@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sub_searchKeySelect">
+        <item>과목명</item>
+        <item>코드</item>
+        <item>교수명</item>
+    </string-array>
+</resources>

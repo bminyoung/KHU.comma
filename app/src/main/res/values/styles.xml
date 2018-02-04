@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="table_tv_top">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="table_tv_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="table_tv_leftTop">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="table_tv_leftBottom">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+</resources>

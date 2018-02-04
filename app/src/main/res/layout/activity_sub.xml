@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jwell.myapplication.activity_sub">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="필수과목선택"
+                android:gravity="left|center"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/sub_btn_nextbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="다음"/>
+
+        </LinearLayout>
+
+
+
+        <ListView
+            android:id="@+id/sub_lstv_showSelet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/sub_spinner_searchKey"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/sub_searchKeySelect">
+            </Spinner>
+
+            <EditText
+                android:id="@+id/sub_edt_searchSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/sub_btn_searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="검색"/>
+
+        </LinearLayout>
+        <ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/sub_elstv_showSubject"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+
+        </ExpandableListView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.minyoung.myapplication3.MadeResultActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/maderesult_btn_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Main" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="시간표 결과목록"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/maderesult_btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Save" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000000" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0F000000"
+                    android:padding="1dp"
+                    android:stretchColumns="*">
+
+                    <!--요일-->
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="1.3"
+                            android:background="#FFFFFF"
+                            android:gravity="end"
+                            android:text=""
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="2"
+                            android:background="#FFFFFF"
+                            android:gravity="center"
+                            android:text="월"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="2"
+                            android:background="#FFFFFF"
+                            android:gravity="center"
+                            android:text="화" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="2"
+                            android:background="#FFFFFF"
+                            android:gravity="center"
+                            android:text="수"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="2"
+                            android:background="#FFFFFF"
+                            android:gravity="center"
+                            android:text="목"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_weight="2"
+                            android:background="#FFFFFF"
+                            android:gravity="center"
+                            android:text="금"
+                            android:textSize="15sp" />
+                    </TableRow>
+                    <!--요일끝-->
+
+                    <!--9시-->
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="9" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_00"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_01"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_02"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_03"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_04"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_10"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_11"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_12"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_13"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_14"/>
+                    </TableRow>
+                    <!--9시끝-->
+
+                    <!--10시-->
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="10" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_20"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_21"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_22"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_23"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_24"/>
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_30"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_31"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_32"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_33"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_34"/>
+                    </TableRow>
+                    <!--10시끝-->
+
+                    <!--11시-->
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="11" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_40"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_41"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_42"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_43"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_44"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_50"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_51"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_52"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_53"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_54"/>
+                    </TableRow>
+                    <!--11시끝-->
+
+                    <!--12시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="12" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_60"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_61"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_62"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_63"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_64"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_70"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_71"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_72"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_73"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_74"/>
+                    </TableRow>
+                    <!--12시끝-->
+
+                    <!--13시-->
+                    <TableRow>
+
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="13" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_80"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_81"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_82"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_83"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_84"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_90"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_91"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_92"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_93"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_94"/>
+                    </TableRow>
+                    <!--13시끝-->
+
+                    <!--14시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="14" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_100"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_101"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_102"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_103"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_104"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_110"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_111"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_112"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_113"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_114"/>
+
+                    </TableRow>
+                    <!--14시끝-->
+
+                    <!--15시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="15" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_120"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_121"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_122"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_123"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_124"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_130"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_131"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_132"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_133"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_134"/>
+                    </TableRow>
+                    <!--15시끝-->
+
+                    <!--16시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="16" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_140"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_141"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_142"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_143"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_144"/>
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_150"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_151"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_152"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_153"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_154"/>
+                    </TableRow>
+                    <!--16시끝-->
+
+                    <!--17시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="17" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_160"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_161"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_162"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_163"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_164"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_170"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_171"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_172"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_173"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_174"/>
+                    </TableRow>
+                    <!--17시끝-->
+
+                    <!--18시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="18" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_180"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_181"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_182"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_183"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_184"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_190"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_191"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_192"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_193"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_194"/>
+                    </TableRow>
+                    <!--18시끝-->
+
+                    <!--19시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="19" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_200"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_201"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_202"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_203"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_204"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_210"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_211"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_212"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_213"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_214"/>
+                    </TableRow>
+                    <!--19시끝-->
+
+                    <!--20시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="20" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_220"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_221"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_222"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_223"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_224"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_230"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_231"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_232"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_233"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_234"/>
+                    </TableRow>
+                    <!--20시끝-->
+
+                    <!--21시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="21" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_240"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_241"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_242"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_243"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_244"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_250"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_251"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_252"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_253"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_254"/>
+                    </TableRow>
+                    <!--21시끝-->
+
+                    <!--22시-->
+                    <TableRow>
+                        <TextView
+                            style="@style/table_tv_leftTop"
+                            android:text="22" />
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_260"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_261"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_262"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_263"/>
+
+                        <TextView style="@style/table_tv_top"
+                            android:id="@+id/maderesult_tv_264"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView style="@style/table_tv_leftBottom" />
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_270"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_271"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_272"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_273"/>
+
+                        <TextView style="@style/table_tv_bottom"
+                            android:id="@+id/maderesult_tv_274"/>
+                    </TableRow>
+                    <!--22시끝-->
+                </TableLayout>
+
+
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-200dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/rectangle_border"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:textSize="18dp"
+                    android:text="시간표 목록" />
+
+                <ExpandableListView
+                    android:id="@+id/maderesult_elv_List"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

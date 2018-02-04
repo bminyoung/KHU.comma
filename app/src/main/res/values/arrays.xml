@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rank">
+        <item>필수</item>
+        <item>선호</item>
+        <item>해당x</item>
+    </string-array>
+
+    <string-array name="firstTime">
+        <item>09:00</item>
+        <item>10:00</item>
+        <item>11:00</item>
+        <item>12:00</item>
+    </string-array>
+
+    <string-array name="timeFlic">
+        <item>0~30분</item>
+        <item>30분~1시간</item>
+        <item>1시간~2시간</item>
+    </string-array>
+
+    <string-array name="daycount">
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="weekday">
+        <item>월요일</item>
+        <item>화요일</item>
+        <item>수요일</item>
+        <item>목요일</item>
+        <item>금요일</item>
+    </string-array>
+
+    <string-array name="leastCredit">
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+    </string-array>
+
+    <string-array name="lunchStart">
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+    </string-array>
+
+    <string-array name="lunchEnd">
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+    </string-array>
+
+</resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

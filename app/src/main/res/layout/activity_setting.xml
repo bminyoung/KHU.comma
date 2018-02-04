@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/setting_btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간표 세부설정"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+            <Button
+                android:id="@+id/setting_btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000000" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/setting_tv_tableName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간표 이름 : "
+                android:textSize="17sp"/>
+
+            <EditText
+                android:id="@+id/setting_edt_fileName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="70dp"
+                android:maxLength="10"/>
+
+            <TextView
+                android:id="@+id/setting_tv_nameInfor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="-70dp"
+                android:gravity="center_vertical"
+                android:text="(최대 10자)"
+                />
+
+        </LinearLayout>
+        <!--시간표이름 끝-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp">
+
+            <Spinner
+                android:id="@+id/setting_spin_subCredit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="최소학점 :               " />
+
+            <Spinner
+                android:id="@+id/setting_spin_credit"
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:entries="@array/leastCredit"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/setting_spin_subFirstStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+            <!--원래 width=20sp-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="첫 강의 시작 시간 : " />
+
+            <Spinner
+                android:id="@+id/setting_spin_firstStartTime"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:entries="@array/firstTime"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp">
+
+            <Spinner
+                android:id="@+id/setting_spin_subTimeFlic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="강의 시간 간격 :      "/>
+
+            <Spinner
+                android:id="@+id/setting_spin_timeFlic"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:entries="@array/timeFlic"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp">
+
+            <Spinner
+                android:id="@+id/setting_spin_subDay"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="공강 요일 :              "/>
+
+            <Spinner
+                android:id="@+id/setting_spin_day"
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:entries="@array/weekday"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp">
+
+            <Spinner
+                android:id="@+id/setting_spin_subDayCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="요일 수 :                  "
+                />
+
+            <Spinner
+                android:id="@+id/setting_spin_dayCount"
+                android:layout_width="100sp"
+                android:layout_height="match_parent"
+                android:entries="@array/daycount"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:orientation="horizontal"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp">
+
+            <Spinner
+                android:id="@+id/setting_spin_subLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:entries="@array/rank"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="점심시간 : "
+                />
+
+            <Spinner
+                android:id="@+id/setting_spin_lunchStart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/lunchStart"/>
+
+            <TextView
+                android:layout_width="20sp"
+                android:layout_height="match_parent"
+                android:text=" ~ "/>
+
+            <Spinner
+                android:id="@+id/setting_spin_lunchEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/lunchEnd"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
