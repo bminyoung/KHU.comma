@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -38,7 +35,7 @@ public class MadeResultActivity extends AppCompatActivity {
     ArrayList<Subject> table;
     ArrayList<ArrayList<ArrayList<Subject>>> childData; // 확장리스트뷰 - child
     public TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
-
+    int focusOn; // 저장될 시간표의 위치
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,6 +45,7 @@ public class MadeResultActivity extends AppCompatActivity {
         Button btnSave = (Button) findViewById(R.id.maderesult_btn_save);
         Button btnMain = (Button) findViewById(R.id.maderesult_btn_main);
         setTextId();
+        focusOn = -1;
 
         final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.maderesult_elv_List);
         setData();
@@ -58,7 +56,12 @@ public class MadeResultActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowSaveDialog();
+                if(focusOn < 0) {
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MadeResultActivity.this);
+                    dialogBuilder.setTitle("저장할 시간표를 선택해주세요").setNegativeButton("취소", null).show();
+                }else{
+                    ShowSaveDialog(focusOn);
+                }
             }
         });
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 for(int i = 0; i <selectedTimeTable.size();i++) {
                     ShowTimeTable(selectedTimeTable.get(i));
                 }
+                focusOn = childPosition;
                 return false;
             }
         });
@@ -97,11 +101,18 @@ public class MadeResultActivity extends AppCompatActivity {
         });
     }
 
+    private void SaveTimeTable(int position, String timeTableName){
+        AppContext.timeTableList.add(new ArrayList<Subject>());
+        AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
+        AppContext.timeTableNameList.add(timeTableName);
+        Log.d("tag","minyoung 여기까지 왓다!!!" + timeTableName);
+
+    }
+
     public void ShowTimeTable(Subject selected){
         TextView tv;
         int start = (int) ((selected.cStart - 9.0)*2.0);
         int end = (int)((selected.cEnd - 9.0)*2.0 - 1.0);
-
 
         for(int i = end; i >= start;i--){
             tv = timeTable[i][selected.cDay];
@@ -145,7 +156,7 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     //다이얼로그
-    private void ShowSaveDialog() {
+    private void ShowSaveDialog(int position) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout saveLayout = (LinearLayout) inflater.inflate(R.layout.maderesult_savedialog, null);
 
@@ -166,8 +177,12 @@ public class MadeResultActivity extends AppCompatActivity {
         dialogBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
-                /*시간표목록에 저장*/
+                if(TimeTableTitle.getText().length() == 0){
+                    Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
+                    SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
+                }
                 dialog.cancel();
             }
         });

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,30 +23,44 @@ import android.widget.TextView;
 import org.apache.poi.sl.usermodel.Line;
 
 
-public class SaveListActivity extends Activity implements View.OnClickListener{
+public class SaveListActivity extends Activity{
+
+    ListView listview;
+    ListViewAdapter lvAdapter;
+    ArrayList<Subject> timeTableList = new ArrayList<Subject>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savelist);
 
-        ListView listview;
-        ListViewAdapter adapter = new ListViewAdapter();
         Button btnNext = (Button) findViewById(R.id.savelist_btn_main);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SaveListActivity.this, LoadResultActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        btnNext.setOnClickListener(this);
-
+        lvAdapter = new ListViewAdapter(timeTableList);
         listview = (ListView) findViewById(R.id.savelist_lv_savedTable);
-        listview.setAdapter(adapter);
+        listview.setAdapter(lvAdapter);
 
-        adapter.addItem("목록1");
-        adapter.addItem("목록2");
-        adapter.addItem("목록3");
+        setData();
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
     }
 
-    public void onClick(View v){
-        Intent intent = new Intent(SaveListActivity.this, LoadResultActivity.class);
-        startActivity(intent);
+    private void setData(){
+
+        lvAdapter.addItem(new Subject());
+
     }
 }
 
@@ -63,18 +78,18 @@ class ListVIewItem{
 
 class ListViewAdapter extends BaseAdapter{
 
-    private ArrayList<ListVIewItem> listViewItemList = new ArrayList<ListVIewItem>();
+    private ArrayList<Subject> itemList = new ArrayList<Subject>();
 
-    public ListViewAdapter(){}
+    public ListViewAdapter(ArrayList<Subject> list){ itemList = list; }
 
     @Override
     public int getCount() {
-        return listViewItemList.size();
+        return itemList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listViewItemList.get(position);
+        return itemList.get(position);
     }
 
     @Override
@@ -85,7 +100,6 @@ class ListViewAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        final int pos = position;
         final Context context = parent.getContext();
 
         if(convertView == null){
@@ -106,8 +120,7 @@ class ListViewAdapter extends BaseAdapter{
         Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
         Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
 
-        ListVIewItem listViewItem = listViewItemList.get(position);
-        tableName.setText(((ListVIewItem)getItem(position)).getTitle());
+        tableName.setText(AppContext.timeTableNameList.get(position)); // 저장된 시간표 이름
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +133,7 @@ class ListViewAdapter extends BaseAdapter{
                 dialogBtnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        listViewItemList.get(position).setTitle(timeTableTitle.getText()+"");
+                        AppContext.timeTableNameList.set(position, timeTableTitle.getText()+""); //이름 바꾸길
                         notifyDataSetChanged();
                         dialog.cancel();
                     }
@@ -144,7 +157,9 @@ class ListViewAdapter extends BaseAdapter{
                 dialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listViewItemList.remove(position);
+                        itemList.remove(position);//삭제해도 되나?
+                        AppContext.timeTableList.remove(position); //db에서 삭제
+                        AppContext.timeTableNameList.remove(position); //이름도 같이 삭제
                         notifyDataSetChanged();
                     }
                 });
@@ -158,10 +173,7 @@ class ListViewAdapter extends BaseAdapter{
     }
 
 
-    public void addItem(String title){
-        ListVIewItem item = new ListVIewItem();
-
-        item.setTitle(title);
-        listViewItemList.add(item);
+    public void addItem(Subject sub){
+        itemList.add(sub);
     }
 }

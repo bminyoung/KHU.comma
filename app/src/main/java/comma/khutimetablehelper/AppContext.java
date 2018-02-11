@@ -21,6 +21,7 @@ public class AppContext extends Application {
     static ArrayList<Subject> timeTable = new ArrayList<Subject>(); //임시 시간표
     static ArrayList<ArrayList<Subject>> tempTimeTableList = new ArrayList<ArrayList<Subject>>(); // MadeResult에서 보여줄 시간표결과 목록
     static ArrayList<ArrayList<Subject>> timeTableList = new ArrayList<ArrayList<Subject>>(); // LoadResult에서 보여줄 저장된 시간표 목록
+    static ArrayList<String> timeTableNameList = new ArrayList<String>(); // 저장된 시간표 이름 목록
 
 }
 
