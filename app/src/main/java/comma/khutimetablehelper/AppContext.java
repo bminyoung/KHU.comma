@@ -2,19 +2,9 @@ package comma.khutimetablehelper;
 
 import android.app.Application;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Created by MinYoung on 2018-02-04.
@@ -23,13 +13,23 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 // 과목정보
 public class AppContext extends Application {
 
+    //이번 학기 과목정보
+    static Subject[] subjectList;
+    static ArrayList<Subject> onlySubjectList = new ArrayList<Subject>();
+    //static ArrayList<Subject> subjectList = new ArrayList<Subject>();
 
-
+    static ArrayList<Subject> timeTable = new ArrayList<Subject>(); //임시 시간표
+    static ArrayList<ArrayList<Subject>> tempTimeTableList = new ArrayList<ArrayList<Subject>>(); // MadeResult에서 보여줄 시간표결과 목록
+    static ArrayList<ArrayList<Subject>> timeTableList = new ArrayList<ArrayList<Subject>>(); // LoadResult에서 보여줄 저장된 시간표 목록
 
 }
 
-class Subject {
+
+//과목클래스
+class Subject implements Serializable {
+
     // 멤버변수
+    int cRow; // 고유번호
     String cNum;// 학수번호
     String cName;// 강좌명
     String cProf;// 교수명
@@ -40,9 +40,14 @@ class Subject {
     int cDay;// 강의요일 요일구분 : 0 월, 1 화, 2 수, 3 목, 4 금
     double cStart;// 시작시간
     double cEnd;// 종료시간
+
     // 메소드
-    Subject() { }; // 기본 생성자
-    Subject(String Num, String Name, String Prof, int Grade, int Credit, int Sort, int Day, double Start, double End) {
+    public Subject() {
+    }; // 기본 생성자
+
+    public Subject(int Row, String Num, String Name, String Prof, int Grade, int Credit, int Sort, int Day,
+                   double Start, double End) {
+        cRow = Row;
         cNum = Num;
         cName = Name;
         cProf = Prof;
@@ -53,13 +58,16 @@ class Subject {
         cStart = Start;
         cEnd = End;
     }; // 생성자
-    public void print() {
-        System.out.println(cNum + " " + cName + " " + cProf + " " + cGrade + " " + cCredit + " " + cSort + " " + cDay
-                + " " + cStart + " " + cEnd);
-    };
 
-    String getName() {
-        return cName
-                ;
+    public String getName(){
+        return cName;
     }
 }
+
+class TimeTable{
+    ArrayList<Subject> subject;
+}
+
+
+
+

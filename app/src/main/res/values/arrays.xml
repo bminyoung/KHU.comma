@@ -2,7 +2,6 @@
 <resources>
     <string-array name="rank">
         <item>필수</item>
-        <item>선호</item>
         <item>해당x</item>
     </string-array>
 
@@ -32,14 +31,15 @@
         <item>금요일</item>
     </string-array>
 
-    <string-array name="leastCredit">
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
+    <!--1부터 30까지-->
+    <string-array name="credit">
+        <item>  15  </item>
+        <item>  16  </item>
+        <item>  17  </item>
+        <item>  18  </item>
+        <item>  19  </item>
+        <item>  20  </item>
+        <item>  21  </item>
     </string-array>
 
     <string-array name="lunchStart">
@@ -57,6 +57,34 @@
         <item>14:00</item>
     </string-array>
 
+    <string-array name="classTime">
+        <item>1.5</item>
+        <item></item>
+        <item>3</item>
+        <item>4.5</item>
+    </string-array>
+
+    <string-array name="maxClassNum">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="maxClassTime">
+        <item>1.5</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+
+    <string-array name="classEndTime">
+        <item>x</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
 
 

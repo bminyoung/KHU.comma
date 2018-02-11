@@ -14,16 +14,11 @@ public class LoadResultActivity extends AppCompatActivity {
     }
 
     public void Summery(View view) {
-        String t;
-        t="요약내용";
+        String t = "요약내용";
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("수강신청 요약본");
         dialog.setMessage(t);
         dialog.setNeutralButton("종료",null);
         dialog.show();
-    }
-
-    public void Delete(View view) {
-
     }
 }

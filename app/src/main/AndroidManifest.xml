@@ -18,10 +18,13 @@
         </activity>
 
         <activity android:name=".LoadResultActivity"></activity>
-        <activity android:name=".MadeResultActivity"></activity>
+        <activity android:name=".MadeResultActivity" android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".SaveListActivity"></activity>
         <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".NeedActivity" android:windowSoftInputMode="adjustNothing"></activity>
+        <activity android:name=".SubActivity" android:windowSoftInputMode="adjustNothing"></activity>
+        <activity android:name=".SearchActivity"></activity>
 
     </application>
 

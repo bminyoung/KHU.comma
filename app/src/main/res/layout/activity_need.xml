@@ -11,67 +11,105 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!--상단바-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="필수과목선택"
-                android:gravity="left|center"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/need_btn_nextbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="다음"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_centerVertical="true"
+                    android:text="필수과목 선택"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/need_btn_nextbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="다음" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000000" />
         </LinearLayout>
 
-
-
-        <ListView
-            android:id="@+id/need_lstv_showSelet"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        </ListView>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/need_spinner_searchkey"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/searchkeyselect">
-            </Spinner>
-
-            <EditText
-                android:id="@+id/need_edt_searchsubject"
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="300dp">
+            <ListView
+                android:id="@+id/need_lstv_showSelet"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/need_btn_searchbutton"
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="-300dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/need_spinner_searchkey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible"
+                    android:clickable="false"
+                    android:entries="@array/searchkeyselect"/>
+                <EditText
+                    android:id="@+id/need_edt_searchsubject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:visibility="invisible"/>
+                <Button
+                    android:id="@+id/need_btn_searchbutton"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:text="검색" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb" />
+
+            <ExpandableListView
+                android:id="@+id/need_elstv_showsubject"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="검색"/>
+                android:layout_weight="0.5"/>
 
         </LinearLayout>
-        <ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/need_elstv_showsubject"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5">
-
-
-        </ExpandableListView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="60dp"
         android:singleLine="true"
+        android:maxLength="10"
         android:layout_gravity="center"
         android:hint="시간표 이름을 입력하세요" />
 

@@ -7,8 +7,10 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/need_elstv_group_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/need_elstv_group_header"/>
+            android:textSize="24sp"
+            android:paddingLeft="35dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

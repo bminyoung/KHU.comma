@@ -12,8 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.apache.poi.sl.usermodel.Line;
 
 
 public class SaveListActivity extends Activity implements View.OnClickListener{
@@ -87,12 +91,46 @@ class ListViewAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.savelist_customlist, parent, false);
         }
 
+        //수정버튼 다이얼로그 애들
+        LayoutInflater dInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LinearLayout dialogLayout = (LinearLayout) dInflater.inflate(R.layout.maderesult_savedialog, null);
+        final EditText timeTableTitle = (EditText) dialogLayout.findViewById(R.id.dialog_edt_title);
+        //저장,취소 버튼
+        final Button dialogBtnSave = (Button) dialogLayout.findViewById(R.id.dialog_btn_save);
+        final Button dialogBtnCancel = (Button) dialogLayout.findViewById(R.id.dialog_btn_cancel);
+
+        //리스트뷰 애들
         TextView tableName = (TextView) convertView.findViewById(R.id.savelist_lv_tv_tableName);
         Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
+        Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
 
         ListVIewItem listViewItem = listViewItemList.get(position);
-
         tableName.setText(((ListVIewItem)getItem(position)).getTitle());
+
+        changeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                dialogBuilder.setTitle("시간표 이름변경").setView(dialogLayout);
+                final AlertDialog dialog;
+                dialog = dialogBuilder.create();
+                dialogBtnSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listViewItemList.get(position).setTitle(timeTableTitle.getText()+"");
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                });
+                dialogBtnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +150,10 @@ class ListViewAdapter extends BaseAdapter{
             }
         });
 
+
         return convertView;
     }
+
 
     public void addItem(String title){
         ListVIewItem item = new ListVIewItem();

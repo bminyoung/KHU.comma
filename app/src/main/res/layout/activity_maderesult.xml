@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.minyoung.myapplication3.MadeResultActivity">
-
+    tools:context="comma.khutimetablehelper.MadeResultActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="시간표 결과목록"
+                    android:text="시간표 결과"
                     android:textSize="18sp" />
 
                 <Button
@@ -51,7 +50,6 @@
                 android:background="#000000" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,19 +64,15 @@
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#0F000000"
-                    android:padding="1dp"
                     android:stretchColumns="*">
 
                     <!--요일-->
                     <TableRow>
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="1.3"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="end"
                             android:text=""
                             android:textSize="15sp" />
@@ -86,9 +80,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="2"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="center"
                             android:text="월"
                             android:textSize="15sp" />
@@ -96,18 +89,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="2"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="center"
-                            android:text="화" />
+                            android:text="화"
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="2"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="center"
                             android:text="수"
                             android:textSize="15sp" />
@@ -115,9 +107,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="2"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="center"
                             android:text="목"
                             android:textSize="15sp" />
@@ -125,9 +116,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
                             android:layout_weight="2"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/rectangle_border"
                             android:gravity="center"
                             android:text="금"
                             android:textSize="15sp" />
@@ -136,7 +126,6 @@
 
                     <!--9시-->
                     <TableRow>
-
                         <TextView
                             style="@style/table_tv_leftTop"
                             android:text="9" />
@@ -729,8 +718,6 @@
                     </TableRow>
                     <!--22시끝-->
                 </TableLayout>
-
-
             </ScrollView>
 
             <LinearLayout

@@ -9,40 +9,34 @@
     </style>
 
     <style name="table_tv_top">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">26dp</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_marginLeft">1dp</item>
-        <item name="android:layout_marginTop">1dp</item>
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:background">@drawable/rectangle_openbottom</item>
     </style>
 
     <style name="table_tv_bottom">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">26dp</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_marginLeft">1dp</item>
-        <item name="android:layout_marginBottom">1dp</item>
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:background">@drawable/rectangle_opentop</item>
     </style>
 
     <style name="table_tv_leftTop">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">26dp</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_marginLeft">1dp</item>
-        <item name="android:layout_marginTop">1dp</item>
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_weight">1.3</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@drawable/rectangle_openbottom</item>
         <item name="android:gravity">end</item>
     </style>
 
     <style name="table_tv_leftBottom">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">26dp</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_marginLeft">1dp</item>
-        <item name="android:layout_marginBottom">1dp</item>
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_weight">1.3</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:background">@drawable/rectangle_opentop</item>
     </style>
 
 </resources>

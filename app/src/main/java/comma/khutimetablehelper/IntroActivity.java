@@ -14,18 +14,26 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        //과목정보 초기화
+        setSubject();
+
+        // 2초동안 띄우고 다음화면
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                 startActivity(intent);
-
                 finish();
             }
         },2000);
+    }
+
+    private void setSubject(){
 
     }
 
 }
+
+
 
