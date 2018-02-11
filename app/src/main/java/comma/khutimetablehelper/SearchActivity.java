@@ -64,15 +64,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         Intent intent =getIntent();
-        String data [] = new String [(NeedActivity.listDataHeader.size()*NeedActivity.listDataChild.size() + NeedActivity.listDataChild.size())];
-        for(int group_num = 0; group_num<NeedActivity.listDataHeader.size();group_num++) {
-            for (int child_num = 0; child_num < NeedActivity.listDataChild.size(); child_num++) {
-                data [group_num*child_num + child_num] = intent.getStringExtra(NeedActivity.listDataChild.get(NeedActivity.listDataHeader.get(group_num)).get(child_num).toString());
-            }
-        }
-//        for(int i=0; i<(NeedActivity.listDataHeader.size()*NeedActivity.listDataChild.size() + NeedActivity.listDataChild.size());i++) {
-//            list.add(data[i] + "");
-//        }
 
 
     }

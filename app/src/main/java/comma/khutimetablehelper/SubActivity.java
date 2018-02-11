@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 public class SubActivity extends AppCompatActivity {
     //확장 리스트뷰
-    ExpandableListAdapter explistAdapter;
+    SubExpandableListAdapter explistAdapter;
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     ArrayList<Subject> needSubject;
@@ -40,7 +40,8 @@ public class SubActivity extends AppCompatActivity {
 
     //리스트뷰
     private ListView mlistView = null;
-    protected static CustomListAdapter madapter = new CustomListAdapter();
+    private ArrayList<Subject> selectedList = new ArrayList<Subject>();
+    protected static CustomListAdapter madapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +83,12 @@ public class SubActivity extends AppCompatActivity {
 
         // 확장리스트 뷰 어댑터 준비
         prepareListData();
-        explistAdapter = new CustomExpandableListAdapter(this, listDataHeader, listDataChild);
+        explistAdapter = new SubExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(explistAdapter);
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.sub_lstv_showSelet);
+        madapter = new CustomListAdapter(selectedList);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -100,6 +102,11 @@ public class SubActivity extends AppCompatActivity {
                     lastExpandedPosition = groupPosition;
             }
         });
+    }
+
+    protected void onDestroy() {
+        selectedList.clear();
+        super.onDestroy();
     }
 
     private void Alert(){
@@ -130,6 +137,101 @@ public class SubActivity extends AppCompatActivity {
         //그룹에 데이터 할당
         listDataChild.put(listDataHeader.get(0), major2); // Header, Child data
         listDataChild.put(listDataHeader.get(1), major1);
+    }
+
+}
+
+//확장 리스트뷰 어댑터
+class SubExpandableListAdapter extends BaseExpandableListAdapter {
+
+    private Context _context;
+    private List<String> _listDataHeader;
+    private HashMap<String, List<Subject>> _listDataChild;
+
+
+    public SubExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
+        this._context = context;
+        this._listDataHeader = listDataHeader;
+        this._listDataChild = listChildData;
+    }
+
+    @Override
+    public Object getChild(int groupPosition, int childPosititon) {
+        return this._listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosititon);
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+        final String childText = ((Subject)getChild(groupPosition, childPosition)).getName();
+
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.need_elstv_item, null);
+        }
+
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.need_elstv_item_header);
+        final Button btn = (Button) convertView.findViewById(R.id.need_elstv_item_btn);
+        btn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
+            public void onClick(View view) {
+                Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
+
+                SubActivity.madapter.additem(selectedSubject);
+                SubActivity.madapter.notifyDataSetChanged();
+                btn.setClickable(false);
+            }
+        });
+        txtListChild.setText(childText);
+        return convertView;
+    }
+
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return this._listDataChild.get(_listDataHeader.get(groupPosition)).size();
+    }
+
+    @Override
+    public Object getGroup(int groupPosition) {
+        return this._listDataHeader.get(groupPosition);
+    }
+
+    @Override
+    public int getGroupCount() {
+        return this._listDataHeader.size();
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        String headerTitle = (String) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.need_elstv_group, null);
+        }
+        TextView lblListHeader = (TextView) convertView.findViewById(R.id.need_elstv_group_header);
+        lblListHeader.setText(headerTitle);
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
     }
 
 }

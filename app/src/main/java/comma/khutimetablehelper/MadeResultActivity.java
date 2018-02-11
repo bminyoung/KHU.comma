@@ -73,8 +73,7 @@ public class MadeResultActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
                 Subject[] subjects = new Subject[10];
-                ArrayList<Subject> selectedTimeTable = new ArrayList<Subject>();
-                selectedTimeTable = (ArrayList<Subject>) expAdapter.getChild(groupPosition, childPosition);
+                ArrayList<Subject> selectedTimeTable = (ArrayList<Subject>) expAdapter.getChild(groupPosition, childPosition);
 
                 colorIndex = 0;
                 for(int i = 0; i <selectedTimeTable.size();i++) {

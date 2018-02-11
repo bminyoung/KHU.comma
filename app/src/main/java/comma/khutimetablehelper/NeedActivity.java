@@ -24,9 +24,9 @@ import android.widget.Toast;
 public class NeedActivity extends Activity {
 
     //확장 리스트뷰
-    CustomExpandableListAdapter explistAdapter;
-    static List<String> listDataHeader;
-    static HashMap<String, List<Subject>> listDataChild;
+    NeedExpandableListAdapter explistAdapter;
+    List<String> listDataHeader;
+    HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
     static ArrayList<Subject> needSubject = new ArrayList<Subject>();
     int i = 0;
@@ -38,7 +38,8 @@ public class NeedActivity extends Activity {
 
     //리스트뷰
     private ListView mlistView = null;
-    protected static CustomListAdapter madapter = new CustomListAdapter();
+    private ArrayList<Subject> selectedList = new ArrayList<Subject>();
+    protected static CustomListAdapter madapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +79,12 @@ public class NeedActivity extends Activity {
 
         // 확장리스트 뷰 어댑터 준비
         prepareListData();
-        explistAdapter = new CustomExpandableListAdapter(this, listDataHeader, listDataChild);
+        explistAdapter = new NeedExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(explistAdapter);
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.need_lstv_showSelet);
+        madapter = new CustomListAdapter(selectedList);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -96,6 +98,11 @@ public class NeedActivity extends Activity {
                     lastExpandedPosition = groupPosition;
             }
         });
+    }
+
+    protected void onDestroy() {
+        selectedList.clear();
+        super.onDestroy();
     }
 
 //데이터 입력
@@ -127,14 +134,14 @@ public class NeedActivity extends Activity {
 }
 
 //확장 리스트뷰 어댑터
-class CustomExpandableListAdapter extends BaseExpandableListAdapter {
+class NeedExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private List<String> _listDataHeader;
     private HashMap<String, List<Subject>> _listDataChild;
 
 
-    public CustomExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
+    public NeedExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -167,33 +174,14 @@ class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                String activityName;
 
-                ActivityManager activitymanager = (ActivityManager)_context.getSystemService(Context.ACTIVITY_SERVICE);
-                List<ActivityManager.RunningTaskInfo> runningtaskinfo= activitymanager.getRunningTasks(1);
-                activityName = runningtaskinfo.get(0).topActivity.getShortClassName();
-
-                if(activityName.equals(".NeedActivity")){
-                    needAdd(selectedSubject);
-                }
-                else if(activityName.equals(".SubActivity")){
-                    subAdd(selectedSubject);
-                }
+                NeedActivity.madapter.additem(selectedSubject);
+                NeedActivity.madapter.notifyDataSetChanged();
                 btn.setClickable(false);
             }
         });
         txtListChild.setText(childText);
         return convertView;
-    }
-
-    public void needAdd(Subject sub){
-        NeedActivity.madapter.additem(sub);
-        NeedActivity.madapter.notifyDataSetChanged();
-    }
-
-    public void subAdd(Subject sub){
-        SubActivity.madapter.additem(sub);
-        SubActivity.madapter.notifyDataSetChanged();
     }
 
     @Override
@@ -246,7 +234,7 @@ class CustomListAdapter extends BaseAdapter {
     private ArrayList<Subject> oData = new ArrayList<Subject>();
     LayoutInflater inflater = null;
 
-    CustomListAdapter() {};
+    CustomListAdapter(ArrayList<Subject> list) { oData = list; };
 
     @Override
     public int getCount() {
