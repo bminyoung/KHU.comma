@@ -69,8 +69,8 @@ public class SettingActivity extends AppCompatActivity {
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
         subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
 
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
         while(i < needSubject.size()) {
-            AppContext.tempTimeTableList.add(new ArrayList<Subject>());
             AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
         }
 
@@ -80,15 +80,15 @@ public class SettingActivity extends AppCompatActivity {
         }
         index++;
         i = 0;
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
         while(i < subSubject.size()) {
-            AppContext.tempTimeTableList.add(new ArrayList<Subject>());
             AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
         }
 
         index++;
         i = 0;
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
         while(i < needSubject.size()) {
-            AppContext.tempTimeTableList.add(new ArrayList<Subject>());
             AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
         }
 

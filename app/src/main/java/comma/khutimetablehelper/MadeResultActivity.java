@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
@@ -160,6 +161,7 @@ public class MadeResultActivity extends AppCompatActivity {
         final AlertDialog dialog;
         dialog = dialogBuilder.create();
         dialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         dialogBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override

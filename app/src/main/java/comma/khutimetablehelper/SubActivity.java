@@ -56,12 +56,11 @@ public class SubActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                subSubject = madapter.getSubjectList();
-                if(needSubject.size() + subSubject.size() == 0){
+                if(needSubject.size() + selectedList.size() == 0){
                     Alert();
                 }
                 else {
-                    intentToSetting.putExtra("SubSubject", subSubject);
+                    intentToSetting.putExtra("SubSubject", selectedList);
                     intentToSetting.putExtra("NeedSubject", needSubject);
                     startActivity(intentToSetting);
                 }

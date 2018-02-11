@@ -10,6 +10,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,6 +116,7 @@ class ListViewAdapter extends BaseAdapter{
                 dialogBuilder.setTitle("시간표 이름변경").setView(dialogLayout);
                 final AlertDialog dialog;
                 dialog = dialogBuilder.create();
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
                 dialogBtnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
