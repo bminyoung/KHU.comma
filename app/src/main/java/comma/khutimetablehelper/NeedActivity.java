@@ -38,7 +38,7 @@ public class NeedActivity extends Activity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private ArrayList<Subject> selectedList = new ArrayList<Subject>();
+    private static ArrayList<Subject> selectedList = new ArrayList<Subject>();
     protected static CustomListAdapter madapter;
 
     @Override
@@ -131,6 +131,18 @@ public class NeedActivity extends Activity {
         listDataChild.put(listDataHeader.get(1), major1);
     }
 
+    public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
+        boolean ret = true;
+        int i = 0;
+        for(i = 0; i < selectedList.size();i++){
+            if(selectedList.get(i).cNum.equals(sub.cNum)){
+                ret = false;
+                break;
+            }
+        }
+        return ret;
+    }
+
 }
 
 //확장 리스트뷰 어댑터
@@ -174,10 +186,10 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-
-                NeedActivity.madapter.additem(selectedSubject);
-                NeedActivity.madapter.notifyDataSetChanged();
-                btn.setClickable(false);
+                if(NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면
+                    NeedActivity.madapter.additem(selectedSubject);
+                    NeedActivity.madapter.notifyDataSetChanged();
+                }
             }
         });
         txtListChild.setText(childText);
