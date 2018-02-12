@@ -261,11 +261,11 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 5:
                             temp = Double.parseDouble(array[i]);
-                            Credit = (int) temp;
+                            Sort = (int) temp;
                             break;
                         case 6:
                             temp = Double.parseDouble(array[i]);
-                            Sort = (int) temp;
+                            Credit = (int) temp;
                             break;
                         case 7:
                             temp = Double.parseDouble(array[i]);

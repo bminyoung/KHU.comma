@@ -1,6 +1,7 @@
 package comma.khutimetablehelper;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,11 +21,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.poi.sl.usermodel.Line;
 
 
-public class SaveListActivity extends Activity{
+public class SaveListActivity extends Activity {
 
     ListView listview;
     ListViewAdapter lvAdapter;
@@ -44,7 +46,7 @@ public class SaveListActivity extends Activity{
             }
         });
 
-        lvAdapter = new ListViewAdapter(timeTableList);
+        lvAdapter = new ListViewAdapter(timeTableList, this);
         listview = (ListView) findViewById(R.id.savelist_lv_savedTable);
         listview.setAdapter(lvAdapter);
 
@@ -60,20 +62,24 @@ public class SaveListActivity extends Activity{
         });
     }
 
-    private void setData(){
+    private void setData() {
 
-        for(int i = 0;i < AppContext.timeTableList.size();i++) {
+        for (int i = 0; i < AppContext.timeTableList.size(); i++) {
             timeTableList.add(AppContext.timeTableList.get(i));
         }
 
     }
 }
 
-class ListViewAdapter extends BaseAdapter{
+class ListViewAdapter extends BaseAdapter {
 
     private ArrayList<ArrayList<Subject>> itemList = new ArrayList<ArrayList<Subject>>();
+    private Context context;
 
-    public ListViewAdapter(ArrayList<ArrayList<Subject>> list){ itemList = list; }
+    public ListViewAdapter(ArrayList<ArrayList<Subject>> list, Context context) {
+        itemList = list;
+        this.context = context;
+    }
 
     @Override
     public int getCount() {
@@ -95,7 +101,7 @@ class ListViewAdapter extends BaseAdapter{
 
         final Context context = parent.getContext();
 
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.savelist_customlist, parent, false);
         }
@@ -127,8 +133,12 @@ class ListViewAdapter extends BaseAdapter{
                 dialogBtnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AppContext.timeTableNameList.set(position, timeTableTitle.getText()+""); //이름 바꾸길
-                        notifyDataSetChanged();
+                        if (timeTableTitle.getText().length() == 0) {
+                            Toast.makeText(context, "변경할 시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                        } else {
+                            AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
+                            notifyDataSetChanged();
+                        }
                         dialog.cancel();
                     }
                 });
@@ -167,7 +177,7 @@ class ListViewAdapter extends BaseAdapter{
     }
 
 
-    public void addItem(ArrayList<Subject> timeTable){
+    public void addItem(ArrayList<Subject> timeTable) {
         itemList.add(timeTable);
     }
 }
