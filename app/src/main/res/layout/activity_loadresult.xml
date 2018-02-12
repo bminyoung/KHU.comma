@@ -108,106 +108,46 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_00"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_00" />
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_01" />
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_02"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_02" />
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_03"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_04"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_04"/>
 
             </TableRow>
 
             <TableRow>
 
-                <TextView
+                <TextView style="@style/table_tv_leftBottom"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1.3"
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_10" />
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_11"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_12"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_13"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_14"/>
 
             </TableRow>
 
@@ -221,50 +161,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_20"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_21"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_22"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_23"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_24"/>
 
             </TableRow>
 
@@ -277,50 +187,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_30"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_30"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_31"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_32"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_32"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_33"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_34"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_34"/>
 
             </TableRow>
 
@@ -334,50 +214,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_40"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_41"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_42"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_43"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_43"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_44"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_44"/>
 
             </TableRow>
 
@@ -390,50 +240,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_50"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView  style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_50"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_51"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_51"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_52"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_52"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_53"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_53"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_54"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_54"/>
 
             </TableRow>
 
@@ -447,50 +267,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_60"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_60"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_61"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_61"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_62"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_62"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_63"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_63"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_64"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_64"/>
 
             </TableRow>
 
@@ -503,50 +293,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_70"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_70"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_71"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_71"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_72"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_72"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_73"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_73"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_74"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_74"/>
 
             </TableRow>
 
@@ -560,50 +320,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_80"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_80"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_81"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_81"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_82"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_82"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_83"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_83"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_84"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_84"/>
 
             </TableRow>
 
@@ -616,50 +346,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_90"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_90"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_91"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_91"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_92"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_92"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_93"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_93"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_94"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_94"/>
 
             </TableRow>
 
@@ -673,50 +373,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_100"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_100"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_101"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_101"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_102"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_102"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_103"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_103"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_104"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_104"/>
 
             </TableRow>
 
@@ -729,50 +399,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_110"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_110"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_111"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_111"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_112"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_112"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_113"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_113"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_114"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_114"/>
 
             </TableRow>
 
@@ -786,50 +426,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_120"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_120"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_121"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_121"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_122"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_122"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_123"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_123"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_124"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_124"/>
 
             </TableRow>
 
@@ -842,50 +452,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_130"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_130"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_131"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_131"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_132"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_132"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_133"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_133"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_134"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_134"/>
 
             </TableRow>
 
@@ -899,50 +479,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_140"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_140"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_141"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_141"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_142"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_142"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_143"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_143"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_144"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_144"/>
 
             </TableRow>
 
@@ -955,50 +505,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_150"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_150"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_151"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_151"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_152"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_152"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_153"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_153"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_154"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_154"/>
 
             </TableRow>
 
@@ -1012,50 +532,20 @@
                 android:gravity="end"
                 android:background="@drawable/rectangle_openbottom"/>
 
-            <TextView
-                android:id="@+id/loadResult_Tv_160"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="2"
-                android:text=""
-                android:gravity="center"
-                android:background="@drawable/rectangle_openbottom" />
+            <TextView style="@style/table_tv_top"
+                android:id="@+id/loadResult_Tv_160"/>
 
-            <TextView
-                android:id="@+id/loadResult_Tv_161"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="2"
-                android:text=""
-                android:gravity="center"
-                android:background="@drawable/rectangle_openbottom" />
+            <TextView style="@style/table_tv_top"
+                android:id="@+id/loadResult_Tv_161"/>
 
-            <TextView
-                android:id="@+id/loadResult_Tv_162"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="2"
-                android:text=""
-                android:gravity="center"
-                android:background="@drawable/rectangle_openbottom" />
+            <TextView style="@style/table_tv_top"
+                android:id="@+id/loadResult_Tv_162"/>
 
-            <TextView
-                android:id="@+id/loadResult_Tv_163"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="2"
-                android:text=""
-                android:gravity="center"
-                android:background="@drawable/rectangle_openbottom" />
+            <TextView style="@style/table_tv_top"
+                android:id="@+id/loadResult_Tv_163"/>
 
-            <TextView
-                android:id="@+id/loadResult_Tv_164"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_weight="2"
-                android:text=""
-                android:gravity="center"
-                android:background="@drawable/rectangle_openbottom" />
+            <TextView style="@style/table_tv_top"
+                android:id="@+id/loadResult_Tv_164"/>
 
         </TableRow>
 
@@ -1068,50 +558,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_170"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_170"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_171"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_171"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_172"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_172"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_173"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_173"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_174"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_174"/>
 
             </TableRow>
 
@@ -1125,50 +585,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_180"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_180"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_181"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_181"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_182"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_182"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_183"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_183"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_184"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_184"/>
 
             </TableRow>
 
@@ -1181,50 +611,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_190"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_190"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_191"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_191"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_192"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_192"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_193"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_193"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_194"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_194"/>
 
             </TableRow>
 
@@ -1238,51 +638,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_200"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_200"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_201"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_201"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_202"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_202"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_203"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_203"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_204"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
-
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_204"/>
             </TableRow>
 
             <TableRow>
@@ -1294,50 +663,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_210"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_210"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_211"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_211"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_212"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_212"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_213"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_213"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_214"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_214"/>
 
             </TableRow>
 
@@ -1351,50 +690,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_220"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_220"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_221"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_221"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_222"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_222"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_223"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_223"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_224"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_224"/>
 
             </TableRow>
 
@@ -1407,50 +716,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_230"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_230"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_231"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_231"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_232"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_232"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_233"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_233"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_234"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_234"/>
 
             </TableRow>
 
@@ -1464,50 +743,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_240"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_240"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_241"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_241"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_242"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_242"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_243"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_243"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_244"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_244"/>
 
             </TableRow>
 
@@ -1520,50 +769,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_250"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_250"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_251"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_251"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_252"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_252"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_253"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_253"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_254"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_254"/>
 
             </TableRow>
 
@@ -1577,50 +796,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_openbottom"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_260"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_260"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_261"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_261"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_262"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_262"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_263"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_263"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_264"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_openbottom" />
+                <TextView style="@style/table_tv_top"
+                    android:id="@+id/loadResult_Tv_264"/>
 
             </TableRow>
 
@@ -1633,50 +822,20 @@
                     android:gravity="end"
                     android:background="@drawable/rectangle_opentop"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_270"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_270"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_271"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_271"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_272"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_272"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_273"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_273"/>
 
-                <TextView
-                    android:id="@+id/loadResult_Tv_274"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_weight="2"
-                    android:text=""
-                    android:gravity="center"
-                    android:background="@drawable/rectangle_opentop" />
+                <TextView style="@style/table_tv_bottom"
+                    android:id="@+id/loadResult_Tv_274"/>
 
             </TableRow>
 

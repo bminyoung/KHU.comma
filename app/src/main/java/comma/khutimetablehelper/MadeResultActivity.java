@@ -32,7 +32,6 @@ public class MadeResultActivity extends AppCompatActivity {
     private int lastExpandedPosition = -1;
 
     ArrayList<String> groupData; //확장리스트뷰 - group
-    ArrayList<Subject> table;
     ArrayList<ArrayList<ArrayList<Subject>>> childData; // 확장리스트뷰 - child
     public TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
@@ -77,7 +76,6 @@ public class MadeResultActivity extends AppCompatActivity {
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
-                Subject[] subjects = new Subject[10];
                 ArrayList<Subject> selectedTimeTable = (ArrayList<Subject>) expAdapter.getChild(groupPosition, childPosition);
 
                 colorIndex = 0;
@@ -104,14 +102,11 @@ public class MadeResultActivity extends AppCompatActivity {
         ArrayList<Subject> subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
         ArrayList<Integer> spinStatus = (ArrayList<Integer>) getIntent().getSerializableExtra("spinStatus");
         ArrayList<Integer> spinValue = (ArrayList<Integer>) getIntent().getSerializableExtra("spinValue");
-
-        Log.d("tag", "minyoung" + needSubject.size() + "" + subSubject.size() + "" + spinStatus.size() + "" + spinValue.size());
     }
 
     private void SaveTimeTable(int position, String timeTableName){
         AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
         AppContext.timeTableNameList.add(timeTableName);
-        Log.d("tag","minyoung 여기까지 왓다!!!" + timeTableName);
 
     }
 
