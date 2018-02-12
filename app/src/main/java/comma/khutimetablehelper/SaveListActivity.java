@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class SaveListActivity extends Activity{
 
     ListView listview;
     ListViewAdapter lvAdapter;
-    ArrayList<Subject> timeTableList = new ArrayList<Subject>();
+    ArrayList<ArrayList<Subject>> timeTableList = new ArrayList<ArrayList<Subject>>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,36 +52,28 @@ public class SaveListActivity extends Activity{
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SaveListActivity.this, LoadResultActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
             }
         });
     }
 
     private void setData(){
 
-        lvAdapter.addItem(new Subject());
+        for(int i = 0;i < AppContext.timeTableList.size();i++) {
+            timeTableList.add(AppContext.timeTableList.get(i));
+        }
 
-    }
-}
-
-class ListVIewItem{
-    private String title;
-
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public String getTitle(){
-        return this.title;
     }
 }
 
 class ListViewAdapter extends BaseAdapter{
 
-    private ArrayList<Subject> itemList = new ArrayList<Subject>();
+    private ArrayList<ArrayList<Subject>> itemList = new ArrayList<ArrayList<Subject>>();
 
-    public ListViewAdapter(ArrayList<Subject> list){ itemList = list; }
+    public ListViewAdapter(ArrayList<ArrayList<Subject>> list){ itemList = list; }
 
     @Override
     public int getCount() {
@@ -120,6 +113,7 @@ class ListViewAdapter extends BaseAdapter{
         Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
         Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
 
+        Log.d("tag", "minyoung" + position);
         tableName.setText(AppContext.timeTableNameList.get(position)); // 저장된 시간표 이름
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +167,7 @@ class ListViewAdapter extends BaseAdapter{
     }
 
 
-    public void addItem(Subject sub){
-        itemList.add(sub);
+    public void addItem(ArrayList<Subject> timeTable){
+        itemList.add(timeTable);
     }
 }

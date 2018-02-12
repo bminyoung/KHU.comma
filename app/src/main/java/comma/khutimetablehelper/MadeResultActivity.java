@@ -102,7 +102,6 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     private void SaveTimeTable(int position, String timeTableName){
-        AppContext.timeTableList.add(new ArrayList<Subject>());
         AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
         AppContext.timeTableNameList.add(timeTableName);
         Log.d("tag","minyoung 여기까지 왓다!!!" + timeTableName);
