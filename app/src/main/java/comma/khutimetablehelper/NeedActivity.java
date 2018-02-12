@@ -9,6 +9,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class NeedActivity extends Activity {
                         intent.putExtra(listDataChild.get(listDataHeader.get(group_num)).get(child_num).toString(),(group_num*child_num)+child_num);
                     }
                 }
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -103,6 +104,17 @@ public class NeedActivity extends Activity {
     protected void onDestroy() {
         selectedList.clear();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(data != null) {
+            Subject sub = (Subject) data.getSerializableExtra("subject");
+            Log.d("tag", "minyoung");
+            madapter.additem(sub);
+            madapter.notifyDataSetChanged();
+            Log.d("tag", "minyoung");
+        }
     }
 
 //데이터 입력
@@ -236,23 +248,6 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
-    }
-
-    //포지션을 입력받으면 listview에 데이터를 입력하는 함수
-    static void NeedSelectSearchSubject(int position) {//검색부분의 position을 입력받음
-        int groupnum = 0;
-        for (int num = 0; num < _listDataHeader.size(); num++) {//확장리스트뷰의 num번째 그룹싸이즈보다 position이 크면 position에 싸이즈를 빼고, num에 1을 추가
-            if (position >= _listDataChild.get(_listDataHeader.get(groupnum)).size()) {
-                position = position - _listDataChild.get(_listDataHeader.get(groupnum)).size();
-                groupnum = groupnum + 1;
-            }
-        }
-        //need액티비티에 과목을 추가
-        Subject choosedSubject = _listDataChild.get(_listDataHeader.get(groupnum)).get(position);
-        if (NeedActivity.isValid(choosedSubject)) {
-            NeedActivity.madapter.additem(choosedSubject);
-            NeedActivity.madapter.notifyDataSetChanged();
-        }
     }
 
 }

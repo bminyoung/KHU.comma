@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:visibility="invisible"
             android:text="임시버튼" />
     </RelativeLayout>
 

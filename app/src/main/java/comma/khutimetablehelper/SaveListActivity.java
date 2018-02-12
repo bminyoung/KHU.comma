@@ -37,15 +37,6 @@ public class SaveListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_savelist);
 
-        Button btnNext = (Button) findViewById(R.id.savelist_btn_main);
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SaveListActivity.this, LoadResultActivity.class);
-                startActivity(intent);
-            }
-        });
-
         lvAdapter = new ListViewAdapter(timeTableList, this);
         listview = (ListView) findViewById(R.id.savelist_lv_savedTable);
         listview.setAdapter(lvAdapter);

@@ -1,28 +1,28 @@
 package comma.khutimetablehelper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static comma.khutimetablehelper.NeedExpandableListAdapter.NeedSelectSearchSubject;
-
 public class SearchActivity extends AppCompatActivity {
 
-    private List<String> list;          // 데이터를 넣은 리스트변수
+    private List<Subject> list;          // 데이터를 넣은 리스트변수(리스트목록)
     private ListView listView;          // 검색을 보여줄 리스트변수
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
-    private ArrayList<String> arraylist;
+    private ArrayList<Subject> arraylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +33,13 @@ public class SearchActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.search_lstv_list);
 
         // 리스트를 생성한다.
-        list = new ArrayList<String>();
+        list = new ArrayList<Subject>();
 
         // 검색에 사용할 데이터을 미리 저장한다.
         settingList();
 
         // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-        arraylist = new ArrayList<String>();
+        arraylist = new ArrayList<Subject>();
         arraylist.addAll(list);
 
         // 리스트에 연동될 아답터를 생성한다.
@@ -49,22 +49,31 @@ public class SearchActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         //리스트뷰 아이템 클릭하면 need의 리스트뷰에 아이템을 넘김
-  /*      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parentView, View childView, int position, long id) {
-                Toast.makeText(SearchActivity.this, position+"의 과목을 추가했습니다.", Toast.LENGTH_LONG).show();
-                NeedSelectSearchSubject(position);
-            }
-        });
-*/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parentView, View childView, int position, long id) {
-                Toast.makeText(SearchActivity.this, position+"의 과목을 추가했습니다.", Toast.LENGTH_LONG).show();
-                NeedSelectSearchSubject(position);
+            public void onItemClick(AdapterView<?> parentView, View childView, final int position, long id) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SearchActivity.this);
+                int i = 0;
+                Subject sub = new Subject();
+                while(i < AppContext.onlySubjectList.size()){
+                    if(list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow){
+                        sub = list.get(position);
+                    }
+                }
+                final Subject finalSub = sub;
+                dialogBuilder.setTitle("과목 선택").setMessage(sub.getName()+"을 추가하시겠습니까?")
+                        .setPositiveButton("선택", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent data = new Intent();
+                                data.putExtra("subject", finalSub);
+                                setResult(0,data);
+                                finish();
+                            }
+                        }).setNegativeButton("취소", null).show();
+
             }
         });
-
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
         editSearch.addTextChangedListener(new TextWatcher() {
@@ -86,9 +95,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent =getIntent();
-
-
     }
 
     // 검색을 수행하는 메소드
@@ -108,7 +114,7 @@ public class SearchActivity extends AppCompatActivity {
             for(int i = 0;i < arraylist.size(); i++)
             {
                 // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (arraylist.get(i).toLowerCase().contains(charText))
+                if (arraylist.get(i).getName().toLowerCase().contains(charText))
                 {
                     // 검색된 데이터를 리스트에 추가한다.
                     list.add(arraylist.get(i));
@@ -123,7 +129,40 @@ public class SearchActivity extends AppCompatActivity {
     private void settingList(){
 
         for(int i = 0; i < AppContext.onlySubjectList.size();i++)
-            list.add(AppContext.onlySubjectList.get(i).getName());
+            list.add(AppContext.onlySubjectList.get(i));
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
