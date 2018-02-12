@@ -30,7 +30,7 @@ public class SettingActivity extends AppCompatActivity {
     Spinner credit_subspin;
     Spinner firstTime_subspin;
     Spinner timeFlic_subspin;
-    Spinner day_subspin;
+    Spinner emptyDay_subspin;
     Spinner dayCount_subspin;
     Spinner lunch_subspin;
     Spinner classTime_subspin;
@@ -47,14 +47,18 @@ public class SettingActivity extends AppCompatActivity {
     Spinner creditMax_spin;
     Spinner firstTime_spin;
     Spinner timeFlic_spin;
-    Spinner day_spin;
+    Spinner emptyDay_spin;
     Spinner dayCount_spin;
     Spinner lunchStart_spin;
     Spinner lunchEnd_spin;
     Spinner classTime_spin;
     Spinner maxClassNum_spin;
     Spinner maxClassTime_spin;
-    Spinner dayEndTime_spin;
+
+    ArrayList<Subject> needSubject = new ArrayList<Subject>();
+    ArrayList<Subject> subSubject = new ArrayList<Subject>();
+    ArrayList<Integer> spinStatus = new ArrayList<Integer>();// 필수인지 해당x인지 (0,1);
+    ArrayList<Integer> spinValue = new ArrayList<Integer>(); // 스피너 선택값
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,25 +66,18 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         TextView test = (TextView) findViewById(R.id.test);
-        ArrayList<Subject> needSubject = new ArrayList<Subject>();
-        ArrayList<Subject> subSubject = new ArrayList<Subject>();
+
         int i = 0;
         int index = 0;
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
         subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
 
+        //임시시간표 만들기부분
         AppContext.tempTimeTableList.add(new ArrayList<Subject>());
         while(i < needSubject.size()) {
             AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
         }
-
         i = 0;
-        while(i < subSubject.size()) {
-            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
-        }
-        index++;
-        i = 0;
-        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
         while(i < subSubject.size()) {
             AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
         }
@@ -88,11 +85,16 @@ public class SettingActivity extends AppCompatActivity {
         index++;
         i = 0;
         AppContext.tempTimeTableList.add(new ArrayList<Subject>());
-        while(i < needSubject.size()) {
-            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
+        while(i < subSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
         }
 
-
+        index++;
+        i = 0;
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
+        while(i < needSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
+        } //임시 시간표 만들기부분 끝
 
         SpinnerInit();
 
@@ -104,6 +106,11 @@ public class SettingActivity extends AppCompatActivity {
                 switch (valid()) {
                     case 0:
                         Intent intent = new Intent(SettingActivity.this, MadeResultActivity.class);
+                        intent.putExtra("NeedSubject", needSubject);
+                        intent.putExtra("SubSubject", subSubject);
+                        saveSpinner();
+                        intent.putExtra("spinStatus", spinStatus);
+                        intent.putExtra("spinValue", spinValue);
                         startActivity(intent);
                         break;
                     case 1: //학점오류 다이얼로그
@@ -115,6 +122,39 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    private void saveSpinner(){
+
+        spinStatus.add(0); //학점 필수
+        spinStatus.add(firstTime_subspin.getSelectedItemPosition());
+        spinStatus.add(timeFlic_subspin.getSelectedItemPosition());
+        spinStatus.add(emptyDay_subspin.getSelectedItemPosition());
+        spinStatus.add(dayCount_subspin.getSelectedItemPosition());
+        spinStatus.add(lunch_subspin.getSelectedItemPosition());
+        spinStatus.add(classTime_subspin.getSelectedItemPosition());
+        spinStatus.add(maxClassNum_subspin.getSelectedItemPosition());
+        spinStatus.add(maxClassTime_subspin.getSelectedItemPosition());
+        spinStatus.add(dayEndTime_subspin.getSelectedItemPosition());
+
+        spinValue.add(creditMin_spin.getSelectedItemPosition());
+        spinValue.add(creditMax_spin.getSelectedItemPosition());
+        spinValue.add(firstTime_spin.getSelectedItemPosition());
+        spinValue.add(timeFlic_spin.getSelectedItemPosition());
+        spinValue.add(emptyDay_spin.getSelectedItemPosition());
+        spinValue.add(dayCount_spin.getSelectedItemPosition());
+        spinValue.add(lunchStart_spin.getSelectedItemPosition());
+        spinValue.add(lunchEnd_spin.getSelectedItemPosition());
+        spinValue.add(classTime_spin.getSelectedItemPosition());
+        spinValue.add(maxClassNum_spin.getSelectedItemPosition());
+        spinValue.add(maxClassTime_spin.getSelectedItemPosition());
+        spinValue.add(dayMon.getSelectedItemPosition());
+        spinValue.add(dayTue.getSelectedItemPosition());
+        spinValue.add(dayWed.getSelectedItemPosition());
+        spinValue.add(dayThu.getSelectedItemPosition());
+        spinValue.add(dayFri.getSelectedItemPosition());
+
 
     }
 
@@ -141,31 +181,22 @@ public class SettingActivity extends AppCompatActivity {
         credit_subspin = (Spinner) findViewById(R.id.setting_spin_subCredit);
         credit_subspin.setSelection(0);
         credit_subspin.setEnabled(false);
-
         firstTime_subspin = (Spinner) findViewById(R.id.setting_spin_subFirstStartTime);
         firstTime_subspin.setSelection(1);
-
         timeFlic_subspin = (Spinner) findViewById(R.id.setting_spin_subTimeFlic);
         timeFlic_subspin.setSelection(1);
-
-        day_subspin = (Spinner) findViewById(R.id.setting_spin_subDay);
-        day_subspin.setSelection(1);
-
+        emptyDay_subspin = (Spinner) findViewById(R.id.setting_spin_subEmptyDay);
+        emptyDay_subspin.setSelection(1);
         dayCount_subspin = (Spinner) findViewById(R.id.setting_spin_subDayCount);
         dayCount_subspin.setSelection(1);
-
         lunch_subspin = (Spinner) findViewById(R.id.setting_spin_subLunch);
         lunch_subspin.setSelection(1);
-
         classTime_subspin = (Spinner) findViewById(R.id.setting_spin_subClassTime);
         classTime_subspin.setSelection(1);
-
         maxClassNum_subspin = (Spinner) findViewById(R.id.setting_spin_subMaxClassNum);
         maxClassNum_subspin.setSelection(1);
-
         maxClassTime_subspin = (Spinner) findViewById(R.id.setting_spin_subMaxClassTime);
         maxClassTime_subspin.setSelection(1);
-
         dayEndTime_subspin = (Spinner) findViewById(R.id.setting_spin_subDayEndTime);
         dayEndTime_subspin.setSelection(1);
 
@@ -173,13 +204,17 @@ public class SettingActivity extends AppCompatActivity {
         creditMax_spin = (Spinner) findViewById(R.id.setting_spin_creditMax);
         firstTime_spin = (Spinner) findViewById(R.id.setting_spin_firstStartTime);
         timeFlic_spin = (Spinner) findViewById(R.id.setting_spin_timeFlic);
-        day_spin = (Spinner) findViewById(R.id.setting_spin_day);
+        emptyDay_spin = (Spinner) findViewById(R.id.setting_spin_emptyDay);
         dayCount_spin = (Spinner) findViewById(R.id.setting_spin_dayCount);
         lunchStart_spin = (Spinner) findViewById(R.id.setting_spin_lunchStart);
         lunchEnd_spin = (Spinner) findViewById(R.id.setting_spin_lunchEnd);
-        classTime_subspin = (Spinner) findViewById(R.id.setting_spin_classTime);
-        maxClassNum_subspin = (Spinner) findViewById(R.id.setting_spin_maxClassNum);
-        maxClassTime_subspin = (Spinner) findViewById(R.id.setting_spin_maxClassTime);
+        classTime_spin = (Spinner) findViewById(R.id.setting_spin_classTime);
+        maxClassNum_spin = (Spinner) findViewById(R.id.setting_spin_maxClassNum);
+        maxClassTime_spin = (Spinner) findViewById(R.id.setting_spin_maxClassTime);
+
+        classTime_subspin = (Spinner) findViewById(R.id.setting_spin_subClassTime);
+        maxClassNum_subspin = (Spinner) findViewById(R.id.setting_spin_subMaxClassNum);
+        maxClassTime_subspin = (Spinner) findViewById(R.id.setting_spin_subMaxClassTime);
         dayMon = (Spinner) findViewById(R.id.setting_spin_Mon);
         dayTue = (Spinner) findViewById(R.id.setting_spin_Tue);
         dayWed = (Spinner) findViewById(R.id.setting_spin_Wed);

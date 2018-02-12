@@ -99,6 +99,13 @@ public class MadeResultActivity extends AppCompatActivity {
                     lastExpandedPosition = groupPosition;
             }
         });
+
+        ArrayList<Subject> needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
+        ArrayList<Subject> subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
+        ArrayList<Integer> spinStatus = (ArrayList<Integer>) getIntent().getSerializableExtra("spinStatus");
+        ArrayList<Integer> spinValue = (ArrayList<Integer>) getIntent().getSerializableExtra("spinValue");
+
+        Log.d("tag", "minyoung" + needSubject.size() + "" + subSubject.size() + "" + spinStatus.size() + "" + spinValue.size());
     }
 
     private void SaveTimeTable(int position, String timeTableName){

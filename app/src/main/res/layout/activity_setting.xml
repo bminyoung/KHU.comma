@@ -126,11 +126,7 @@
         <!--학점끝-->
 
         <!--첫강의시작시간-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subFirstStartTime"
@@ -154,13 +150,7 @@
         <!--첫강의시작시간 끝-->
 
         <!--강의시간간격-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subTimeFlic"
@@ -183,16 +173,10 @@
         <!--강의시간간격 끝-->
 
         <!--공강요일-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
-                android:id="@+id/setting_spin_subDay"
+                android:id="@+id/setting_spin_subEmptyDay"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -204,7 +188,7 @@
                 android:text="공강 요일 :              "/>
 
             <Spinner
-                android:id="@+id/setting_spin_day"
+                android:id="@+id/setting_spin_emptyDay"
                 android:layout_width="100sp"
                 android:layout_height="match_parent"
                 android:entries="@array/weekday"/>
@@ -213,13 +197,7 @@
         <!--공강요일 끝-->
 
         <!--요일수-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subDayCount"
@@ -244,13 +222,7 @@
         <!--요일수 끝-->
 
         <!--점심시간-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subLunch"
@@ -284,13 +256,7 @@
         <!--점심시간 끝-->
 
         <!--수업최대시간-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subClassTime"
@@ -315,13 +281,7 @@
         <!--수업최대시간끝-->
 
         <!--하루강의갯수-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subMaxClassNum"
@@ -346,13 +306,7 @@
         <!--하루강의갯수 끝-->
 
         <!--하루강의시간-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subMaxClassTime"
@@ -377,13 +331,7 @@
         <!--하루강의시간 끝-->
 
         <!--요일별 끝나는시간-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
+        <LinearLayout style="@style/spinRank">
 
             <Spinner
                 android:id="@+id/setting_spin_subDayEndTime"
@@ -400,13 +348,8 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp">
+        <LinearLayout style="@style/spinRank"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
