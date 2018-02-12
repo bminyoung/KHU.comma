@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/KHUTimeTableHelper.iml" filepath="$PROJECT_DIR$/KHUTimeTableHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KHU.comma.iml" filepath="$PROJECT_DIR$/KHU.comma.iml" />
+      <module fileurl="file://C:\Users\jwell\AndroidStudioProjects\KHU.comma\KHUTimeTableHelper.iml" filepath="C:\Users\jwell\AndroidStudioProjects\KHU.comma\KHUTimeTableHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
