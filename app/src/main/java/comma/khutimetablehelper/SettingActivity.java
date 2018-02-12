@@ -56,14 +56,16 @@ public class SettingActivity extends AppCompatActivity {
     Spinner maxClassTime_spin;
     Spinner dayEndTime_spin;
 
+    ArrayList<Subject> needSubject = new ArrayList<Subject>();
+    ArrayList<Subject> subSubject = new ArrayList<Subject>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
         TextView test = (TextView) findViewById(R.id.test);
-        ArrayList<Subject> needSubject = new ArrayList<Subject>();
-        ArrayList<Subject> subSubject = new ArrayList<Subject>();
+
         int i = 0;
         int index = 0;
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
@@ -187,6 +189,7 @@ public class SettingActivity extends AppCompatActivity {
         dayFri = (Spinner) findViewById(R.id.setting_spin_Fri);
 
     }
+
 }
 
 
