@@ -5,11 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static comma.khutimetablehelper.NeedExpandableListAdapter.NeedSelectSearchSubject;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -42,6 +47,24 @@ public class SearchActivity extends AppCompatActivity {
 
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
+
+        //리스트뷰 아이템 클릭하면 need의 리스트뷰에 아이템을 넘김
+  /*      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parentView, View childView, int position, long id) {
+                Toast.makeText(SearchActivity.this, position+"의 과목을 추가했습니다.", Toast.LENGTH_LONG).show();
+                NeedSelectSearchSubject(position);
+            }
+        });
+*/
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parentView, View childView, int position, long id) {
+                Toast.makeText(SearchActivity.this, position+"의 과목을 추가했습니다.", Toast.LENGTH_LONG).show();
+                NeedSelectSearchSubject(position);
+            }
+        });
+
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
         editSearch.addTextChangedListener(new TextWatcher() {

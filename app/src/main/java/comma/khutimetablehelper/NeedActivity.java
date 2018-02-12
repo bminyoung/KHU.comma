@@ -149,8 +149,8 @@ public class NeedActivity extends Activity {
 class NeedExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader;
-    private HashMap<String, List<Subject>> _listDataChild;
+    private static List<String> _listDataHeader;
+    private static HashMap<String, List<Subject>> _listDataChild;
 
 
     public NeedExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
@@ -236,6 +236,23 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    //포지션을 입력받으면 listview에 데이터를 입력하는 함수
+    static void NeedSelectSearchSubject(int position) {//검색부분의 position을 입력받음
+        int groupnum = 0;
+        for (int num = 0; num < _listDataHeader.size(); num++) {//확장리스트뷰의 num번째 그룹싸이즈보다 position이 크면 position에 싸이즈를 빼고, num에 1을 추가
+            if (position >= _listDataChild.get(_listDataHeader.get(groupnum)).size()) {
+                position = position - _listDataChild.get(_listDataHeader.get(groupnum)).size();
+                groupnum = groupnum + 1;
+            }
+        }
+        //need액티비티에 과목을 추가
+        Subject choosedSubject = _listDataChild.get(_listDataHeader.get(groupnum)).get(position);
+        if (NeedActivity.isValid(choosedSubject)) {
+            NeedActivity.madapter.additem(choosedSubject);
+            NeedActivity.madapter.notifyDataSetChanged();
+        }
     }
 
 }
