@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
     public void setSubjectOnlyList(){
         AppContext.onlySubjectList.add(AppContext.subjectList[0]);
         for(int i = 0;i < AppContext.subjectList.length - 1;i++){
-            if(!(AppContext.subjectList[i+1].getName().equals(AppContext.subjectList[i].getName()))){
+            if(!(AppContext.subjectList[i+1].cNum.equals(AppContext.subjectList[i].cNum))){
                 AppContext.onlySubjectList.add(AppContext.subjectList[i+1]);
             }
         }

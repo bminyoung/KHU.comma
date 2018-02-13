@@ -65,8 +65,6 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        TextView test = (TextView) findViewById(R.id.test);
-
         int i = 0;
         int index = 0;
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");

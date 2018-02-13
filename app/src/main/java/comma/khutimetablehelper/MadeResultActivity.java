@@ -22,6 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 
@@ -139,11 +142,58 @@ public class MadeResultActivity extends AppCompatActivity {
 
     }
 
-    private void SaveTimeTable(int position, String timeTableName){
+
+
+
+
+
+
+
+
+    private void SaveTimeTable(int position, String timeTableName) {
         AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
         AppContext.timeTableNameList.add(timeTableName);
 
+        Log.d("tag", "minyoung good1");
+
+        int[] classes = new int[42];
+        classes[0] = 5;
+        classes[1] = 150;
+        classes[2] = 255;
+        String fileName = "테스트용 시간표12.csv";
+        UserInputData timeTable = new UserInputData(classes, fileName);
+        int i = 0;
+
+
+        try {
+            //BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
+            FileWriter fw = new FileWriter(fileName) ;
+
+            Log.d("tag", "minyoung good2");
+            while (timeTable.getcClasses()[i] != 0) {
+                Log.d("tag", "minyoung good2-while start");
+                fw.write("" + timeTable.getcClasses()[i]);
+                Log.d("tag", "minyoung good2-while start2");
+                if (timeTable.getcClasses()[i + 1] != 0) {
+                    Log.d("tag", "minyoung good2-if start1");
+                    fw.write(",");
+                    Log.d("tag", "minyoung good2-if end");
+                }
+                i++;
+            }
+            Log.d("tag", "minyoung good2-while end");
+            fw.flush();
+            fw.close();
+
+        } catch (Exception e) {
+            Log.d("tag", "minyoung good3");
+            e.printStackTrace();
+        }
     }
+
+
+
+
 
     public void ShowTimeTable(Subject selected){
         TextView tv;
@@ -606,7 +656,30 @@ class CustomElvAdapter extends BaseExpandableListAdapter {
 }
 
 
+class UserInputData {
+    int[] cClasses = new int[42]; // 저장되는 과목
+    String cFileName; // 시간표 이름
 
+    public UserInputData() {
+    } // 기본생성자
+
+    public UserInputData(int[] classes, String fileName) {
+        for (int i = 0; i < 42; i++) {
+            cClasses[i] = classes[i];
+        }
+        cFileName = fileName;
+    }
+
+    public String getFileName() {
+        return cFileName;
+    }
+
+    public int[] getcClasses() {
+        return cClasses;
+    }
+
+
+}
 
 
 
