@@ -24,6 +24,9 @@ public class SearchActivity extends AppCompatActivity {
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<Subject> arraylist;
 
+    //검색 성공
+    static final int SUCCESS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class SearchActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent data = new Intent();
                                 data.putExtra("subject", finalSub);
-                                setResult(0,data);
+                                setResult(SUCCESS,data);
                                 finish();
                             }
                         }).setNegativeButton("취소", null).show();

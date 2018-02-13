@@ -25,14 +25,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SubActivity extends AppCompatActivity {
+
     //확장 리스트뷰
     SubExpandableListAdapter explistAdapter;
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     ArrayList<Subject> needSubject;
-    static ArrayList<Subject> subSubject = new ArrayList<Subject>();
     Intent intentToSetting;
     int i = 0;
+
+    //어느 액티비티에서 search를 호출했는지
+    static final int SUB = 1;
 
     //다른 그룹 오픈시 열려있는 그룹 닫기 메서드 선언부
     private ExpandableListView expListView;
@@ -40,7 +43,7 @@ public class SubActivity extends AppCompatActivity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private static ArrayList<Subject> selectedList = new ArrayList<Subject>();
+    private static ArrayList<Subject> selectedSubList = new ArrayList<Subject>();
     protected static CustomListAdapter madapter;
 
     @Override
@@ -56,11 +59,11 @@ public class SubActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(needSubject.size() + selectedList.size() == 0){
+                if(needSubject.size() + selectedSubList.size() == 0){
                     Alert();
                 }
                 else {
-                    intentToSetting.putExtra("SubSubject", selectedList);
+                    intentToSetting.putExtra("SubSubject", madapter.getSubjectList());
                     intentToSetting.putExtra("NeedSubject", needSubject);
                     startActivity(intentToSetting);
                 }
@@ -73,7 +76,7 @@ public class SubActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SubActivity.this, SearchActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, SUB);
             }
         });
 
@@ -87,7 +90,7 @@ public class SubActivity extends AppCompatActivity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.sub_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedList);
+        madapter = new CustomListAdapter(selectedSubList);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -104,8 +107,21 @@ public class SubActivity extends AppCompatActivity {
     }
 
     protected void onDestroy() {
-        selectedList.clear();
+        selectedSubList.clear();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if((requestCode == SUB) && (resultCode == SearchActivity.SUCCESS)) {
+            Subject sub = (Subject) data.getSerializableExtra("subject");
+            if(isValid(sub)) { // 리스트에 이미 있으면
+                madapter.additem(sub);
+                madapter.notifyDataSetChanged();
+            }else{
+                Toast.makeText(SubActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void Alert(){
@@ -141,8 +157,8 @@ public class SubActivity extends AppCompatActivity {
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
         int i = 0;
-        for(i = 0; i < selectedList.size();i++){
-            if(selectedList.get(i).cNum.equals(sub.cNum)){
+        for(i = 0; i < selectedSubList.size();i++){
+            if(selectedSubList.get(i).cNum.equals(sub.cNum)){
                 ret = false;
                 break;
             }
@@ -198,9 +214,6 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
                     SubActivity.madapter.additem(selectedSubject);
                     SubActivity.madapter.notifyDataSetChanged();
                 }
-
-
-                btn.setClickable(false);
             }
         });
         txtListChild.setText(childText);

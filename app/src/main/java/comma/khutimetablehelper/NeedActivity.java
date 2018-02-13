@@ -29,9 +29,11 @@ public class NeedActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
-    static ArrayList<Subject> needSubject = new ArrayList<Subject>();
+    ArrayList<Subject> needSubject = new ArrayList<Subject>();
     int i = 0;
 
+    //어느 액티비티에서 search를 호출했는지
+    static final int NEED = 0;
 
     //다른 그룹 오픈시 열려있는 그룹 닫기 메서드 선언부
     private ExpandableListView expListView;
@@ -39,7 +41,7 @@ public class NeedActivity extends Activity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private static ArrayList<Subject> selectedList = new ArrayList<Subject>();
+    private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>();
     protected static CustomListAdapter madapter;
 
     @Override
@@ -66,12 +68,7 @@ public class NeedActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(NeedActivity.this, SearchActivity.class);
-                for(int group_num = 0; group_num<listDataHeader.size();group_num++) {
-                    for (int child_num = 0; child_num < listDataChild.size(); child_num++) {
-                        intent.putExtra(listDataChild.get(listDataHeader.get(group_num)).get(child_num).toString(),(group_num*child_num)+child_num);
-                    }
-                }
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, NEED);
             }
         });
 
@@ -85,7 +82,7 @@ public class NeedActivity extends Activity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.need_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedList);
+        madapter = new CustomListAdapter(selectedNeedList);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -102,18 +99,20 @@ public class NeedActivity extends Activity {
     }
 
     protected void onDestroy() {
-        selectedList.clear();
+        selectedNeedList.clear();
         super.onDestroy();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(data != null) {
+        if((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
             Subject sub = (Subject) data.getSerializableExtra("subject");
-            Log.d("tag", "minyoung");
-            madapter.additem(sub);
-            madapter.notifyDataSetChanged();
-            Log.d("tag", "minyoung");
+            if(isValid(sub)) { // 리스트에 이미 있으면
+                madapter.additem(sub);
+                madapter.notifyDataSetChanged();
+            }else{
+                Toast.makeText(NeedActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -146,8 +145,8 @@ public class NeedActivity extends Activity {
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
         int i = 0;
-        for(i = 0; i < selectedList.size();i++){
-            if(selectedList.get(i).cNum.equals(sub.cNum)){
+        for(i = 0; i < selectedNeedList.size();i++){
+            if(selectedNeedList.get(i).cNum.equals(sub.cNum)){
                 ret = false;
                 break;
             }
