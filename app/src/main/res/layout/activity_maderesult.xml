@@ -738,8 +738,8 @@
                     android:textSize="18dp"
                     android:text="시간표 목록" />
 
-                <ExpandableListView
-                    android:id="@+id/maderesult_elv_List"
+                <ListView
+                    android:id="@+id/maderesult_lv_List"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
