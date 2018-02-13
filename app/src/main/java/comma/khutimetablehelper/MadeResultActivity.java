@@ -135,7 +135,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 filterDayEndTime(subSubject.get(i).cDay, subSubject.get(i).cEnd, i);
             }
         }
-
+        calculateSubject();
     }
 
     private void SaveTimeTable(int position, String timeTableName){
@@ -383,11 +383,7 @@ public class MadeResultActivity extends AppCompatActivity {
         int[][] Code = new int[10][21];
 
         ArrayList<Subject> tmpSubSubject = filteredSubSubject;
-        ArrayList<Subject> getUsedFirstSubSubject = new ArrayList<Subject>();
-        ArrayList<Subject> getUsedSecondSubSubject;
-        ArrayList<Subject> getUsedThirdSubSubject;
-        ArrayList<Subject> getUsedForthSubSubject;
-        ArrayList<Subject> getUsedFifthSubSubject;
+        ArrayList<ArrayList<Subject>> getUsedSubSubject = new ArrayList<ArrayList<Subject>>();
 
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < 5; j++) {
@@ -395,6 +391,7 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         }
         boolean registCheck = true;
+        int overlapCheck;
         int getSettedMinCreditCount = spinValue.get(0) + 15;
         int getSettedMaxCreditCount = spinValue.get(1) + 15;
         int nowCreditCount = 0;
@@ -404,133 +401,165 @@ public class MadeResultActivity extends AppCompatActivity {
         int thursDayClassCount = 0;
         int friDayClassCount = 0;
         int dayCount = 0;
+        int tmpCount = 0;
 
         for (int i = 0; i < 10; i++) {
+            getUsedSubSubject.add(i,new ArrayList<Subject>());
             for (int j = 0; j < filteredSubSubject.size(); j++) {
                 registCheck = true;
-                if(spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                    dayCount = 5;
-                    switch (filteredSubSubject.get(j).cDay){
-                        case 0:
-                            if(monDayClassCount == 0) {
-                                dayCount++;
-                            }
-                            break;
-                        case 1:
-                            if(tuesDayClassCount == 0){
-                                dayCount--;
-                            }
-                            break;
-                        case 2:
-                            if(wednesDayClassCount == 0){
-                                dayCount--;
-                            }
-                            break;
-                        case 3:
-                            if(thursDayClassCount == 0){
-                                dayCount--;
-                            }
-                            break;
-                        case 4:
-                            if(friDayClassCount == 0){
-                                dayCount--;
-                            }
-                            break;
-                    }
-                    if(monDayClassCount == 0) {
-                        dayCount--;
-                    }
-                    if(tuesDayClassCount == 0){
-                        dayCount--;
-                    }
-                    if(wednesDayClassCount == 0) {
-                        dayCount--;
-                    }
-                    if(thursDayClassCount == 0){
-                        dayCount--;
-                    }
-                    if(friDayClassCount == 0){
-                        dayCount--;
-                    }
-                    if(dayCount > spinValue.get(5) + 3) {
-                        registCheck = false;
+                overlapCheck = 1;
+                for (int k = 0 ; k < getUsedSubSubject.get(i).size() ; k++) {
+                    for (int l = 0; l < getUsedSubSubject.size() ; l++) {
+                        if (getUsedSubSubject.get(l).contains(filteredSubSubject.get(j))){
+                            tmpCount++;
+                        }
                     }
                 }
-
-                if (nowCreditCount + filteredSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
+                if(tmpCount > 2){
                     registCheck = false;
                 }
-                if(spinStatus.get(7) == 0){     // 요일별 최대강의수를 넘었는지 체크
-                    switch (filteredSubSubject.get(j).cDay) {
-                        case 0:
-                            if(monDayClassCount >= spinValue.get(9) + 2) {
-                                registCheck = false;
-                            }
-                            break;
-                        case 1:
-                            if(tuesDayClassCount >= spinValue.get(9) + 2) {
-                                registCheck = false;
-                            }
-                            break;
-                        case 2:
-                            if(wednesDayClassCount >= spinValue.get(9) + 2) {
-                                registCheck = false;
-                            }
-                            break;
-                        case 3:
-                            if(thursDayClassCount >= spinValue.get(9) + 2) {
-                                registCheck = false;
-                            }
-                            break;
-                        case 4:
-                            if(friDayClassCount >= spinValue.get(9) + 2) {
-                                registCheck = false;
-                            }
-                            break;
+                if(filteredSubSubject.size() != j-1){
+                    if(filteredSubSubject.get(j) == filteredSubSubject.get(j+1)) {
+                        overlapCheck++;
+                    }
+                    if(filteredSubSubject.size() +1 != j-2) {
+                        if (filteredSubSubject.get(j) == filteredSubSubject.get(j + 2)) {
+                            overlapCheck++;
+                        }
                     }
                 }
+                for(int repeatCount = 0; repeatCount < overlapCheck ; repeatCount++) {
+                    if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
+                        dayCount = 5;
+                        switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                            case 0:
+                                if (monDayClassCount == 0) {
+                                    dayCount++;
+                                }
+                                break;
+                            case 1:
+                                if (tuesDayClassCount == 0) {
+                                    dayCount--;
+                                }
+                                break;
+                            case 2:
+                                if (wednesDayClassCount == 0) {
+                                    dayCount--;
+                                }
+                                break;
+                            case 3:
+                                if (thursDayClassCount == 0) {
+                                    dayCount--;
+                                }
+                                break;
+                            case 4:
+                                if (friDayClassCount == 0) {
+                                    dayCount--;
+                                }
+                                break;
+                        }
+                        if (monDayClassCount == 0) {
+                            dayCount--;
+                        }
+                        if (tuesDayClassCount == 0) {
+                            dayCount--;
+                        }
+                        if (wednesDayClassCount == 0) {
+                            dayCount--;
+                        }
+                        if (thursDayClassCount == 0) {
+                            dayCount--;
+                        }
+                        if (friDayClassCount == 0) {
+                            dayCount--;
+                        }
+                        if (dayCount > spinValue.get(5) + 3) {
+                            registCheck = false;
+                        }
+                    }
 
-                if (spinStatus.get(2) == 0) {   //공강 체크
-                    for (int k = 0; k < spinValue.get(3) + 2; k++) {
-                        if (SubjectCell[(int) ((filteredSubSubject.get(j).cStart - 9) * 2 - k)][filteredSubSubject.get(j).cDay] == 0) {
+                    if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
+                        switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                            case 0:
+                                if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    registCheck = false;
+                                }
+                                break;
+                            case 1:
+                                if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    registCheck = false;
+                                }
+                                break;
+                            case 2:
+                                if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    registCheck = false;
+                                }
+                                break;
+                            case 3:
+                                if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    registCheck = false;
+                                }
+                                break;
+                            case 4:
+                                if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    registCheck = false;
+                                }
+                                break;
+                        }
+                    }
+
+                    if (spinStatus.get(2) == 0) {   //공강 체크
+                        for (int k = 0; k < spinValue.get(3) + 2; k++) {
+                            if (SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 - k)][filteredSubSubject.get(j+repeatCount).cDay] == 0) {
+                                registCheck = false;
+                                break;
+                            }
+                        }
+                    }
+                    for (int k = 0; k < (int) ((filteredSubSubject.get(j+repeatCount).cEnd - filteredSubSubject.get(j+repeatCount).cStart) * 2); k++) {     // 들어갈 시간이 비었는지 체크 j : 현재과목, repeatCount : 중복된 과목 수
+                        if (SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j+repeatCount).cDay] != 0) {
                             registCheck = false;
                             break;
                         }
                     }
-                }
-                for (int k = 0; k < (int) ((filteredSubSubject.get(j).cEnd - filteredSubSubject.get(j).cStart) * 2); k++) {     // 들어갈 시간이 비었는지 체크
-                    if (SubjectCell[(int) ((filteredSubSubject.get(j).cStart - 9) * 2 + k)][filteredSubSubject.get(j).cDay] != 0) {
-                        registCheck = false;
+                    if(!registCheck){
                         break;
                     }
                 }
-                if (registCheck == true) {
-                    for (int k = 0; k < (int) ((filteredSubSubject.get(j).cEnd - filteredSubSubject.get(j).cStart) * 2); k++) {
-                        SubjectCell[(int) ((filteredSubSubject.get(j).cStart - 9) * 2 + k)][filteredSubSubject.get(j).cDay] = filteredSubSubject.get(j).cRow;
-                        nowCreditCount = nowCreditCount + filteredSubSubject.get(j).cCredit;
-                        getUsedFirstSubSubject.add(j, filteredSubSubject.get(j));
-                        switch (filteredSubSubject.get(j).cDay) {
-                            case 0:
-                                monDayClassCount++;
-                                break;
-                            case 1:
-                                tuesDayClassCount++;
-                                break;
-                            case 2:
-                                wednesDayClassCount++;
-                                break;
-                            case 3:
-                                thursDayClassCount++;
-                                break;
-                            case 4:
-                                friDayClassCount++;
-                                break;
+                if (nowCreditCount + filteredSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
+                    registCheck = false;
+                }
+                if (registCheck == true) {      // 조건에 맞을경우 과목 담기 시작
+                    for(int repeatCount = 0; repeatCount < overlapCheck ; repeatCount++){
+                        for (int k = 0; k < (int) ((filteredSubSubject.get(j+repeatCount).cEnd - filteredSubSubject.get(j+repeatCount).cStart) * 2); k++) {
+                            SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j+repeatCount).cDay] = filteredSubSubject.get(j).cRow;
+                            nowCreditCount = nowCreditCount + filteredSubSubject.get(j+repeatCount).cCredit;
+                            getUsedSubSubject.get(i).add(j, filteredSubSubject.get(j+repeatCount));
+                            switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                                case 0:
+                                    monDayClassCount++;
+                                    break;
+                                case 1:
+                                    tuesDayClassCount++;
+                                    break;
+                                case 2:
+                                    wednesDayClassCount++;
+                                    break;
+                                case 3:
+                                    thursDayClassCount++;
+                                    break;
+                                case 4:
+                                    friDayClassCount++;
+                                    break;
+                            }
                         }
                     }
                 }
             }
         }
+        AppContext.tempTimeTableList = getUsedSubSubject;
     }
+
 }
 
 //확장리스트뷰 어댑터
