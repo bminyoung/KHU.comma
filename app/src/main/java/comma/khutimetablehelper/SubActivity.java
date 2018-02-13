@@ -158,7 +158,7 @@ public class SubActivity extends AppCompatActivity {
         boolean ret = true;
         int i = 0;
         for(i = 0; i < selectedSubList.size();i++){
-            if(selectedSubList.get(i).cNum.equals(sub.cNum)){
+            if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;
                 break;
             }
@@ -195,7 +195,8 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = ((Subject)getChild(groupPosition, childPosition)).getName();
+        Subject child = (Subject) getChild(groupPosition, childPosition);
+        String childText = child.getName();
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -216,7 +217,7 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
                 }
             }
         });
-        txtListChild.setText(childText);
+        txtListChild.setText(childText + "\n" + child.cProf + "교수 / " + child.cStart + " ~ " +child.cEnd);
         return convertView;
     }
 

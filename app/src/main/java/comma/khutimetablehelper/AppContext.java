@@ -65,9 +65,7 @@ class Subject implements Serializable {
     }
 }
 
-class TimeTable{
-    ArrayList<Subject> subject;
-}
+
 
 
 
