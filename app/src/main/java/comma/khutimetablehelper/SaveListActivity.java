@@ -101,44 +101,34 @@ class ListViewAdapter extends BaseAdapter {
         LayoutInflater dInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final LinearLayout dialogLayout = (LinearLayout) dInflater.inflate(R.layout.maderesult_savedialog, null);
         final EditText timeTableTitle = (EditText) dialogLayout.findViewById(R.id.dialog_edt_title);
-        //저장,취소 버튼
-        final Button dialogBtnSave = (Button) dialogLayout.findViewById(R.id.dialog_btn_save);
-        final Button dialogBtnCancel = (Button) dialogLayout.findViewById(R.id.dialog_btn_cancel);
 
         //리스트뷰 애들
         TextView tableName = (TextView) convertView.findViewById(R.id.savelist_lv_tv_tableName);
         Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
         Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
 
-        Log.d("tag", "minyoung" + position);
         tableName.setText(AppContext.timeTableNameList.get(position)); // 저장된 시간표 이름
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                dialogBuilder.setTitle("시간표 이름변경").setView(dialogLayout);
+                dialogBuilder.setTitle("시간표 이름변경").setView(dialogLayout).setNegativeButton("취소", null)
+                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (timeTableTitle.getText().length() == 0) {
+                                    Toast.makeText(context, "변경할 시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                                } else {
+                                    AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
                 final AlertDialog dialog;
                 dialog = dialogBuilder.create();
                 dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                dialogBtnSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (timeTableTitle.getText().length() == 0) {
-                            Toast.makeText(context, "변경할 시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                        } else {
-                            AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
-                            notifyDataSetChanged();
-                        }
-                        dialog.cancel();
-                    }
-                });
-                dialogBtnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
-                    }
-                });
+
                 dialog.show();
             }
         });

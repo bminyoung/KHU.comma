@@ -2,6 +2,7 @@ package comma.khutimetablehelper;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
@@ -197,36 +198,24 @@ public class MadeResultActivity extends AppCompatActivity {
 
         final EditText TimeTableTitle = (EditText) saveLayout.findViewById(R.id.dialog_edt_title);
 
-        //저장,취소 버튼
-        Button dialogBtnSave = (Button) saveLayout.findViewById(R.id.dialog_btn_save);
-        Button dialogBtnCancel = (Button) saveLayout.findViewById(R.id.dialog_btn_cancel);
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("이 시간표를 저장하시겠습니까?").setView(saveLayout);
+        dialogBuilder.setTitle("이 시간표를 저장하시겠습니까?").setView(saveLayout).setNegativeButton("취소", null)
+                .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(TimeTableTitle.getText().length() == 0){
+                            Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
+                            SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
+                        }
+                    }
+                });
 
         final AlertDialog dialog;
         dialog = dialogBuilder.create();
         dialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        dialogBtnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TimeTableTitle.getText().length() == 0){
-                    Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
-                    SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
-                }
-                dialog.cancel();
-            }
-        });
-        dialogBtnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-            }
-        });
 
         dialog.show();
     }
