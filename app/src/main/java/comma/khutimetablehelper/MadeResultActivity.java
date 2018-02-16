@@ -46,6 +46,7 @@ public class MadeResultActivity extends AppCompatActivity {
     ArrayList<Integer> spinStatus;
     ArrayList<Integer> spinValue;
     ArrayList<Subject> filteredSubSubject;
+    boolean filteringNumber = false;
 
     ArrayList<ArrayList<Subject>> listData = new ArrayList<ArrayList<Subject>>();
     public TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
@@ -108,24 +109,31 @@ public class MadeResultActivity extends AppCompatActivity {
         filteredSubSubject = subSubject;
 
         // 필수과목, 시작시간, 점심시간, 공강요일, 강의최대시간, 끝나는시간에 맞지않는과목 걸러내기
-        for (int i = 0; i < subSubject.size(); i++)
+        for (int i = 0; i < filteredSubSubject.size(); i++)
         {
-            filterStackNeedSubject(subSubject.get(i).cStart, subSubject.get(i).cEnd, i);
+            filterStackNeedSubject(subSubject.get(i).cStart, subSubject.get(i).cEnd);
             if(spinStatus.get(1) == 0) {
-                filterStartTime(spinValue.get(2), subSubject.get(i).cStart, i);
+                filterStartTime(spinValue.get(2), subSubject.get(i).cStart);
             }
             if(spinStatus.get(3) == 0) {
-                filterBlankDay(spinValue.get(4), subSubject.get(i).cDay, i);
+                filterBlankDay(spinValue.get(4), subSubject.get(i).cDay);
             }
             if(spinStatus.get(5) == 0) {
-                filterLunchTime(spinValue.get(6), spinValue.get(7), subSubject.get(i).cStart, subSubject.get(i).cEnd, i);
+                filterLunchTime(spinValue.get(6), spinValue.get(7), subSubject.get(i).cStart, subSubject.get(i).cEnd);
             }
             if(spinStatus.get(6) == 0) {
-                filterMaxLectureTime(subSubject.get(i).cStart, subSubject.get(i).cEnd, i);
+                filterMaxLectureTime(subSubject.get(i).cStart, subSubject.get(i).cEnd);
             }
             if(spinStatus.get(9) == 0) {
-                filterDayEndTime(subSubject.get(i).cDay, subSubject.get(i).cEnd, i);
+                filterDayEndTime(subSubject.get(i).cDay, subSubject.get(i).cEnd);
             }
+            if(filteringNumber){
+                filteredSubSubject.remove(i);
+                if(i!=0){
+                    i--;
+                }
+            }
+            filteringNumber = false;
         }
 
         calculateSubject();
@@ -240,41 +248,37 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     // 필수과목과 시간이 겹치는 후보과목 걸러내기
-    public  void filterStackNeedSubject(double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum) {
+    public  void filterStackNeedSubject(double subSubjectStartTime, double subSubjectEndTime) {
         for(int i = 0; i < needSubject.size() ; i++){
             if(!(subSubjectStartTime > needSubject.get(i).cEnd || subSubjectEndTime < needSubject.get(i).cStart)){
-                filteredSubSubject.remove(subSubjectArrayNum);
-                subSubjectArrayNum--;
+                filteringNumber = true;
             }
         }
     }
 
     // 시작시간이 10시, 11시, 12시이전인 후보과목 걸러내기
-    public void filterStartTime(int firstTimeSpinnerNum, double subSubjectStartTime, int subSubjectArrayNum){
+    public void filterStartTime(int firstTimeSpinnerNum, double subSubjectStartTime){
         switch(firstTimeSpinnerNum) {
             case 1:
                 if (subSubjectStartTime < 10) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 2:
                 if (subSubjectStartTime < 11) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 3:
                 if (subSubjectStartTime < 12) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
         }
     }
 
     // 점심시간에 해당되는 후보과목 걸러내기
-    public void filterLunchTime(int lunchStartTimeSpinnerNum, int lunchEndTimeSpinnerNum, double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum){
+    public void filterLunchTime(int lunchStartTimeSpinnerNum, int lunchEndTimeSpinnerNum, double subSubjectStartTime, double subSubjectEndTime){
         double tmpLunchStartTime = 0.0;
         double tmpLunchEndTime = 0.0;
         switch(lunchStartTimeSpinnerNum) {
@@ -310,104 +314,66 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         if(!(subSubjectEndTime < tmpLunchStartTime || subSubjectStartTime > tmpLunchEndTime))
         {
-            filteredSubSubject.remove(subSubjectArrayNum);
-            subSubjectArrayNum--;
+            filteringNumber = true;
         }
     }
 
     // 공강요일 설정된 과목 걸러내기
-    public void filterBlankDay(int daySpinnerNum, int subSubjectDay, int subSubjectArrayNum) {
-        switch (daySpinnerNum) {
-            case 0:
-                if(subSubjectDay != 0) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
-                }
-                break;
-            case 1:
-                if(subSubjectDay != 1) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
-                }
-                break;
-            case 2:
-                if(subSubjectDay != 2) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
-                }
-                break;
-            case 3:
-                if(subSubjectDay != 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
-                }
-                break;
-            case 4:
-                if(subSubjectDay != 4) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
-                }
-                break;
+    public void filterBlankDay(int daySpinnerNum, int subSubjectDay) {
+        if(daySpinnerNum != subSubjectDay){
+            filteringNumber = true;
         }
     }
 
     // 요일별 끝나는시간 걸러내기
 
-    public void filterDayEndTime(int subSubjectDay, double subSubjectEndTime, int subSubjectArrayNum){ //첫번째 : subsubject의 요일
+    public void filterDayEndTime(int subSubjectDay, double subSubjectEndTime){ //첫번째 : subsubject의 요일
 
         switch (subSubjectDay) {
             case 0:
                 if(subSubjectEndTime > spinValue.get(11) + 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 1:
                 if(subSubjectEndTime > spinValue.get(12) + 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 2:
                 if(subSubjectEndTime > spinValue.get(13) + 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 3:
                 if(subSubjectEndTime > spinValue.get(14) + 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 4:
                 if(subSubjectEndTime > spinValue.get(15) + 3) {
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
         }
     }
 
-    public void filterMaxLectureTime(double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum){
+    public void filterMaxLectureTime(double subSubjectStartTime, double subSubjectEndTime){
         double calculatedTime = subSubjectEndTime - subSubjectStartTime;
         switch (spinValue.get(8)) {
             case 0:
                 if(calculatedTime > 1.5){
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 1:
                 if(calculatedTime > 3.0){
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
             case 2:
                 if(calculatedTime > 4.5){
-                    filteredSubSubject.remove(subSubjectArrayNum);
-                    subSubjectArrayNum--;
+                    filteringNumber = true;
                 }
                 break;
         }
@@ -427,9 +393,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 SubjectCell[i][j] = 0;
             }
         }
-        boolean registCheck;
         boolean blankcheck = true;
-        int overlapCheck;
         int getSettedMinCreditCount = spinValue.get(0) + 15;
         int getSettedMaxCreditCount = spinValue.get(1) + 15;
         int nowCreditCount = 0;
@@ -439,8 +403,6 @@ public class MadeResultActivity extends AppCompatActivity {
         int thursDayClassCount = 0;
         int friDayClassCount = 0;
         int dayCount;
-        int tmpCount;
-        int intentNum = 0;
 
         //먼저 필수과목 일단 담기
 
@@ -455,6 +417,23 @@ public class MadeResultActivity extends AppCompatActivity {
             for(int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime)*2) ; j++){ // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
                 needSubjectCell[(int)needSubjectStartTime+j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
             }
+            switch (needSubject.get(i).cDay){
+                case 0:
+                    monDayClassCount++;
+                    break;
+                case 1:
+                    tuesDayClassCount++;
+                    break;
+                case 2:
+                    wednesDayClassCount++;
+                    break;
+                case 3:
+                    thursDayClassCount++;
+                    break;
+                case 4:
+                    friDayClassCount++;
+                    break;
+            }
             nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
         }
         int[] pluralChecker = new int[filteredSubSubject.size()];
@@ -462,9 +441,13 @@ public class MadeResultActivity extends AppCompatActivity {
         int[] triplePluralChecker = new int[filteredSubSubject.size()];
 
         for(int i = 0; i < filteredSubSubject.size() ; i++) {
-            tmpCount = 0;
             tmpSubSubject = filteredSubSubject;
             SubjectCell = needSubjectCell;
+            monDayClassCount = 0;
+            tuesDayClassCount = 0;
+            wednesDayClassCount = 0;
+            thursDayClassCount = 0;
+            friDayClassCount = 0;
 
             for(int j = 0; j < tmpSubSubject.size() ; j++){
                 pluralChecker[j] = 0;
@@ -486,9 +469,9 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
                 }
             }
-
             for (int j = 0; j < tmpSubSubject.size(); j++) {
-                int tmpJ = j;
+                int tmpJ;
+                Log.d("tag","minyoung"+pluralCount);
                  switch(pluralCount[j]) {//중복횟수만큼
                      case 0:
                          if (nowCreditCount + tmpSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
@@ -505,7 +488,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -574,6 +557,25 @@ public class MadeResultActivity extends AppCompatActivity {
                                      if (friDayClassCount >= spinValue.get(9) + 2) {
                                          blankcheck = false;
                                      }
+                                     break;
+                             }
+                         }
+                         if(blankcheck){
+                             switch (tmpSubSubject.get(j).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
                                      break;
                              }
                          }
@@ -593,7 +595,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -679,7 +681,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -751,7 +753,45 @@ public class MadeResultActivity extends AppCompatActivity {
                                      break;
                              }
                          }
+                         if(blankcheck){
+                             switch (tmpSubSubject.get(j).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
+                                     break;
+                             }
+                         }
                          j = tmpJ;
+                         if(blankcheck){
+                             switch (tmpSubSubject.get(j).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
+                                     break;
+                             }
+                         }
                          break;
                      case 2:
                          if (nowCreditCount + tmpSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
@@ -768,7 +808,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -854,7 +894,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -940,7 +980,7 @@ public class MadeResultActivity extends AppCompatActivity {
                              switch (tmpSubSubject.get(j).cDay) {
                                  case 0:
                                      if (monDayClassCount == 0) {
-                                         dayCount++;
+                                         dayCount--;
                                      }
                                      break;
                                  case 1:
@@ -1013,22 +1053,84 @@ public class MadeResultActivity extends AppCompatActivity {
                              }
                          }
                          j = tmpJ;
+                         if(blankcheck){
+                             switch (tmpSubSubject.get(j).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
+                                     break;
+                             }
+                             switch (tmpSubSubject.get(pluralChecker[j]).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
+                                     break;
+                             }
+                             switch (tmpSubSubject.get(triplePluralChecker[j]).cDay){
+                                 case 0:
+                                     monDayClassCount++;
+                                     break;
+                                 case 1:
+                                     tuesDayClassCount++;
+                                     break;
+                                 case 2:
+                                     wednesDayClassCount++;
+                                     break;
+                                 case 3:
+                                     thursDayClassCount++;
+                                     break;
+                                 case 4:
+                                     friDayClassCount++;
+                                     break;
+                             }
+                         }
+                         break;
+                     default:
                          break;
                  }
                 if (blankcheck == true) {       // ok 면 시간표에 넣기
                     OKSubSubject.add(tmpSubSubject.get(j));
                     for (int k = 0; k < (int) ((tmpSubSubject.get(j).cStart - tmpSubSubject.get(j).cEnd) * 2); k++) {
                         SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
-                        tmpCount++;
                     }
                     nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                     tmpSubSubject.remove(j);
                     break;
                 }
-                if (nowCreditCount >= getSettedMinCreditCount) { // 최소학점을 넘었다면 과목찾는 for문을 break -> 문제점 : 15~21로설정시 15학점값으로만나옴
+                if(spinStatus.get(2) == 0) {
+                    for (int k = 0; k < 5; k++) {
+                        for (int l = 0; k < 26; k++) {
+
+                        }
+                    }
+                }
+                if (nowCreditCount >= getSettedMinCreditCount) {
                     getUsedSubSubject.add(OKSubSubject);
                 }
             }
+
             //조건 테스트하기전에 일단 되는경우 다넣기
             if(getUsedSubSubject.size() == 10){
                 break;
