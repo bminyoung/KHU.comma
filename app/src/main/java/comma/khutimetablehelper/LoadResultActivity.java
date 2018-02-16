@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class LoadResultActivity extends AppCompatActivity {
 
-    int[] colors = {Color.parseColor("#B8F3B8"),Color.parseColor("#FFA9B0"),Color.parseColor("#CCD1FF"),Color.parseColor("#FFDDA6"),Color.parseColor("#FFADC5")};
+//    int[] colors = {Color.parseColor("#B8F3B8"),Color.parseColor("#FFA9B0"),Color.parseColor("#CCD1FF"),Color.parseColor("#FFDDA6"),Color.parseColor("#FFADC5")};
     int colorIndex = 0;
     enum Day{ 월, 화, 수, 목, 금 } //나중에 쓸수도
 
@@ -43,12 +44,23 @@ public class LoadResultActivity extends AppCompatActivity {
 
     private void showTimeTable(){
         ArrayList<Subject> selectedTimeTable = AppContext.timeTableList.get(position);
-
         colorIndex = 0;
-        for(int i = 0; i <selectedTimeTable.size();i++) {
-            ShowSubject(selectedTimeTable.get(i));
-        }
+        //같은 과목은 같은 색깔로
+        for (int i = 0; i < selectedTimeTable.size(); i++) {
+            for (int j = i; j < selectedTimeTable.size(); j++) {
+                if (selectedTimeTable.get(i).cNum.equals(selectedTimeTable.get(j).cNum)) {
+                    ShowSubject(selectedTimeTable.get(j));
+                    if (j == selectedTimeTable.size() - 1) {
+                        i = selectedTimeTable.size();
+                    }
+                } else {
+                    i = j - 1;
+                    break;
+                }
 
+            }
+            colorIndex++;
+        }
     }
 
     public void ShowSubject(Subject selected){
@@ -58,10 +70,9 @@ public class LoadResultActivity extends AppCompatActivity {
 
         for(int i = end; i >= start;i--){
             tv = timeTable[i][selected.cDay];
-            tv.setBackgroundColor(colors[colorIndex]);
+            tv.setBackgroundColor(MadeResultActivity.colors[colorIndex]);
         }
         timeTable[start][selected.cDay].setText(selected.cName);
-        colorIndex++;
     }
 
     public void Summery(View view) {
