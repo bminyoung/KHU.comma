@@ -48,7 +48,21 @@ public class SearchAdapter extends BaseAdapter {
 
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다.
         TextView tv = (TextView) convertView.findViewById(R.id.search_lstv_tv_label);
-        tv.setText(list.get(position).getName());
+        String listText = "";
+        int i = 0;
+        Subject selected = list.get(position);
+
+        listText += selected.getName() + " / " + selected.cProf + "교수\n" + selected.day() + " " + selected.getTime();
+
+        //같은과목(ex 선대1반 화욜/목욜)시간표시
+        while(i < AppContext.subjectList.length){
+            Subject sub = AppContext.subjectList[i];
+            if((sub.cNum.equals(selected.cNum)) && ((sub.cStart != selected.cStart) || sub.cDay != selected.cDay)){
+                listText += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
+            }
+            i++;
+        }
+        tv.setText(listText);
 
         return convertView;
     }

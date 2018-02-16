@@ -1,5 +1,6 @@
 package comma.khutimetablehelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,8 @@ public class SubActivity extends AppCompatActivity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private static ArrayList<Subject> selectedSubList = new ArrayList<Subject>();
+    private static ArrayList<Subject> selectedSubList = new ArrayList<Subject>(); // 위 리스트에 표시될 과목
+    private ArrayList<Subject> subSubject = new ArrayList<Subject>(); // 다음으로 넘길 과목
     protected static CustomListAdapter madapter;
 
     @Override
@@ -63,7 +65,7 @@ public class SubActivity extends AppCompatActivity {
                     Alert();
                 }
                 else {
-                    intentToSetting.putExtra("SubSubject", madapter.getSubjectList());
+                    intentToSetting.putExtra("SubSubject", subSubject);
                     intentToSetting.putExtra("NeedSubject", needSubject);
                     startActivity(intentToSetting);
                 }
@@ -90,7 +92,7 @@ public class SubActivity extends AppCompatActivity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.sub_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedSubList);
+        madapter = new CustomListAdapter(selectedSubList, subSubject);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -114,9 +116,17 @@ public class SubActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if((requestCode == SUB) && (resultCode == SearchActivity.SUCCESS)) {
-            Subject sub = (Subject) data.getSerializableExtra("subject");
-            if(isValid(sub)) { // 리스트에 이미 있으면
-                madapter.additem(sub);
+            Subject selected = (Subject) data.getSerializableExtra("subject");
+
+            if(isValid(selected)) { // 리스트에 이미 있으면
+                int i = 0;
+                madapter.additem(selected);
+                while(i < AppContext.subjectList.length){
+                    Subject sub = AppContext.subjectList[i++];
+                    if(sub.cNum.equals(selected.cNum)){
+                        madapter.addNeed(sub);
+                    }
+                }
                 madapter.notifyDataSetChanged();
             }else{
                 Toast.makeText(SubActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
@@ -196,7 +206,8 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         Subject child = (Subject) getChild(groupPosition, childPosition);
-        String childText = child.getName();
+        String childText = "";
+        int i = 0;
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -210,14 +221,28 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-
-                if(SubActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면
-                    SubActivity.madapter.additem(selectedSubject);
-                    SubActivity.madapter.notifyDataSetChanged();
+                int i = 0;
+                SubActivity.madapter.additem(selectedSubject);
+                while(i < AppContext.subjectList.length){
+                    Subject sub = AppContext.subjectList[i++];
+                    if(sub.cNum.equals(selectedSubject.cNum)){
+                        SubActivity.madapter.addNeed(sub);
+                    }
                 }
+                SubActivity.madapter.notifyDataSetChanged();
             }
         });
-        txtListChild.setText(childText + "\n" + child.cProf + "교수 / " + child.cStart + " ~ " +child.cEnd);
+
+        childText += child.getName() + " / " + child.cProf + "교수\n" + child.day() + " " + child.getTime();
+
+        while(i < AppContext.subjectList.length){
+            Subject sub = AppContext.subjectList[i];
+            if((sub.cNum.equals(child.cNum)) && ((sub.cStart != child.cStart) || sub.cDay != child.cDay)){
+                childText += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
+            }
+            i++;
+        }
+        txtListChild.setText(childText);
         return convertView;
     }
 

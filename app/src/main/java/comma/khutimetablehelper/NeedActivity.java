@@ -29,7 +29,7 @@ public class NeedActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
-    ArrayList<Subject> needSubject = new ArrayList<Subject>();
+    ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
     int i = 0;
 
     //어느 액티비티에서 search를 호출했는지
@@ -41,7 +41,7 @@ public class NeedActivity extends Activity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>();
+    private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
     protected static CustomListAdapter madapter;
 
     @Override
@@ -57,7 +57,6 @@ public class NeedActivity extends Activity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                needSubject = madapter.getSubjectList();
                 intentToSub.putExtra("NeedSubject", needSubject);
                 startActivity(intentToSub);
             }
@@ -82,7 +81,7 @@ public class NeedActivity extends Activity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.need_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedNeedList);
+        madapter = new CustomListAdapter(selectedNeedList, needSubject);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -100,15 +99,24 @@ public class NeedActivity extends Activity {
 
     protected void onDestroy() {
         selectedNeedList.clear();
+        needSubject.clear();
         super.onDestroy();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
-            Subject sub = (Subject) data.getSerializableExtra("subject");
-            if(isValid(sub)) { // 리스트에 이미 있으면
-                madapter.additem(sub);
+            Subject selected = (Subject) data.getSerializableExtra("subject");
+
+            if(isValid(selected)) { // 리스트에 이미 있으면 실행안됨
+                int i = 0;
+                madapter.additem(selected);
+                while(i < AppContext.subjectList.length){
+                    Subject sub = AppContext.subjectList[i++];
+                    if(sub.cNum.equals(selected.cNum)){
+                        madapter.addNeed(sub);
+                    }
+                }
                 madapter.notifyDataSetChanged();
             }else{
                 Toast.makeText(NeedActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
@@ -184,7 +192,8 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         Subject child = (Subject) getChild(groupPosition, childPosition);
-        String childText = child.getName();
+        String childText = "";
+        int i = 0;
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -198,14 +207,32 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if(NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면
+                if(NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
+                    int i = 0;
                     NeedActivity.madapter.additem(selectedSubject);
+                    while(i < AppContext.subjectList.length){
+                        Subject sub = AppContext.subjectList[i++];
+                        if(sub.cNum.equals(selectedSubject.cNum)){
+                            NeedActivity.madapter.addNeed(sub);
+                        }
+                    }
                     NeedActivity.madapter.notifyDataSetChanged();
                 }
             }
         });
 
-        txtListChild.setText(childText + "\n" + child.cProf + "교수 / " + child.cStart + " ~ " +child.cEnd);
+        childText += child.getName() + " / " + child.cProf + "교수\n" + child.day() + " " + child.getTime();
+
+        //같은과목(ex 선대1반 화욜/목욜)시간표시
+        while(i < AppContext.subjectList.length){
+            Subject sub = AppContext.subjectList[i];
+            if((sub.cNum.equals(child.cNum)) && ((sub.cStart != child.cStart) || sub.cDay != child.cDay)){
+                childText += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
+            }
+            i++;
+        }
+        txtListChild.setText(childText);
+
         return convertView;
     }
 
@@ -257,9 +284,13 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
 class CustomListAdapter extends BaseAdapter {
 
     private ArrayList<Subject> oData = new ArrayList<Subject>();
+    private ArrayList<Subject> intentSubject = new ArrayList<Subject>(); //다음으로 넘겨줄 과목값
     LayoutInflater inflater = null;
 
-    CustomListAdapter(ArrayList<Subject> list) { oData = list; };
+    CustomListAdapter(ArrayList<Subject> list, ArrayList<Subject> intentSubject) {
+        oData = list;
+        this.intentSubject = intentSubject;
+    };
 
     @Override
     public int getCount() {
@@ -279,7 +310,7 @@ class CustomListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertview, ViewGroup parent) {
         if (convertview == null) {
-            final Context context = parent.getContext();
+            Context context = parent.getContext();
             if (inflater == null) {
                 inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
@@ -293,6 +324,13 @@ class CustomListAdapter extends BaseAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int i = intentSubject.size() - 1;
+                while(i >= 0 ){
+                    Subject sub = intentSubject.get(i--);
+                    if(sub.cNum.equals(((Subject)getItem(position)).cNum)){
+                        intentSubject.remove(sub);
+                    }
+                }
                 oData.remove(position);
                 notifyDataSetChanged();
             }
@@ -304,6 +342,6 @@ class CustomListAdapter extends BaseAdapter {
         oData.add(sub);
     }
 
-    public ArrayList<Subject> getSubjectList(){ return oData; }
+    public void addNeed(Subject need) { intentSubject.add(need); }
 }
 

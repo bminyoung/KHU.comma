@@ -16,20 +16,13 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
@@ -37,7 +30,7 @@ import java.util.ArrayList;
 public class MadeResultActivity extends AppCompatActivity {
 
     //시간표색상
-    int[] colors = {Color.parseColor("#B8F3B8"),Color.parseColor("#FFA9B0"),Color.parseColor("#CCD1FF"),Color.parseColor("#FFDDA6"),Color.parseColor("#FFADC5")};
+    int[] colors = {Color.parseColor("#B8F3B8"), Color.parseColor("#FFA9B0"), Color.parseColor("#CCD1FF"), Color.parseColor("#FFDDA6"), Color.parseColor("#FFADC5"), Color.parseColor("#A8C8F9"), Color.parseColor("#DDDDFF")};
     int colorIndex = 0;
 
     ArrayList<Subject> needSubject;
@@ -49,6 +42,7 @@ public class MadeResultActivity extends AppCompatActivity {
     ArrayList<ArrayList<Subject>> listData = new ArrayList<ArrayList<Subject>>();
     public TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -68,10 +62,10 @@ public class MadeResultActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(focusOn < 0) {
+                if (focusOn < 0) {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MadeResultActivity.this);
                     dialogBuilder.setTitle("저장할 시간표를 선택해주세요").setNegativeButton("취소", null).show();
-                }else{
+                } else {
                     ShowSaveDialog(focusOn);
                 }
             }
@@ -91,11 +85,38 @@ public class MadeResultActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 ArrayList<Subject> selectedTimeTable = (ArrayList<Subject>) adapter.getItem(position);
 
-                colorIndex = 0;
-                for(int i = 0; i <selectedTimeTable.size();i++) {
-                    ShowTimeTable(selectedTimeTable.get(i));
+                if (focusOn != position) {
+                    //리셋
+                    for (int i = 0; i < 28; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (i % 2 == 0) {
+                                timeTable[i][j].setTextAppearance(MadeResultActivity.this,R.style.table_tv_top);
+                                timeTable[i][j].setText("");
+                            }else{
+                                timeTable[i][j].setTextAppearance(getApplicationContext(), R.style.table_tv_bottom);
+                                timeTable[i][j].setText("");
+                            }
+                        }
+                    }
+
+                    focusOn = position;
+                    colorIndex = 0; //새로운시간표 클릭시 리셋하고 실행 - 코드짤것!!
+                    //같은 과목은 같은 색깔로
+                    for (int i = 0; i < selectedTimeTable.size(); i++) {
+                        for (int j = i; j < selectedTimeTable.size(); j++) {
+                            if (selectedTimeTable.get(i).cNum.equals(selectedTimeTable.get(j).cNum)) {
+                                ShowTimeTable(selectedTimeTable.get(j));
+                                if (j == selectedTimeTable.size() - 1) {
+                                    i = selectedTimeTable.size();
+                                }
+                            } else {
+                                i = j - 1;
+                                break;
+                            }
+                        }
+                        colorIndex++;
+                    }
                 }
-                focusOn = position;
             }
         });
 
@@ -107,21 +128,20 @@ public class MadeResultActivity extends AppCompatActivity {
         filteredSubSubject = subSubject;
 
         // 시작시간, 점심시간, 공강요일, 강의최대시간, 끝나는시간에 맞지않는과목 걸러내기
-        for (int i = 0; i < subSubject.size(); i++)
-        {
-            if(spinStatus.get(1) == 0) {
+        for (int i = 0; i < subSubject.size(); i++) {
+            if (spinStatus.get(1) == 0) {
                 filterStartTime(spinValue.get(2), subSubject.get(i).cStart, i);
             }
-            if(spinStatus.get(3) == 0) {
+            if (spinStatus.get(3) == 0) {
                 filterBlankDay(spinValue.get(4), subSubject.get(i).cDay, i);
             }
-            if(spinStatus.get(5) == 0) {
+            if (spinStatus.get(5) == 0) {
                 filterLunchTime(spinValue.get(6), spinValue.get(7), subSubject.get(i).cStart, subSubject.get(i).cEnd, i);
             }
-            if(spinStatus.get(6) == 0) {
+            if (spinStatus.get(6) == 0) {
                 filterMaxLectureTime(subSubject.get(i).cStart, subSubject.get(i).cEnd, i);
             }
-            if(spinStatus.get(9) == 0) {
+            if (spinStatus.get(9) == 0) {
                 filterDayEndTime(subSubject.get(i).cDay, subSubject.get(i).cEnd, i);
             }
         }
@@ -131,11 +151,26 @@ public class MadeResultActivity extends AppCompatActivity {
 
     }
 
+    protected void onDestroy() {
+        AppContext.tempTimeTableList.clear();
+        super.onDestroy();
+    }
+
+    public void ShowTimeTable(Subject selected) {
+        TextView tv;
+        int start = (int) ((selected.cStart - 9.0) * 2.0);
+        int end = (int) ((selected.cEnd - 9.0) * 2.0 - 1.0);
+
+        for (int i = end; i >= start; i--) {
+            tv = timeTable[i][selected.cDay];
+            tv.setBackgroundColor(colors[colorIndex]);
+        }
+        timeTable[start][selected.cDay].setText(selected.cName);
+    }
+
     private void SaveTimeTable(int position, String timeTableName) {
         AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
         AppContext.timeTableNameList.add(timeTableName);
-
-        Log.d("tag", "minyoung good1");
 
         int[] classes = new int[42];
         classes[0] = 5;
@@ -148,7 +183,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         try {
             //BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
-            FileWriter fw = new FileWriter(fileName) ;
+            FileWriter fw = new FileWriter(fileName);
 
             Log.d("tag", "minyoung good2");
             while (timeTable.getcClasses()[i] != 0) {
@@ -172,20 +207,6 @@ public class MadeResultActivity extends AppCompatActivity {
         }
     }
 
-
-    public void ShowTimeTable(Subject selected){
-        TextView tv;
-        int start = (int) ((selected.cStart - 9.0)*2.0);
-        int end = (int)((selected.cEnd - 9.0)*2.0 - 1.0);
-
-        for(int i = end; i >= start;i--){
-            tv = timeTable[i][selected.cDay];
-            tv.setBackgroundColor(colors[colorIndex]);
-        }
-        timeTable[start][selected.cDay].setText(selected.cName);
-        colorIndex++;
-    }
-
     //시간표 각 칸 변수지정
     private void setTextId() {
         for (int i = 0; i < 28; i++) {
@@ -202,7 +223,7 @@ public class MadeResultActivity extends AppCompatActivity {
         int i = 0;
 
         // listData-시간표들의 목록
-        for(i = 0; i< AppContext.tempTimeTableList.size();i++) {
+        for (i = 0; i < AppContext.tempTimeTableList.size(); i++) {
             listData.add(AppContext.tempTimeTableList.get(i));
         }
 
@@ -217,29 +238,37 @@ public class MadeResultActivity extends AppCompatActivity {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle("이 시간표를 저장하시겠습니까?").setView(saveLayout).setNegativeButton("취소", null)
-                .setPositiveButton("저장", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if(TimeTableTitle.getText().length() == 0){
-                            Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
-                            SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
-                        }
-                    }
-                });
+                .setPositiveButton("저장", null);
 
         final AlertDialog dialog;
         dialog = dialogBuilder.create();
         dialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button posBtn = ((AlertDialog) dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE);
+                posBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (TimeTableTitle.getText().length() == 0) {
+                            Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
+                            SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
 
         dialog.show();
     }
 
     // 시작시간이 10시, 11시, 12시이전인 후보과목 걸러내기
-    public void filterStartTime(int firstTimeSpinnerNum, double subSubjectStartTime, int subSubjectArrayNum){
-        switch(firstTimeSpinnerNum) {
+    public void filterStartTime(int firstTimeSpinnerNum, double subSubjectStartTime, int subSubjectArrayNum) {
+        switch (firstTimeSpinnerNum) {
             case 1:
                 if (subSubjectStartTime < 10) {
                     filteredSubSubject.remove(subSubjectArrayNum);
@@ -259,10 +288,10 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     // 점심시간에 해당되는 후보과목 걸러내기
-    public void filterLunchTime(int lunchStartTimeSpinnerNum, int lunchEndTimeSpinnerNum, double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum){
+    public void filterLunchTime(int lunchStartTimeSpinnerNum, int lunchEndTimeSpinnerNum, double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum) {
         double tmpLunchStartTime = 0.0;
         double tmpLunchEndTime = 0.0;
-        switch(lunchStartTimeSpinnerNum) {
+        switch (lunchStartTimeSpinnerNum) {
             case 0:
                 tmpLunchStartTime = 11.5;
                 break;
@@ -276,7 +305,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 tmpLunchStartTime = 13.0;
                 break;
         }
-        switch(lunchEndTimeSpinnerNum) {
+        switch (lunchEndTimeSpinnerNum) {
             case 0:
                 tmpLunchStartTime = 12.0;
                 break;
@@ -293,8 +322,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 tmpLunchStartTime = 14.0;
                 break;
         }
-        if(!(subSubjectEndTime < tmpLunchStartTime || subSubjectStartTime > tmpLunchEndTime))
-        {
+        if (!(subSubjectEndTime < tmpLunchStartTime || subSubjectStartTime > tmpLunchEndTime)) {
             filteredSubSubject.remove(subSubjectArrayNum);
         }
     }
@@ -303,27 +331,27 @@ public class MadeResultActivity extends AppCompatActivity {
     public void filterBlankDay(int daySpinnerNum, int subSubjectDay, int subSubjectArrayNum) {
         switch (daySpinnerNum) {
             case 0:
-                if(subSubjectDay != 0) {
+                if (subSubjectDay != 0) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 1:
-                if(subSubjectDay != 1) {
+                if (subSubjectDay != 1) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 2:
-                if(subSubjectDay != 2) {
+                if (subSubjectDay != 2) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 3:
-                if(subSubjectDay != 3) {
+                if (subSubjectDay != 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 4:
-                if(subSubjectDay != 4) {
+                if (subSubjectDay != 4) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
@@ -332,52 +360,52 @@ public class MadeResultActivity extends AppCompatActivity {
 
     // 요일별 끝나는시간 걸러내기
 
-    public void filterDayEndTime(int subSubjectDay, double subSubjectEndTime, int subSubjectArrayNum){ //첫번째 : subsubject의 요일
+    public void filterDayEndTime(int subSubjectDay, double subSubjectEndTime, int subSubjectArrayNum) { //첫번째 : subsubject의 요일
 
         switch (subSubjectDay) {
             case 0:
-                if(subSubjectEndTime > spinValue.get(11) + 3) {
+                if (subSubjectEndTime > spinValue.get(11) + 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 1:
-                if(subSubjectEndTime > spinValue.get(12) + 3) {
+                if (subSubjectEndTime > spinValue.get(12) + 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 2:
-                if(subSubjectEndTime > spinValue.get(13) + 3) {
+                if (subSubjectEndTime > spinValue.get(13) + 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 3:
-                if(subSubjectEndTime > spinValue.get(14) + 3) {
+                if (subSubjectEndTime > spinValue.get(14) + 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 4:
-                if(subSubjectEndTime > spinValue.get(15) + 3) {
+                if (subSubjectEndTime > spinValue.get(15) + 3) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
         }
     }
 
-    public void filterMaxLectureTime(double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum){
+    public void filterMaxLectureTime(double subSubjectStartTime, double subSubjectEndTime, int subSubjectArrayNum) {
         double calculatedTime = subSubjectEndTime - subSubjectStartTime;
         switch (spinValue.get(8)) {
             case 0:
-                if(calculatedTime > 1.5){
+                if (calculatedTime > 1.5) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 1:
-                if(calculatedTime > 3.0){
+                if (calculatedTime > 3.0) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
             case 2:
-                if(calculatedTime > 4.5){
+                if (calculatedTime > 4.5) {
                     filteredSubSubject.remove(subSubjectArrayNum);
                 }
                 break;
@@ -410,34 +438,34 @@ public class MadeResultActivity extends AppCompatActivity {
         int tmpCount = 0;
 
         for (int i = 0; i < 10; i++) {
-            getUsedSubSubject.add(i,new ArrayList<Subject>());
+            getUsedSubSubject.add(i, new ArrayList<Subject>());
             for (int j = 0; j < filteredSubSubject.size(); j++) {
                 registCheck = true;
                 overlapCheck = 1;
-                for (int k = 0 ; k < getUsedSubSubject.get(i).size() ; k++) {
-                    for (int l = 0; l < getUsedSubSubject.size() ; l++) {
-                        if (getUsedSubSubject.get(l).contains(filteredSubSubject.get(j))){
+                for (int k = 0; k < getUsedSubSubject.get(i).size(); k++) {
+                    for (int l = 0; l < getUsedSubSubject.size(); l++) {
+                        if (getUsedSubSubject.get(l).contains(filteredSubSubject.get(j))) {
                             tmpCount++;
                         }
                     }
                 }
-                if(tmpCount > 2){
+                if (tmpCount > 2) {
                     registCheck = false;
                 }
-                if(filteredSubSubject.size() != j-1){
-                    if(filteredSubSubject.get(j) == filteredSubSubject.get(j+1)) {
+                if (filteredSubSubject.size() != j - 1) {
+                    if (filteredSubSubject.get(j) == filteredSubSubject.get(j + 1)) {
                         overlapCheck++;
                     }
-                    if(filteredSubSubject.size() +1 != j-2) {
+                    if (filteredSubSubject.size() + 1 != j - 2) {
                         if (filteredSubSubject.get(j) == filteredSubSubject.get(j + 2)) {
                             overlapCheck++;
                         }
                     }
                 }
-                for(int repeatCount = 0; repeatCount < overlapCheck ; repeatCount++) {
+                for (int repeatCount = 0; repeatCount < overlapCheck; repeatCount++) {
                     if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
                         dayCount = 5;
-                        switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                        switch (filteredSubSubject.get(j + repeatCount).cDay) {
                             case 0:
                                 if (monDayClassCount == 0) {
                                     dayCount++;
@@ -485,7 +513,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
 
                     if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
-                        switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                        switch (filteredSubSubject.get(j + repeatCount).cDay) {
                             case 0:
                                 if (monDayClassCount >= spinValue.get(9) + 2) {
                                     registCheck = false;
@@ -516,19 +544,19 @@ public class MadeResultActivity extends AppCompatActivity {
 
                     if (spinStatus.get(2) == 0) {   //공강 체크
                         for (int k = 0; k < spinValue.get(3) + 2; k++) {
-                            if (SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 - k)][filteredSubSubject.get(j+repeatCount).cDay] == 0) {
+                            if (SubjectCell[(int) ((filteredSubSubject.get(j + repeatCount).cStart - 9) * 2 - k)][filteredSubSubject.get(j + repeatCount).cDay] == 0) {
                                 registCheck = false;
                                 break;
                             }
                         }
                     }
-                    for (int k = 0; k < (int) ((filteredSubSubject.get(j+repeatCount).cEnd - filteredSubSubject.get(j+repeatCount).cStart) * 2); k++) {     // 들어갈 시간이 비었는지 체크 j : 현재과목, repeatCount : 중복된 과목 수
-                        if (SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j+repeatCount).cDay] != 0) {
+                    for (int k = 0; k < (int) ((filteredSubSubject.get(j + repeatCount).cEnd - filteredSubSubject.get(j + repeatCount).cStart) * 2); k++) {     // 들어갈 시간이 비었는지 체크 j : 현재과목, repeatCount : 중복된 과목 수
+                        if (SubjectCell[(int) ((filteredSubSubject.get(j + repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j + repeatCount).cDay] != 0) {
                             registCheck = false;
                             break;
                         }
                     }
-                    if(!registCheck){
+                    if (!registCheck) {
                         break;
                     }
                 }
@@ -536,12 +564,12 @@ public class MadeResultActivity extends AppCompatActivity {
                     registCheck = false;
                 }
                 if (registCheck == true) {      // 조건에 맞을경우 과목 담기 시작
-                    for(int repeatCount = 0; repeatCount < overlapCheck ; repeatCount++){
-                        for (int k = 0; k < (int) ((filteredSubSubject.get(j+repeatCount).cEnd - filteredSubSubject.get(j+repeatCount).cStart) * 2); k++) {
-                            SubjectCell[(int) ((filteredSubSubject.get(j+repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j+repeatCount).cDay] = filteredSubSubject.get(j).cRow;
-                            nowCreditCount = nowCreditCount + filteredSubSubject.get(j+repeatCount).cCredit;
-                            getUsedSubSubject.get(i).add(j, filteredSubSubject.get(j+repeatCount));
-                            switch (filteredSubSubject.get(j+repeatCount).cDay) {
+                    for (int repeatCount = 0; repeatCount < overlapCheck; repeatCount++) {
+                        for (int k = 0; k < (int) ((filteredSubSubject.get(j + repeatCount).cEnd - filteredSubSubject.get(j + repeatCount).cStart) * 2); k++) {
+                            SubjectCell[(int) ((filteredSubSubject.get(j + repeatCount).cStart - 9) * 2 + k)][filteredSubSubject.get(j + repeatCount).cDay] = filteredSubSubject.get(j).cRow;
+                            nowCreditCount = nowCreditCount + filteredSubSubject.get(j + repeatCount).cCredit;
+                            getUsedSubSubject.get(i).add(j, filteredSubSubject.get(j + repeatCount));
+                            switch (filteredSubSubject.get(j + repeatCount).cDay) {
                                 case 0:
                                     monDayClassCount++;
                                     break;
@@ -570,12 +598,14 @@ public class MadeResultActivity extends AppCompatActivity {
 }
 
 //리스트뷰 어댑터
-class CustomLvAdapter extends BaseAdapter{
+class CustomLvAdapter extends BaseAdapter {
 
     private ArrayList<ArrayList<Subject>> list = new ArrayList<ArrayList<Subject>>();
     LayoutInflater inflater = null;
 
-    CustomLvAdapter(ArrayList<ArrayList<Subject>> list){ this.list = list; }
+    CustomLvAdapter(ArrayList<ArrayList<Subject>> list) {
+        this.list = list;
+    }
 
     @Override
     public int getCount() {
@@ -594,7 +624,7 @@ class CustomLvAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertview, ViewGroup parent) {
-        if(convertview == null){
+        if (convertview == null) {
             Context context = parent.getContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);

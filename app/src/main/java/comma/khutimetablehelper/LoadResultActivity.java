@@ -71,7 +71,7 @@ public class LoadResultActivity extends AppCompatActivity {
 
         for(int i = 0; i < timeTable.size();i++){
             Subject sub = timeTable.get(i);
-            msg += sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + day(sub.cDay) + "요일 / " + sub.cStart + " ~ " + sub.cEnd + "\n";
+            msg += sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
         }
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -81,26 +81,5 @@ public class LoadResultActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public String day(int num){
-        String ret = "";
-        switch (num){
-            case 0:
-                ret = "월";
-                break;
-            case 1:
-                ret = "화";
-                break;
-            case 2:
-                ret = "수";
-                break;
-            case 3:
-                ret = "목";
-                break;
-            case 4:
-                ret = "금";
-                break;
-        }
 
-        return ret;
-    }
 }
