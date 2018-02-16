@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="searchkeyselect">
-        <item>과목명</item>
-        <item>코드</item>
-        <item>교수명</item>
+        <item>2학년</item>
+        <item>1학년</item>
     </string-array>
 </resources>

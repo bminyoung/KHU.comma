@@ -13,12 +13,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,10 @@ public class NeedActivity extends Activity {
     Intent intentToSub;
     ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
     int i = 0;
+    //확장 리스트뷰에 복사할 리스트 선언
+    List<String> mlistDataHeader;
+    HashMap<String, List<Subject>> mlistDataChild;
+
 
     //어느 액티비티에서 search를 호출했는지
     static final int NEED = 0;
@@ -74,10 +81,71 @@ public class NeedActivity extends Activity {
         //확장 리스트 뷰 가져오기
         expListView = (ExpandableListView) findViewById(R.id.need_elstv_showsubject);
 
-        // 확장리스트 뷰 어댑터 준비
-        prepareListData();
+        //preparelistdata() 함수 내용을 밖으로 뺏음.. major1,2를 불러오기 위해
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<Subject>>();
+        // 그룹 데이터 입력
+        listDataHeader.add("2학년 전공");
+        listDataHeader.add("1학년 전공");
+        // 그룹 1의 차일드 데이터 입력
+        final List<Subject> major2 = new ArrayList<Subject>();
+        while (!(AppContext.onlySubjectList.get(i).getName().equals("물리학및실험1"))) {
+            major2.add(AppContext.onlySubjectList.get(i++));
+        }
+        //그룹 2의 차일드 데이터 입력
+        final List<Subject> major1 = new ArrayList<Subject>();
+        while (i < AppContext.onlySubjectList.size()) {
+            major1.add(AppContext.onlySubjectList.get(i++));
+        }
+        //그룹에 데이터 할당
+        ; // Header, Child data
+        listDataChild.put(listDataHeader.get(0), major2);
+        listDataChild.put(listDataHeader.get(1), major1);
+
+
+        // 확장리스트 뷰 어댑터 준비;
+        mlistDataChild = listDataChild;
+        mlistDataHeader = listDataHeader;
         explistAdapter = new NeedExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(explistAdapter);
+
+
+        //스피너 설정
+        final Spinner collegeSpinner;
+        collegeSpinner = (Spinner) findViewById(R.id.need_spinner_college);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.searchkeyselect, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collegeSpinner.setAdapter(adapter);
+
+        //스피너 값 변경 이벤트
+        collegeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+//                String charText = collegeSpinner.getSelectedItem().toString();
+//                search(charText);
+                TextView textView;
+                String charText;
+                listDataChild.clear();
+                listDataHeader.clear();
+
+                if (position == 0) {
+                    listDataHeader.add("2학년 전공");
+                    listDataChild.put(listDataHeader.get(0), major2);
+
+                } else {
+                    listDataHeader.add("1학년 전공");
+                    listDataChild = mlistDataChild;
+                    listDataChild.put(listDataHeader.get(0), major1);
+
+                }
+                explistAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+
+        });
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.need_lstv_showSelet);
@@ -95,7 +163,7 @@ public class NeedActivity extends Activity {
                     lastExpandedPosition = groupPosition;
             }
         });
-    }
+    }//온크리에이트의 끝
 
     protected void onDestroy() {
         selectedNeedList.clear();
