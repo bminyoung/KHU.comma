@@ -3,6 +3,5 @@
     <string-array name="searchkeyselect">
         <item>과목명</item>
         <item>코드</item>
-        <item>교수명</item>
     </string-array>
 </resources>
