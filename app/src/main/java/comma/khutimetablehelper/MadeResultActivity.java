@@ -529,9 +529,15 @@ public class MadeResultActivity extends AppCompatActivity {
                 Log.d("tag", "minyoung swap 이전 과목 : " + tmpSubSubject.get(j).cName);
             }
             for(int j = 0; j < swapNum ; j++){
+                if(tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(1).cNum)){        // 다음과목과 학수번호가 같으면
+                    swapNum++;
+                    if(tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(2).cNum)){    // 다다음과목과 학수번호가 같으면
+                        swapNum++;
+                    }
+                }
                 for(int swap = 0; swap < tmpSubSubject.size() - 1 ; swap++) {
                     Log.d("tag","minyoung swap 과목 : "+tmpSubSubject.get(swap).cName + "와(과)" + tmpSubSubject.get(swap+1).cName + "를 바꿉니다!!");
-                        Collections.swap(tmpSubSubject, swap, swap+1);
+                    Collections.swap(tmpSubSubject, swap, swap+1);
                 }
             }
             swapNum++;
@@ -1216,12 +1222,12 @@ public class MadeResultActivity extends AppCompatActivity {
                          break;
                  }
                 if (blankcheck) {       // ok 면 시간표에 넣기
-                    OKSubSubject.add(tmpSubSubject.get(j));
                     Log.d("tag","minyoung 과목추가 : "+tmpSubSubject.get(j).cName);
                     Log.d("tag","minyoung pluralCountcheck : "+pluralCount[j]);
                     Log.d("tag","minyoung for문 k값 check : "+(int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
                     switch (pluralCount[j]) {
                         case 0:
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 없으면 셀에 한번만담아도됨
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
@@ -1229,11 +1235,13 @@ public class MadeResultActivity extends AppCompatActivity {
                             tmpSubSubject.remove(j);
                             break;
                         case 1:
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 1개면 셀에2번담아야됨 셀에담기는거 이상없음
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             tmpJ = j;
                             j = pluralChecker[tmpJ];
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
@@ -1246,15 +1254,18 @@ public class MadeResultActivity extends AppCompatActivity {
                             }
                             break;
                         case 2:
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된 과목이 3개면 셀에 3번담아야됨
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             tmpJ = j;
                             j = pluralChecker[tmpJ];
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             j = triplePluralChecker[tmpJ];
+                            OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
 

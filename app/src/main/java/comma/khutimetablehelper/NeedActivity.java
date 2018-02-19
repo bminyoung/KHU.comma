@@ -32,7 +32,7 @@ public class NeedActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
-    ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
+    static ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
     int i = 0;
     //확장 리스트뷰에 복사할 리스트 선언
     List<String> mlistDataHeader;
@@ -223,6 +223,12 @@ public class NeedActivity extends Activity {
         int i = 0;
         for(i = 0; i < selectedNeedList.size();i++){
             if(selectedNeedList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0,8))){
+                ret = false;
+                break;
+            }
+        }
+        for(i = 0 ; i < needSubject.size(); i++){
+            if(needSubject.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;
                 break;
             }
