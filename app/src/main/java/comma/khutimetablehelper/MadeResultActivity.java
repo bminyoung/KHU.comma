@@ -466,7 +466,7 @@ public class MadeResultActivity extends AppCompatActivity {
         int[][] Code = new int[10][21];
 
         ArrayList<Subject> tmpSubSubject = new ArrayList<>();
-        ArrayList<ArrayList<Subject>> getUsedSubSubject = new ArrayList<ArrayList<Subject>>();
+        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
         ArrayList<Subject> OKSubSubject = new ArrayList<>();
 
         for (int i = 0; i < 26; i++) {
@@ -1248,7 +1248,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             j = tmpJ;
                             Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             tmpSubSubject.remove(j);                        // 1개가 줄어듦
-//                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
+                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
                             for(int x = 0; x < tmpSubSubject.size();x++) {
                                 Log.d("tag", "minyoung tmpSubSubject 유무 check" + tmpSubSubject.get(pluralChecker[x]).cName);
                             }
@@ -1268,12 +1268,12 @@ public class MadeResultActivity extends AppCompatActivity {
                             OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
-
                             }
+                            j = tmpJ;
                             Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             tmpSubSubject.remove(j);                        // 1개가 줄어듦
-//                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
-//                            tmpSubSubject.remove(triplePluralChecker[tmpJ-2]);    // 이미 앞에 2개가줄었으니
+                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
+                            tmpSubSubject.remove(triplePluralChecker[tmpJ-2]);    // 이미 앞에 2개가줄었으니
                             for(int x = 0; x < tmpSubSubject.size();x++) {
                                 Log.d("tag", "minyoung tmpSubSubject 유무 check" + tmpSubSubject.get(pluralChecker[x]).cName);
                             }
@@ -1321,13 +1321,13 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                     }
                     if(blankOk) {
-                        getUsedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                        selectedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
                     }
                 }
             }
 
             //조건 테스트하기전에 일단 되는경우 다넣기
-            if(getUsedSubSubject.size() >= 10){
+            if(selectedSubSubject.size() >= 10){
                 break;
             }
             // 조건테스트해야되는것 : 공강이 비었는가,  >>>>>>>>>>>>>>> OK
@@ -1335,17 +1335,17 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         // 조건테스트 1,3,5,6,9 이미됨 학점은 위에서 카운트할예정
 
-        for(int i = 0; i < getUsedSubSubject.size(); i++) {
+        for(int i = 0; i < selectedSubSubject.size(); i++) {
             for(int j = 0 ; j < needSubject.size() ; j++) {
-                getUsedSubSubject.get(i).add(needSubject.get(j));
+                selectedSubSubject.get(i).add(needSubject.get(j));
             }
         }
 
-        //공강시간만큼 앞뒤로 더 크기를 늘림
+        //공강시간만큼 앞뒤로 더 크기를 늘림   >>>>>>>>>>>>>>>> OK
 
 
 //        AppContext.tempTimeTableList.clear();
-        AppContext.tempTimeTableList.addAll(getUsedSubSubject);
+        AppContext.tempTimeTableList.addAll(selectedSubSubject);
     }
 
 }
