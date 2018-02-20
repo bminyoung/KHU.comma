@@ -31,7 +31,7 @@ public class SubActivity extends AppCompatActivity {
     SubExpandableListAdapter explistAdapter;
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
-    ArrayList<Subject> needSubject;
+    static ArrayList<Subject> needSubject;
     Intent intentToSetting;
     int i = 0;
 
@@ -166,9 +166,16 @@ public class SubActivity extends AppCompatActivity {
 
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
-        int i = 0;
+        int i ;
+        int j ;
         for(i = 0; i < selectedSubList.size();i++){
             if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
+                ret = false;
+                break;
+            }
+        }
+        for(j = 0 ; j < needSubject.size(); j++){
+            if(needSubject.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;
                 break;
             }
