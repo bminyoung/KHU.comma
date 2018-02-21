@@ -1416,20 +1416,18 @@ public class MadeResultActivity extends AppCompatActivity {
                     Log.d("tag", "minyoung "+ i +"번째 시간표 과목" + selectedSubSubject.get(i).get(k).cName);
                 }
             }
-
         }
-        // 조건테스트 1,3,5,6,9 이미됨 학점은 위에서 카운트할예정
-
         for(int i = 0; i < selectedSubSubject.size(); i++) {
             for(int j = 0 ; j < needSubject.size() ; j++) {
                 selectedSubSubject.get(i).add(needSubject.get(j));
             }
         }
-
-        //공강시간만큼 앞뒤로 더 크기를 늘림   >>>>>>>>>>>>>>>> OK
-
-
-//        AppContext.tempTimeTableList.clear();
+        if (selectedSubSubject.size() < 10) {
+            selectedSubSubject.add(new ArrayList<Subject>());
+            for(int i = 0; i < needSubject.size() ; i++){
+                selectedSubSubject.get(selectedSubSubject.size()-1).add(needSubject.get(i));
+            }
+        }
         AppContext.tempTimeTableList.addAll(selectedSubSubject);
     }
 

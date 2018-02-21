@@ -167,13 +167,13 @@ public class SubActivity extends AppCompatActivity {
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
         int i, j;
-        for(i = 0; i < selectedSubList.size();i++){
-            if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
-                ret = false;
-                Log.d("tag", "minyoung/" + selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8)));
-                break;
-            }
-        }
+//        for(i = 0; i < selectedSubList.size();i++){
+//            if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
+//                ret = false;
+//                Log.d("tag", "minyoung/" + selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8)));
+//                break;
+//            }
+//        }
         for(j = 0 ; j < needSubject.size(); j++){
             if(needSubject.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;
