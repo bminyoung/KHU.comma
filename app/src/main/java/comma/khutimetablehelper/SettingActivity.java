@@ -9,7 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -121,6 +121,145 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+
+        //스피너 값 변경 이벤트
+        lunch_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    lunchStart_spin.setEnabled(false);
+                    lunchEnd_spin.setEnabled(false);
+                }else{
+                    lunchStart_spin.setEnabled(true);
+                    lunchEnd_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        firstTime_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    firstTime_spin.setEnabled(false);
+                }else{
+                    firstTime_spin.setEnabled(true);
+
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        timeFlic_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    timeFlic_spin.setEnabled(false);
+                }else{
+                    timeFlic_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        emptyDay_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    emptyDay_spin.setEnabled(false);
+                }else{
+                    emptyDay_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        dayCount_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    dayCount_spin.setEnabled(false);
+                }else{
+                    dayCount_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        classTime_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    classTime_spin.setEnabled(false);
+                }else{
+                    classTime_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        maxClassNum_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    maxClassNum_spin.setEnabled(false);
+                }else{
+                    maxClassNum_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        maxClassTime_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    maxClassTime_spin.setEnabled(false);
+                }else{
+                    maxClassTime_spin.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        dayEndTime_subspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
+
+                if (position == 1) {
+                    dayMon.setEnabled(false);
+                    dayTue.setEnabled(false);
+                    dayWed.setEnabled(false);
+                    dayThu.setEnabled(false);
+                    dayFri.setEnabled(false);
+                }else{
+                    dayMon.setEnabled(true);
+                    dayTue.setEnabled(true);
+                    dayWed.setEnabled(true);
+                    dayThu.setEnabled(true);
+                    dayFri.setEnabled(true);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
     private void saveSpinner(){

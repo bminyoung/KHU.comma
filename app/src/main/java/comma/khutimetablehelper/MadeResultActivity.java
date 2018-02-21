@@ -46,7 +46,7 @@ public class MadeResultActivity extends AppCompatActivity {
     int filterCount = 0;
 
     ArrayList<ArrayList<Subject>> listData = new ArrayList<ArrayList<Subject>>();
-    TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
+    AutoResizeTextView timeTable[][] = new AutoResizeTextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
     @Override
@@ -109,7 +109,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
 
                     focusOn = position;
-                    colorIndex = 0; //새로운시간표 클릭시 리셋하고 실행 - 코드짤것!!
+                    colorIndex = 0; //새로운시간표 클릭시 리셋하고 실행
                     //같은 과목은 같은 색깔로
                     for (int i = 0; i < selectedTimeTable.size(); i++) {
                         for (int j = i; j < selectedTimeTable.size(); j++) {
@@ -201,6 +201,7 @@ public class MadeResultActivity extends AppCompatActivity {
             tv.setBackgroundColor(colors[colorIndex]);
         }
         timeTable[start][selected.cDay].setText(selected.cName);
+        timeTable[start][selected.cDay].resizeText();
     }
 
     private void SaveTimeTable(int position, String timeTableName) {
@@ -247,7 +248,7 @@ public class MadeResultActivity extends AppCompatActivity {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 5; j++) {
                 int resID = getResources().getIdentifier("maderesult_tv_" + i + "" + j, "id", "comma.khutimetablehelper");
-                timeTable[i][j] = ((TextView) findViewById(resID));
+                timeTable[i][j] = ((AutoResizeTextView) findViewById(resID));
             }
         }
     }
@@ -463,10 +464,9 @@ public class MadeResultActivity extends AppCompatActivity {
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
         int[][] needSubjectCell = SubjectCell;
-        int[][] Code = new int[10][21];
 
         ArrayList<Subject> tmpSubSubject = new ArrayList<>();
-        ArrayList<ArrayList<Subject>> getUsedSubSubject = new ArrayList<ArrayList<Subject>>();
+        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
         ArrayList<Subject> OKSubSubject = new ArrayList<>();
 
         for (int i = 0; i < 26; i++) {
@@ -1286,6 +1286,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             } else {
                                 tmpSubSubject.remove(pluralChecker[tmpJ]);                        //
                                 tmpSubSubject.remove(j);
+                                Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             }
                             break;
                         case 2:
@@ -1307,7 +1308,6 @@ public class MadeResultActivity extends AppCompatActivity {
                             OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
-
                             }
 //                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             if(j > pluralChecker[tmpJ] && j > triplePluralChecker[tmpJ]) {
@@ -1330,17 +1330,21 @@ public class MadeResultActivity extends AppCompatActivity {
                                 }
                             } else {
                                 large = triplePluralChecker[tmpJ];
-                                if(j > pluralChecker[tmpJ]){
+                                if (j > pluralChecker[tmpJ]) {
                                     mid = j;
                                     small = pluralChecker[tmpJ];
                                 } else {
                                     mid = pluralChecker[tmpJ];
                                     small = j;
                                 }
+
+                                j = tmpJ;
+                                Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
+
+                                tmpSubSubject.remove(large);                        // 가장 큰거부터 줄어듦
+                                tmpSubSubject.remove(mid);    //
+                                tmpSubSubject.remove(small);    //
                             }
-                            tmpSubSubject.remove(large);                        // 가장 큰거부터 줄어듦
-                            tmpSubSubject.remove(mid);    //
-                            tmpSubSubject.remove(small);    //
                             break;
                         default:
                             break;
@@ -1388,7 +1392,8 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
                     if(blankOk) {
                         Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
-                        getUsedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+
+                        selectedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
                     }
                 }
                 else {
@@ -1399,31 +1404,31 @@ public class MadeResultActivity extends AppCompatActivity {
 
 
             //조건 테스트하기전에 일단 되는경우 다넣기
-            if(getUsedSubSubject.size() >= 10){
+            if(selectedSubSubject.size() >= 10){
                 break;
             }
             // 조건테스트해야되는것 : 공강이 비었는가,  >>>>>>>>>>>>>>> OK
             OKSubSubject.clear();
-            for(int j = 0; j <getUsedSubSubject.size() ; j++){
-                for(int k = 0; k < getUsedSubSubject.get(i).size(); k++){
-                    Log.d("tag", "minyoung "+ i +"번째 시간표 과목" + getUsedSubSubject.get(i).get(k).cName);
+            for(int j = 0; j <selectedSubSubject.size() ; j++){
+                for(int k = 0; k < selectedSubSubject.get(i).size(); k++){
+                    Log.d("tag", "minyoung "+ i +"번째 시간표 과목" + selectedSubSubject.get(i).get(k).cName);
                 }
             }
 
         }
         // 조건테스트 1,3,5,6,9 이미됨 학점은 위에서 카운트할예정
 
-        for(int i = 0; i < getUsedSubSubject.size(); i++) {
+        for(int i = 0; i < selectedSubSubject.size(); i++) {
             for(int j = 0 ; j < needSubject.size() ; j++) {
-                getUsedSubSubject.get(i).add(needSubject.get(j));
+                selectedSubSubject.get(i).add(needSubject.get(j));
             }
         }
 
-        //공강시간만큼 앞뒤로 더 크기를 늘림
+        //공강시간만큼 앞뒤로 더 크기를 늘림   >>>>>>>>>>>>>>>> OK
 
 
 //        AppContext.tempTimeTableList.clear();
-        AppContext.tempTimeTableList.addAll(getUsedSubSubject);
+        AppContext.tempTimeTableList.addAll(selectedSubSubject);
     }
 
 }

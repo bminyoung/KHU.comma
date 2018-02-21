@@ -31,7 +31,7 @@ public class SubActivity extends AppCompatActivity {
     SubExpandableListAdapter explistAdapter;
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
-    ArrayList<Subject> needSubject;
+    static ArrayList<Subject> needSubject;
     Intent intentToSetting;
     int i = 0;
 
@@ -166,9 +166,16 @@ public class SubActivity extends AppCompatActivity {
 
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
-        int i = 0;
+        int i, j;
         for(i = 0; i < selectedSubList.size();i++){
             if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
+                ret = false;
+                Log.d("tag", "minyoung/" + selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8)));
+                break;
+            }
+        }
+        for(j = 0 ; j < needSubject.size(); j++){
+            if(needSubject.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;
                 break;
             }
@@ -221,15 +228,17 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                int i = 0;
-                SubActivity.madapter.additem(selectedSubject);
-                while(i < AppContext.subjectList.length){
-                    Subject sub = AppContext.subjectList[i++];
-                    if(sub.cNum.equals(selectedSubject.cNum)){
-                        SubActivity.madapter.addNeed(sub);
+                if(SubActivity.isValid(selectedSubject)) {
+                    int i = 0;
+                    SubActivity.madapter.additem(selectedSubject);
+                    while (i < AppContext.subjectList.length) {
+                        Subject sub = AppContext.subjectList[i++];
+                        if (sub.cNum.equals(selectedSubject.cNum)) {
+                            SubActivity.madapter.addNeed(sub);
+                        }
                     }
+                    SubActivity.madapter.notifyDataSetChanged();
                 }
-                SubActivity.madapter.notifyDataSetChanged();
             }
         });
 
