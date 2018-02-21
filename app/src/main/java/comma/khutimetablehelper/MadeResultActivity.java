@@ -529,14 +529,18 @@ public class MadeResultActivity extends AppCompatActivity {
                 Log.d("tag", "minyoung swap 이전 과목 : " + tmpSubSubject.get(j).cName);
             }
             for(int j = 0; j < swapNum ; j++){
-                if(tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(1).cNum)){        // 다음과목과 학수번호가 같으면
-                    swapNum++;
-                    if(tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(2).cNum)){    // 다다음과목과 학수번호가 같으면
+                if(tmpSubSubject.size() > 3) {
+                    if (tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(1).cNum)) {        // 다음과목과 학수번호가 같으면
                         swapNum++;
+                        if(tmpSubSubject.size() > 4) {
+                            if (tmpSubSubject.get(0).cNum.equals(tmpSubSubject.get(2).cNum)) {    // 다다음과목과 학수번호가 같으면
+                                swapNum++;
+                            }
+                        }
                     }
                 }
                 for(int swap = 0; swap < tmpSubSubject.size() - 1 ; swap++) {
-                    Log.d("tag","minyoung swap 과목 : "+tmpSubSubject.get(swap).cName + "와(과)" + tmpSubSubject.get(swap+1).cName + "를 바꿉니다!!");
+//                    Log.d("tag","minyoung swap 과목 : "+tmpSubSubject.get(swap).cName + "와(과)" + tmpSubSubject.get(swap+1).cName + "를 바꿉니다!!");
                     Collections.swap(tmpSubSubject, swap, swap+1);
                 }
             }
@@ -552,31 +556,58 @@ public class MadeResultActivity extends AppCompatActivity {
             friDayClassCount = 0;
             nowCreditCount = creditIntent;
 
-            for(int j = 0; j < tmpSubSubject.size() ; j++){
-                pluralChecker[j] = 0;
-                pluralCount[j] = 0;
-                triplePluralChecker[j] = 0;
-            }
-            for(int k = 0; k < tmpSubSubject.size() - 1; k++){
-                for(int l = k+1; l < tmpSubSubject.size(); l++) {
-                    if(pluralCount[k] == 0) {
-                        if (tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
-                            pluralChecker[k] = l;
-                            pluralCount[k]++;
-                            pluralCount[l] = 3;     // 이미 다른곳에서 중복된걸로 체크된경우
-                        }
+//            for(int k = 0; k < tmpSubSubject.size() - 1; k++){
+//                for(int l = k+1; l < tmpSubSubject.size(); l++) {
+//                    if(pluralCount[k] == 0) {
+//                        if (tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
+//                            pluralChecker[k] = l;
+//                            pluralCount[k]++;
+//                            pluralCount[l] = 3;     // 이미 다른곳에서 중복된걸로 체크된경우
+//                        }
+//                    }
+//                    else if(pluralCount[k] == 1){
+//                        if(tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
+//                            triplePluralChecker[k] = l;
+//                            pluralCount[k]++;
+//                        }
+//                    }
+//                }
+//            }
+            for (int j = 0; j < tmpSubSubject.size(); j++) {
+                int tmpJ;
+                for(int k = 0; k < tmpSubSubject.size() - 1; k++){
+
+                    for(int l = 0; l < tmpSubSubject.size() ; l++){
+                        pluralChecker[l] = 0;
+                        pluralCount[l] = 0;
+                        triplePluralChecker[l] = 0;
                     }
-                    else if(pluralCount[k] == 1){
-                        if(tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
-                            triplePluralChecker[k] = l;
-                            pluralCount[k]++;
+                    Log.d("tag","minyoung error check : size : " + tmpSubSubject.size());
+                    Log.d("tag","minyoung error check : k    : " + k);
+                    for(int l = k+1; l < tmpSubSubject.size(); l++) {
+                        if(pluralCount[k] == 0) {
+                            if (tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
+                                Log.d("tag","minyoung 중복과목 :"+tmpSubSubject.get(k).cNum + "&&" + tmpSubSubject.get(l).cNum);
+                                pluralChecker[k] = l;
+                                pluralCount[k] = 1;
+                                pluralCount[l] = 3;     // 이미 다른곳에서 중복된걸로 체크된경우
+                            }
+                        } else if(pluralCount[k] == 1){
+                            if(tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
+                                Log.d("tag","minyoung 3중복과목 : "+k+" &&"+ l + "과목" + tmpSubSubject.get(k).cNum);
+                                triplePluralChecker[k] = l;
+                                pluralCount[k]++;
+                            }
                         }
                     }
                 }
-            }
-            for (int j = 0; j < tmpSubSubject.size(); j++) {
-                int tmpJ;
+//                Log.d("tag","minyoung error check : " + tmpSubSubject.get(j).cStart);  // 문제없음
+                Log.d("tag","minyoung error check : " + tmpSubSubject.get(pluralChecker[j]).cStart); // pluralChecker[j] 가 문제
+
                 Log.d("tag","minyoung pluralCount : "+pluralCount[j]);
+                Log.d("tag","minyoung 과목 : "+tmpSubSubject.get(j).cName);
+                Log.d("tag","minyoung tmpSubSubject크기 : "+tmpSubSubject.size());
+                Log.d("tag","minyoung 현재 j값 : "+j);
                 blankcheck = true;
                  switch(pluralCount[j]) {//중복횟수만큼
                      case 0:
@@ -1223,19 +1254,21 @@ public class MadeResultActivity extends AppCompatActivity {
                  }
                 if (blankcheck) {       // ok 면 시간표에 넣기
                     Log.d("tag","minyoung 과목추가 : "+tmpSubSubject.get(j).cName);
-                    Log.d("tag","minyoung pluralCountcheck : "+pluralCount[j]);
-                    Log.d("tag","minyoung for문 k값 check : "+(int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
+//                    Log.d("tag","minyoung pluralCountcheck : "+pluralCount[j]);
+//                    Log.d("tag","minyoung for문 k값 check : "+(int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
                     switch (pluralCount[j]) {
                         case 0:
                             OKSubSubject.add(tmpSubSubject.get(j));
+                            nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 없으면 셀에 한번만담아도됨
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
-                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
+//                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             tmpSubSubject.remove(j);
                             break;
                         case 1:
                             OKSubSubject.add(tmpSubSubject.get(j));
+                            nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 1개면 셀에2번담아야됨 셀에담기는거 이상없음
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
@@ -1246,15 +1279,21 @@ public class MadeResultActivity extends AppCompatActivity {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             j = tmpJ;
-                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
-                            tmpSubSubject.remove(j);                        // 1개가 줄어듦
-//                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
-                            for(int x = 0; x < tmpSubSubject.size();x++) {
-                                Log.d("tag", "minyoung tmpSubSubject 유무 check" + tmpSubSubject.get(pluralChecker[x]).cName);
+//                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
+                            if (j > tmpJ) {
+                                tmpSubSubject.remove(j);                        //
+                                tmpSubSubject.remove(pluralChecker[tmpJ]);    //
+                            } else {
+                                tmpSubSubject.remove(pluralChecker[tmpJ]);                        //
+                                tmpSubSubject.remove(j);
                             }
                             break;
                         case 2:
+                            int large;
+                            int mid;
+                            int small;
                             OKSubSubject.add(tmpSubSubject.get(j));
+                            nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된 과목이 3개면 셀에 3번담아야됨
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
@@ -1270,20 +1309,47 @@ public class MadeResultActivity extends AppCompatActivity {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
 
                             }
-                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
-                            tmpSubSubject.remove(j);                        // 1개가 줄어듦
-//                            tmpSubSubject.remove(pluralChecker[tmpJ-1]);    // 이미 앞에 1개가줄었으니
-//                            tmpSubSubject.remove(triplePluralChecker[tmpJ-2]);    // 이미 앞에 2개가줄었으니
-                            for(int x = 0; x < tmpSubSubject.size();x++) {
-                                Log.d("tag", "minyoung tmpSubSubject 유무 check" + tmpSubSubject.get(pluralChecker[x]).cName);
+//                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
+                            if(j > pluralChecker[tmpJ] && j > triplePluralChecker[tmpJ]) {
+                                large = j;
+                                if (pluralChecker[tmpJ] > triplePluralChecker[tmpJ]) {
+                                    mid = pluralChecker[tmpJ];
+                                    small = triplePluralChecker[tmpJ];
+                                } else {
+                                    mid = triplePluralChecker[tmpJ];
+                                    small = pluralChecker[tmpJ];
+                                }
+                            } else if(pluralChecker[tmpJ] > triplePluralChecker[tmpJ]) {
+                                large = pluralChecker[tmpJ];
+                                if(j > triplePluralChecker[tmpJ]){
+                                    mid = j;
+                                    small = triplePluralChecker[tmpJ];
+                                } else {
+                                    mid = triplePluralChecker[tmpJ];
+                                    small = j;
+                                }
+                            } else {
+                                large = triplePluralChecker[tmpJ];
+                                if(j > pluralChecker[tmpJ]){
+                                    mid = j;
+                                    small = pluralChecker[tmpJ];
+                                } else {
+                                    mid = pluralChecker[tmpJ];
+                                    small = j;
+                                }
                             }
+                            tmpSubSubject.remove(large);                        // 가장 큰거부터 줄어듦
+                            tmpSubSubject.remove(mid);    //
+                            tmpSubSubject.remove(small);    //
+                            break;
+                        default:
                             break;
                     }
-
-                    nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
-                    break;
+//                    break;
                 }
                 boolean blankOk = true;
+                Log.d("tag", "minyoung " +nowCreditCount + "//" + getSettedMinCreditCount);
+                Log.d("tag", "minyoung 현재학점 : " +nowCreditCount + " 최소학점 : " + getSettedMinCreditCount);
                 if (nowCreditCount >= getSettedMinCreditCount) {    // 최소학점을 넘었을때,
                     if(spinStatus.get(2) == 0) { // 공강시간 체크
                         for (int k = 0; k < 5; k++) {
@@ -1321,10 +1387,16 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                     }
                     if(blankOk) {
+                        Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
                         getUsedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
                     }
                 }
+                else {
+                    Log.d("tag", "minyoung 아직 최소학점을 못넘었습니다.");
+                }
+                Log.d("tag", "minyoung tmpSubSubject.size() :" + tmpSubSubject.size());
             }
+
 
             //조건 테스트하기전에 일단 되는경우 다넣기
             if(getUsedSubSubject.size() >= 10){
@@ -1332,6 +1404,12 @@ public class MadeResultActivity extends AppCompatActivity {
             }
             // 조건테스트해야되는것 : 공강이 비었는가,  >>>>>>>>>>>>>>> OK
             OKSubSubject.clear();
+            for(int j = 0; j <getUsedSubSubject.size() ; j++){
+                for(int k = 0; k < getUsedSubSubject.get(i).size(); k++){
+                    Log.d("tag", "minyoung "+ i +"번째 시간표 과목" + getUsedSubSubject.get(i).get(k).cName);
+                }
+            }
+
         }
         // 조건테스트 1,3,5,6,9 이미됨 학점은 위에서 카운트할예정
 
