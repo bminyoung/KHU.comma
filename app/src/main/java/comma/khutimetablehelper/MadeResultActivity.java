@@ -46,7 +46,7 @@ public class MadeResultActivity extends AppCompatActivity {
     int filterCount = 0;
 
     ArrayList<ArrayList<Subject>> listData = new ArrayList<ArrayList<Subject>>();
-    TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
+    AutoResizeTextView timeTable[][] = new AutoResizeTextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
     @Override
@@ -109,7 +109,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
 
                     focusOn = position;
-                    colorIndex = 0; //새로운시간표 클릭시 리셋하고 실행 - 코드짤것!!
+                    colorIndex = 0; //새로운시간표 클릭시 리셋하고 실행
                     //같은 과목은 같은 색깔로
                     for (int i = 0; i < selectedTimeTable.size(); i++) {
                         for (int j = i; j < selectedTimeTable.size(); j++) {
@@ -181,7 +181,7 @@ public class MadeResultActivity extends AppCompatActivity {
             filterCount = 0;
         }
 
-        calculateSubject();
+//        calculateSubject();
         setData();
 
     }
@@ -201,6 +201,7 @@ public class MadeResultActivity extends AppCompatActivity {
             tv.setBackgroundColor(colors[colorIndex]);
         }
         timeTable[start][selected.cDay].setText(selected.cName);
+        timeTable[start][selected.cDay].resizeText();
     }
 
     private void SaveTimeTable(int position, String timeTableName) {
@@ -247,7 +248,7 @@ public class MadeResultActivity extends AppCompatActivity {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 5; j++) {
                 int resID = getResources().getIdentifier("maderesult_tv_" + i + "" + j, "id", "comma.khutimetablehelper");
-                timeTable[i][j] = ((TextView) findViewById(resID));
+                timeTable[i][j] = ((AutoResizeTextView) findViewById(resID));
             }
         }
     }
