@@ -515,7 +515,11 @@ public class MadeResultActivity extends AppCompatActivity {
                     friDayClassCount++;
                     break;
             }
-            nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+            if(i!=0) {
+                if(needSubject.get(i).cNum.equals(needSubject.get(i-1).cNum)) {
+                    nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+                }
+            }
         }
         int creditIntent = nowCreditCount;
         int[] pluralChecker = new int[filteredSubSubject.size()];
@@ -582,19 +586,19 @@ public class MadeResultActivity extends AppCompatActivity {
                         pluralCount[l] = 0;
                         triplePluralChecker[l] = 0;
                     }
-                    Log.d("tag","minyoung error check : size : " + tmpSubSubject.size());
-                    Log.d("tag","minyoung error check : k    : " + k);
+//                    Log.d("tag","minyoung error check : size : " + tmpSubSubject.size());
+//                    Log.d("tag","minyoung error check : k    : " + k);
                     for(int l = k+1; l < tmpSubSubject.size(); l++) {
                         if(pluralCount[k] == 0) {
                             if (tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
-                                Log.d("tag","minyoung 중복과목 :"+tmpSubSubject.get(k).cNum + "&&" + tmpSubSubject.get(l).cNum);
+//                                Log.d("tag","minyoung 중복과목 :"+tmpSubSubject.get(k).cNum + "&&" + tmpSubSubject.get(l).cNum);
                                 pluralChecker[k] = l;
                                 pluralCount[k] = 1;
                                 pluralCount[l] = 3;     // 이미 다른곳에서 중복된걸로 체크된경우
                             }
                         } else if(pluralCount[k] == 1){
                             if(tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
-                                Log.d("tag","minyoung 3중복과목 : "+k+" &&"+ l + "과목" + tmpSubSubject.get(k).cNum);
+//                                Log.d("tag","minyoung 3중복과목 : "+k+" &&"+ l + "과목" + tmpSubSubject.get(k).cNum);
                                 triplePluralChecker[k] = l;
                                 pluralCount[k]++;
                             }
@@ -602,7 +606,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
                 }
 //                Log.d("tag","minyoung error check : " + tmpSubSubject.get(j).cStart);  // 문제없음
-                Log.d("tag","minyoung error check : " + tmpSubSubject.get(pluralChecker[j]).cStart); // pluralChecker[j] 가 문제
+//                Log.d("tag","minyoung error check : " + tmpSubSubject.get(pluralChecker[j]).cStart); // pluralChecker[j] 가 문제 >> 해결된듯?
 
                 Log.d("tag","minyoung pluralCount : "+pluralCount[j]);
                 Log.d("tag","minyoung 과목 : "+tmpSubSubject.get(j).cName);
@@ -612,6 +616,7 @@ public class MadeResultActivity extends AppCompatActivity {
                  switch(pluralCount[j]) {//중복횟수만큼
                      case 0:
                          if (nowCreditCount + tmpSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
+                             Log.d("tag","minyoung 최대학점 초과");
                              blankcheck = false;
                          }
                          for (int k = 0; k < (int) ((tmpSubSubject.get(j).cStart - tmpSubSubject.get(j).cEnd) * 2); k++) {
@@ -720,6 +725,7 @@ public class MadeResultActivity extends AppCompatActivity {
                          break;
                      case 1:
                          if (nowCreditCount + tmpSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
+                             Log.d("tag","minyoung 최대학점 초과");
                              blankcheck = false;
                          }
                          for (int k = 0; k < (int) ((tmpSubSubject.get(j).cStart - tmpSubSubject.get(j).cEnd) * 2); k++) {
@@ -935,6 +941,7 @@ public class MadeResultActivity extends AppCompatActivity {
                          break;
                      case 2:
                          if (nowCreditCount + tmpSubSubject.get(j).cCredit > getSettedMaxCreditCount) {     //학점이 되는지 체크
+                             Log.d("tag","minyoung 최대학점 초과");
                              blankcheck = false;
                          }
                          for (int k = 0; k < (int) ((tmpSubSubject.get(j).cStart - tmpSubSubject.get(j).cEnd) * 2); k++) {
@@ -1347,14 +1354,13 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
                     for(int k = 0; k < tmpSubSubject.size() ; k++){
                         if(tmpSubSubject.get(k).cName.equals(tmpSubjectcName)){
-                            Log.d("tag", "minyoung 분반된 과목 제거 : " + tmpSubjectcName + "//" + tmpSubSubject.get(k).cName);
+                            Log.d("tag", "minyoung 분반된 과목 제거 : " + tmpSubjectcName + "//" + k);
                             tmpSubSubject.remove(k);
                             k--;
                         }
                     }
                 }
                 boolean blankOk = true;
-                Log.d("tag", "minyoung " +nowCreditCount + "//" + getSettedMinCreditCount);
                 Log.d("tag", "minyoung 현재학점 : " +nowCreditCount + " 최소학점 : " + getSettedMinCreditCount);
                 if (nowCreditCount >= getSettedMinCreditCount) {    // 최소학점을 넘었을때,
                     if(spinStatus.get(2) == 0) { // 공강시간 체크
@@ -1411,11 +1417,6 @@ public class MadeResultActivity extends AppCompatActivity {
             }
             // 조건테스트해야되는것 : 공강이 비었는가,  >>>>>>>>>>>>>>> OK
             OKSubSubject.clear();
-            for(int j = 0; j <selectedSubSubject.size() ; j++){
-                for(int k = 0; k < selectedSubSubject.get(i).size(); k++){
-                    Log.d("tag", "minyoung "+ i +"번째 시간표 과목" + selectedSubSubject.get(i).get(k).cName);
-                }
-            }
         }
         for(int i = 0; i < selectedSubSubject.size(); i++) {
             for(int j = 0 ; j < needSubject.size() ; j++) {
@@ -1426,6 +1427,11 @@ public class MadeResultActivity extends AppCompatActivity {
             selectedSubSubject.add(new ArrayList<Subject>());
             for(int i = 0; i < needSubject.size() ; i++){
                 selectedSubSubject.get(selectedSubSubject.size()-1).add(needSubject.get(i));
+            }
+        }
+        for(int i = 0; i <selectedSubSubject.size() ; i++){
+            for(int k = 0; k < selectedSubSubject.get(i).size(); k++){
+                Log.d("tag", "minyoung "+ i +"번째 시간표 과목 : " + selectedSubSubject.get(i).get(k).cName);
             }
         }
         AppContext.tempTimeTableList.addAll(selectedSubSubject);
