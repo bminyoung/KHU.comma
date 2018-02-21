@@ -1253,6 +1253,7 @@ public class MadeResultActivity extends AppCompatActivity {
                          break;
                  }
                 if (blankcheck) {       // ok 면 시간표에 넣기
+                    String tmpSubjectcName = tmpSubSubject.get(j).cName;        // 반이 나뉜과목도 이제 제거해야됨!
                     Log.d("tag","minyoung 과목추가 : "+tmpSubSubject.get(j).cName);
 //                    Log.d("tag","minyoung pluralCountcheck : "+pluralCount[j]);
 //                    Log.d("tag","minyoung for문 k값 check : "+(int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
@@ -1286,7 +1287,6 @@ public class MadeResultActivity extends AppCompatActivity {
                             } else {
                                 tmpSubSubject.remove(pluralChecker[tmpJ]);                        //
                                 tmpSubSubject.remove(j);
-                                Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             }
                             break;
                         case 2:
@@ -1309,7 +1309,6 @@ public class MadeResultActivity extends AppCompatActivity {
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
-//                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             if(j > pluralChecker[tmpJ] && j > triplePluralChecker[tmpJ]) {
                                 large = j;
                                 if (pluralChecker[tmpJ] > triplePluralChecker[tmpJ]) {
@@ -1337,19 +1336,22 @@ public class MadeResultActivity extends AppCompatActivity {
                                     mid = pluralChecker[tmpJ];
                                     small = j;
                                 }
-
-                                j = tmpJ;
-                                Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
-
-                                tmpSubSubject.remove(large);                        // 가장 큰거부터 줄어듦
-                                tmpSubSubject.remove(mid);    //
-                                tmpSubSubject.remove(small);    //
                             }
+                            tmpSubSubject.remove(large);                        // 가장 큰거부터 줄어듦
+                            tmpSubSubject.remove(mid);    //
+                            tmpSubSubject.remove(small);    //
+
                             break;
                         default:
                             break;
                     }
-//                    break;
+                    for(int k = 0; k < tmpSubSubject.size() ; k++){
+                        if(tmpSubSubject.get(k).cName.equals(tmpSubjectcName)){
+                            Log.d("tag", "minyoung 분반된 과목 제거 : " + tmpSubjectcName + "//" + tmpSubSubject.get(k).cName);
+                            tmpSubSubject.remove(k);
+                            k--;
+                        }
+                    }
                 }
                 boolean blankOk = true;
                 Log.d("tag", "minyoung " +nowCreditCount + "//" + getSettedMinCreditCount);
@@ -1402,7 +1404,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 Log.d("tag", "minyoung tmpSubSubject.size() :" + tmpSubSubject.size());
             }
 
-
+            Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
             //조건 테스트하기전에 일단 되는경우 다넣기
             if(selectedSubSubject.size() >= 10){
                 break;
