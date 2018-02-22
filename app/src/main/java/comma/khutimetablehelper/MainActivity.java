@@ -1,5 +1,6 @@
 package comma.khutimetablehelper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private BackPressCloseHandler backPressCloseHandler;
 
     //static ArrayList<Subject> subjectList;
     @Override
@@ -33,10 +34,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         TextView temp = (TextView) findViewById(R.id.tempText);
         String tmp = "";
         setSubjectList();
         setSubjectOnlyList();
+
+        // 뒤로가기 핸들러
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+        @Override
+        public void onBackPressed () {
+            backPressCloseHandler.onBackPressed();
+        }
+
 
         /* 과목명 확인
         for(int i = 0;i<AppContext.onlySubjectList.size();i++){
@@ -55,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
         }
         temp.setText(tmp); */
 
-
-    }
 
     void setContext(){
         FileInputStream fis;
@@ -322,4 +331,33 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SaveListActivity.class);
         startActivity(intent);
     }
+}
+
+class BackPressCloseHandler {
+    private long backKeyPressedTime = 0;
+    private Toast toast;
+
+    private Activity activity;
+
+    public BackPressCloseHandler(Activity context) {
+        this.activity = context;
+    }
+
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            showGuide();
+            return;
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            toast.cancel();
+            activity.finish();
+        }
+    }
+
+    public void showGuide() {
+        toast = Toast.makeText(activity, "한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
 }
