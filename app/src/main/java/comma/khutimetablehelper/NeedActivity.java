@@ -220,15 +220,9 @@ public class NeedActivity extends Activity {
 
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
-        int i = 0;
-        for(i = 0; i < selectedNeedList.size();i++){
-            if(selectedNeedList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0,8))){
-                ret = false;
-                break;
-            }
-        }
-        for(i = 0 ; i < needSubject.size(); i++){
-            if(needSubject.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
+        int i;
+        for(i = 0; i < selectedNeedList.size();i++) {
+            if (selectedNeedList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))) {
                 ret = false;
                 break;
             }
