@@ -1260,7 +1260,7 @@ public class MadeResultActivity extends AppCompatActivity {
                  }
                 if (blankcheck) {       // ok 면 시간표에 넣기
                     String tmpSubjectcName = tmpSubSubject.get(j).cName;        // 반이 나뉜과목도 이제 제거해야됨!
-                    Log.d("tag","minyoung 과목추가 : "+tmpSubSubject.get(j).cName);
+                    Log.d("tag","minyoung 과목추가 : "+tmpSubSubject.get(j).cName + "// pluralCount[" + j+ "] : " + pluralCount[j]);
 //                    Log.d("tag","minyoung pluralCountcheck : "+pluralCount[j]);
 //                    Log.d("tag","minyoung for문 k값 check : "+(int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
                     switch (pluralCount[j]) {
@@ -1400,8 +1400,13 @@ public class MadeResultActivity extends AppCompatActivity {
                     }
                     if(blankOk) {
                         Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
-
-                        selectedSubSubject.add(OKSubSubject); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                        selectedSubSubject.add(new ArrayList<Subject>());
+                        for (int k = 0; k < OKSubSubject.size(); k++) {
+                            selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                        }
+                    }
+                    if(selectedSubSubject.size() >= 10){
+                        break;
                     }
                 }
                 else {
