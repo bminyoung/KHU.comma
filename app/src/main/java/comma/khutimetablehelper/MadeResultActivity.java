@@ -34,7 +34,11 @@ import java.util.Collections;
 public class MadeResultActivity extends AppCompatActivity {
 
     //시간표색상
-    static int[] colors = {Color.parseColor("#B8F3B8"), Color.parseColor("#FFA9B0"), Color.parseColor("#CCD1FF"), Color.parseColor("#FFDDA6"), Color.parseColor("#FFADC5"), Color.parseColor("#A8C8F9"), Color.parseColor("#DDDDFF")};
+    static int[] colors = {Color.parseColor("#FFCDD2"), Color.parseColor("#BBDEFB"), Color.parseColor("#F0F4C3"), Color.parseColor("#FFCC80"),
+            Color.parseColor("#E1BEE7"), Color.parseColor("#80DEEA"), Color.parseColor("#D7CCC8"), Color.parseColor("#D1C4E9"),
+            Color.parseColor("#F8BBD0"),Color.parseColor("#DCEDC8"),Color.parseColor("#FFF59D"),Color.parseColor("#81D4FA"),
+            Color.parseColor("#CFD8DC"),Color.parseColor("#B2DFDB"),Color.parseColor("#FFCCBC"),Color.parseColor("#C5CAE9"),
+            Color.parseColor("#C8E6C9"),Color.parseColor("#FFECB3"),Color.parseColor("#E0E0E0"),Color.parseColor("#EF9A9A"), Color.parseColor("#90CAF9")};
     int colorIndex = 0;
 
     ArrayList<Subject> needSubject;
