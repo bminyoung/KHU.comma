@@ -1311,6 +1311,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                                 SubjectCell[(int) tmpSubSubject.get(j).cStart - 9 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
+                            j = tmpJ;
                             if(j > pluralChecker[tmpJ] && j > triplePluralChecker[tmpJ]) {
                                 large = j;
                                 if (pluralChecker[tmpJ] > triplePluralChecker[tmpJ]) {
