@@ -70,29 +70,29 @@ public class SettingActivity extends AppCompatActivity {
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
         subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
 
-//        //임시시간표 만들기부분
-//        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
-//        while(i < needSubject.size()) {
-//            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
-//        }
-//        i = 0;
-//        while(i < subSubject.size()) {
-//            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
-//        }
-//
-//        index++;
-//        i = 0;
-//        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
-//        while(i < subSubject.size()) {
-//            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
-//        }
-//
-//        index++;
-//        i = 0;
-//        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
-//        while(i < needSubject.size()) {
-//            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
-//        } //임시 시간표 만들기부분 끝
+        //임시시간표 만들기부분
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
+        while(i < needSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
+        }
+        i = 0;
+        while(i < subSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
+        }
+
+        index++;
+        i = 0;
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
+        while(i < subSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(subSubject.get(i++));
+        }
+
+        index++;
+        i = 0;
+        AppContext.tempTimeTableList.add(new ArrayList<Subject>());
+        while(i < needSubject.size()) {
+            AppContext.tempTimeTableList.get(index).add(needSubject.get(i++));
+        } //임시 시간표 만들기부분 끝
 
         SpinnerInit();
 

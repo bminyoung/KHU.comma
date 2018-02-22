@@ -46,7 +46,7 @@ public class MadeResultActivity extends AppCompatActivity {
     int filterCount = 0;
 
     ArrayList<ArrayList<Subject>> listData = new ArrayList<ArrayList<Subject>>();
-    AutoResizeTextView timeTable[][] = new AutoResizeTextView[140][5]; //시간표 각 칸
+    TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
     @Override
@@ -92,17 +92,12 @@ public class MadeResultActivity extends AppCompatActivity {
                 ArrayList<Subject> selectedTimeTable = (ArrayList<Subject>) adapter.getItem(position);
 
                 if (focusOn != position) {
-                    //리셋 - 안됨 ㅜ.ㅜ
                     for (int i = 0; i < 28; i++) {
                         for (int j = 0; j < 5; j++) {
                             if (i % 2 == 0) {
-                                if(Build.VERSION.SDK_INT < 23) {
-                                    timeTable[i][j].setTextAppearance(getApplicationContext(), R.style.table_tv_top);
-                                }else{
-                                    timeTable[i][j].setTextAppearance(R.style.table_tv_top);
-                                }
+                                timeTable[i][j].setBackgroundResource(R.drawable.rectangle_openbottom);
                             }else{
-                                TextViewCompat.setTextAppearance(timeTable[i][j], R.style.table_tv_bottom);
+                                timeTable[i][j].setBackgroundResource(R.drawable.rectangle_opentop);
                             }
                             timeTable[i][j].setText("");
                         }
@@ -201,7 +196,7 @@ public class MadeResultActivity extends AppCompatActivity {
             tv.setBackgroundColor(colors[colorIndex]);
         }
         timeTable[start][selected.cDay].setText(selected.cName);
-        timeTable[start][selected.cDay].resizeText();
+//        timeTable[start][selected.cDay].resizeText();
     }
 
     private void SaveTimeTable(int position, String timeTableName) {
@@ -248,7 +243,7 @@ public class MadeResultActivity extends AppCompatActivity {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 5; j++) {
                 int resID = getResources().getIdentifier("maderesult_tv_" + i + "" + j, "id", "comma.khutimetablehelper");
-                timeTable[i][j] = ((AutoResizeTextView) findViewById(resID));
+                timeTable[i][j] = ((TextView) findViewById(resID));
             }
         }
     }
