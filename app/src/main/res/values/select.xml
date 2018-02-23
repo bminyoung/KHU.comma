@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="select">
+        <item>과목명</item>
+        <item>학수번호</item>
+        <item>교수명</item>
+    </string-array>
+</resources>

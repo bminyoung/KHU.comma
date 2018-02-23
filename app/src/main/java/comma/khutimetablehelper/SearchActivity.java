@@ -10,8 +10,10 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,8 @@ public class SearchActivity extends AppCompatActivity {
 
     //검색 성공
     static final int SUCCESS = 1;
+
+    static int selectNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,38 @@ public class SearchActivity extends AppCompatActivity {
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
 
+        //스피너 선언
+        Spinner selectSpinner;
+        selectSpinner = (Spinner) findViewById(R.id.search_spinner_select);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.select, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectSpinner.setAdapter(adapter);
+
+        //스피너 클릭이벤트
+        selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        selectNum = 0;
+                        break;
+                    case 1:
+                        selectNum = 1;
+                        break;
+
+                    case 2:
+                        selectNum = 2;
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         //리스트뷰 아이템 클릭하면 need의 리스트뷰에 아이템을 넘김
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,19 +94,19 @@ public class SearchActivity extends AppCompatActivity {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SearchActivity.this);
                 int i = 0;
                 Subject sub = new Subject();
-                while(i < AppContext.onlySubjectList.size()){
-                    if(list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow){
+                while (i < AppContext.onlySubjectList.size()) {
+                    if (list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow) {
                         sub = list.get(position);
                     }
                 }
                 final Subject finalSub = sub;
-                dialogBuilder.setTitle("과목 선택").setMessage(sub.getName()+"을 추가하시겠습니까?")
+                dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
                         .setPositiveButton("선택", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent data = new Intent();
                                 data.putExtra("subject", finalSub);
-                                setResult(SUCCESS,data);
+                                setResult(SUCCESS, data);
                                 finish();
                             }
                         }).setNegativeButton("취소", null).show();
@@ -95,8 +131,10 @@ public class SearchActivity extends AppCompatActivity {
                 // search 메소드를 호출한다.
                 String text = editSearch.getText().toString();
                 search(text);
+
             }
         });
+
 
     }
 
@@ -106,22 +144,41 @@ public class SearchActivity extends AppCompatActivity {
         // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
         list.clear();
 
+
         // 문자 입력이 없을때는 모든 데이터를 보여준다.
         if (charText.length() == 0) {
             list.addAll(arraylist);
         }
         // 문자 입력을 할때..
-        else
-        {
-            // 리스트의 모든 데이터를 검색한다.
-            for(int i = 0;i < arraylist.size(); i++)
-            {
-                // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (arraylist.get(i).getName().toLowerCase().contains(charText))
-                {
-                    // 검색된 데이터를 리스트에 추가한다.
-                    list.add(arraylist.get(i));
+        else {
+            if (selectNum == 0) {
+                for (int i = 0; i < arraylist.size(); i++) {
+                    // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                    if (arraylist.get(i).cName.contains(charText.toString())) {
+                        // 검색된 데이터를 리스트에 추가한다.
+                        list.add(arraylist.get(i));
+                    }
                 }
+            } else if (selectNum == 1) {
+                // 리스트의 모든 데이터를 검색한다.
+                for (int i = 0; i < arraylist.size(); i++) {
+                    // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                    if (arraylist.get(i).cNum.contains(charText.toString())) {
+                        // 검색된 데이터를 리스트에 추가한다.
+                        list.add(arraylist.get(i));
+                    }
+                }
+            } else if (selectNum == 2) {
+
+                for (int i = 0; i < arraylist.size(); i++) {
+                    // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                    if (arraylist.get(i).cProf.contains(charText.toString())) {
+                        list.add(arraylist.get(i));
+                    }
+                    // 검색된 데이터를 리스트에 추가한다.
+
+                }
+
             }
         }
         // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
@@ -129,9 +186,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     // 검색에 사용될 데이터를 리스트에 추가한다.
-    private void settingList(){
+    private void settingList() {
 
-        for(int i = 0; i < AppContext.onlySubjectList.size();i++)
+        for (int i = 0; i < AppContext.onlySubjectList.size(); i++)
             list.add(AppContext.onlySubjectList.get(i));
 
     }

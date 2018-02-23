@@ -121,21 +121,24 @@ public class NeedActivity extends Activity {
         collegeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
-//                String charText = collegeSpinner.getSelectedItem().toString();
-//                search(charText);
                 TextView textView;
                 String charText;
                 listDataChild.clear();
                 listDataHeader.clear();
-
-                if (position == 0) {
-                    listDataHeader.add("2학년 전공");
-                    listDataChild.put(listDataHeader.get(0), major2);
-
-                } else {
-                    listDataHeader.add("1학년 전공");
-                    listDataChild = mlistDataChild;
-                    listDataChild.put(listDataHeader.get(0), major1);
+                switch (position) {
+                    case 0: {
+                        listDataHeader.add("2학년 전공");
+                        listDataChild.put(listDataHeader.get(0), major2);
+                        listDataHeader.add("1학년 전공");
+                        listDataChild.put(listDataHeader.get(0), major1);
+                        break;
+                    }
+                    case 1: {
+                        listDataHeader.add("1학년 전공");
+                        listDataChild = mlistDataChild;
+                        listDataChild.put(listDataHeader.get(0), major1);
+                        break;
+                    }
 
                 }
                 explistAdapter.notifyDataSetChanged();
