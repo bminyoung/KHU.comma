@@ -63,6 +63,41 @@ class Subject implements Serializable {
     public String getName(){
         return cName;
     }
+
+    //시간표시
+    public String getTime(){
+        String ret = "";
+        ret += ((int)cStart) + ":";
+        ret += ((cStart*10.0) % 10 > 0) ? "30" : "00";
+        ret += "~" + ((int)cEnd) + ":";
+        ret += ((cEnd*10.0) % 10 > 0) ? "30" : "00";
+
+        return ret;
+    }
+
+    //날짜를 문자로
+    public String day() {
+        String ret = "";
+        switch (cDay) {
+            case 0:
+                ret = "월";
+                break;
+            case 1:
+                ret = "화";
+                break;
+            case 2:
+                ret = "수";
+                break;
+            case 3:
+                ret = "목";
+                break;
+            case 4:
+                ret = "금";
+                break;
+        }
+        return ret;
+    }
+
 }
 
 

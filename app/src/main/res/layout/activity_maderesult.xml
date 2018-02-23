@@ -71,6 +71,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1.3"
                             android:layout_span="1"
+                            android:text="  "
+                            android:textSize="15sp"
                             android:background="@drawable/rectangle_border" />
 
                         <TextView
@@ -127,8 +129,7 @@
 
                     <!--9시-->
                     <TableRow>
-                        <TextView
-                            style="@style/table_tv_leftTop"
+                        <TextView style="@style/table_tv_leftTop"
                             android:text="9" />
 
                         <TextView style="@style/table_tv_top"

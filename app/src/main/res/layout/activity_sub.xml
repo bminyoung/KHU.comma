@@ -76,10 +76,10 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                android:id="@+id/sub_spinner_searchKey"
+                android:id="@+id/sub_spinner_college"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                    android:visibility="invisible"
+                    android:clickable="true"
                 android:entries="@array/sub_searchKeySelect"/>
 
                 <EditText
