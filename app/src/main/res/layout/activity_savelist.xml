@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_centerVertical="true"
-            android:text="저장된 시간표"
+            android:text="History"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -28,11 +28,6 @@
             android:visibility="invisible"
             android:text="임시버튼" />
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#000000" />
 
     <ListView
         android:id="@+id/savelist_lv_savedTable"
