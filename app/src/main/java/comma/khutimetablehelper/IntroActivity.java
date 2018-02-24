@@ -33,14 +33,12 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void loadFile() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-        path += "/SaveList";
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SaveList";
         File dirFile = new File(path);
         dirFile.mkdirs();
         String[] fileList = dirFile.list();
         for(int i = 0; i< fileList.length; i++) {
             AppContext.timeTableNameList.add(fileList[i].substring(0,fileList[i].length()-4));
-            Log.d("tag", "minyoung/"+fileList[i]);
         }
     }
 

@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:orientation="horizontal"
-                android:background="#F064F0">
+                android:background="#80EE82EE">
 
                 <ImageButton
                     android:id="@+id/maderesult_btn_main"
