@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,7 +146,6 @@ public class NeedActivity extends Activity {
         ArrayList<Subject> sub = new ArrayList<Subject>();
         for (int i = 0; i < college.length; i++) { // i는 학과
             listDataHeader.add(college[i]);
-            Log.d("tag", "minyoung/" + college[i]);
             for (int j = 0; j < AppContext.onlySubjectList.size(); j++) {
                 if (AppContext.onlySubjectList.get(j).cDepart == i + major)
                     sub.add(AppContext.onlySubjectList.get(j));

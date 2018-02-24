@@ -29,7 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="Next" />
+                android:background="@drawable/btn_round"
+                android:text="Next"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
 
         <View
