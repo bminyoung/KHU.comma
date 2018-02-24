@@ -113,7 +113,6 @@ public class NeedActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
                 listDataChild.clear();
                 listDataHeader.clear();
-                lastExpandedPosition = -1;
                 prepareListData(position);
                 explistAdapter.notifyDataSetChanged();
             }

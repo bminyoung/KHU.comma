@@ -105,23 +105,6 @@ public class SubActivity extends AppCompatActivity {
         //preparelistdata() 함수 내용을 밖으로 뺏음.. major1,2를 불러오기 위해
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<Subject>>();
-        // 그룹 데이터 입력
-        listDataHeader.add("2학년 전공");
-        listDataHeader.add("1학년 전공");
-        // 그룹 1의 차일드 데이터 입력
-        final List<Subject> major2 = new ArrayList<Subject>();
-        while (!(AppContext.onlySubjectList.get(i).getName().equals("물리학및실험1"))) {
-            major2.add(AppContext.onlySubjectList.get(i++));
-        }
-        //그룹 2의 차일드 데이터 입력
-        final List<Subject> major1 = new ArrayList<Subject>();
-        while (i < AppContext.onlySubjectList.size()) {
-            major1.add(AppContext.onlySubjectList.get(i++));
-        }
-        //그룹에 데이터 할당
-        ; // Header, Child data
-        listDataChild.put(listDataHeader.get(0), major2);
-        listDataChild.put(listDataHeader.get(1), major1);
 
         // 확장리스트 뷰 어댑터 준비
         mlistDataChild = listDataChild;
