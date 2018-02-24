@@ -31,7 +31,8 @@ class Subject implements Serializable {
 
     // 멤버변수
     int cRow; // 고유번호
-    int cCol; // 단과대구분
+    int cCollege; // 단과대구분
+    int cDepart;
     String cNum;// 학수번호
     String cName;// 강좌명
     String cProf;// 교수명
@@ -48,7 +49,7 @@ class Subject implements Serializable {
     }; // 기본 생성자
 
     public Subject(int Row, String Num, String Name, String Prof, int Grade, int Credit, int Sort, int Day,
-                   double Start, double End) {
+                   double Start, double End, int College, int Depart) {
         cRow = Row;
         cNum = Num;
         cName = Name;
@@ -59,6 +60,8 @@ class Subject implements Serializable {
         cDay = Day;
         cStart = Start;
         cEnd = End;
+        cCollege = College;
+        cDepart = Depart;
     }; // 생성자
 
     public String getName(){

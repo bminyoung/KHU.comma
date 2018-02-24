@@ -85,7 +85,7 @@
     </string-array>
 
     <string-array name="polEco">
-        <item>경제학과 경제학</item>
+        <item>경제학과 경제학</item><!--0-->
         <item>무역학과 무역학</item>
         <item>정치외교학과 정치외교학</item>
         <item>행정학과 행정학</item>
@@ -95,7 +95,7 @@
     </string-array>
 
     <string-array name="livingScience">
-        <item>생활과학대학</item>
+        <item>생활과학대학</item><!--7-->
         <item>식품영양학과 식품영양학</item>
         <item>의상학과 의상학</item>
         <item>아동가족학과 아동가족학</item>
@@ -103,36 +103,36 @@
     </string-array>
 
     <string-array name="medical">
-        <item>의학과 의학전공</item>
+        <item>의학과 의학전공</item><!--12-->
         <item>의예과 의예전공</item>
     </string-array>
 
     <string-array name="korMedical">
-        <item>한의학과 한의학전공</item>
+        <item>한의학과 한의학전공</item><!--14-->
         <item>한의예과 한의예</item>
     </string-array>
 
     <string-array name="tooth">
-        <item>치의학과 치의학전공</item>
+        <item>치의학과 치의학전공</item><!--16-->
         <item>치의예과 치의예전공</item>
     </string-array>
 
     <string-array name="medicine">
-        <item>약학대학공통 약학대학공통</item>
+        <item>약학대학공통 약학대학공통</item><!--18-->
         <item>한약학과 한약학</item>
         <item>약과학과 약과학</item>
         <item>약학과(2+4년제) 약학전공</item>
     </string-array>
 
     <string-array name="music">
-        <item>음악대학</item>
+        <item>음악대학</item><!--22-->
         <item>기악과 기악</item>
         <item>성악과 성악</item>
         <item>작곡과 작곡</item>
     </string-array>
 
     <string-array name="hotel">
-        <item>관광학부 관광학부</item>
+        <item>관광학부 관광학부</item><!--26-->
         <item>Hospitality경영학부 Hospitality경영학부</item>
         <item>관광학부 문화관광콘텐츠학과</item>
         <item>관광학부 관광학과</item>
@@ -145,12 +145,12 @@
     </string-array>
 
     <string-array name="self">
-        <item>자율전공학과</item>
+        <item>자율전공학과</item><!--36-->
         <item>자율전공학과 글로벌리더</item>
     </string-array>
 
     <string-array name="write">
-        <item>국어국문학과 국어국문학</item>
+        <item>국어국문학과 국어국문학</item><!--38-->
         <item>사학과 사학</item>
         <item>철학과 철학</item>
         <item>영어영문학과 영어영문학</item>
@@ -158,13 +158,13 @@
     </string-array>
 
     <string-array name="ceo">
-        <item>경영대학</item>
+        <item>경영대학</item><!--43-->
         <item>회계·세무학과 회계·세무학</item>
         <item>경영학과 경영학</item>
     </string-array>
 
     <string-array name="science">
-        <item>지리학과 지리학</item>
+        <item>지리학과 지리학</item><!--46-->
         <item>정보디스플레이학과 정보디스플레이학</item>
         <item>수학과 수학</item>
         <item>물리학과 물리학</item>
@@ -173,26 +173,26 @@
     </string-array>
 
     <string-array name="nurse">
-        <item>간호학과 간호학</item>
+        <item>간호학과 간호학</item><!--52-->
         <item>간호학과(야) 간호학전공</item>
     </string-array>
 
     <string-array name="art">
-        <item>미술학부 미술학부</item>
+        <item>미술학부 미술학부</item><!--54-->
         <item>미술학부 한국화</item>
         <item>미술학부 회화</item>
         <item>미술학부 조소</item>
     </string-array>
 
     <string-array name="dance">
-        <item>무용학부 무용학부</item>
+        <item>무용학부 무용학부</item><!--58-->
         <item>무용학부 한국무용</item>
         <item>무용학부 현대무용</item>
         <item>무용학부 발레</item>
     </string-array>
 
     <string-array name="huma">
-        <item>중핵교과 문명전개의지구적문맥1</item>
+        <item>중핵교과 문명전개의지구적문맥1</item><!--62-->
         <item>중핵교과 문명전개의지구적문맥2</item>
         <item>배분이수교과 생명,몸,공생체계</item>
         <item>배분이수교과 자연,우주,물질,기술</item>
@@ -215,13 +215,13 @@
     </string-array>
 
     <string-array name="etc">
-        <item>ROTC과정 군사학</item>
+        <item>ROTC과정 군사학</item><!--82-->
         <item>취업스쿨 취업관련강좌</item>
         <item>사회봉사 사회봉사관련강좌</item>
     </string-array>
 
     <string-array name="cyber">
-        <item>경희사이버대학(학점교류)</item>
+        <item>경희사이버대학(학점교류)</item><!--85-->
     </string-array>
 </resources>
 
