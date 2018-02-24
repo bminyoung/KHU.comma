@@ -1,5 +1,6 @@
 package comma.khutimetablehelper;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,6 +145,17 @@ class ListViewAdapter extends BaseAdapter {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         itemList.remove(position);//삭제해도 되나?
+                        File s = context.getFilesDir().getAbsoluteFile();
+                        File file = new File(  s + AppContext.timeTableNameList.get(position) + ".csv"); // 경로 + 시간표이름
+                        if (file.exists()) {
+                            if (file.delete()) {
+                                Log.d("tag","시간표 삭제 성공");
+                            } else {
+                                Log.d("tag","시간표 삭제 실패");
+                            }
+                        } else {
+                            Log.d("tag","시간표가 존재하지 않습니다.");
+                        }
                         AppContext.timeTableList.remove(position); //db에서 삭제
                         AppContext.timeTableNameList.remove(position); //이름도 같이 삭제
                         notifyDataSetChanged();

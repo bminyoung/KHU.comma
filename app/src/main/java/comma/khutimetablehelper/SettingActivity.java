@@ -3,6 +3,7 @@ package comma.khutimetablehelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -60,10 +61,21 @@ public class SettingActivity extends AppCompatActivity {
     ArrayList<Integer> spinStatus = new ArrayList<Integer>();// 필수인지 해당x인지 (0,1);
     ArrayList<Integer> spinValue = new ArrayList<Integer>(); // 스피너 선택값
 
+    //처음화면 뜰때 다이얼로그 boolean 값 선언
+    public static boolean first = true ;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        if(first) {
+            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
+            dialog.setTitle("시간표 요약");
+            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다. \n ");
+            dialog.setNeutralButton("확인", yesButtonClickListener);
+            dialog.show();
+        }
 
         int i = 0;
         int index = 0;
@@ -260,6 +272,23 @@ public class SettingActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+    }
+
+    // DialogInterface.OnClickListener 인터페이스를 구현
+    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            ChangeFirst() ;
+        }
+    };
+
+
+
+    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
+    protected boolean ChangeFirst() {
+        first = false ;
+        return  first;
     }
 
     private void saveSpinner(){

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -204,42 +206,44 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     private void SaveTimeTable(int position, String timeTableName) {
-        AppContext.timeTableList.add(AppContext.tempTimeTableList.get(position));
+        ArrayList<Subject> selected = AppContext.tempTimeTableList.get(position);
+        AppContext.timeTableList.add(selected);
         AppContext.timeTableNameList.add(timeTableName);
+        Log.d("tag", "minyoung/"+AppContext.timeTableNameList.get(AppContext.timeTableNameList.size()-1));
 
         int[] classes = new int[42];
-        classes[0] = 5;
-        classes[1] = 150;
-        classes[2] = 255;
-        String fileName = "테스트용 시간표12.csv";
+        ArrayList<Integer> nums = new ArrayList<Integer>();
+        for(int i = 0; i < selected.size();i++) {
+            nums.add(selected.get(i).cRow);
+        }
+
+        for(int j =0; j < nums.size(); j++) {
+            int temp = Integer.parseInt(""+nums.get(j));
+            classes[j] = temp;
+        };
+
+//        String fileName = getDir("saving", MODE_WORLD_READABLE) +timeTableName+".csv";
+        String fileName = getFilesDir().getAbsolutePath() +timeTableName+".csv";
+
         UserInputData timeTable = new UserInputData(classes, fileName);
         int i = 0;
 
-
         try {
-            //BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
-            FileWriter fw = new FileWriter(fileName);
+            BufferedWriter fw = new BufferedWriter(new FileWriter(fileName));
 
-            Log.d("tag", "minyoung good2");
             while (timeTable.getcClasses()[i] != 0) {
-                Log.d("tag", "minyoung good2-while start");
-                fw.write("" + timeTable.getcClasses()[i]);
-                Log.d("tag", "minyoung good2-while start2");
-                if (timeTable.getcClasses()[i + 1] != 0) {
-                    Log.d("tag", "minyoung good2-if start1");
-                    fw.write(",");
-                    Log.d("tag", "minyoung good2-if end");
-                }
+                fw.write(""+timeTable.getcClasses()[i]);
+                if(timeTable.getcClasses()[i+1] != 0) {
+                    fw.write(",");}
                 i++;
             }
-            Log.d("tag", "minyoung good2-while end");
             fw.flush();
             fw.close();
 
         } catch (Exception e) {
-            Log.d("tag", "minyoung good3");
             e.printStackTrace();
         }
+
     }
 
     //시간표 각 칸 변수지정
