@@ -27,6 +27,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_centerVertical="true"
                     android:text="과목명 검색"
+                    android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
                 <Button

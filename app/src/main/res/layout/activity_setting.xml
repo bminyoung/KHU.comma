@@ -21,6 +21,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="40dp"
                 android:text="시간표 세부설정"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
 
             <Button
