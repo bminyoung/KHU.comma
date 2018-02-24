@@ -139,7 +139,7 @@ public class LoadResultActivity extends AppCompatActivity {
 
     public void Summary(View view) {
         String msg = "";
-        
+
         for(int i = 0; i < subList.size();i++){
             Subject sub = subList.get(i);
             msg += sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";

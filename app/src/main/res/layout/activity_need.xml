@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#FFFFFF">
 
         <!--상단바-->
         <LinearLayout
@@ -22,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="#057DE1">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
                     android:text="필수과목 선택"
                     android:textSize="18sp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/need_btn_nextbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,6 +44,7 @@
                     android:text="Next"
                     android:textSize="18sp"
                     android:textColor="@android:color/white"/>
+
             </RelativeLayout>
 
             <View
@@ -93,13 +96,13 @@
                     android:layout_weight="1"
                     android:clickable="false"
                     android:visibility="invisible"/>
-                <Button
+                <ImageButton
                     android:id="@+id/need_btn_searchbutton"
-                    android:layout_width="60dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:text="검색" />
+                    android:background="@mipmap/seek2"/>
             </LinearLayout>
 
             <View

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
-
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
