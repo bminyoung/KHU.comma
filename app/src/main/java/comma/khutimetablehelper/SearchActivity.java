@@ -1,6 +1,7 @@
 package comma.khutimetablehelper;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,48 +94,57 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parentView, View childView, final int position, long id) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SearchActivity.this);
-                int i = 0;
-                Subject sub = new Subject();
-                while (i < AppContext.onlySubjectList.size()) {
-                    if (list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow) {
-                        sub = list.get(position);
+                if (NeedExpandableListAdapter.need_inum < 25) {
+                    int i = 0;
+                    Subject sub = new Subject();
+                    while (i < AppContext.onlySubjectList.size()) {
+                        if (list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow) {
+                            sub = list.get(position);
+                        }
                     }
-                }
-                final Subject finalSub = sub;
-                dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
-                        .setPositiveButton("선택", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent data = new Intent();
-                                data.putExtra("subject", finalSub);
-                                setResult(SUCCESS, data);
-                                finish();
-                            }
-                        }).setNegativeButton("취소", null).show();
+                    NeedExpandableListAdapter.need_inum =NeedExpandableListAdapter.need_inum +  sub.cCredit;
 
+                    final Subject finalSub = sub;
+                    dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
+                            .setPositiveButton("선택", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent data = new Intent();
+                                    data.putExtra("subject", finalSub);
+                                    setResult(SUCCESS, data);
+                                    finish();
+                                }
+                            }).setNegativeButton("취소", null).show();
+
+                } else {
+                    Toast.makeText(getApplicationContext(),"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
+                }
             }
+
         });
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
-        editSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+        editSearch.addTextChangedListener(new
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                                  TextWatcher() {
+                                                      @Override
+                                                      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                                      }
 
-            }
+                                                      @Override
+                                                      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
-                String text = editSearch.getText().toString();
-                search(text);
+                                                      }
 
-            }
-        });
+                                                      @Override
+                                                      public void afterTextChanged(Editable editable) {
+                                                          // input창에 문자를 입력할때마다 호출된다.
+                                                          // search 메소드를 호출한다.
+                                                          String text = editSearch.getText().toString();
+                                                          search(text);
+
+                                                      }
+                                                  });
 
 
     }
