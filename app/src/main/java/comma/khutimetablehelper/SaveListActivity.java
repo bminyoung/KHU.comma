@@ -122,6 +122,7 @@ class ListViewAdapter extends BaseAdapter {
                                 if (timeTableTitle.getText().length() == 0) {
                                     Toast.makeText(context, "변경할 시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
                                 } else {
+                                    changeName(AppContext.timeTableNameList.get(position), timeTableTitle.getText().toString());
                                     AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
                                     notifyDataSetChanged();
                                 }
@@ -170,6 +171,11 @@ class ListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void changeName(String before, String after) {
+        File file1 = new File(context.getFilesDir().getAbsolutePath() + before + ".csv");
+        File file2 = new File(context.getFilesDir().getAbsolutePath() + after + ".csv");
+        file1.renameTo(file2);
+    }
 
     public void addItem(ArrayList<Subject> timeTable) {
         itemList.add(timeTable);

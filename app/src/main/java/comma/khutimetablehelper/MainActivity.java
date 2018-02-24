@@ -38,30 +38,22 @@ public class MainActivity extends AppCompatActivity {
         //과목정보들 불러오기
         setSubjectList();
         setSubjectOnlyList();
-//        loadFile();
+        loadFile();
 
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
-    public void loadFile() {
-        Log.d("tag", "minyoung/loadFile 1");
+    public void loadFile() { // 이거안됨
         String path = getFilesDir().getAbsolutePath(); // 경로
-        Log.d("tag", "minyoung/loadFile 2");
         File dirFile = new File(path);
-        Log.d("tag", "minyoung/loadFile 3");
-        File[] fileList = dirFile.listFiles();
-        Log.d("tag", "minyoung/loadFile 4");
-        if(fileList[0] == null){
-            Log.d("tag", "minyoung null이다");
-        }
-        for (File tempFile : fileList) {
-            Log.d("tag", "minyoung/loadFile if전");
-            if (tempFile.isFile()) {
-                String tempFileName = tempFile.getName();
-                Log.d("tag", "minyoung/"+tempFileName);
-                AppContext.timeTableNameList.add(tempFileName.substring(0, tempFileName.length()-4));
-            }
+
+        String[] fileList = dirFile.list();
+        ArrayList<String> tableList = new ArrayList<>();
+        for(int i = 0; i< fileList.length; i++) {
+            tableList.add(fileList[i]);
+            Log.d("tag", "minyoung/"+fileList[i]);
+
         }
     }
 

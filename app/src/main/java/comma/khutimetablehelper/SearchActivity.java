@@ -102,7 +102,7 @@ public class SearchActivity extends AppCompatActivity {
                             sub = list.get(position);
                         }
                     }
-                    NeedExpandableListAdapter.need_inum =NeedExpandableListAdapter.need_inum +  sub.cCredit;
+                    NeedExpandableListAdapter.need_inum = NeedExpandableListAdapter.need_inum + sub.cCredit;
 
                     final Subject finalSub = sub;
                     dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
@@ -117,34 +117,32 @@ public class SearchActivity extends AppCompatActivity {
                             }).setNegativeButton("취소", null).show();
 
                 } else {
-                    Toast.makeText(getApplicationContext(),"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "더이상 입력할 수 없습니다.", Toast.LENGTH_LONG).show();
                 }
             }
 
         });
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
-        editSearch.addTextChangedListener(new
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                                                  TextWatcher() {
-                                                      @Override
-                                                      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                                                      }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                                                      @Override
-                                                      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
-                                                      }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // input창에 문자를 입력할때마다 호출된다.
+                // search 메소드를 호출한다.
+                String text = editSearch.getText().toString();
+                search(text);
 
-                                                      @Override
-                                                      public void afterTextChanged(Editable editable) {
-                                                          // input창에 문자를 입력할때마다 호출된다.
-                                                          // search 메소드를 호출한다.
-                                                          String text = editSearch.getText().toString();
-                                                          search(text);
-
-                                                      }
-                                                  });
+            }
+        });
 
 
     }
@@ -174,7 +172,7 @@ public class SearchActivity extends AppCompatActivity {
                 // 리스트의 모든 데이터를 검색한다.
                 for (int i = 0; i < arraylist.size(); i++) {
                     // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                    if (arraylist.get(i).cNum.contains(charText.toString())) {
+                    if (arraylist.get(i).cNum.contains(charText.toString().toUpperCase())) {
                         // 검색된 데이터를 리스트에 추가한다.
                         list.add(arraylist.get(i));
                     }

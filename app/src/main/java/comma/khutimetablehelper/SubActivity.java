@@ -106,23 +106,6 @@ public class SubActivity extends AppCompatActivity {
         //preparelistdata() 함수 내용을 밖으로 뺏음.. major1,2를 불러오기 위해
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<Subject>>();
-        // 그룹 데이터 입력
-        listDataHeader.add("2학년 전공");
-        listDataHeader.add("1학년 전공");
-        // 그룹 1의 차일드 데이터 입력
-        final List<Subject> major2 = new ArrayList<Subject>();
-        while (!(AppContext.onlySubjectList.get(i).getName().equals("물리학및실험1"))) {
-            major2.add(AppContext.onlySubjectList.get(i++));
-        }
-        //그룹 2의 차일드 데이터 입력
-        final List<Subject> major1 = new ArrayList<Subject>();
-        while (i < AppContext.onlySubjectList.size()) {
-            major1.add(AppContext.onlySubjectList.get(i++));
-        }
-        //그룹에 데이터 할당
-        ; // Header, Child data
-        listDataChild.put(listDataHeader.get(0), major2);
-        listDataChild.put(listDataHeader.get(1), major1);
 
         // 확장리스트 뷰 어댑터 준비
         mlistDataChild = listDataChild;
@@ -141,23 +124,10 @@ public class SubActivity extends AppCompatActivity {
         collegeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
-//                String charText = collegeSpinner.getSelectedItem().toString();
-//                search(charText);
-                TextView textView;
-                String charText;
                 listDataChild.clear();
                 listDataHeader.clear();
-
-                if (position == 0) {
-                    listDataHeader.add("2학년 전공");
-                    listDataChild.put(listDataHeader.get(0), major2);
-
-                } else {
-                    listDataHeader.add("1학년 전공");
-                    listDataChild = mlistDataChild;
-                    listDataChild.put(listDataHeader.get(0), major1);
-
-                }
+                lastExpandedPosition = -1;
+                prepareListData(position);
                 explistAdapter.notifyDataSetChanged();
             }
 
@@ -183,6 +153,102 @@ public class SubActivity extends AppCompatActivity {
                     lastExpandedPosition = groupPosition;
             }
         });
+    }
+
+    //prepareListData 안에서 쓰는 함수
+    public void setList(String[] college, int major) {
+        ArrayList<Subject> sub = new ArrayList<Subject>();
+        for (int i = 0; i < college.length; i++) { // i는 학과
+            listDataHeader.add(college[i]);
+            Log.d("tag", "minyoung/" + college[i]);
+            for (int j = 0; j < AppContext.onlySubjectList.size(); j++) {
+                if (AppContext.onlySubjectList.get(j).cDepart == i + major)
+                    sub.add(AppContext.onlySubjectList.get(j));
+            }
+            listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
+            sub.clear();
+        }
+    }
+
+    // 스피너값에 따른 리스트 출력
+    public void prepareListData(int position) {
+
+        String[] college;
+
+        switch (position) {
+            case 0: //정경대
+                college = getResources().getStringArray(R.array.polEco);
+                setList(college, 0);
+                break;
+            case 1: //생과대
+                college = getResources().getStringArray(R.array.livingScience);
+                setList(college, 7);
+                break;
+            case 2: //의대
+                college = getResources().getStringArray(R.array.medical);
+                setList(college, 12);
+                break;
+            case 3: //한의대
+                college = getResources().getStringArray(R.array.korMedical);
+                setList(college, 14);
+                break;
+            case 4: //치의대
+                college = getResources().getStringArray(R.array.tooth);
+                setList(college, 16);
+                break;
+            case 5: //약대
+                college = getResources().getStringArray(R.array.medicine);
+                setList(college, 18);
+                break;
+            case 6: //음대
+                college = getResources().getStringArray(R.array.music);
+                setList(college, 22);
+                break;
+            case 7: // 호관대
+                college = getResources().getStringArray(R.array.hotel);
+                setList(college, 26);
+                break;
+            case 8: //자전
+                college = getResources().getStringArray(R.array.self);
+                setList(college, 36);
+                break;
+            case 9: // 문대
+                college = getResources().getStringArray(R.array.write);
+                setList(college, 38);
+                break;
+            case 10: //경영대
+                college = getResources().getStringArray(R.array.ceo);
+                setList(college, 43);
+                break;
+            case 11: // 이과대
+                college = getResources().getStringArray(R.array.science);
+                setList(college, 46);
+                break;
+            case 12: //간호대
+                college = getResources().getStringArray(R.array.nurse);
+                setList(college, 52);
+                break;
+            case 13: //미대
+                college = getResources().getStringArray(R.array.art);
+                setList(college, 54);
+                break;
+            case 14: // 무용대
+                college = getResources().getStringArray(R.array.dance);
+                setList(college, 58);
+                break;
+            case 15: // 후마니타스
+                college = getResources().getStringArray(R.array.huma);
+                setList(college, 62);
+                break;
+            case 16: //기타
+                college = getResources().getStringArray(R.array.etc);
+                setList(college, 82);
+                break;
+            case 17: //경희사이버대
+                college = getResources().getStringArray(R.array.cyber);
+                setList(college, 85);
+                break;
+        }
     }
 
     // DialogInterface.OnClickListener 인터페이스를 구현
@@ -232,32 +298,6 @@ public class SubActivity extends AppCompatActivity {
 
     private void Alert(){
         new AlertDialog.Builder(this).setTitle("오류").setMessage("선택된 과목이 없습니다").setNegativeButton("닫기",null).show();
-    }
-
-//데이터 입력
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<Subject>>();
-
-        // 그룹 데이터 입력
-        listDataHeader.add("2학년 전공");
-        listDataHeader.add("1학년 전공");
-
-        // 그룹 1의 차일드 데이터 입력
-        List<Subject> major2 = new ArrayList<Subject>();
-        while(!(AppContext.onlySubjectList.get(i).getName().equals("물리학및실험1"))){
-            major2.add(AppContext.onlySubjectList.get(i++));
-        }
-
-        //그룹 2의 차일드 데이터 입력
-        List<Subject> major1 = new ArrayList<Subject>();
-        while(i < AppContext.onlySubjectList.size()){
-            major1.add(AppContext.onlySubjectList.get(i++));
-        }
-
-        //그룹에 데이터 할당
-        listDataChild.put(listDataHeader.get(0), major2); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), major1);
     }
 
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false

@@ -114,7 +114,6 @@ public class NeedActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
                 listDataChild.clear();
                 listDataHeader.clear();
-                lastExpandedPosition = -1;
                 prepareListData(position);
                 explistAdapter.notifyDataSetChanged();
             }
@@ -294,7 +293,7 @@ public class NeedActivity extends Activity {
             if (selectedNeedList.get(i).cStart >= sub.cEnd) {
                 return ret;
             } else {
-                if (selectedNeedList.get(i).cEnd >= sub.cStart) {
+                if (selectedNeedList.get(i).cEnd > sub.cStart) {
                     ret = false;
                     break;
                 }
