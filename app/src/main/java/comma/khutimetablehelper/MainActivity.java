@@ -47,11 +47,24 @@ public class MainActivity extends AppCompatActivity {
     public void loadFile() { // 이거안됨
         String path = getFilesDir().getAbsolutePath(); // 경로
         File dirFile = new File(path);
+<<<<<<< HEAD
+        Log.d("tag", "minyoung/loadFile 3");
+        File[] fileList = dirFile.listFiles();
+        Log.d("tag", "minyoung/loadFile 4");
+        for (File tempFile : fileList) {
+            Log.d("tag", "minyoung/loadFile if전");
+            if (tempFile.isFile()) {
+                String tempFileName = tempFile.getName();
+                Log.d("tag", "minyoung/"+tempFileName);
+                AppContext.timeTableNameList.add(tempFileName.substring(0, tempFileName.length()-4));
+            }
+=======
         String[] fileList = dirFile.list();
         ArrayList<String> tableList = new ArrayList<>();
         for(int i = 0; i< fileList.length; i++) {
             tableList.add(fileList[i]);
             Log.d("tag", "minyoung/"+fileList[i]);
+>>>>>>> a64d3e448e357e61d0ad288bc38a83d87f2e3e59
         }
     }
 
