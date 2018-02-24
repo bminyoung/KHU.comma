@@ -2,9 +2,13 @@ package comma.khutimetablehelper;
 
 
 import android.content.Intent;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
+import java.io.File;
 
 
 public class IntroActivity extends AppCompatActivity {
@@ -14,8 +18,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        //과목정보 초기화
-        setSubject();
+        loadFile();
 
         // 2초동안 띄우고 다음화면
         Handler handler = new Handler();
@@ -29,8 +32,16 @@ public class IntroActivity extends AppCompatActivity {
         },2000);
     }
 
-    private void setSubject(){
-
+    public void loadFile() {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+        path += "/SaveList";
+        File dirFile = new File(path);
+        dirFile.mkdirs();
+        String[] fileList = dirFile.list();
+        for(int i = 0; i< fileList.length; i++) {
+            AppContext.timeTableNameList.add(fileList[i].substring(0,fileList[i].length()-4));
+            Log.d("tag", "minyoung/"+fileList[i]);
+        }
     }
 
 }

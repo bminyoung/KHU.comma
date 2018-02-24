@@ -1,6 +1,7 @@
 package comma.khutimetablehelper;
 
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class LoadResultActivity extends AppCompatActivity {
 
         int arSize = 0;
         try {
-            File csv = new File(getFilesDir().getAbsolutePath() + fileName + ".csv");
+            File csv = new File( Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SaveList/" + fileName + ".csv");
             br = new BufferedReader(new InputStreamReader(new FileInputStream(csv), "euc-kr"));
             // Charset.forName("UTF-8");
 
@@ -136,13 +137,11 @@ public class LoadResultActivity extends AppCompatActivity {
         timeTable[start][selected.cDay].setText(selected.cName);
     }
 
-    public void Summery(View view) {
+    public void Summary(View view) {
         String msg = "";
-        ArrayList<Subject> timeTable = AppContext.timeTableList.get(position);
-
-
-        for(int i = 0; i < timeTable.size();i++){
-            Subject sub = timeTable.get(i);
+        
+        for(int i = 0; i < subList.size();i++){
+            Subject sub = subList.get(i);
             msg += sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
         }
 

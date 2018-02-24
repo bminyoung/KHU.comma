@@ -32,7 +32,7 @@ public class SaveListActivity extends Activity {
 
     ListView listview;
     ListViewAdapter lvAdapter;
-    ArrayList<ArrayList<Subject>> timeTableList = new ArrayList<ArrayList<Subject>>();
+    ArrayList<String> timeTableList = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,10 @@ public class SaveListActivity extends Activity {
 
         setData();
 
+        for(int i = 0;i < AppContext.timeTableNameList.size();i++){
+            Log.d("tag", "minyoung/"+timeTableList.get(i));
+        }
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,20 +60,19 @@ public class SaveListActivity extends Activity {
     }
 
     private void setData() {
-
-        for (int i = 0; i < AppContext.timeTableList.size(); i++) {
-            timeTableList.add(AppContext.timeTableList.get(i));
+        for (int i = 0; i < AppContext.timeTableNameList.size(); i++) {
+            timeTableList.add(AppContext.timeTableNameList.get(i));
         }
-
+        Log.d("tag", "minyoung/"+timeTableList.size());
     }
 }
 
 class ListViewAdapter extends BaseAdapter {
 
-    private ArrayList<ArrayList<Subject>> itemList = new ArrayList<ArrayList<Subject>>();
+    private ArrayList<String> itemList = new ArrayList<String>();
     private Context context;
 
-    public ListViewAdapter(ArrayList<ArrayList<Subject>> list, Context context) {
+    public ListViewAdapter(ArrayList<String> list, Context context) {
         itemList = list;
         this.context = context;
     }
@@ -109,7 +112,7 @@ class ListViewAdapter extends BaseAdapter {
         Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
         Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
 
-        tableName.setText(AppContext.timeTableNameList.get(position)); // 저장된 시간표 이름
+        tableName.setText((String)getItem(position)); // 저장된 시간표 이름
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +149,7 @@ class ListViewAdapter extends BaseAdapter {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         itemList.remove(position);//삭제해도 되나?
-                        File s = context.getFilesDir().getAbsoluteFile();
+                        String s = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SaveList/";
                         File file = new File(  s + AppContext.timeTableNameList.get(position) + ".csv"); // 경로 + 시간표이름
                         if (file.exists()) {
                             if (file.delete()) {
@@ -157,7 +160,6 @@ class ListViewAdapter extends BaseAdapter {
                         } else {
                             Log.d("tag","시간표가 존재하지 않습니다.");
                         }
-                        AppContext.timeTableList.remove(position); //db에서 삭제
                         AppContext.timeTableNameList.remove(position); //이름도 같이 삭제
                         notifyDataSetChanged();
                     }
@@ -172,12 +174,12 @@ class ListViewAdapter extends BaseAdapter {
     }
 
     public void changeName(String before, String after) {
-        File file1 = new File(context.getFilesDir().getAbsolutePath() + before + ".csv");
-        File file2 = new File(context.getFilesDir().getAbsolutePath() + after + ".csv");
+        File file1 = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SaveList/" + before + ".csv");
+        File file2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ "/SaveList/" + after + ".csv");
         file1.renameTo(file2);
     }
 
-    public void addItem(ArrayList<Subject> timeTable) {
-        itemList.add(timeTable);
-    }
+//    public void addItem(ArrayList<Subject> timeTable) {
+//        itemList.add(timeTable);
+//    }
 }
