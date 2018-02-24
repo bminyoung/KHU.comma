@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="시간표 결과"
+                    android:text="입맛대로 골라봐"
                     android:textSize="18sp" />
 
                 <ImageButton
@@ -47,10 +47,6 @@
                     android:background="@mipmap/save"/>
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#000000" />
         </LinearLayout>
 
         <LinearLayout

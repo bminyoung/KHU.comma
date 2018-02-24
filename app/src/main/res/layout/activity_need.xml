@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_centerVertical="true"
-                    android:text="필수과목 선택"
+                    android:text="어머!이건 꼭 들어야 해!"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
