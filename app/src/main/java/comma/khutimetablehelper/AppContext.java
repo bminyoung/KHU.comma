@@ -46,7 +46,9 @@ class Subject implements Serializable {
 
     // 메소드
     public Subject() {
-    }; // 기본 생성자
+    }
+
+    ; // 기본 생성자
 
     public Subject(int Row, String Num, String Name, String Prof, int Grade, int Credit, int Sort, int Day,
                    double Start, double End, int College, int Depart) {
@@ -62,19 +64,23 @@ class Subject implements Serializable {
         cEnd = End;
         cCollege = College;
         cDepart = Depart;
-    }; // 생성자
+    }
 
-    public String getName(){
+    ; // 생성자
+
+    public String getName() {
         return cName;
     }
 
     //시간표시
-    public String getTime(){
+    public String getTime() {
         String ret = "";
-        ret += ((int)cStart) + ":";
-        ret += ((cStart*10.0) % 10 > 0) ? "30" : "00";
-        ret += "~" + ((int)cEnd) + ":";
-        ret += ((cEnd*10.0) % 10 > 0) ? "30" : "00";
+        ret += ((int) cStart) + ":";
+        ret += ((cStart * 10.0) % 10 > 0) ? "30" : "00";
+        ret += "~" + ((int) cEnd) + ":";
+        ret += ((cEnd * 10.0) % 10 > 0) ? "30" : "00";
+        if(cEnd == 0.0)
+            ret = "";
 
         return ret;
     }
@@ -97,6 +103,9 @@ class Subject implements Serializable {
                 break;
             case 4:
                 ret = "금";
+                break;
+            default:
+                ret = "-";
                 break;
         }
         return ret;

@@ -1,6 +1,7 @@
 package comma.khutimetablehelper;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,26 +94,33 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parentView, View childView, final int position, long id) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(SearchActivity.this);
-                int i = 0;
-                Subject sub = new Subject();
-                while (i < AppContext.onlySubjectList.size()) {
-                    if (list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow) {
-                        sub = list.get(position);
+                if (NeedExpandableListAdapter.need_inum < 25) {
+                    int i = 0;
+                    Subject sub = new Subject();
+                    while (i < AppContext.onlySubjectList.size()) {
+                        if (list.get(position).cRow == AppContext.onlySubjectList.get(i++).cRow) {
+                            sub = list.get(position);
+                        }
                     }
-                }
-                final Subject finalSub = sub;
-                dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
-                        .setPositiveButton("선택", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent data = new Intent();
-                                data.putExtra("subject", finalSub);
-                                setResult(SUCCESS, data);
-                                finish();
-                            }
-                        }).setNegativeButton("취소", null).show();
+                    NeedExpandableListAdapter.need_inum = NeedExpandableListAdapter.need_inum + sub.cCredit;
 
+                    final Subject finalSub = sub;
+                    dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
+                            .setPositiveButton("선택", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent data = new Intent();
+                                    data.putExtra("subject", finalSub);
+                                    setResult(SUCCESS, data);
+                                    finish();
+                                }
+                            }).setNegativeButton("취소", null).show();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "더이상 입력할 수 없습니다.", Toast.LENGTH_LONG).show();
+                }
             }
+
         });
 
         // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
@@ -163,7 +172,7 @@ public class SearchActivity extends AppCompatActivity {
                 // 리스트의 모든 데이터를 검색한다.
                 for (int i = 0; i < arraylist.size(); i++) {
                     // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                    if (arraylist.get(i).cNum.contains(charText.toString())) {
+                    if (arraylist.get(i).cNum.contains(charText.toString().toUpperCase())) {
                         // 검색된 데이터를 리스트에 추가한다.
                         list.add(arraylist.get(i));
                     }

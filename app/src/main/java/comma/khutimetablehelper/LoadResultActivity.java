@@ -29,7 +29,7 @@ public class LoadResultActivity extends AppCompatActivity {
     ArrayList<Subject> subList = new ArrayList<Subject>();
 
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
-    int position;
+    int position ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +123,8 @@ public class LoadResultActivity extends AppCompatActivity {
     }
 
     public void ShowSubject(Subject selected){
+        if(selected.cDay == -1)
+            return;
         TextView tv;
         int start = (int) ((selected.cStart - 9.0)*2.0);
         int end = (int)((selected.cEnd - 9.0)*2.0 - 1.0);
