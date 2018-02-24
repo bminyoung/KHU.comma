@@ -30,7 +30,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:background="@drawable/btn_round"
                 android:text="요약"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
                 android:onClick="Summary"/>
         </RelativeLayout>
 

@@ -15,10 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -46,10 +44,6 @@ public class SaveListActivity extends Activity {
 
         setData();
 
-        for(int i = 0;i < AppContext.timeTableNameList.size();i++){
-            Log.d("tag", "minyoung/"+timeTableList.get(i));
-        }
-
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,7 +58,6 @@ public class SaveListActivity extends Activity {
         for (int i = 0; i < AppContext.timeTableNameList.size(); i++) {
             timeTableList.add(AppContext.timeTableNameList.get(i));
         }
-        Log.d("tag", "minyoung/"+timeTableList.size());
     }
 }
 

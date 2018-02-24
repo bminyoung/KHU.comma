@@ -299,7 +299,6 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                         else if(AppContext.timeTableNameList.contains(TimeTableTitle.getText()+"")){
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "은(는) 이미 있습니다.", Toast.LENGTH_LONG).show();
-                            Log.d("tag", "minyoung/"+TimeTableTitle.getText());
                         }
                         else {
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "이(가) 저장되었습니다", Toast.LENGTH_LONG).show();
