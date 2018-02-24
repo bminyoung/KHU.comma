@@ -1,10 +1,9 @@
 package comma.khutimetablehelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -64,7 +60,7 @@ public class SubActivity extends AppCompatActivity {
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
         intentToSetting = new Intent(SubActivity.this, SettingActivity.class);
 
-
+        //다음버튼
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +75,7 @@ public class SubActivity extends AppCompatActivity {
             }
         });
 
-
+        //검색버튼
         Button searchBtn = (Button) findViewById(R.id.sub_btn_searchButton);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,11 +170,13 @@ public class SubActivity extends AppCompatActivity {
         });
     }
 
+    //액티비티가 종료될때 static변수 비워주기
     protected void onDestroy() {
         selectedSubList.clear();
         super.onDestroy();
     }
 
+    //검색창에서 선택한 과목 추가
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if((requestCode == SUB) && (resultCode == SearchActivity.SUCCESS)) {
@@ -233,13 +231,12 @@ public class SubActivity extends AppCompatActivity {
     public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
         int i, j;
-//        for(i = 0; i < selectedSubList.size();i++){
-//            if(selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
-//                ret = false;
-//                Log.d("tag", "minyoung/" + selectedSubList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8)));
-//                break;
-//            }
-//        }
+        for(i = 0; i < selectedSubList.size();i++){
+            if(selectedSubList.get(i).cNum.equals(sub.cNum)){
+                ret = false;
+                break;
+            }
+        }
         for(j = 0 ; j < needSubject.size(); j++){
             if(needSubject.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
                 ret = false;

@@ -17,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,160 +35,65 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        TextView temp = (TextView) findViewById(R.id.tempText);
-        String tmp = "";
+        //과목정보들 불러오기
         setSubjectList();
         setSubjectOnlyList();
+
+//        //저장된 시간표 불러오기
+//        while(false) {
+//            String fileName = "";
+//            int[] tableContent = loadTimeTableList(fileName); //객체 번호 저장 배열
+//            for (int i = 0; i < tableContent.length; i++) {
+//                Log.d("tag", ""+tableContent[i]);
+//            } // 테스트용 출력문
+//        }
 
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
-        @Override
-        public void onBackPressed () {
-            backPressCloseHandler.onBackPressed();
-        }
 
+    public int[] loadTimeTableList(String fileName){
+        BufferedReader br = null;
+        String cvsSplitBy = ",";
+        String line = "";
+        String[] field = new String[42];
 
-        /* 과목명 확인
-        for(int i = 0;i<AppContext.onlySubjectList.size();i++){
-            if(AppContext.onlySubjectList.get(i) != null)
-                tmp += AppContext.onlySubjectList.get(i).getName();
-            if(i % 3 == 0)
-                tmp += "\n";
-        }
-        temp.setText(tmp);
-
-        for(int i = 0;i<AppContext.subjectList.length;i++){
-            if(AppContext.subjectList[i] != null)
-                tmp += AppContext.subjectList[i].getName();
-            if(i % 3 == 0)
-                tmp += "\n";
-        }
-        temp.setText(tmp); */
-
-
-    void setContext(){
-        FileInputStream fis;
-        XSSFWorkbook workbook = null;
+        int arSize = 0;
         try {
-            //is = (InputStream) getBaseContext().getResources().getAssets().open("이과대학 개설과목.xls");
-            fis = new FileInputStream("C:\\Users\\MinYoung\\AndroidStudioProjects\\KHUTimeTableHelper\\app\\src\\main\\이과대학 개설과목.xlsx");
-            //workbook = Workbook.getWorkbook(is);
-            workbook = new XSSFWorkbook(fis);
+            File csv = new File(getApplicationContext().getFilesDir().getAbsolutePath() + fileName + ".csv");
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(csv), "euc-kr"));
+            // Charset.forName("UTF-8");
+
+            while ((line = br.readLine()) != null) {
+                field = line.split(cvsSplitBy, -1);
+                arSize = field.length;
+                break;
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-
-        int rowindex = 0;
-        int columnindex = 0;
-        String Num = "";
-        String Name = "";
-        String Prof = "";
-        int Grade = 0;
-        int Credit = 0;
-        int Sort = 0;
-        int Day = 0;
-        double Start = 0.0;
-        double End = 0.0;
-        double temp = 0.0;
-        Log.d("minyoung", "worksheet"+(workbook == null));
-        XSSFSheet sheet = workbook.getSheetAt(0);
-        int rows = sheet.getPhysicalNumberOfRows();
-
-        System.out.println("rows : " + rows);
-        System.out.println();
-        // for test 키위야 일해라
-        boolean isDataCorrect = true;
-        for (rowindex = 1; rowindex < rows; rowindex++) {
-            XSSFRow row = sheet.getRow(rowindex);
-            if (!isDataCorrect)
-                break;
-
-//         System.out.println("rowIndex : " + rowindex);
-
-            if (row != null) {
-                int cells = row.getPhysicalNumberOfCells();
-                for (columnindex = 1; columnindex < 10; columnindex++) {
-
-                    if(!isDataCorrect)
-                        break;
-
-                    XSSFCell cell = row.getCell(columnindex);
-                    String value = "";
-                    if (cell == null) {
-                        continue;
-                    } else {
-                        switch (cell.getCellType()) {
-                            case XSSFCell.CELL_TYPE_FORMULA:
-                                value = cell.getCellFormula();
-                                break;
-                            case XSSFCell.CELL_TYPE_NUMERIC:
-                                value = cell.getNumericCellValue() + "";
-                                break;
-                            case XSSFCell.CELL_TYPE_STRING:
-                                value = cell.getStringCellValue() + "";
-                                break;
-                            case XSSFCell.CELL_TYPE_BLANK:
-                                value = cell.getBooleanCellValue() + "";
-                                break;
-                            case XSSFCell.CELL_TYPE_ERROR:
-                                value = cell.getErrorCellValue() + "";
-                                break;
-                        }
-                    }
-                    ;
-
-                    switch (columnindex) {
-                        case 1:
-                            Num = value;
-                            if (value.equals("false")) {
-                                isDataCorrect = false;
-                            }
-                            break;
-                        case 2:
-                            Name = value;
-                            break;
-                        case 3:
-                            Prof = value;
-                            break;
-                        case 4:
-                            temp = Double.parseDouble(value);
-                            Grade = (int) temp;
-                            break;
-                        case 5:
-                            temp = Double.parseDouble(value);
-                            Credit = (int) temp;
-                            break;
-                        case 6:
-                            temp = Double.parseDouble(value);
-                            Sort = (int) temp;
-                            break;
-                        case 7:
-                            temp = Double.parseDouble(value);
-                            Day = (int) temp;
-                            break;
-                        case 8:
-                            Start = Double.parseDouble(value);
-                            break;
-                        case 9:
-                            End = Double.parseDouble(value);
-                            break;
-                    }
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
                 }
-
-                if(!isDataCorrect)
-                    continue;
-
-                //subjectList.add(new Subject(Num, Name, Prof, Grade, Credit, Sort, Day, Start, End));
-//            t[rowindex-1].print(); // 실행확인
-
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
         }
+        int[] file = new int[arSize];
+        for (int i = 0; i < arSize; i++) {
+            double temp = Double.parseDouble(field[i]);
+            file[i] = (int) temp;
+        }
+        return file;
+
+    };
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 
     public void setSubjectList() {
@@ -312,11 +218,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setSubjectOnlyList(){
+    public void setSubjectOnlyList() {
         AppContext.onlySubjectList.add(AppContext.subjectList[0]);
-        for(int i = 0;i < AppContext.subjectList.length - 1;i++){
-            if(!(AppContext.subjectList[i+1].cNum.equals(AppContext.subjectList[i].cNum))){
-                AppContext.onlySubjectList.add(AppContext.subjectList[i+1]);
+        for (int i = 0; i < AppContext.subjectList.length - 1; i++) {
+            if (!(AppContext.subjectList[i + 1].cNum.equals(AppContext.subjectList[i].cNum))) {
+                AppContext.onlySubjectList.add(AppContext.subjectList[i + 1]);
             }
         }
     }

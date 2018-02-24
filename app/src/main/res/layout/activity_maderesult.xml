@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:text="Main" />
 
-                <comma.khutimetablehelper.AutoResizeTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -129,42 +129,41 @@
 
                     <!--9시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
-                            style="@style/table_tv_leftTop"
+                        <TextView style="@style/table_tv_leftTop"
                             android:text="9" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_00"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_01"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_02"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_03"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_04"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_10"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_11"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_12"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_13"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_14"/>
                     </TableRow>
                     <!--9시끝-->
@@ -172,43 +171,43 @@
                     <!--10시-->
                     <TableRow>
 
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="10" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_20"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_21"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_22"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_23"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_24"/>
                     </TableRow>
 
                     <TableRow>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_30"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_31"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_32"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_33"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_34"/>
                     </TableRow>
                     <!--10시끝-->
@@ -216,84 +215,84 @@
                     <!--11시-->
                     <TableRow>
 
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="11" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_40"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_41"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_42"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_43"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_44"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_50"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_51"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_52"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_53"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_54"/>
                     </TableRow>
                     <!--11시끝-->
 
                     <!--12시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="12" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_60"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_61"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_62"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_63"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_64"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_70"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_71"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_72"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_73"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_74"/>
                     </TableRow>
                     <!--12시끝-->
@@ -301,84 +300,84 @@
                     <!--13시-->
                     <TableRow>
 
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="13" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_80"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_81"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_82"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_83"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_84"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_90"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_91"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_92"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_93"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_94"/>
                     </TableRow>
                     <!--13시끝-->
 
                     <!--14시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="14" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_100"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_101"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_102"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_103"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_104"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_110"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_111"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_112"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_113"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_114"/>
 
                     </TableRow>
@@ -386,337 +385,337 @@
 
                     <!--15시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="15" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_120"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_121"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_122"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_123"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_124"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_130"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_131"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_132"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_133"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_134"/>
                     </TableRow>
                     <!--15시끝-->
 
                     <!--16시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="16" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_140"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_141"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_142"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_143"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_144"/>
                     </TableRow>
 
                     <TableRow>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_150"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_151"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_152"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_153"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_154"/>
                     </TableRow>
                     <!--16시끝-->
 
                     <!--17시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="17" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_160"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_161"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_162"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_163"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_164"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_170"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_171"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_172"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_173"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_174"/>
                     </TableRow>
                     <!--17시끝-->
 
                     <!--18시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="18" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_180"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_181"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_182"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_183"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_184"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_190"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_191"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_192"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_193"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_194"/>
                     </TableRow>
                     <!--18시끝-->
 
                     <!--19시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="19" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_200"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_201"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_202"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_203"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_204"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_210"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_211"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_212"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_213"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_214"/>
                     </TableRow>
                     <!--19시끝-->
 
                     <!--20시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="20" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_220"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_221"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_222"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_223"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_224"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_230"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_231"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_232"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_233"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_234"/>
                     </TableRow>
                     <!--20시끝-->
 
                     <!--21시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="21" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_240"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_241"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_242"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_243"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_244"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_250"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_251"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_252"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_253"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_254"/>
                     </TableRow>
                     <!--21시끝-->
 
                     <!--22시-->
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView
+                        <TextView
                             style="@style/table_tv_leftTop"
                             android:text="22" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_260"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_261"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_262"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_263"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_top"
+                        <TextView style="@style/table_tv_top"
                             android:id="@+id/maderesult_tv_264"/>
                     </TableRow>
 
                     <TableRow>
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_leftBottom" />
+                        <TextView style="@style/table_tv_leftBottom" />
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_270"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_271"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_272"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_273"/>
 
-                        <comma.khutimetablehelper.AutoResizeTextView style="@style/table_tv_bottom"
+                        <TextView style="@style/table_tv_bottom"
                             android:id="@+id/maderesult_tv_274"/>
                     </TableRow>
                     <!--22시끝-->
@@ -729,7 +728,7 @@
                 android:layout_marginTop="-200dp"
                 android:orientation="vertical">
 
-                <comma.khutimetablehelper.AutoResizeTextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="@drawable/rectangle_border"
