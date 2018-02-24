@@ -22,11 +22,13 @@
                 android:orientation="horizontal"
                 android:background="#F064F0">
 
-                <Button
+                <ImageButton
                     android:id="@+id/maderesult_btn_main"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Main" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:text="Main"
+
+                    android:background="@mipmap/save"/>
 
                 <TextView
                     android:layout_width="wrap_content"

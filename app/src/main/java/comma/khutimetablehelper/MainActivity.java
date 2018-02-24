@@ -2,30 +2,19 @@ package comma.khutimetablehelper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.w3c.dom.Text;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        ImageButton info_imgbtn = (ImageButton)findViewById(R.id.main_imgbtn_info);
+        info_imgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("주의사항");
+                dialog.setMessage("헤헤");
+                dialog.setNeutralButton("닫기",null);
+                dialog.show();
+            }
+        });
     }
     @Override
     public void onBackPressed() {
