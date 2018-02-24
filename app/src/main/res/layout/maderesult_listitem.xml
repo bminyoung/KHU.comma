@@ -2,12 +2,25 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <TextView
         android:id="@+id/maderesult_lstv_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:layout_weight="1"
         android:paddingLeft="35dp"/>
 
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/look"
+        android:layout_gravity="right"
+        android:id="@+id/maderesult_btn_look"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

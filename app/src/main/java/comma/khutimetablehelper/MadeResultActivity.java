@@ -83,6 +83,9 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1518,8 +1521,9 @@ class CustomLvAdapter extends BaseAdapter {
             Context context = parent.getContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);
-        }
 
+        }
+        
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
 
         tv.setText("시간표 " + (position + 1));
