@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("tag", "minyoung/loadFile 3");
         File[] fileList = dirFile.listFiles();
         Log.d("tag", "minyoung/loadFile 4");
-        if(fileList[0] == null){
-            Log.d("tag", "minyoung null이다");
-        }
         for (File tempFile : fileList) {
             Log.d("tag", "minyoung/loadFile if전");
             if (tempFile.isFile()) {
