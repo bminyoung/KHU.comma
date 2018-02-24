@@ -99,7 +99,6 @@ public class NeedActivity extends Activity {
                 listDataChild.clear();
                 listDataHeader.clear();
                 prepareListData(position);
-
                 explistAdapter.notifyDataSetChanged();
             }
 
