@@ -72,7 +72,7 @@ public class SettingActivity extends AppCompatActivity {
         if(first) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("시간표 요약");
-            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다. \n ");
+            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.");
             dialog.setNeutralButton("확인", yesButtonClickListener);
             dialog.show();
         }
