@@ -62,7 +62,7 @@ public class MadeResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maderesult);
 
-        Button btnSave = (Button) findViewById(R.id.maderesult_btn_save);
+        ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
         ImageButton btnMain = (ImageButton) findViewById(R.id.maderesult_btn_main);
         setTextId();
         focusOn = -1;

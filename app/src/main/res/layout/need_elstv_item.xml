@@ -20,10 +20,10 @@ android:layout_height="match_parent">
 
     <ImageButton
         android:id="@+id/need_elstv_item_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="right"
-        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="-90dp"
         android:layout_marginRight="20dp"
         android:src="@mipmap/plusimage"

@@ -32,24 +32,23 @@
             android:background="#FFFFFF"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/minBtnMade"
                 android:layout_width="120dp"
                 android:layout_height="150dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:background="#3032C8F0"
+                android:background="@mipmap/designtimetable"
                 android:onClick="GoSetting"
-                android:text="시간표\n만들기"
-                android:textSize="30sp" />
+                 />
 
-            <Button
+            <ImageButton
                 android:id="@+id/mainBtnList"
                 android:layout_width="120dp"
                 android:layout_height="150dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:background="#3032C8F0"
+                android:background="@mipmap/loadsavelist"
                 android:onClick="GoList"
                 android:text="시간표\n목록"
 
