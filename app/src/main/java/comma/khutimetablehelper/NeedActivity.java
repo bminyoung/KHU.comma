@@ -306,7 +306,7 @@ public class NeedActivity extends Activity {
 
 //확장 리스트뷰 어댑터
 class NeedExpandableListAdapter extends BaseExpandableListAdapter {
-    int inum = 0;
+    static int need_inum = 0;
     private Context _context;
     private static List<String> _listDataHeader;
     private static HashMap<String, List<Subject>> _listDataChild;
@@ -348,7 +348,7 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
 
-                if (inum < 25) {
+                if (need_inum < 25) {
                     if (NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
                         int i = 0;
                         NeedActivity.madapter.additem(selectedSubject);
@@ -359,13 +359,14 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
 
                             }
                         }
-                        inum = inum + selectedSubject.cCredit;
+                        need_inum = need_inum + selectedSubject.cCredit;
+                        Toast.makeText(_context,"더이상 입력할 수 없습니다."+need_inum,Toast.LENGTH_LONG).show();
                         NeedActivity.madapter.notifyDataSetChanged();
 
                     }
                 }else{
                     Toast.makeText(_context,"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
-                    Toast.makeText(_context,"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context,"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show ();
                 }
             }
         });
