@@ -98,6 +98,7 @@ public class NeedActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View convertView, int position, long id) {
                 listDataChild.clear();
                 listDataHeader.clear();
+                lastExpandedPosition = -1;
                 prepareListData(position);
                 explistAdapter.notifyDataSetChanged();
             }
@@ -126,233 +127,99 @@ public class NeedActivity extends Activity {
         });
     }//온크리에이트의 끝
 
-    // 단과대학별 리스트목록 저장
-    public void prepareChildData(){
-        int i = 0;
-//        List<Subject> major =
-//
-//
-//        i = 0; //경제학과
-//        economic = new ArrayList<Subject>();
-//        while (i < AppContext.onlySubjectList.size()) {
-//            if(AppContext.onlySubjectList.get(i).cCol == "경제") {
-//                economic.add(AppContext.onlySubjectList.get(i));
-//            }
-//            i++;
-//        }
-//
-//        i = 0; //무역학과
-//        trade = new ArrayList<Subject>();
-//        while (i < AppContext.onlySubjectList.size()) {
-//            if(AppContext.onlySubjectList.get(i).cCol == "무역") {
-//                trade.add(AppContext.onlySubjectList.get(i));
-//            }
-//            i++;
-//        }
-
+    //prepareListData 안에서 쓰는 함수
+    public void setList(String[] college, int major) {
+        ArrayList<Subject> sub = new ArrayList<Subject>();
+        for (int i = 0; i < college.length; i++) { // i는 학과
+            listDataHeader.add(college[i]);
+            Log.d("tag", "minyoung/" + college[i]);
+            for (int j = 0; j < AppContext.onlySubjectList.size(); j++) {
+                if (AppContext.onlySubjectList.get(j).cDepart == i + major)
+                    sub.add(AppContext.onlySubjectList.get(j));
+            }
+            listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
+            sub.clear();
+        }
     }
 
     // 스피너값에 따른 리스트 출력
     public void prepareListData(int position) {
 
         String[] college;
-        ArrayList<Subject> sub = new ArrayList<Subject>();
-        // 그룹 1의 차일드 데이터 입력
-        List<Subject> major2 = new ArrayList<Subject>();
-        while (!(AppContext.onlySubjectList.get(i).getName().equals("물리학및실험1"))) {
-            major2.add(AppContext.onlySubjectList.get(i++));
-        }
 
-        //그룹 2의 차일드 데이터 입력
-        List<Subject> major1 = new ArrayList<Subject>();
-        while (!(AppContext.onlySubjectList.get(i).getName().equals("교과교육론(수학)"))) {
-            major1.add(AppContext.onlySubjectList.get(i++));
-        }
-
-        switch (position){ //case 0 실행되는지 확인하자
+        switch (position) {
             case 0: //정경대
                 college = getResources().getStringArray(R.array.polEco);
-                for(int i = 0; i < college.length;i++){ // i는 학과
-                    listDataHeader.add(college[i]);
-                    for(int j = 0; j <AppContext.onlySubjectList.size();j++) {
-                        if(AppContext.onlySubjectList.get(j).cCol == i)
-                            sub.add(AppContext.onlySubjectList.get(j));
-                    }
-                    listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
-                    sub.clear();
-                }
-
-//                listDataChild.put(listDataHeader.get(0), major2);//경제학과 붙이기
-//                listDataChild.put(listDataHeader.get(1), major2);//무역학과 붙이기
-//                listDataChild.put(listDataHeader.get(2), major2);//정외과 붙이기
-//                listDataChild.put(listDataHeader.get(3), major2);//행정학과 붙이기
-//                listDataChild.put(listDataHeader.get(4), major2);//사회학과 붙이기
-//                listDataChild.put(listDataHeader.get(5), major2);//언정과 붙이기
-//                listDataChild.put(listDataHeader.get(6), major2);//국제통상과 붙이기
+                setList(college, 0);
                 break;
             case 1: //생과대
                 college = getResources().getStringArray(R.array.livingScience);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//생과대 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//식영과 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//의상학과 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//아가과 붙이기
-                listDataChild.put(listDataHeader.get(4), major2);//주거과 붙이기
+                setList(college, 7);
                 break;
             case 2: //의대
                 college = getResources().getStringArray(R.array.medical);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//의학전공 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//의예전공 붙이기
+                setList(college, 12);
                 break;
             case 3: //한의대
                 college = getResources().getStringArray(R.array.korMedical);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//한의학전공 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//한의예 붙이기
+                setList(college, 14);
                 break;
             case 4: //치의대
                 college = getResources().getStringArray(R.array.tooth);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//치의학전공 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//치의예 붙이기
+                setList(college, 16);
                 break;
             case 5: //약대
                 college = getResources().getStringArray(R.array.medicine);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//약대공통 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//한약학 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//약과학 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//약학전공(2+4) 붙이기
+                setList(college, 18);
                 break;
             case 6: //음대
                 college = getResources().getStringArray(R.array.music);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//음대 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//기악과 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//성악과 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//작곡과 붙이기
+                setList(college, 22);
                 break;
             case 7: // 호관대
                 college = getResources().getStringArray(R.array.hotel);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//관광학부 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//H경영 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//문콘 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//관광학과 붙이기
-                listDataChild.put(listDataHeader.get(4), major2);//호경 붙이기
-                listDataChild.put(listDataHeader.get(5), major2);//컨경 붙이기
-                listDataChild.put(listDataHeader.get(6), major2);//외경 붙이기
-                listDataChild.put(listDataHeader.get(7), major2);//조리경영 붙이기
-                listDataChild.put(listDataHeader.get(8), major2);//문화관광산업 붙이기
-                listDataChild.put(listDataHeader.get(9), major2);//조리산업 붙이기
+                setList(college, 26);
                 break;
             case 8: //자전
                 college = getResources().getStringArray(R.array.self);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//자전 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//자전글로벌리더 붙이기
+                setList(college, 36);
                 break;
             case 9: // 문대
                 college = getResources().getStringArray(R.array.write);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//국문 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//사학 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//철학 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//영문 붙이기
-                listDataChild.put(listDataHeader.get(4), major2);//통번역 붙이기
+                setList(college, 38);
                 break;
             case 10: //경영대
                 college = getResources().getStringArray(R.array.ceo);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//경영대 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//회세 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//경영 붙이기
+                setList(college, 43);
                 break;
             case 11: // 이과대
                 college = getResources().getStringArray(R.array.science);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//지리 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//정대 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//수학 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//물리 붙이기
-                listDataChild.put(listDataHeader.get(4), major2);//화학 붙이기
-                listDataChild.put(listDataHeader.get(5), major2);//생물 붙이기
+                setList(college, 46);
                 break;
             case 12: //간호대
                 college = getResources().getStringArray(R.array.nurse);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//간호 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//간호(야) 붙이기
+                setList(college, 52);
                 break;
             case 13: //미대
                 college = getResources().getStringArray(R.array.art);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//미술학부 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//한국화 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//회화 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//조소 붙이기
+                setList(college, 54);
                 break;
             case 14: // 무용대
                 college = getResources().getStringArray(R.array.dance);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//무용학부 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//한국무용 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//현대무용 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//발레 붙이기
+                setList(college, 58);
                 break;
             case 15: // 후마니타스
                 college = getResources().getStringArray(R.array.huma);
-                for(int i = 0; i < college.length;i++){
-                    listDataHeader.add(college[i]);
-                }
-                listDataChild.put(listDataHeader.get(0), major2);//인가탐 붙이기
-                listDataChild.put(listDataHeader.get(1), major2);//우사세 붙이기
-                listDataChild.put(listDataHeader.get(2), major2);//생명 붙이기
-                listDataChild.put(listDataHeader.get(3), major2);//자연 붙이기
-                listDataChild.put(listDataHeader.get(4), major2);//의미 붙이기
-                listDataChild.put(listDataHeader.get(5), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(6), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(7), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(8), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(9), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(10), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(11), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(12), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(13), major2);//사회 붙이기
-                listDataChild.put(listDataHeader.get(5), major2);//사회 붙이기
-
-            case 16:
-
-            case 17:
+                setList(college, 62);
+                break;
+            case 16: //기타
+                college = getResources().getStringArray(R.array.etc);
+                setList(college, 82);
+                break;
+            case 17: //경희사이버대
+                college = getResources().getStringArray(R.array.cyber);
+                setList(college, 85);
+                break;
         }
     }
 
@@ -363,35 +230,37 @@ public class NeedActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if ((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
             Subject selected = (Subject) data.getSerializableExtra("subject");
 
-            if(isValid(selected)) { // 리스트에 이미 있으면 실행안됨
+            if (isValid(selected)) { // 리스트에 이미 있으면 실행안됨
                 int i = 0;
                 madapter.additem(selected);
-                while(i < AppContext.subjectList.length){
+                while (i < AppContext.subjectList.length) {
                     Subject sub = AppContext.subjectList[i++];
-                    if(sub.cNum.equals(selected.cNum)){
+                    if (sub.cNum.equals(selected.cNum)) {
                         madapter.addNeed(sub);
                     }
                 }
                 madapter.notifyDataSetChanged();
-            }else{
+            } else {
                 Toast.makeText(NeedActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
+    public static boolean isValid(Subject sub) { // 리스트에 과목이 없다-true 있다-false
         boolean ret = true;
         int i;
-        for(i = 0; i < selectedNeedList.size();i++) {
+        for (i = 0; i < selectedNeedList.size(); i++) {
             if (selectedNeedList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))) {
                 ret = false;
                 break;
             }
         }
+
+
         return ret;
     }
 
@@ -440,12 +309,12 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if(NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
+                if (NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
                     int i = 0;
                     NeedActivity.madapter.additem(selectedSubject);
-                    while(i < AppContext.subjectList.length){
+                    while (i < AppContext.subjectList.length) {
                         Subject sub = AppContext.subjectList[i++];
-                        if(sub.cNum.equals(selectedSubject.cNum)){
+                        if (sub.cNum.equals(selectedSubject.cNum)) {
                             NeedActivity.madapter.addNeed(sub);
                         }
                     }
@@ -457,9 +326,9 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
         childText += child.getName() + " / " + child.cProf + "교수\n" + child.day() + " " + child.getTime();
 
         //같은과목(ex 선대1반 화욜/목욜)시간표시
-        while(i < AppContext.subjectList.length){
+        while (i < AppContext.subjectList.length) {
             Subject sub = AppContext.subjectList[i];
-            if((sub.cNum.equals(child.cNum)) && ((sub.cStart != child.cStart) || sub.cDay != child.cDay)){
+            if ((sub.cNum.equals(child.cNum)) && ((sub.cStart != child.cStart) || sub.cDay != child.cDay)) {
                 childText += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
             }
             i++;
@@ -523,7 +392,9 @@ class CustomListAdapter extends BaseAdapter {
     CustomListAdapter(ArrayList<Subject> list, ArrayList<Subject> intentSubject) {
         oData = list;
         this.intentSubject = intentSubject;
-    };
+    }
+
+    ;
 
     @Override
     public int getCount() {
@@ -558,9 +429,9 @@ class CustomListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 int i = intentSubject.size() - 1;
-                while(i >= 0 ){
+                while (i >= 0) {
                     Subject sub = intentSubject.get(i--);
-                    if(sub.cNum.equals(((Subject)getItem(position)).cNum)){
+                    if (sub.cNum.equals(((Subject) getItem(position)).cNum)) {
                         intentSubject.remove(sub);
                     }
                 }
@@ -575,6 +446,8 @@ class CustomListAdapter extends BaseAdapter {
         oData.add(sub);
     }
 
-    public void addNeed(Subject need) { intentSubject.add(need); }
+    public void addNeed(Subject need) {
+        intentSubject.add(need);
+    }
 }
 

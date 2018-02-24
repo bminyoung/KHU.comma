@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="searchkeyselect">
-        <item>2학년</item> <!--0-->
-        <item>1학년</item> <!--1-->
-        <item>정경대학</item> <!--2-->
-        <item>생활과학대학</item> <!--3-->
-        <item>의과대학</item> <!--4-->
-        <item>한의과대학</item> <!--5-->
-        <item>치과대학</item> <!--6-->
-        <item>약학대학</item> <!--7-->
-        <item>음악대학</item> <!--8-->
-        <item>호텔관광대학</item> <!--9-->
-        <item>자율전공학과</item> <!--10-->
-        <item>문과대학</item> <!--11-->
-        <item>경영대학</item> <!--12-->
-        <item>이과대학</item> <!--13-->
-        <item>간호과학대학</item> <!--14-->
-        <item>미술대학</item> <!--15-->
-        <item>무용학부</item> <!--16-->
-        <item>후마니타스칼리지</item> <!--17-->
-        <item>기타</item> <!--18-->
-        <item>경희사이버대학(학점교류)</item> <!--19-->
+        <item>정경대학</item> <!--0-->
+        <item>생활과학대학</item> <!--1-->
+        <item>의과대학</item> <!--2-->
+        <item>한의과대학</item> <!--3-->
+        <item>치과대학</item> <!--4-->
+        <item>약학대학</item> <!--5-->
+        <item>음악대학</item> <!--6-->
+        <item>호텔관광대학</item> <!--7-->
+        <item>자율전공학과</item> <!--8-->
+        <item>문과대학</item> <!--9-->
+        <item>경영대학</item> <!--10-->
+        <item>이과대학</item> <!--11-->
+        <item>간호과학대학</item> <!--12-->
+        <item>미술대학</item> <!--13-->
+        <item>무용학부</item> <!--14-->
+        <item>후마니타스칼리지</item> <!--15-->
+        <item>기타</item> <!--16-->
+        <item>경희사이버대학(학점교류)</item> <!--17-->
     </string-array>
 </resources>

@@ -8,13 +8,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class LoadResultActivity extends AppCompatActivity {
 
-//    int[] colors = {Color.parseColor("#B8F3B8"),Color.parseColor("#FFA9B0"),Color.parseColor("#CCD1FF"),Color.parseColor("#FFDDA6"),Color.parseColor("#FFADC5")};
+    static int[] colors = {Color.parseColor("#FFCDD2"), Color.parseColor("#BBDEFB"), Color.parseColor("#F0F4C3"), Color.parseColor("#FFCC80"),
+            Color.parseColor("#E1BEE7"), Color.parseColor("#80DEEA"), Color.parseColor("#D7CCC8"), Color.parseColor("#D1C4E9"),
+            Color.parseColor("#F8BBD0"),Color.parseColor("#DCEDC8"),Color.parseColor("#FFF59D"),Color.parseColor("#81D4FA"),
+            Color.parseColor("#CFD8DC"),Color.parseColor("#B2DFDB"),Color.parseColor("#FFCCBC"),Color.parseColor("#C5CAE9"),
+            Color.parseColor("#C8E6C9"),Color.parseColor("#FFECB3"),Color.parseColor("#E0E0E0"),Color.parseColor("#EF9A9A"), Color.parseColor("#90CAF9")};
     int colorIndex = 0;
     enum Day{ 월, 화, 수, 목, 금 } //나중에 쓸수도
+    int [] tableContent;
+    ArrayList<Subject> subList = new ArrayList<Subject>();
 
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int position;
@@ -28,9 +40,56 @@ public class LoadResultActivity extends AppCompatActivity {
         position = getIntent().getIntExtra("position",0);
         tableName.setText(AppContext.timeTableNameList.get(position)); //시간표 이름표시
 
-        setTextId();
+        tableContent = loadFile(AppContext.timeTableNameList.get(position));
+        for(int i = 0; i < tableContent.length;i++){
+            for(int j = 0; j < AppContext.subjectList.length;j++) {
+                if (AppContext.subjectList[j].cRow == tableContent[i]){
+                    subList.add(AppContext.subjectList[j]);
+                    break;
+                }
+            }
+        }
 
+        setTextId();
         showTimeTable();
+    }
+
+    public int[] loadFile(String fileName) {
+        BufferedReader br = null;
+        String cvsSplitBy = ",";
+        String line = "";
+        String[] field = new String[42];
+
+        int arSize = 0;
+        try {
+            File csv = new File(getFilesDir().getAbsolutePath() + fileName + ".csv");
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(csv), "euc-kr"));
+            // Charset.forName("UTF-8");
+
+            while ((line = br.readLine()) != null) {
+                field = line.split(cvsSplitBy, -1);
+                arSize = field.length;
+                break;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        int[] file = new int[arSize];
+        for (int i = 0; i < arSize; i++) {
+            double temp = Double.parseDouble(field[i]);
+            file[i] = (int) temp;
+        }
+        return file;
     }
 
     private void setTextId(){
@@ -43,7 +102,7 @@ public class LoadResultActivity extends AppCompatActivity {
     }
 
     private void showTimeTable(){
-        ArrayList<Subject> selectedTimeTable = AppContext.timeTableList.get(position);
+        ArrayList<Subject> selectedTimeTable = subList;
         colorIndex = 0;
         //같은 과목은 같은 색깔로
         for (int i = 0; i < selectedTimeTable.size(); i++) {

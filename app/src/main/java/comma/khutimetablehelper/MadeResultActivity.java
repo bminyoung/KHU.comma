@@ -209,7 +209,6 @@ public class MadeResultActivity extends AppCompatActivity {
         ArrayList<Subject> selected = AppContext.tempTimeTableList.get(position);
         AppContext.timeTableList.add(selected);
         AppContext.timeTableNameList.add(timeTableName);
-        Log.d("tag", "minyoung/"+AppContext.timeTableNameList.get(AppContext.timeTableNameList.size()-1));
 
         int[] classes = new int[42];
         ArrayList<Integer> nums = new ArrayList<Integer>();
@@ -222,7 +221,6 @@ public class MadeResultActivity extends AppCompatActivity {
             classes[j] = temp;
         };
 
-//        String fileName = getDir("saving", MODE_WORLD_READABLE) +timeTableName+".csv";
         String fileName = getFilesDir().getAbsolutePath() +timeTableName+".csv";
 
         UserInputData timeTable = new UserInputData(classes, fileName);
