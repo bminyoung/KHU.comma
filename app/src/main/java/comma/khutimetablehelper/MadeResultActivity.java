@@ -193,11 +193,12 @@ public class MadeResultActivity extends AppCompatActivity {
 
     //메인으로 돌아갈래?
     public void goToMain(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         dialogBuilder.setTitle("메인화면으로 돌아가시겠습니까?").setNegativeButton("아니요", null)
                 .setPositiveButton("예", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
                         Intent intent = new Intent(MadeResultActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -206,6 +207,8 @@ public class MadeResultActivity extends AppCompatActivity {
     }
 
     public void ShowTimeTable(Subject selected) {
+        if(selected.cDay == -1)
+            return;
         TextView tv;
         int start = (int) ((selected.cStart - 9.0) * 2.0);
         int end = (int) ((selected.cEnd - 9.0) * 2.0 - 1.0);
@@ -215,7 +218,6 @@ public class MadeResultActivity extends AppCompatActivity {
             tv.setBackgroundColor(colors[colorIndex]);
         }
         timeTable[start][selected.cDay].setText(selected.cName);
-//        timeTable[start][selected.cDay].resizeText();
     }
 
     private void SaveTimeTable(int position, String timeTableName) {
