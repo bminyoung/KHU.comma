@@ -1,11 +1,14 @@
 package comma.khutimetablehelper;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        ImageButton info_imgbtn = (ImageButton)findViewById(R.id.main_imgbtn_info);
+        info_imgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("주의사항");
+                dialog.setMessage("헤헤");
+                dialog.setNeutralButton("닫기",null);
+                dialog.show();
+            }
+        });
     }
+
 
     public void loadFile() { // 이거안됨
         String path = getFilesDir().getAbsolutePath(); // 경로

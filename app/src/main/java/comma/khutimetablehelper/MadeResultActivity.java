@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,7 +63,7 @@ public class MadeResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maderesult);
 
         Button btnSave = (Button) findViewById(R.id.maderesult_btn_save);
-        Button btnMain = (Button) findViewById(R.id.maderesult_btn_main);
+        ImageButton btnMain = (ImageButton) findViewById(R.id.maderesult_btn_main);
         setTextId();
         focusOn = -1;
 
