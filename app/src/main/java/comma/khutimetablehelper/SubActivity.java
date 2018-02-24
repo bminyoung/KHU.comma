@@ -63,7 +63,7 @@ public class SubActivity extends AppCompatActivity {
 
         if(first) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
-            dialog.setTitle("시간표 요약");
+            dialog.setTitle("사용법");
             dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 50개까지 선택이 가능합니다.\n " +
                     "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다. ");
             dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
