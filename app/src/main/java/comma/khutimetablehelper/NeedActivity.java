@@ -64,7 +64,7 @@ public class NeedActivity extends Activity {
             dialog.setTitle("시간표 요약");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
                     "이 화면에서 선택해야합니다. (ex 사이버 강의) \n");
-            dialog.setNeutralButton("확인", yesButtonClickListener);
+            dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
         }
 
