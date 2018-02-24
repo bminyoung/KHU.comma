@@ -293,7 +293,7 @@ public class NeedActivity extends Activity {
             if (selectedNeedList.get(i).cStart >= sub.cEnd) {
                 return ret;
             } else {
-                if (selectedNeedList.get(i).cEnd >= sub.cStart) {
+                if (selectedNeedList.get(i).cEnd > sub.cStart) {
                     ret = false;
                     break;
                 }

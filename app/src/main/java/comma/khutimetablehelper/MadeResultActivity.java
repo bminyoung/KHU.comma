@@ -85,9 +85,8 @@ public class MadeResultActivity extends AppCompatActivity {
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MadeResultActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                goToMain();
+
             }
         });
 
@@ -190,6 +189,20 @@ public class MadeResultActivity extends AppCompatActivity {
     protected void onDestroy() {
         AppContext.tempTimeTableList.clear();
         super.onDestroy();
+    }
+
+    //메인으로 돌아갈래?
+    public void goToMain(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("메인화면으로 돌아가시겠습니까?").setNegativeButton("아니요", null)
+                .setPositiveButton("예", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MadeResultActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                }).show();
     }
 
     public void ShowTimeTable(Subject selected) {
