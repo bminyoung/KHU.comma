@@ -29,7 +29,7 @@ public class LoadResultActivity extends AppCompatActivity {
     ArrayList<Subject> subList = new ArrayList<Subject>();
 
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
-    int position;
+    int position ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
