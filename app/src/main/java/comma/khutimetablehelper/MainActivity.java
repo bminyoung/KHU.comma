@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //과목정보들 불러오기
         setSubjectList();
         setSubjectOnlyList();
-        loadFile();
+//        loadFile();
 
         // 뒤로가기 핸들러
         backPressCloseHandler = new BackPressCloseHandler(this);

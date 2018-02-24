@@ -52,14 +52,14 @@ public class NeedActivity extends Activity {
     protected static CustomListAdapter madapter;
 
     //처음화면 뜰때 다이얼로그 boolean 값 선언
-    public static boolean first = true ;
+    public static boolean first = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need);
 
-        if(first) {
+        if (first) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("시간표 요약");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
@@ -237,21 +237,21 @@ public class NeedActivity extends Activity {
                 break;
         }
     }
+
     // DialogInterface.OnClickListener 인터페이스를 구현
     private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            ChangeFirst() ;
+            ChangeFirst();
         }
     };
 
 
-
     //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
     protected boolean ChangeFirst() {
-        first = false ;
-        return  first;
+        first = false;
+        return first;
     }
 
     protected void onDestroy() {
@@ -290,9 +290,9 @@ public class NeedActivity extends Activity {
                 break;
             }
         }
-        for(i = 0; i < selectedNeedList.size(); i++) {
+        for (i = 0; i < selectedNeedList.size(); i++) {
             if (selectedNeedList.get(i).cStart > sub.cEnd) {
-                return ret ;
+                return ret;
             } else {
                 if (selectedNeedList.get(i).cEnd > sub.cStart) {
                     ret = false;
@@ -307,7 +307,7 @@ public class NeedActivity extends Activity {
 
 //확장 리스트뷰 어댑터
 class NeedExpandableListAdapter extends BaseExpandableListAdapter {
-
+    int inum = 0;
     private Context _context;
     private static List<String> _listDataHeader;
     private static HashMap<String, List<Subject>> _listDataChild;
@@ -348,16 +348,25 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if (NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
-                    int i = 0;
-                    NeedActivity.madapter.additem(selectedSubject);
-                    while (i < AppContext.subjectList.length) {
-                        Subject sub = AppContext.subjectList[i++];
-                        if (sub.cNum.equals(selectedSubject.cNum)) {
-                            NeedActivity.madapter.addNeed(sub);
+
+                if (inum < 25) {
+                    if (NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
+                        int i = 0;
+                        NeedActivity.madapter.additem(selectedSubject);
+                        while (i < AppContext.subjectList.length) {
+                            Subject sub = AppContext.subjectList[i++];
+                            if (sub.cNum.equals(selectedSubject.cNum)) {
+                                NeedActivity.madapter.addNeed(sub);
+
+                            }
                         }
+                        inum = inum + selectedSubject.cCredit;
+                        NeedActivity.madapter.notifyDataSetChanged();
+
                     }
-                    NeedActivity.madapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(_context,"더이상 입력할 수 없습니다."+inum,Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context,"더이상 입력할 수 없습니다."+inum,Toast.LENGTH_LONG).show();
                 }
             }
         });
