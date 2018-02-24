@@ -4,16 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
     <!--android:background="#EAEAEA"-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/khuniversity"
+        android:src="@mipmap/khuniversity" />
 
     <ImageView
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src = "@mipmap/khuniversity"
-        android:background="@mipmap/khuniversity"
-        android:layout_gravity="top" />
+        android:layout_height="130dp"
+        android:src = "@mipmap/hytt"/>
 
 
 </LinearLayout>
