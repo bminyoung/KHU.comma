@@ -296,8 +296,13 @@ public class MadeResultActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeTableTitle.getText().length() == 0) {
                             Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + " 이 저장되었습니다", Toast.LENGTH_LONG).show();
+                        }
+                        else if(AppContext.timeTableNameList.contains(TimeTableTitle.getText()+"")){
+                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "은(는) 이미 있습니다.", Toast.LENGTH_LONG).show();
+                            Log.d("tag", "minyoung/"+TimeTableTitle.getText());
+                        }
+                        else {
+                            Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "이(가) 저장되었습니다", Toast.LENGTH_LONG).show();
                             SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
                         }
                     }

@@ -16,15 +16,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#80057DE1">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:orientation="horizontal"
-                android:background="#057DE1">
+                android:background="#80057DE1">
 
                 <TextView
                     android:layout_width="wrap_content"

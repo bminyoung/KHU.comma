@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -109,8 +110,8 @@ class ListViewAdapter extends BaseAdapter {
 
         //리스트뷰 애들
         TextView tableName = (TextView) convertView.findViewById(R.id.savelist_lv_tv_tableName);
-        Button deleteBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_delete);
-        Button changeBtn = (Button) convertView.findViewById(R.id.savelist_lv_btn_change);
+        ImageButton deleteBtn = (ImageButton) convertView.findViewById(R.id.savelist_lv_btn_delete);
+        ImageButton changeBtn = (ImageButton) convertView.findViewById(R.id.savelist_lv_btn_change);
 
         tableName.setText((String)getItem(position)); // 저장된 시간표 이름
 
@@ -124,7 +125,11 @@ class ListViewAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if (timeTableTitle.getText().length() == 0) {
                                     Toast.makeText(context, "변경할 시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                                } else {
+                                }
+                                else if(AppContext.timeTableNameList.contains(timeTableTitle.getText()+"")){
+                                    Toast.makeText(context, timeTableTitle.getText() + "은(는) 이미 있습니다.", Toast.LENGTH_LONG).show();
+                                }
+                                else {
                                     changeName(AppContext.timeTableNameList.get(position), timeTableTitle.getText().toString());
                                     AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
                                     notifyDataSetChanged();
