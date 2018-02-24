@@ -6,10 +6,12 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +53,22 @@ public class SubActivity extends AppCompatActivity {
     private ArrayList<Subject> subSubject = new ArrayList<Subject>(); // 다음으로 넘길 과목
     protected static CustomListAdapter madapter;
 
+    //처음화면 뜰때 다이얼로그 boolean 값 선언
+    public static boolean first = true ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+
+        if(first) {
+            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
+            dialog.setTitle("시간표 요약");
+            dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 50개까지 선택이 가능합니다.\n " +
+                    "후보과목을 다량 선택시 계산시간이 다소 소요됩니다. ");
+            dialog.setNeutralButton("확인", yesButtonClickListener);
+            dialog.show();
+        }
 
         Button nextBtn = (Button) findViewById(R.id.sub_btn_nextbutton);
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
@@ -168,6 +182,23 @@ public class SubActivity extends AppCompatActivity {
                     lastExpandedPosition = groupPosition;
             }
         });
+    }
+
+    // DialogInterface.OnClickListener 인터페이스를 구현
+    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            ChangeFirst() ;
+        }
+    };
+
+
+
+    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
+    protected boolean ChangeFirst() {
+        first = false ;
+        return  first;
     }
 
     //액티비티가 종료될때 static변수 비워주기
@@ -290,17 +321,26 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
             @Override
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
+
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if(SubActivity.isValid(selectedSubject)) {
-                    int i = 0;
-                    SubActivity.madapter.additem(selectedSubject);
-                    while (i < AppContext.subjectList.length) {
-                        Subject sub = AppContext.subjectList[i++];
-                        if (sub.cNum.equals(selectedSubject.cNum)) {
-                            SubActivity.madapter.addNeed(sub);
+                if (SubActivity.madapter.getCount() < 50) {
+                    if (SubActivity.isValid(selectedSubject)) {
+                        int i = 0;
+                        SubActivity.madapter.additem(selectedSubject);
+                        while (i < AppContext.subjectList.length) {
+                            Subject sub = AppContext.subjectList[i++];
+                            if (sub.cNum.equals(selectedSubject.cNum)) {
+                                SubActivity.madapter.addNeed(sub);
+                            }
                         }
+                        SubActivity.madapter.notifyDataSetChanged();
                     }
-                    SubActivity.madapter.notifyDataSetChanged();
+                } else {
+
+                    Toast toast = Toast.makeText(_context, "더이상 등록할 수 없습니다.",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.show();
+                    toast.show();
                 }
             }
         });

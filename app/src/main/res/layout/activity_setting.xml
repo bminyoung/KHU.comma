@@ -97,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="최소학점 :"
+                        android:text="몇학점?"
                         android:textSize="20sp"/>
 
                     <Spinner
@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="점심시간 : "
+                        android:text="점심 언제 먹을래? "
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 
@@ -203,7 +203,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="첫 강의 시작 시간 : "
+                        android:text="몇시부터?"
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 
@@ -231,234 +231,7 @@
                         android:entries="@array/firstTime" />
 
                 </LinearLayout>
-                <!--첫강의시작시간 끝-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-                <!--강의시간간격-->
-                <LinearLayout style="@style/spinRank">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="강의 시간 간격 :      "
-                        android:textSize="20sp"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subTimeFlic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_timeFlic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/timeFlic" />
-                </LinearLayout>
-                <!--강의시간간격 끝-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-                <!--공강요일-->
-                <LinearLayout style="@style/spinRank">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="공강 요일 :              "
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subEmptyDay"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank"
-                        android:layout_weight="3"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_emptyDay"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/weekday" />
-
-                </LinearLayout>
-                <!--공강요일 끝-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-                <!--요일수-->
-                <LinearLayout style="@style/spinRank">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="공강 요일 수 :                  "
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subDayCount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank"
-                        android:layout_weight="3"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_dayCount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/daycount" />
-
-                </LinearLayout>
-                <!--요일수 끝-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-                <!--수업최대시간-->
-                <LinearLayout style="@style/spinRank">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="한 수업당 최대시간 :"
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subClassTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank"
-                        android:layout_weight="3"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_classTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/classTime" />
-
-                </LinearLayout>
-                <!--수업최대시간끝-->
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-
-                <!--하루강의갯수-->
-                <LinearLayout style="@style/spinRank">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="하루 최대 수업갯수 :"
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subMaxClassNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank"
-                        android:layout_weight="3"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_maxClassNum"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/maxClassNum" />
-
-                </LinearLayout>
-                <!--하루강의갯수 끝-->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#c8c8c8" />
-                <!--하루강의시간-->
-                <LinearLayout style="@style/spinRank">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="하루최대 수업시간 :"
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
-
-                    <Spinner
-                        android:id="@+id/setting_spin_subMaxClassTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/rank"
-                        android:layout_weight="3"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="15dp">
-
-                    <Spinner
-                        android:id="@+id/setting_spin_maxClassTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/maxClassTime" />
-
-                </LinearLayout>
-                <!--하루강의시간 끝-->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -469,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="요일별 끝나는 시간 :"
+                        android:text="몇시까지?"
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 
@@ -571,6 +344,230 @@
 
                 </LinearLayout>
                 <!--요일별끝나는시간 끝-->
+
+                <!--첫강의시작시간 끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+                <!--강의시간간격-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="너의 공강은?     "
+                        android:textSize="20sp"/>
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subTimeFlic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_timeFlic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/timeFlic" />
+                </LinearLayout>
+                <!--강의시간간격 끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+                <!--공강요일-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="공(부)휴(식)일    "
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subEmptyDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_emptyDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/weekday" />
+
+                </LinearLayout>
+                <!--공강요일 끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+                <!--요일수-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="몇일 등교할거니?    "
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subDayCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_dayCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/daycount" />
+
+                </LinearLayout>
+                <!--요일수 끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+                <!--수업최대시간-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="한개 수업을 몇시간 들을까?"
+                        android:textSize="20sp"
+                        android:layout_weight="1"/>
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subClassTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_classTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/classTime" />
+
+                </LinearLayout>
+                <!--수업최대시간끝-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+
+                <!--하루강의갯수-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="하루에 몇 강의 들을래?   "
+                        android:textSize="20sp"
+                        android:layout_weight="1"/>
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subMaxClassNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank"
+                        android:layout_weight="3"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_maxClassNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/maxClassNum" />
+
+                </LinearLayout>
+                <!--하루강의갯수 끝-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+                <!--하루강의시간-->
+                <LinearLayout style="@style/spinRank">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="하루에 몇시간 들을래?   "
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/setting_spin_subMaxClassTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/rank" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp">
+
+                    <Spinner
+                        android:id="@+id/setting_spin_maxClassTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/maxClassTime" />
+
+                </LinearLayout>
+                <!--하루강의시간 끝-->
+
 
             </LinearLayout>
 

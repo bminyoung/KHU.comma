@@ -6,8 +6,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,10 +51,23 @@ public class NeedActivity extends Activity {
     private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
     protected static CustomListAdapter madapter;
 
+    //처음화면 뜰때 다이얼로그 boolean 값 선언
+    public static boolean first = true ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need);
+
+        if(first) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("시간표 요약");
+            dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
+                    "이 화면에서 선택해야합니다. (ex 사이버 강의) \n * ");
+            dialog.setNeutralButton("확인", yesButtonClickListener);
+            dialog.show();
+        }
+
 
         Button nextBtn = (Button) findViewById(R.id.need_btn_nextbutton);
         intentToSub = new Intent(NeedActivity.this, SubActivity.class);
@@ -222,6 +237,22 @@ public class NeedActivity extends Activity {
                 break;
         }
     }
+    // DialogInterface.OnClickListener 인터페이스를 구현
+    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            ChangeFirst() ;
+        }
+    };
+
+
+
+    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
+    protected boolean ChangeFirst() {
+        first = false ;
+        return  first;
+    }
 
     protected void onDestroy() {
         selectedNeedList.clear();
@@ -259,8 +290,16 @@ public class NeedActivity extends Activity {
                 break;
             }
         }
-
-
+        for(i = 0; i < selectedNeedList.size(); i++) {
+            if (selectedNeedList.get(i).cStart > sub.cEnd) {
+                return ret ;
+            } else {
+                if (selectedNeedList.get(i).cEnd > sub.cStart) {
+                    ret = false;
+                    break;
+                }
+            }
+        }
         return ret;
     }
 
