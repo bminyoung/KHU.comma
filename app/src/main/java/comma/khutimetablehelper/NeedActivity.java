@@ -364,8 +364,8 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
 
                     }
                 }else{
-                    Toast.makeText(_context,"더이상 입력할 수 없습니다."+inum,Toast.LENGTH_LONG).show();
-                    Toast.makeText(_context,"더이상 입력할 수 없습니다."+inum,Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context,"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(_context,"더이상 입력할 수 없습니다.",Toast.LENGTH_LONG).show();
                 }
             }
         });
