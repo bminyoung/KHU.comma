@@ -9,12 +9,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#FFFFFF">
 
         <!--상단바-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F064F0"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -26,8 +28,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
                     android:text="후보과목 선택"
                     android:textSize="18sp" />
 
@@ -48,20 +50,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="300dp">
+            android:layout_marginBottom="300dp"
+            android:orientation="vertical">
+
             <ListView
                 android:id="@+id/sub_lstv_showSelet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="-300dp">
+            android:layout_marginTop="-300dp"
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
@@ -76,26 +79,26 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                android:id="@+id/sub_spinner_college"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                    android:id="@+id/sub_spinner_college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:clickable="true"
-                android:entries="@array/sub_searchKeySelect"/>
+                    android:entries="@array/sub_searchKeySelect" />
 
                 <EditText
-                android:id="@+id/sub_edt_searchSubject"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                    android:visibility="invisible"
-                android:layout_weight="1" />
+                    android:id="@+id/sub_edt_searchSubject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="invisible" />
 
-                <Button
-                android:id="@+id/sub_btn_searchButton"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
+                <ImageButton
+                    android:id="@+id/sub_btn_searchButton"
+                    android:layout_width="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
-                    android:textSize="15sp"
-                android:text="검색" />
+                    android:background="@mipmap/seek"/>
 
             </LinearLayout>
 

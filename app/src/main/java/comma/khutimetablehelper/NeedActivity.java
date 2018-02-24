@@ -21,6 +21,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -79,7 +80,7 @@ public class NeedActivity extends Activity {
                 startActivity(intentToSub);
             }
         }); //다음버튼
-        Button searchBtn = (Button) findViewById(R.id.need_btn_searchbutton);
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.need_btn_searchbutton);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -341,7 +342,7 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView) convertView.findViewById(R.id.need_elstv_item_header);
-        final Button btn = (Button) convertView.findViewById(R.id.need_elstv_item_btn);
+        final ImageButton btn = (ImageButton) convertView.findViewById(R.id.need_elstv_item_btn);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
@@ -468,7 +469,7 @@ class CustomListAdapter extends BaseAdapter {
             convertview = inflater.inflate(R.layout.need_lstv_item, parent, false);
         }
 
-        Button deleteBtn = (Button) convertview.findViewById(R.id.need_lstv_btn);
+        ImageButton deleteBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_btn);
         TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
         need_lstv_tv_choosedsubject.setText(oData.get(position).getName());
 

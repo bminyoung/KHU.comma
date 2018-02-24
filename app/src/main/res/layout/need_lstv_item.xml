@@ -6,7 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
 
         <TextView
             android:id="@+id/need_lstv_tv"
@@ -17,13 +18,14 @@
             android:textSize="20sp"
             android:gravity="center_vertical"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/need_lstv_btn"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="-70dp"
-            android:textSize="15sp"
-            android:text="x"/>
+            android:background="@mipmap/minusimage"
+            android:scaleType="fitXY"
+            android:src="@mipmap/minusimage"/>
 
 
     </LinearLayout>

@@ -21,6 +21,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -90,7 +91,7 @@ public class SubActivity extends AppCompatActivity {
         });
 
         //검색버튼
-        Button searchBtn = (Button) findViewById(R.id.sub_btn_searchButton);
+        ImageButton searchBtn = (ImageButton) findViewById(R.id.sub_btn_searchButton);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -316,7 +317,7 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView) convertView.findViewById(R.id.need_elstv_item_header);
-        final Button btn = (Button) convertView.findViewById(R.id.need_elstv_item_btn);
+        final ImageButton btn = (ImageButton) convertView.findViewById(R.id.need_elstv_item_btn);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
