@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_centerVertical="true"
+                android:textColor="@android:color/white"
                 android:text="시간표 이름 들어갈 자리"
                 android:textSize="18sp" />
 
@@ -33,15 +34,13 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/btn_round"
                 android:text="요약"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:textSize="18sp"
                 android:textColor="@android:color/white"
                 android:onClick="Summary"/>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#000000" />
     </LinearLayout>
 
     <ScrollView

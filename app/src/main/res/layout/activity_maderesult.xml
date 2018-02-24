@@ -36,6 +36,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="입맛대로 골라봐"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp" />
 
                 <ImageButton

@@ -103,8 +103,8 @@ public class SearchActivity extends AppCompatActivity {
                     NeedExpandableListAdapter.need_inum = NeedExpandableListAdapter.need_inum + sub.cCredit;
 
                     final Subject finalSub = sub;
-                    dialogBuilder.setTitle("과목 선택").setMessage(sub.getName() + "을 추가하시겠습니까?")
-                            .setPositiveButton("선택", new DialogInterface.OnClickListener() {
+                    dialogBuilder.setTitle("과목 추가").setMessage(sub.getName() + "을 추가하시겠습니까?")
+                            .setPositiveButton("추가", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Intent data = new Intent();
