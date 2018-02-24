@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="rank">
-        <item>필수</item>
-        <item>해당x</item>
+        <item>꼭! 필요해!</item>
+        <item>필요 없어!</item>
     </string-array>
 
     <string-array name="firstTime">
@@ -58,9 +58,9 @@
     </string-array>
 
     <string-array name="classTime">
-        <item>1.5</item>
-        <item>3</item>
-        <item>4.5</item>
+        <item>1시간 30분</item>
+        <item>3시간</item>
+        <item>4시간 30분</item>
     </string-array>
 
     <string-array name="maxClassNum">
@@ -70,11 +70,11 @@
     </string-array>
 
     <string-array name="maxClassTime">
-        <item>1.5</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
+        <item>1시간 30분</item>
+        <item>3시간</item>
+        <item>4시간</item>
+        <item>5시간</item>
+        <item>6시간</item>
     </string-array>
 
 
