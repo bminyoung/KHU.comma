@@ -61,10 +61,10 @@ public class NeedActivity extends Activity {
 
         if (first) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("시간표 요약");
+            dialog.setTitle("사용법");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
                     "이 화면에서 선택해야합니다. (ex 사이버 강의) \n");
-            dialog.setNeutralButton("확인", yesButtonClickListener);
+            dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
         }
 
@@ -289,11 +289,11 @@ public class NeedActivity extends Activity {
                 break;
             }
         }
-        for(i = 0; i < selectedNeedList.size(); i++) {
+        for (i = 0; i < selectedNeedList.size(); i++) {
             if (selectedNeedList.get(i).cStart >= sub.cEnd) {
-                return ret ;
+                return ret;
             } else {
-                if (selectedNeedList.get(i).cEnd > sub.cStart) {
+                if (selectedNeedList.get(i).cEnd >= sub.cStart) {
                     ret = false;
                     break;
                 }
@@ -360,7 +360,6 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
                             }
                         }
                         need_inum = need_inum + selectedSubject.cCredit;
-                        Toast.makeText(_context,"더이상 입력할 수 없습니다."+need_inum,Toast.LENGTH_LONG).show();
                         NeedActivity.madapter.notifyDataSetChanged();
 
                     }
