@@ -291,7 +291,7 @@ public class NeedActivity extends Activity {
             }
         }
         for(i = 0; i < selectedNeedList.size(); i++) {
-            if (selectedNeedList.get(i).cStart > sub.cEnd) {
+            if (selectedNeedList.get(i).cStart >= sub.cEnd) {
                 return ret ;
             } else {
                 if (selectedNeedList.get(i).cEnd > sub.cStart) {
