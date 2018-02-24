@@ -290,10 +290,10 @@ public class NeedActivity extends Activity {
             }
         }
         for (i = 0; i < selectedNeedList.size(); i++) {
-            if (selectedNeedList.get(i).cStart > sub.cEnd) {
+            if (selectedNeedList.get(i).cStart >= sub.cEnd) {
                 return ret;
             } else {
-                if (selectedNeedList.get(i).cEnd > sub.cStart) {
+                if (selectedNeedList.get(i).cEnd >= sub.cStart) {
                     ret = false;
                     break;
                 }
@@ -360,7 +360,6 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
                             }
                         }
                         need_inum = need_inum + selectedSubject.cCredit;
-                        Toast.makeText(_context,"더이상 입력할 수 없습니다."+need_inum,Toast.LENGTH_LONG).show();
                         NeedActivity.madapter.notifyDataSetChanged();
 
                     }
