@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static comma.khutimetablehelper.NeedExpandableListAdapter.need_inum;
 
 public class NeedActivity extends Activity {
 
@@ -255,6 +258,8 @@ public class NeedActivity extends Activity {
         selectedNeedList.clear();
         needSubject.clear();
         super.onDestroy();
+        need_inum = 0;
+
     }
 
     @Override
@@ -346,7 +351,7 @@ class NeedExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
 
-                if (need_inum < 25) {
+                if (need_inum < 22) {
                     if (NeedActivity.isValid(selectedSubject)) { // 리스트에 이미 있으면 실행안됨
                         int i = 0;
                         NeedActivity.madapter.additem(selectedSubject);
@@ -470,7 +475,9 @@ class CustomListAdapter extends BaseAdapter {
         TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
         need_lstv_tv_choosedsubject.setText(oData.get(position).getName());
 
+        //리스트뷰 제거이벤트
         deleteBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 int i = intentSubject.size() - 1;
@@ -480,7 +487,9 @@ class CustomListAdapter extends BaseAdapter {
                         intentSubject.remove(sub);
                     }
                 }
+                need_inum = need_inum -intentSubject.get(position).cCredit;
                 oData.remove(position);
+
                 notifyDataSetChanged();
             }
         });

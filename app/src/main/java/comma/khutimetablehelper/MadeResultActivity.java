@@ -1523,7 +1523,14 @@ class CustomLvAdapter extends BaseAdapter {
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);
 
         }
-        
+        ImageButton imgbtn_look = (ImageButton)convertview.findViewById(R.id.maderesult_btn_look);
+
+        imgbtn_look.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
 
         tv.setText("시간표 " + (position + 1));
