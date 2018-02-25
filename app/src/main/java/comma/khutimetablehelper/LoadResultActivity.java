@@ -150,6 +150,4 @@ public class LoadResultActivity extends AppCompatActivity {
         dialog.setNeutralButton("확인",null);
         dialog.show();
     }
-
-
 }
