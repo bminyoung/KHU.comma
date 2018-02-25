@@ -231,7 +231,7 @@ public class NeedActivity extends Activity {
                 break;
             case 17: //경희사이버대
                 college = getResources().getStringArray(R.array.cyber);
-                setList(college, 85);
+                setList(college, 86);
                 break;
         }
     }

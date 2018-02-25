@@ -280,15 +280,16 @@ public class SettingActivity extends AppCompatActivity {
     private void saveSpinner(){
 
         spinStatus.add(0); //학점 필수
+        spinStatus.add(lunch_subspin.getSelectedItemPosition());
         spinStatus.add(firstTime_subspin.getSelectedItemPosition());
+        spinStatus.add(dayEndTime_subspin.getSelectedItemPosition());
         spinStatus.add(timeFlic_subspin.getSelectedItemPosition());
         spinStatus.add(emptyDay_subspin.getSelectedItemPosition());
         spinStatus.add(dayCount_subspin.getSelectedItemPosition());
-        spinStatus.add(lunch_subspin.getSelectedItemPosition());
         spinStatus.add(classTime_subspin.getSelectedItemPosition());
         spinStatus.add(maxClassNum_subspin.getSelectedItemPosition());
         spinStatus.add(maxClassTime_subspin.getSelectedItemPosition());
-        spinStatus.add(dayEndTime_subspin.getSelectedItemPosition());
+
 
         spinValue.add(creditMin_spin.getSelectedItemPosition());
         spinValue.add(creditMax_spin.getSelectedItemPosition());

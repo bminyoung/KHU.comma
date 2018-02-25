@@ -160,7 +160,7 @@ public class SubActivity extends AppCompatActivity {
         for (int i = 0; i < college.length; i++) { // i는 학과
             listDataHeader.add(college[i]);
             for (int j = 0; j < AppContext.onlySubjectList.size(); j++) {
-                if (AppContext.onlySubjectList.get(j).cDepart == i + major)
+                if ((AppContext.onlySubjectList.get(j).cDepart == i + major) && (AppContext.onlySubjectList.get(j).cDay != -1))
                     sub.add(AppContext.onlySubjectList.get(j));
             }
             listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
@@ -241,10 +241,6 @@ public class SubActivity extends AppCompatActivity {
             case 16: //기타
                 college = getResources().getStringArray(R.array.etc);
                 setList(college, 82);
-                break;
-            case 17: //경희사이버대
-                college = getResources().getStringArray(R.array.cyber);
-                setList(college, 85);
                 break;
         }
     }

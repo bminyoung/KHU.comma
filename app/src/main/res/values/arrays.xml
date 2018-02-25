@@ -218,10 +218,11 @@
         <item>ROTC과정 군사학</item><!--82-->
         <item>취업스쿨 취업관련강좌</item>
         <item>사회봉사 사회봉사관련강좌</item>
+        <item>기타1 기타1</item>
     </string-array>
 
     <string-array name="cyber">
-        <item>경희사이버대학(학점교류)</item><!--85-->
+        <item>경희사이버대학(학점교류)</item><!--86-->
     </string-array>
 </resources>
 
