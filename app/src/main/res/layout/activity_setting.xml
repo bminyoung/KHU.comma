@@ -278,7 +278,9 @@
                         android:layout_height="match_parent"
                         android:entries="@array/classEndTime"
                         android:layout_weight="4"/>
-
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -290,7 +292,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:entries="@array/classEndTime"
-                        android:layout_weight="4"/>
+                        android:layout_weight="4" />
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="화"
+                        android:layout_weight="0.1"
+                        android:visibility="invisible"/>
+                    <Spinner
+                        android:id="@+id/setting_spin_null"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:entries="@array/classEndTime"
+                        android:layout_weight="4"
+                        android:visibility="invisible"/>
 
                 </LinearLayout>
 
@@ -316,6 +335,9 @@
                         android:layout_height="match_parent"
                         android:entries="@array/classEndTime"
                         android:layout_weight="4"/>
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -329,6 +351,9 @@
                         android:layout_height="match_parent"
                         android:entries="@array/classEndTime"
                         android:layout_weight="4"/>
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent" />
 
                     <TextView
                         android:layout_width="wrap_content"

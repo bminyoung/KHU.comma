@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@mipmap/comma"
     android:orientation="vertical"
     tools:context="comma.khutimetablehelper.MainActivity">
 
@@ -56,10 +56,10 @@
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="응"
+            android:layout_height="10dp"
             android:visibility="invisible"
             android:clickable="false"/>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

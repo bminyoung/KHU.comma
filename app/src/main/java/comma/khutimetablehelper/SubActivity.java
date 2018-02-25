@@ -64,7 +64,7 @@ public class SubActivity extends AppCompatActivity {
         if(first) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
-            dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 50개까지 선택이 가능합니다.\n " +
+            dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
                     "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다. ");
             dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
@@ -362,7 +362,7 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View view) {
 
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if (SubActivity.madapter.getCount() < 50) {
+                if (SubActivity.madapter.getCount() < 13) {
                     if (SubActivity.isValid(selectedSubject)) {
                         int i = 0;
                         SubActivity.madapter.additem(selectedSubject);
