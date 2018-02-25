@@ -5,7 +5,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/maderesult_lstv_name"
@@ -15,12 +16,12 @@
         android:layout_weight="1"
         android:paddingLeft="35dp"/>
 
-
     <ImageButton
+        android:id="@+id/maderesult_btn_look"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@mipmap/look"
         android:layout_gravity="right"
-        android:id="@+id/maderesult_btn_look"/>
+        android:layout_marginRight="20dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
