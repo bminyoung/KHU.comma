@@ -154,26 +154,30 @@ public class MadeResultActivity extends AppCompatActivity {
                 if (filteringNumber) {
                     Log.d("tag", "minyoung 필수랑 겹쳐서 제외 : " + filteredSubSubject.get(i + j).cName);
                 }
-                if (spinStatus.get(1) == 0) {
+                if (spinStatus.get(2) == 0) {
                     filterStartTime(spinValue.get(2), subSubject.get(i + j).cStart);
                 }
-                if (spinStatus.get(3) == 0) {
+                if (spinStatus.get(4) == 0) {
+                    Log.d("tag", "minyoung 4번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
                     filterBlankDay(spinValue.get(4), subSubject.get(i + j).cDay);
                 }
-                if (spinStatus.get(5) == 0) {
-                    filterLunchTime(spinValue.get(6), spinValue.get(7), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                if (spinStatus.get(1) == 0) {
+                    Log.d("tag", "minyoung 1번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    filterLunchTime(spinValue.get(3), spinValue.get(4), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
-                if (spinStatus.get(6) == 0) {
+                if (spinStatus.get(7) == 0) {
+                    Log.d("tag", "minyoung 7번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
                     filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
-                if (spinStatus.get(9) == 0) {
+                if (spinStatus.get(3) == 0) {
+                    Log.d("tag", "minyoung 3번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
                     filterDayEndTime(subSubject.get(i + j).cDay, subSubject.get(i + j).cEnd);
                 }
             }
 //            Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
             if (filteringNumber) {
                 for (int j = 0; j < filterCount + 1; j++) {
-//                    Log.d("tag", "minyoung filteredSubSubject.remove(" + i + ") : " + filteredSubSubject.get(i).cName);
+                    Log.d("tag", "minyoung filteredSubSubject.remove(" + i + ") : " + filteredSubSubject.get(i).cName);
                     filteredSubSubject.remove(i);       // 문제발생 : 2과목연속으로나오면 같이지워야됨.
                 }
                 if (i != 0) {
@@ -351,19 +355,19 @@ public class MadeResultActivity extends AppCompatActivity {
     public void filterStartTime(int firstTimeSpinnerNum, double subSubjectStartTime) {
         switch (firstTimeSpinnerNum) {
             case 1:
-                if (subSubjectStartTime < 10) {
+                if (subSubjectStartTime < 10.0) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 10시 이전이라서 제외 : ");
                 }
                 break;
             case 2:
-                if (subSubjectStartTime < 11) {
+                if (subSubjectStartTime < 11.0) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 11시 이전이라서 제외 : ");
                 }
                 break;
             case 3:
-                if (subSubjectStartTime < 12) {
+                if (subSubjectStartTime < 12.0) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 12시 이전이라서 제외 : ");
                 }
@@ -459,23 +463,25 @@ public class MadeResultActivity extends AppCompatActivity {
 
     public void filterMaxLectureTime(double subSubjectStartTime, double subSubjectEndTime) {
         double calculatedTime = subSubjectEndTime - subSubjectStartTime;
+
+
         switch (spinValue.get(8)) {
             case 0:
                 if (calculatedTime > 1.5) {
                     filteringNumber = true;
-                    Log.d("tag", "minyoung 늦게끝나서 제외 : ");
+                    Log.d("tag", "minyoung 길어서 제외 : ");
                 }
                 break;
             case 1:
                 if (calculatedTime > 3.0) {
                     filteringNumber = true;
-                    Log.d("tag", "minyoung 늦게끝나서 제외 : ");
+                    Log.d("tag", "minyoung 길어서 제외 : ");
                 }
                 break;
             case 2:
                 if (calculatedTime > 4.5) {
                     filteringNumber = true;
-                    Log.d("tag", "minyoung 늦게끝나서 제외 : ");
+                    Log.d("tag", "minyoung 길어서 제외 : ");
                 }
                 break;
         }
@@ -595,13 +601,9 @@ public class MadeResultActivity extends AppCompatActivity {
                     triplePluralChecker[l] = 0;
                 }
                 for (int k = 0; k < tmpSubSubject.size() - 1; k++) {
-//                    Log.d("tag","minyoung error check : size : " + tmpSubSubject.size());
-//                    Log.d("tag","minyoung error check : k    : " + k);
                     for (int l = k + 1; l < tmpSubSubject.size(); l++) {
                         if (pluralCount[k] == 0) {
                             if (tmpSubSubject.get(k).cNum.equals(tmpSubSubject.get(l).cNum)) {
-//                                Log.d("tag","minyoung 중복과목 :"+tmpSubSubject.get(k).cNum + "&&" + tmpSubSubject.get(l).cNum);
-//                                Log.d("tag","minyoung 중복과목 :"+tmpSubSubject.get(k).cName + "&&" + tmpSubSubject.get(l).cName);
                                 pluralChecker[k] = l;
                                 pluralCount[k] = 1;
                                 pluralCount[l] = 3;     // 이미 다른곳에서 중복된걸로 체크된경우
@@ -613,21 +615,10 @@ public class MadeResultActivity extends AppCompatActivity {
                                 pluralCount[k]++;
                             }
                         }
-//                        Log.d("tag","minyoung pluralCount["+k+"] : " + pluralCount[k]); // >> 두번출력이유??
                     }
                 }
-//                Log.d("tag","minyoung error check : " + tmpSubSubject.get(j).cStart);  // 문제없음
-//                Log.d("tag","minyoung error check : " + tmpSubSubject.get(pluralChecker[j]).cStart); // pluralChecker[j] 가 문제 >> 해결된듯?
 
-                Log.d("tag", "minyoung pluralCount : " + pluralCount[j]);
-                Log.d("tag", "minyoung 과목 : " + tmpSubSubject.get(j).cName);
-                Log.d("tag", "minyoung tmpSubSubject크기 : " + tmpSubSubject.size());
-                Log.d("tag", "minyoung 현재 j값 : " + j);
-                Log.d("tag", "minyoung 실행횟수 : " + ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2));
                 blankcheck = true;
-                for (int k = 0; k < 26; k++) {
-//                        Log.d("tag","minyoung Cell["+k+"] : "+SubjectCell[k][0]+SubjectCell[k][1]+SubjectCell[k][2]+SubjectCell[k][3]+SubjectCell[k][4]);
-                }
 
                 switch (pluralCount[j]) {//중복횟수만큼
                     case 0:
