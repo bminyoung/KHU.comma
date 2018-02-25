@@ -520,7 +520,7 @@ public class MadeResultActivity extends AppCompatActivity {
             needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
             for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) needSubjectStartTime + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                needSubjectCell[(int) needSubjectStartTime*2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
             }
             switch (needSubject.get(i).cDay) {
                 case 0:
@@ -1516,17 +1516,37 @@ class CustomLvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertview, ViewGroup parent) {
+    public View getView(final int position, View convertview, ViewGroup parent) {
+        final Context context = parent.getContext();
         if (convertview == null) {
-            Context context = parent.getContext();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);
-
         }
         
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
-
+        ImageButton imgBtn = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
         tv.setText("시간표 " + (position + 1));
+        final ArrayList<Subject> selected =  list.get(position);
+
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = "";
+
+                for(int i = 0; i < selected.size();i++){
+                    Subject sub = selected.get(i);
+                    msg += sub.cNum + "/" +sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+                }
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("시간표 요약");
+                dialog.setMessage(msg);
+                dialog.setNeutralButton("확인",null);
+                dialog.show();
+            }
+        });
+
+
         return convertview;
     }
 }
