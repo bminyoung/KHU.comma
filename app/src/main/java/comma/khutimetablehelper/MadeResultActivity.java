@@ -148,7 +148,7 @@ public class MadeResultActivity extends AppCompatActivity {
             if (i < filteredSubSubject.size() - 2) {
                 tripleFilterCounting(i);
             }
-//            Log.d("tag", "minyoung 중복횟수 : " + filterCount);
+            Log.d("tag", "minyoung 중복횟수 : " + filterCount);
             for (int j = 0; j < filterCount + 1; j++) {
                 filterStackNeedSubject(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd, subSubject.get(i + j).cDay);
                 if (filteringNumber) {
@@ -158,23 +158,24 @@ public class MadeResultActivity extends AppCompatActivity {
                     filterStartTime(spinValue.get(4), subSubject.get(i + j).cStart);
                 }
                 if (spinStatus.get(5) == 0) {
-                    Log.d("tag", "minyoung 4번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 공휴일 : " + filteredSubSubject.get(i + j).cName);
                     filterBlankDay(spinValue.get(11), subSubject.get(i + j).cDay);
                 }
                 if (spinStatus.get(1) == 0) {
-                    Log.d("tag", "minyoung 1번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 점심시간 : " + filteredSubSubject.get(i + j).cName +".."+ filteredSubSubject.get(i+j).cDay);
+                    Log.d("tag","minyoung " + subSubject.get(i+j).cStart + " / " + subSubject.get(i+j).cEnd);
                     filterLunchTime(spinValue.get(2), spinValue.get(3), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(6) == 0) {
-                    Log.d("tag", "minyoung 7번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 과목길이 : " + filteredSubSubject.get(i + j).cName);
                     filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(3) == 0) {
-                    Log.d("tag", "minyoung 3번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 끝나는시간 : " + filteredSubSubject.get(i + j).cName);
                     filterDayEndTime(subSubject.get(i + j).cDay, subSubject.get(i + j).cEnd);
                 }
             }
-//            Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
+            Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
             if (filteringNumber) {
                 for (int j = 0; j < filterCount + 1; j++) {
                     Log.d("tag", "minyoung filteredSubSubject.remove(" + i + ") : " + filteredSubSubject.get(i).cName);
@@ -395,22 +396,22 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         switch (lunchEndTimeSpinnerNum) {
             case 0:
-                tmpLunchStartTime = 12.0;
+                tmpLunchEndTime = 12.0;
                 break;
             case 1:
-                tmpLunchStartTime = 12.5;
+                tmpLunchEndTime = 12.5;
                 break;
             case 2:
-                tmpLunchStartTime = 13.0;
+                tmpLunchEndTime = 13.0;
                 break;
             case 3:
-                tmpLunchStartTime = 13.5;
+                tmpLunchEndTime = 13.5;
                 break;
             case 4:
-                tmpLunchStartTime = 14.0;
+                tmpLunchEndTime = 14.0;
                 break;
         }
-        if (!(subSubjectEndTime < tmpLunchStartTime || subSubjectStartTime > tmpLunchEndTime)) {
+        if (!(subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime)) {
             filteringNumber = true;
             Log.d("tag", "minyoung 점심시간이라서 제외 : ");
         }
@@ -1132,7 +1133,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
-                                    if (spinValue.get(10) < Maxblank) {
+                                    if (spinValue.get(10+3) < Maxblank) {
                                         blankOk = false;
                                         break;
                                     }
@@ -1181,9 +1182,11 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         }
         if (selectedSubSubject.size() < 10) {
-            selectedSubSubject.add(new ArrayList<Subject>());
-            for (int i = 0; i < needSubject.size(); i++) {
-                selectedSubSubject.get(selectedSubSubject.size() - 1).add(needSubject.get(i));
+            if(!selectedSubSubject.contains(needSubject)) {
+                selectedSubSubject.add(new ArrayList<Subject>());
+                for (int i = 0; i < needSubject.size(); i++) {
+                    selectedSubSubject.get(selectedSubSubject.size() - 1).add(needSubject.get(i));
+                }
             }
         }
 
