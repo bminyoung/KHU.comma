@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -54,8 +55,8 @@ public class SettingActivity extends AppCompatActivity {
         if(first) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
-            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.");
-            dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
+            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
         }
 
@@ -65,6 +66,19 @@ public class SettingActivity extends AppCompatActivity {
         subSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("SubSubject");
 
         SpinnerInit();
+
+        ImageButton warningBtn = (ImageButton) findViewById(R.id.setting_btn_warning);
+
+        warningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SettingActivity.this);
+                dialog.setTitle("사용법");
+                dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.");
+                dialog.setPositiveButton("확인", null);
+                dialog.show();
+            }
+        });
 
         Button nextBtn = (Button) findViewById(R.id.setting_btn_next);
 

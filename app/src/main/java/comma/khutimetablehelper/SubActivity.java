@@ -65,8 +65,8 @@ public class SubActivity extends AppCompatActivity {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
             dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
-                    "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다. ");
-            dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
+                    "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
         }
 
@@ -88,6 +88,20 @@ public class SubActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ImageButton warningBtn = (ImageButton) findViewById(R.id.sub_btn_warning);
+
+        warningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SubActivity.this);
+                dialog.setTitle("사용법");
+                dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
+                        "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다..");
+                dialog.setPositiveButton("확인", null);
+                dialog.show();
+            }
+        }); //주의사항 버튼
 
         //검색버튼
         ImageButton searchBtn = (ImageButton) findViewById(R.id.sub_btn_searchButton);
