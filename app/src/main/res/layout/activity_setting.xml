@@ -485,7 +485,10 @@
 
                 </LinearLayout>
                 <!--하루강의갯수 끝-->
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4100ad94dfce45d8c1e8d347d1ad21dbac877b2
             </LinearLayout>
 
         </ScrollView>

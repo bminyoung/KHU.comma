@@ -127,6 +127,10 @@ public class SubActivity extends AppCompatActivity {
                 listDataHeader.clear();
                 lastExpandedPosition = -1;
                 prepareListData(position);
+
+                for(int i=0; i<explistAdapter.getGroupCount();i++){
+                    expListView.collapseGroup(i);
+                }
                 explistAdapter.notifyDataSetChanged();
             }
 

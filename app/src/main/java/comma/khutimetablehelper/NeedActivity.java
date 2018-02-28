@@ -117,6 +117,10 @@ public class NeedActivity extends Activity {
                 listDataChild.clear();
                 listDataHeader.clear();
                 prepareListData(position);
+
+                for (int i= 0; i < explistAdapter.getGroupCount();i++){//스피너 값 변경시 열려있는 그룹 닫기
+                expListView.collapseGroup(i);
+                }
                 explistAdapter.notifyDataSetChanged();
             }
 
@@ -143,6 +147,10 @@ public class NeedActivity extends Activity {
             }
         });
     }//온크리에이트의 끝
+
+
+
+
 
     //prepareListData 안에서 쓰는 함수
     public void setList(String[] college, int major) {
