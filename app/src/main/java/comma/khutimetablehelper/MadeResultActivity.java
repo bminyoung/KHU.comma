@@ -1,10 +1,14 @@
 package comma.khutimetablehelper;
 
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.widget.TextViewCompat;
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +62,71 @@ public class MadeResultActivity extends AppCompatActivity {
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
+    public class CustomProgressDialog extends ProgressDialog {
+        public CustomProgressDialog(Context context) {
+            super(context);
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+    }
+
+    // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
+    private class CheckTypesTask extends AsyncTask<Integer, String, Integer> {
+        private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
+        private ProgressBar bar;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.custom_progress_bar);
+            bar = progressDialog.findViewById(R.id.maderesult_progressbar_bar);
+            bar.setProgress(0);
+            bar.setMax(100);
+            super.onPreExecute();
+        }
+
+        //excute()실행시 실행됨
+        @Override
+        protected Integer doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
+            final int taskCnt = 10; //작업량
+            publishProgress("max", Integer.toString(taskCnt));
+
+            for (int i = 0; i < taskCnt; i++) {
+                try {
+                    Thread.sleep(1000);
+//                    bar.setProgress(20*i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress("progress", Integer.toString(i));
+            }
+            return taskCnt;
+        }
+
+        // publicshProgress()에서 넘겨준 데이터들 받음
+        protected void onProgressUpdate(String... progress) {
+            if(progress[0].equals("progress")){
+                bar.setProgress(Integer.parseInt(progress[1]));
+            }
+            else if(progress[0].equals("max")){
+                bar.setMax(Integer.parseInt(progress[1]));
+            }
+        }
+
+        //doInBackground()가 종료되면 실행됨
+        @Override
+        protected void onPostExecute(Integer result) {
+            progressDialog.dismiss();
+            super.onPostExecute(result);
+        }
+    } //프로그래스바 여기까지
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        CheckTypesTask task = new CheckTypesTask();
+        task.execute(); //인수로 작업량을 넘겨줘도됨
         setContentView(R.layout.activity_maderesult);
 
         ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
@@ -83,7 +150,6 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +214,7 @@ public class MadeResultActivity extends AppCompatActivity {
             if (i < filteredSubSubject.size() - 2) {
                 tripleFilterCounting(i);
             }
-//            Log.d("tag", "minyoung 중복횟수 : " + filterCount);
+            Log.d("tag", "minyoung 중복횟수 : " + filterCount);
             for (int j = 0; j < filterCount + 1; j++) {
                 filterStackNeedSubject(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd, subSubject.get(i + j).cDay);
                 if (filteringNumber) {
@@ -158,23 +224,24 @@ public class MadeResultActivity extends AppCompatActivity {
                     filterStartTime(spinValue.get(4), subSubject.get(i + j).cStart);
                 }
                 if (spinStatus.get(5) == 0) {
-                    Log.d("tag", "minyoung 4번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 공휴일 : " + filteredSubSubject.get(i + j).cName);
                     filterBlankDay(spinValue.get(11), subSubject.get(i + j).cDay);
                 }
                 if (spinStatus.get(1) == 0) {
-                    Log.d("tag", "minyoung 1번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 점심시간 : " + filteredSubSubject.get(i + j).cName +".."+ filteredSubSubject.get(i+j).cDay);
+                    Log.d("tag","minyoung " + subSubject.get(i+j).cStart + " / " + subSubject.get(i+j).cEnd);
                     filterLunchTime(spinValue.get(2), spinValue.get(3), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(6) == 0) {
-                    Log.d("tag", "minyoung 7번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 과목길이 : " + filteredSubSubject.get(i + j).cName);
                     filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(3) == 0) {
-                    Log.d("tag", "minyoung 3번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
+                    Log.d("tag", "minyoung 끝나는시간 : " + filteredSubSubject.get(i + j).cName);
                     filterDayEndTime(subSubject.get(i + j).cDay, subSubject.get(i + j).cEnd);
                 }
             }
-//            Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
+            Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
             if (filteringNumber) {
                 for (int j = 0; j < filterCount + 1; j++) {
                     Log.d("tag", "minyoung filteredSubSubject.remove(" + i + ") : " + filteredSubSubject.get(i).cName);
@@ -303,11 +370,9 @@ public class MadeResultActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeTableTitle.getText().length() == 0) {
                             Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                        }
-                        else if(AppContext.timeTableNameList.contains(TimeTableTitle.getText()+"")){
+                        } else if (AppContext.timeTableNameList.contains(TimeTableTitle.getText() + "")) {
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "은(는) 이미 있습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "이(가) 저장되었습니다", Toast.LENGTH_LONG).show();
                             SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
                         }
@@ -325,6 +390,7 @@ public class MadeResultActivity extends AppCompatActivity {
     // 2개로 나뉜 시간 체크
     public void filterCounting(int subSubjectNum) {
         if (subSubject.get(subSubjectNum).cNum.equals(subSubject.get(subSubjectNum + 1).cNum)) {
+            Log.d("tag", "minyoung filteredSubject.size("+subSubjectNum +") : " + filteredSubSubject.get(subSubjectNum).cName +" / " + filteredSubSubject.get(subSubjectNum + 1).cName);
             filterCount = 1;
         }
     }
@@ -395,24 +461,27 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         switch (lunchEndTimeSpinnerNum) {
             case 0:
-                tmpLunchStartTime = 12.0;
+                tmpLunchEndTime = 12.0;
                 break;
             case 1:
-                tmpLunchStartTime = 12.5;
+                tmpLunchEndTime = 12.5;
                 break;
             case 2:
-                tmpLunchStartTime = 13.0;
+                tmpLunchEndTime = 13.0;
                 break;
             case 3:
-                tmpLunchStartTime = 13.5;
+                tmpLunchEndTime = 13.5;
                 break;
             case 4:
-                tmpLunchStartTime = 14.0;
+                tmpLunchEndTime = 14.0;
                 break;
         }
-        if (!(subSubjectEndTime < tmpLunchStartTime || subSubjectStartTime > tmpLunchEndTime)) {
-            filteringNumber = true;
+        if (subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime) {
+
+        }
+        else{
             Log.d("tag", "minyoung 점심시간이라서 제외 : ");
+            filteringNumber = true;
         }
     }
 
@@ -526,7 +595,7 @@ public class MadeResultActivity extends AppCompatActivity {
             needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
             for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) needSubjectStartTime*2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                needSubjectCell[(int) needSubjectStartTime * 2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
             }
             switch (needSubject.get(i).cDay) {
                 case 0:
@@ -1132,7 +1201,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
-                                    if (spinValue.get(10)+3 < Maxblank) {
+                                    if (spinValue.get(10+3) < Maxblank) {
                                         blankOk = false;
                                         break;
                                     }
@@ -1181,9 +1250,11 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         }
         if (selectedSubSubject.size() < 10) {
-            selectedSubSubject.add(new ArrayList<Subject>());
-            for (int i = 0; i < needSubject.size(); i++) {
-                selectedSubSubject.get(selectedSubSubject.size() - 1).add(needSubject.get(i));
+            if(!selectedSubSubject.contains(needSubject)) {
+                selectedSubSubject.add(new ArrayList<Subject>());
+                for (int i = 0; i < needSubject.size(); i++) {
+                    selectedSubSubject.get(selectedSubSubject.size() - 1).add(needSubject.get(i));
+                }
             }
         }
 
@@ -1224,7 +1295,7 @@ class CustomLvAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);
         }
-        ImageButton imgbtn_look = (ImageButton)convertview.findViewById(R.id.maderesult_btn_look);
+        ImageButton imgbtn_look = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
 
         imgbtn_look.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1235,22 +1306,22 @@ class CustomLvAdapter extends BaseAdapter {
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
         ImageButton imgBtn = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
         tv.setText("시간표 " + (position + 1));
-        final ArrayList<Subject> selected =  list.get(position);
+        final ArrayList<Subject> selected = list.get(position);
 
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg = "";
 
-                for(int i = 0; i < selected.size();i++){
+                for (int i = 0; i < selected.size(); i++) {
                     Subject sub = selected.get(i);
-                    msg += sub.cNum + "/" +sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                 dialog.setTitle("시간표 요약");
                 dialog.setMessage(msg);
-                dialog.setNeutralButton("확인",null);
+                dialog.setNeutralButton("확인", null);
                 dialog.show();
             }
         });
