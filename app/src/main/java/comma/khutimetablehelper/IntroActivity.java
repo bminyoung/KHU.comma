@@ -1,12 +1,17 @@
 package comma.khutimetablehelper;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,13 +43,26 @@ public class IntroActivity extends AppCompatActivity {
         },2000);
     }
 
+//    @Override
+//    protected void onStart() {
+//
+//        super.onStart();
+//    }
+
     public void loadFile() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SaveList";
-        File dirFile = new File(path);
-        dirFile.mkdirs();
-        String[] fileList = dirFile.list();
-        for(int i = 0; i< fileList.length; i++) {
-            AppContext.timeTableNameList.add(fileList[i].substring(0,fileList[i].length()-4));
+        String path = Environment.getExternalStorageDirectory().getPath() + "";
+        File dirFile = new File(path, "/SaveList");
+        if(!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+
+        Log.d("tag", "minyoung" + dirFile.exists() + "/" + (dirFile == null) + "/" + dirFile.getAbsolutePath());
+
+        if(dirFile.exists()){
+            String[] fileList = dirFile.list();
+            for (int i = 0; i < fileList.length; i++) {
+                AppContext.timeTableNameList.add(fileList[i].substring(0, fileList[i].length() - 4));
+            }
         }
     }
 

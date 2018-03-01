@@ -89,7 +89,7 @@ public class MadeResultActivity extends AppCompatActivity {
         //excute()실행시 실행됨
         @Override
         protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
-            final int taskCnt = 10; //작업량
+            final int taskCnt = 1; //작업량
             publishProgress("max", Integer.toString(taskCnt));
 
             for (int i = 0; i < taskCnt; i++) {
@@ -252,7 +252,6 @@ public class MadeResultActivity extends AppCompatActivity {
                     i--;
                 }
             }
-            i = i + filterCount;
             filteringNumber = false;
             filterCount = 0;
         }
