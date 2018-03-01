@@ -23,7 +23,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        loadFile();
+//        loadFile();
         // AppContext.booleanArray = readBoolean();
 
         // 2초동안 띄우고 다음화면

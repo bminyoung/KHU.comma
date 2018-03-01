@@ -252,7 +252,9 @@ public class MadeResultActivity extends AppCompatActivity {
                     i--;
                 }
             }
-            i = i + filterCount;
+            else {
+                i = i + filterCount;
+            }
             filteringNumber = false;
             filterCount = 0;
         }
