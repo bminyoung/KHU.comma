@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
-        //saveBoolean(); 저장할 불린 배열 인수로 넣어줘라
+        saveBoolean(AppContext.first); //저장할 불린 배열 인수로 넣어줘라
         super.onDestroy();
     }
 
