@@ -54,20 +54,22 @@ public class NeedActivity extends Activity {
     private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
     protected static CustomListAdapter madapter;
 
-    //처음화면 뜰때 다이얼로그 boolean 값 선언
-    public static boolean first = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need);
 
-        if (first) {
+        if (AppContext.first[0]) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("사용법");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
-                    "이 화면에서 선택해야합니다. (ex 사이버 강의)\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
-            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
+                    "이 화면에서 선택해야합니다. (ex 사이버 강의)\n* 필수과목은 24학점까지 선택가능합니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    AppContext.first[0] = false;
+                }
+            });
             dialog.show();
         }
 
@@ -260,21 +262,6 @@ public class NeedActivity extends Activity {
                 setList(college, 86);
                 break;
         }
-    }
-
-    // DialogInterface.OnClickListener 인터페이스를 구현
-    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            ChangeFirst();
-        }
-    };
-
-    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
-    protected boolean ChangeFirst() {
-        first = false;
-        return first;
     }
 
     protected void onDestroy() {

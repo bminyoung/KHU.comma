@@ -16,6 +16,7 @@
             android:background="#80057DE1">
 
             <TextView
+                android:id="@+id/setting_tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -26,11 +27,11 @@
 
             <ImageButton
                 android:id="@+id/setting_btn_warning"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toLeftOf="@+id/setting_btn_next"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/setting_tv_title"
                 android:background="@mipmap/warning_icon"/>
 
             <Button

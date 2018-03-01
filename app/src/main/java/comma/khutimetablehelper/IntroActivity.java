@@ -29,7 +29,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
         loadFile();
-        // AppContext.booleanArray = readBoolean();
+        AppContext.first = readBoolean();
 
         // 2초동안 띄우고 다음화면
         Handler handler = new Handler();

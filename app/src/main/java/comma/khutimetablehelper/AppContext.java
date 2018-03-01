@@ -23,6 +23,15 @@ public class AppContext extends Application {
     static ArrayList<ArrayList<Subject>> timeTableList = new ArrayList<ArrayList<Subject>>(); // LoadResult에서 보여줄 저장된 시간표 목록
     static ArrayList<String> timeTableNameList = new ArrayList<String>(); // 저장된 시간표 이름 목록
 
+    //처음화면 뜰때 다이얼로그 boolean 값 선언
+    public static boolean[] first = new boolean[6];
+    //boolean 값 true 로 초기화
+    static{
+        int i ;
+        for ( i = 0 ; i < first.length ; i++ ) {
+            first[i] = true;
+        }
+    }
 }
 
 

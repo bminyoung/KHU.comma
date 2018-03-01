@@ -139,6 +139,20 @@ public class MadeResultActivity extends AppCompatActivity {
         final CustomLvAdapter adapter = new CustomLvAdapter(listData);
         listView.setAdapter(adapter);
 
+        //주의사항 버튼
+        ImageButton warningBtn = (ImageButton) findViewById(R.id.maderesult_btn_warning);
+
+        warningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+                dialog.setTitle("사용법");
+                dialog.setMessage("* 입맛에 맞게 계산된 시간표가 나오는 화면입니다.\n* 상단 오른쪽 버튼을 누르면 띄워진 시간표가 저장됩니다.\n* 여러개 시간표를 저장 할 수 있습니다.\n* 상단 외쪽 버튼을 누르면 홈 화면으로 넘어갑니다.\n* 결과가 뜨지 않는다면 과목의 수를 줄여야 합니다.\n* 계산된 시간표는 최대 10개까지만 표시됩니다.");
+                dialog.setPositiveButton("확인", null);
+                dialog.show();
+            }
+        });
+
         //저장, 메인버튼
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,6 +265,9 @@ public class MadeResultActivity extends AppCompatActivity {
                 if (i != 0) {
                     i--;
                 }
+            }
+            else {
+                i = i + filterCount;
             }
             filteringNumber = false;
             filterCount = 0;
@@ -1202,7 +1219,9 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
+
                                     if (spinValue.get(10+3) < Maxblank) {
+
                                         blankOk = false;
                                         break;
                                     }
@@ -1230,12 +1249,17 @@ public class MadeResultActivity extends AppCompatActivity {
 
             Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
             for (int j = 0; j < selectedSubSubject.size(); j++) {
+                int tmpcount = 0;
                 for (int k = j + 1; k < selectedSubSubject.size(); k++) {
-                    if (selectedSubSubject.get(j).equals(selectedSubSubject.get(k))) {
-                        Log.d("tag", "minyoung selectedSub중복제외" + j + " // " + k);
-                        selectedSubSubject.remove(k);       // 중복된 결과 제외
-                        k--;
+                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
+                        if (selectedSubSubject.get(j).equals(selectedSubSubject.get(k))) {
+                            tmpcount++;
+                        }
                     }
+                }
+                if(tmpcount==selectedSubSubject.size()){
+                    selectedSubSubject.remove(j);       // 중복된 결과 제외
+                    j--;
                 }
             }
             //조건 테스트하기전에 일단 되는경우 다넣기

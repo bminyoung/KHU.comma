@@ -26,6 +26,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sub_tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -36,11 +37,11 @@
 
                 <ImageButton
                     android:id="@+id/sub_btn_warning"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@+id/sub_btn_nextbutton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/sub_tv_title"
                     android:background="@mipmap/warning_icon"/>
 
                 <Button

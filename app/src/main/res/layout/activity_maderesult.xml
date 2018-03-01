@@ -31,6 +31,7 @@
                     android:background="@mipmap/home"/>
 
                 <TextView
+                    android:id="@+id/maderesult_tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -38,6 +39,15 @@
                     android:text="입맛대로 골라봐"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/maderesult_btn_warning"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/maderesult_tv_title"
+                    android:background="@mipmap/warning_icon"/>
 
                 <ImageButton
                     android:id="@+id/maderesult_btn_save"
