@@ -34,6 +34,15 @@
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
+                <ImageButton
+                    android:id="@+id/need_btn_warning"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@+id/need_btn_nextbutton"
+                    android:background="@mipmap/warning_icon"/>
+
                 <Button
                     android:id="@+id/need_btn_nextbutton"
                     android:layout_width="wrap_content"

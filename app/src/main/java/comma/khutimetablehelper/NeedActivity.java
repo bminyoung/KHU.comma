@@ -66,8 +66,8 @@ public class NeedActivity extends Activity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("사용법");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
-                    "이 화면에서 선택해야합니다. (ex 사이버 강의) \n");
-            dialog.setNeutralButton("다시 보지 않기", yesButtonClickListener);
+                    "이 화면에서 선택해야합니다. (ex 사이버 강의)\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
             dialog.show();
         }
 
@@ -82,6 +82,21 @@ public class NeedActivity extends Activity {
                 startActivity(intentToSub);
             }
         }); //다음버튼
+
+        ImageButton warningBtn = (ImageButton) findViewById(R.id.need_btn_warning);
+
+        warningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(NeedActivity.this);
+                dialog.setTitle("사용법");
+                dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
+                        "이 화면에서 선택해야합니다. (ex 사이버 강의)");
+                dialog.setPositiveButton("확인", null);
+                dialog.show();
+            }
+        }); //주의사항 버튼
+
         ImageButton searchBtn = (ImageButton) findViewById(R.id.need_btn_searchbutton);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +132,10 @@ public class NeedActivity extends Activity {
                 listDataChild.clear();
                 listDataHeader.clear();
                 prepareListData(position);
+
+                for (int i= 0; i < explistAdapter.getGroupCount();i++){//스피너 값 변경시 열려있는 그룹 닫기
+                expListView.collapseGroup(i);
+                }
                 explistAdapter.notifyDataSetChanged();
             }
 
@@ -143,6 +162,10 @@ public class NeedActivity extends Activity {
             }
         });
     }//온크리에이트의 끝
+
+
+
+
 
     //prepareListData 안에서 쓰는 함수
     public void setList(String[] college, int major) {
