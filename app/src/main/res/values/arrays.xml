@@ -13,14 +13,8 @@
     </string-array>
 
     <string-array name="timeFlic">
-        <item>0~30분</item>
-        <item>30분~1시간</item>
-        <item>1시간~2시간</item>
-    </string-array>
-
-    <string-array name="daycount">
-        <item>3</item>
-        <item>4</item>
+        <item>1시간~1시간30분</item>
+        <item>1시간30분~2시간</item>
     </string-array>
 
     <string-array name="weekday">
@@ -64,24 +58,16 @@
     </string-array>
 
     <string-array name="maxClassNum">
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
-    <string-array name="maxClassTime">
-        <item>1시간 30분</item>
-        <item>3시간</item>
-        <item>4시간</item>
-        <item>5시간</item>
-        <item>6시간</item>
+        <item>2개</item>
+        <item>3개</item>
+        <item>4개</item>
     </string-array>
 
     <string-array name="classEndTime">
         <item>x</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>3시</item>
+        <item>4시</item>
+        <item>5시</item>
     </string-array>
 
     <string-array name="polEco">
