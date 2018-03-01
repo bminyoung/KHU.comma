@@ -1,10 +1,14 @@
 package comma.khutimetablehelper;
 
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.widget.TextViewCompat;
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +62,71 @@ public class MadeResultActivity extends AppCompatActivity {
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
+    public class CustomProgressDialog extends ProgressDialog {
+        public CustomProgressDialog(Context context) {
+            super(context);
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+    }
+
+    // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
+    private class CheckTypesTask extends AsyncTask<Integer, String, Integer> {
+        private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
+        private ProgressBar bar;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.custom_progress_bar);
+            bar = progressDialog.findViewById(R.id.maderesult_progressbar_bar);
+            bar.setProgress(0);
+            bar.setMax(100);
+            super.onPreExecute();
+        }
+
+        //excute()실행시 실행됨
+        @Override
+        protected Integer doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
+            final int taskCnt = 10; //작업량
+            publishProgress("max", Integer.toString(taskCnt));
+
+            for (int i = 0; i < taskCnt; i++) {
+                try {
+                    Thread.sleep(1000);
+//                    bar.setProgress(20*i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress("progress", Integer.toString(i));
+            }
+            return taskCnt;
+        }
+
+        // publicshProgress()에서 넘겨준 데이터들 받음
+        protected void onProgressUpdate(String... progress) {
+            if(progress[0].equals("progress")){
+                bar.setProgress(Integer.parseInt(progress[1]));
+            }
+            else if(progress[0].equals("max")){
+                bar.setMax(Integer.parseInt(progress[1]));
+            }
+        }
+
+        //doInBackground()가 종료되면 실행됨
+        @Override
+        protected void onPostExecute(Integer result) {
+            progressDialog.dismiss();
+            super.onPostExecute(result);
+        }
+    } //프로그래스바 여기까지
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        CheckTypesTask task = new CheckTypesTask();
+        task.execute(); //인수로 작업량을 넘겨줘도됨
         setContentView(R.layout.activity_maderesult);
 
         ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
@@ -83,7 +150,6 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -155,17 +221,17 @@ public class MadeResultActivity extends AppCompatActivity {
                     Log.d("tag", "minyoung 필수랑 겹쳐서 제외 : " + filteredSubSubject.get(i + j).cName);
                 }
                 if (spinStatus.get(2) == 0) {
-                    filterStartTime(spinValue.get(2), subSubject.get(i + j).cStart);
+                    filterStartTime(spinValue.get(4), subSubject.get(i + j).cStart);
                 }
-                if (spinStatus.get(4) == 0) {
+                if (spinStatus.get(5) == 0) {
                     Log.d("tag", "minyoung 4번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
-                    filterBlankDay(spinValue.get(4), subSubject.get(i + j).cDay);
+                    filterBlankDay(spinValue.get(11), subSubject.get(i + j).cDay);
                 }
                 if (spinStatus.get(1) == 0) {
                     Log.d("tag", "minyoung 1번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
-                    filterLunchTime(spinValue.get(3), spinValue.get(4), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                    filterLunchTime(spinValue.get(2), spinValue.get(3), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
-                if (spinStatus.get(7) == 0) {
+                if (spinStatus.get(6) == 0) {
                     Log.d("tag", "minyoung 7번 무슨과목 : " + filteredSubSubject.get(i + j).cName);
                     filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
                 }
@@ -303,11 +369,9 @@ public class MadeResultActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (TimeTableTitle.getText().length() == 0) {
                             Toast.makeText(MadeResultActivity.this, "시간표이름을 입력해주세요", Toast.LENGTH_LONG).show();
-                        }
-                        else if(AppContext.timeTableNameList.contains(TimeTableTitle.getText()+"")){
+                        } else if (AppContext.timeTableNameList.contains(TimeTableTitle.getText() + "")) {
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "은(는) 이미 있습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(MadeResultActivity.this, TimeTableTitle.getText() + "이(가) 저장되었습니다", Toast.LENGTH_LONG).show();
                             SaveTimeTable(focusOn, String.valueOf(TimeTableTitle.getText()));
                         }
@@ -465,7 +529,7 @@ public class MadeResultActivity extends AppCompatActivity {
         double calculatedTime = subSubjectEndTime - subSubjectStartTime;
 
 
-        switch (spinValue.get(8)) {
+        switch (spinValue.get(12)) {
             case 0:
                 if (calculatedTime > 1.5) {
                     filteringNumber = true;
@@ -526,7 +590,7 @@ public class MadeResultActivity extends AppCompatActivity {
             needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
             for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) needSubjectStartTime*2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                needSubjectCell[(int) needSubjectStartTime * 2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
             }
             switch (needSubject.get(i).cDay) {
                 case 0:
@@ -633,78 +697,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -742,78 +758,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -829,78 +797,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -958,78 +878,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -1044,79 +916,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
-
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -1130,78 +953,30 @@ public class MadeResultActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if (spinStatus.get(4) == 0) {        //요일수가 넘어가는지 체크
-                            dayCount = 5;
-                            switch (tmpSubSubject.get(j).cDay) {
-                                case 0:
-                                    if (monDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 1:
-                                    if (tuesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 2:
-                                    if (wednesDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 3:
-                                    if (thursDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                                case 4:
-                                    if (friDayClassCount == 0) {
-                                        dayCount--;
-                                    }
-                                    break;
-                            }
-                            if (monDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (tuesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (wednesDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (thursDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (friDayClassCount == 0) {
-                                dayCount--;
-                            }
-                            if (dayCount > spinValue.get(5) + 3) {
-                                blankcheck = false;
-                            }
-                        }
                         if (spinStatus.get(7) == 0) {     // 요일별 최대강의수를 넘었는지 체크
                             switch (tmpSubSubject.get(j).cDay) {
                                 case 0:
-                                    if (monDayClassCount >= spinValue.get(9) + 2) {
+                                    if (monDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 1:
-                                    if (tuesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (tuesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 2:
-                                    if (wednesDayClassCount >= spinValue.get(9) + 2) {
+                                    if (wednesDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 3:
-                                    if (thursDayClassCount >= spinValue.get(9) + 2) {
+                                    if (thursDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
                                 case 4:
-                                    if (friDayClassCount >= spinValue.get(9) + 2) {
+                                    if (friDayClassCount >= spinValue.get(13) + 2) {
                                         blankcheck = false;
                                     }
                                     break;
@@ -1398,7 +1173,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 boolean blankOk = true;
                 Log.d("tag", "minyoung 현재학점 : " + nowCreditCount + " 최소학점 : " + getSettedMinCreditCount);
                 if (nowCreditCount >= getSettedMinCreditCount) {    // 최소학점을 넘었을때,
-                    if (spinStatus.get(2) == 0) { // 공강시간 체크
+                    if (spinStatus.get(4) == 0) { // 공강시간 체크
                         for (int k = 0; k < 5; k++) {
                             boolean startcheck = true;
                             boolean endcheck;
@@ -1421,7 +1196,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
-                                    if (spinValue.get(3) < Maxblank) {
+                                    if (spinValue.get(10) < Maxblank) {
                                         blankOk = false;
                                         break;
                                     }
@@ -1513,7 +1288,7 @@ class CustomLvAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertview = inflater.inflate(R.layout.maderesult_listitem, parent, false);
         }
-        ImageButton imgbtn_look = (ImageButton)convertview.findViewById(R.id.maderesult_btn_look);
+        ImageButton imgbtn_look = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
 
         imgbtn_look.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1524,22 +1299,22 @@ class CustomLvAdapter extends BaseAdapter {
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
         ImageButton imgBtn = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
         tv.setText("시간표 " + (position + 1));
-        final ArrayList<Subject> selected =  list.get(position);
+        final ArrayList<Subject> selected = list.get(position);
 
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg = "";
 
-                for(int i = 0; i < selected.size();i++){
+                for (int i = 0; i < selected.size(); i++) {
                     Subject sub = selected.get(i);
-                    msg += sub.cNum + "/" +sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                 dialog.setTitle("시간표 요약");
                 dialog.setMessage(msg);
-                dialog.setNeutralButton("확인",null);
+                dialog.setNeutralButton("확인", null);
                 dialog.show();
             }
         });

@@ -125,6 +125,7 @@ class ListViewAdapter extends BaseAdapter {
                                 else {
                                     changeName(AppContext.timeTableNameList.get(position), timeTableTitle.getText().toString());
                                     AppContext.timeTableNameList.set(position, timeTableTitle.getText() + ""); //이름 바꾸길
+                                    itemList.set(position, timeTableTitle.getText()+"");
                                     notifyDataSetChanged();
                                 }
                             }
