@@ -216,29 +216,29 @@ public class MadeResultActivity extends AppCompatActivity {
             }
             Log.d("tag", "minyoung 중복횟수 : " + filterCount);
             for (int j = 0; j < filterCount + 1; j++) {
-                filterStackNeedSubject(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd, subSubject.get(i + j).cDay);
+                filterStackNeedSubject(filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd, filteredSubSubject.get(i + j).cDay);
                 if (filteringNumber) {
                     Log.d("tag", "minyoung 필수랑 겹쳐서 제외 : " + filteredSubSubject.get(i + j).cName);
                 }
                 if (spinStatus.get(2) == 0) {
-                    filterStartTime(spinValue.get(4), subSubject.get(i + j).cStart);
+                    filterStartTime(spinValue.get(4), filteredSubSubject.get(i + j).cStart);
                 }
                 if (spinStatus.get(5) == 0) {
                     Log.d("tag", "minyoung 공휴일 : " + filteredSubSubject.get(i + j).cName);
-                    filterBlankDay(spinValue.get(11), subSubject.get(i + j).cDay);
+                    filterBlankDay(spinValue.get(11), filteredSubSubject.get(i + j).cDay);
                 }
                 if (spinStatus.get(1) == 0) {
                     Log.d("tag", "minyoung 점심시간 : " + filteredSubSubject.get(i + j).cName +".."+ filteredSubSubject.get(i+j).cDay);
-                    Log.d("tag","minyoung " + subSubject.get(i+j).cStart + " / " + subSubject.get(i+j).cEnd);
-                    filterLunchTime(spinValue.get(2), spinValue.get(3), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                    Log.d("tag","minyoung " + filteredSubSubject.get(i+j).cStart + " / " + filteredSubSubject.get(i+j).cEnd);
+                    filterLunchTime(spinValue.get(2), spinValue.get(3), filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(6) == 0) {
                     Log.d("tag", "minyoung 과목길이 : " + filteredSubSubject.get(i + j).cName);
-                    filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                    filterMaxLectureTime(filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(3) == 0) {
                     Log.d("tag", "minyoung 끝나는시간 : " + filteredSubSubject.get(i + j).cName);
-                    filterDayEndTime(subSubject.get(i + j).cDay, subSubject.get(i + j).cEnd);
+                    filterDayEndTime(filteredSubSubject.get(i + j).cDay, filteredSubSubject.get(i + j).cEnd);
                 }
             }
             Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
@@ -251,6 +251,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     i--;
                 }
             }
+            i = i + filterCount;
             filteringNumber = false;
             filterCount = 0;
         }
