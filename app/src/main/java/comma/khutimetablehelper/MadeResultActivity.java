@@ -69,8 +69,9 @@ public class MadeResultActivity extends AppCompatActivity {
         }
     }
 
+    // 작업에 사용할 데이터의 자료형 / 작업 진행 표시를 위한 자료형 / 작업의 결과를 표시할 자료형
     // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
-    private class CheckTypesTask extends AsyncTask<Integer, String, Integer> {
+    private class CheckTypesTask extends AsyncTask<Integer, String, Void> {
         private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
         private ProgressBar bar;
 
@@ -87,7 +88,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //excute()실행시 실행됨
         @Override
-        protected Integer doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
+        protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 10; //작업량
             publishProgress("max", Integer.toString(taskCnt));
 
@@ -100,7 +101,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
                 publishProgress("progress", Integer.toString(i));
             }
-            return taskCnt;
+            return null;
         }
 
         // publicshProgress()에서 넘겨준 데이터들 받음
@@ -115,7 +116,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //doInBackground()가 종료되면 실행됨
         @Override
-        protected void onPostExecute(Integer result) {
+        protected void onPostExecute(Void result) {
             progressDialog.dismiss();
             super.onPostExecute(result);
         }
@@ -230,29 +231,29 @@ public class MadeResultActivity extends AppCompatActivity {
             }
             Log.d("tag", "minyoung 중복횟수 : " + filterCount);
             for (int j = 0; j < filterCount + 1; j++) {
-                filterStackNeedSubject(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd, subSubject.get(i + j).cDay);
+                filterStackNeedSubject(filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd, filteredSubSubject.get(i + j).cDay);
                 if (filteringNumber) {
                     Log.d("tag", "minyoung 필수랑 겹쳐서 제외 : " + filteredSubSubject.get(i + j).cName);
                 }
                 if (spinStatus.get(2) == 0) {
-                    filterStartTime(spinValue.get(4), subSubject.get(i + j).cStart);
+                    filterStartTime(spinValue.get(4), filteredSubSubject.get(i + j).cStart);
                 }
                 if (spinStatus.get(5) == 0) {
                     Log.d("tag", "minyoung 공휴일 : " + filteredSubSubject.get(i + j).cName);
-                    filterBlankDay(spinValue.get(11), subSubject.get(i + j).cDay);
+                    filterBlankDay(spinValue.get(11), filteredSubSubject.get(i + j).cDay);
                 }
                 if (spinStatus.get(1) == 0) {
                     Log.d("tag", "minyoung 점심시간 : " + filteredSubSubject.get(i + j).cName +".."+ filteredSubSubject.get(i+j).cDay);
-                    Log.d("tag","minyoung " + subSubject.get(i+j).cStart + " / " + subSubject.get(i+j).cEnd);
-                    filterLunchTime(spinValue.get(2), spinValue.get(3), subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                    Log.d("tag","minyoung " + filteredSubSubject.get(i+j).cStart + " / " + filteredSubSubject.get(i+j).cEnd);
+                    filterLunchTime(spinValue.get(2), spinValue.get(3), filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(6) == 0) {
                     Log.d("tag", "minyoung 과목길이 : " + filteredSubSubject.get(i + j).cName);
-                    filterMaxLectureTime(subSubject.get(i + j).cStart, subSubject.get(i + j).cEnd);
+                    filterMaxLectureTime(filteredSubSubject.get(i + j).cStart, filteredSubSubject.get(i + j).cEnd);
                 }
                 if (spinStatus.get(3) == 0) {
                     Log.d("tag", "minyoung 끝나는시간 : " + filteredSubSubject.get(i + j).cName);
-                    filterDayEndTime(subSubject.get(i + j).cDay, subSubject.get(i + j).cEnd);
+                    filterDayEndTime(filteredSubSubject.get(i + j).cDay, filteredSubSubject.get(i + j).cEnd);
                 }
             }
             Log.d("tag", "minyoung filteringNumber값 체크 : " + filteringNumber);
@@ -265,6 +266,7 @@ public class MadeResultActivity extends AppCompatActivity {
                     i--;
                 }
             }
+            i = i + filterCount;
             filteringNumber = false;
             filterCount = 0;
         }
@@ -404,6 +406,7 @@ public class MadeResultActivity extends AppCompatActivity {
     // 2개로 나뉜 시간 체크
     public void filterCounting(int subSubjectNum) {
         if (subSubject.get(subSubjectNum).cNum.equals(subSubject.get(subSubjectNum + 1).cNum)) {
+            Log.d("tag", "minyoung filteredSubject.size("+subSubjectNum +") : " + filteredSubSubject.get(subSubjectNum).cName +" / " + filteredSubSubject.get(subSubjectNum + 1).cName);
             filterCount = 1;
         }
     }
@@ -489,15 +492,18 @@ public class MadeResultActivity extends AppCompatActivity {
                 tmpLunchEndTime = 14.0;
                 break;
         }
-        if (!(subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime)) {
-            filteringNumber = true;
+        if (subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime) {
+
+        }
+        else{
             Log.d("tag", "minyoung 점심시간이라서 제외 : ");
+            filteringNumber = true;
         }
     }
 
     // 공강요일 설정된 과목 걸러내기
     public void filterBlankDay(int daySpinnerNum, int subSubjectDay) {
-        if (daySpinnerNum != subSubjectDay) {
+        if (daySpinnerNum == subSubjectDay) {
             filteringNumber = true;
             Log.d("tag", "minyoung 공강요일이라서 제외 : ");
         }

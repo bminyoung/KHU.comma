@@ -10,7 +10,9 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,6 +45,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy(){
+        //saveBoolean(); 저장할 불린 배열 인수로 넣어줘라
+        super.onDestroy();
+    }
+
+    public void saveBoolean(boolean[] bool) {
+        String path = getFilesDir().getAbsolutePath();
+        String fileName = path + "/saveboolean.csv";
+        try {
+            BufferedWriter fw = new BufferedWriter(new FileWriter(fileName));
+            for (int i = 0; i < 6; i++) {
+                fw.write("" + bool[i]);
+                if (i != 6) {
+                    fw.write(",");
+                }
+            }
+            fw.flush();
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
