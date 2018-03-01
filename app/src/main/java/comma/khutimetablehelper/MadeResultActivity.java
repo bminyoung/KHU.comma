@@ -69,8 +69,9 @@ public class MadeResultActivity extends AppCompatActivity {
         }
     }
 
+    // 작업에 사용할 데이터의 자료형 / 작업 진행 표시를 위한 자료형 / 작업의 결과를 표시할 자료형
     // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
-    private class CheckTypesTask extends AsyncTask<Integer, String, Integer> {
+    private class CheckTypesTask extends AsyncTask<Integer, String, Void> {
         private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
         private ProgressBar bar;
 
@@ -87,7 +88,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //excute()실행시 실행됨
         @Override
-        protected Integer doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
+        protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 10; //작업량
             publishProgress("max", Integer.toString(taskCnt));
 
@@ -100,7 +101,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
                 publishProgress("progress", Integer.toString(i));
             }
-            return taskCnt;
+            return null;
         }
 
         // publicshProgress()에서 넘겨준 데이터들 받음
@@ -115,7 +116,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //doInBackground()가 종료되면 실행됨
         @Override
-        protected void onPostExecute(Integer result) {
+        protected void onPostExecute(Void result) {
             progressDialog.dismiss();
             super.onPostExecute(result);
         }
