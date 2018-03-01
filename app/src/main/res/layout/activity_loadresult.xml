@@ -29,11 +29,11 @@
 
             <ImageButton
                 android:id="@+id/loadresult_btn_warning"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toLeftOf="@+id/loadresult_btn_summery"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/loadresult_tv_title"
                 android:background="@mipmap/warning_icon"/>
 
             <Button
