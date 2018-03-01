@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -35,6 +36,33 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        if(AppContext.first[4]) {
+            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
+            dialog.setTitle("사용법");
+            dialog.setMessage("* 찾고 싶은 강의를 검색하세요.\n* 교수명, 강의명, 학수번호로 검색가능합니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요.");
+            dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    AppContext.first[4] = false ;
+                }
+            });
+            dialog.show();
+        }
+
+        //주의사항 버튼
+        ImageButton warningBtn = (ImageButton) findViewById(R.id.search_btn_warning);
+
+        warningBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SearchActivity.this);
+                dialog.setTitle("사용법");
+                dialog.setMessage("* 찾고 싶은 강의를 검색하세요. \n * 교수명, 강의명, 학수번호로 검색가능합니다.");
+                dialog.setPositiveButton("확인", null);
+                dialog.show();
+            }
+        });
 
         editSearch = (EditText) findViewById(R.id.search_edt_input);
         listView = (ListView) findViewById(R.id.search_lstv_list);

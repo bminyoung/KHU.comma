@@ -33,19 +33,22 @@ public class LoadResultActivity extends AppCompatActivity {
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int position ;
 
-    //처음화면 뜰때 다이얼로그 boolean 값 선언
-    public static boolean first = true ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loadresult);
 
-        if(first) {
+        if(AppContext.first[5]) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
             dialog.setMessage("* 저장된 시간표가 나오는 화면입니다. \n * 담겨진 강의 정보를 확인하고 싶다면 상단 오른쪽 버튼을 눌러주세요.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요.");
-            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
+            dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    AppContext.first[5] = false ;
+                }
+            });
             dialog.show();
         }
 
@@ -116,21 +119,6 @@ public class LoadResultActivity extends AppCompatActivity {
             file[i] = (int) temp;
         }
         return file;
-    }
-
-    // DialogInterface.OnClickListener 인터페이스를 구현
-    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            ChangeFirst() ;
-        }
-    };
-
-    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
-    protected boolean ChangeFirst() {
-        first = false ;
-        return  first;
     }
 
     private void setTextId(){

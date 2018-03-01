@@ -61,12 +61,16 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        if(first) {
+        if(AppContext.first[2]) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
-            dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
-                    "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
-            dialog.setPositiveButton("다시 보지 않기", yesButtonClickListener);
+            dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요.\n* 후보과목은 최대 12개까지 선택이 가능합니다.\n* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    AppContext.first[2] = false ;
+                }
+            });
             dialog.show();
         }
 
