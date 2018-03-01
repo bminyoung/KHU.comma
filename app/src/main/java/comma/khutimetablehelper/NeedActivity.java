@@ -510,7 +510,7 @@ class CustomListAdapter extends BaseAdapter {
                         intentSubject.remove(sub);
                     }
                 }
-                need_inum = need_inum -intentSubject.get(position).cCredit;
+                need_inum = need_inum - oData.get(position).cCredit;
                 oData.remove(position);
 
                 notifyDataSetChanged();
