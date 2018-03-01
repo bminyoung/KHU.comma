@@ -1247,12 +1247,17 @@ public class MadeResultActivity extends AppCompatActivity {
 
             Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
             for (int j = 0; j < selectedSubSubject.size(); j++) {
+                int tmpcount = 0;
                 for (int k = j + 1; k < selectedSubSubject.size(); k++) {
-                    if (selectedSubSubject.get(j).equals(selectedSubSubject.get(k))) {
-                        Log.d("tag", "minyoung selectedSub중복제외" + j + " // " + k);
-                        selectedSubSubject.remove(k);       // 중복된 결과 제외
-                        k--;
+                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
+                        if (selectedSubSubject.get(j).equals(selectedSubSubject.get(k))) {
+                            tmpcount++;
+                        }
                     }
+                }
+                if(tmpcount==selectedSubSubject.size()){
+                    selectedSubSubject.remove(j);       // 중복된 결과 제외
+                    j--;
                 }
             }
             //조건 테스트하기전에 일단 되는경우 다넣기
