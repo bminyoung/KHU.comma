@@ -71,7 +71,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
     // 작업에 사용할 데이터의 자료형 / 작업 진행 표시를 위한 자료형 / 작업의 결과를 표시할 자료형
     // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
-    private class CheckTypesTask extends AsyncTask<Integer, String, Void> {
+    private class CheckTypesTask extends AsyncTask<Integer, String, String> {
         private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
         private ProgressBar bar;
 
@@ -88,7 +88,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //excute()실행시 실행됨
         @Override
-        protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
+        protected String doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 10; //작업량
             publishProgress("max", Integer.toString(taskCnt));
 
@@ -101,6 +101,7 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
                 publishProgress("progress", Integer.toString(i));
             }
+            return null;
         }
 
         // publicshProgress()에서 넘겨준 데이터들 받음
@@ -115,9 +116,9 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //doInBackground()가 종료되면 실행됨
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            super.onPostExecute();
+            super.onPostExecute(result);
         }
     } //프로그래스바 여기까지
 
@@ -390,6 +391,7 @@ public class MadeResultActivity extends AppCompatActivity {
     // 2개로 나뉜 시간 체크
     public void filterCounting(int subSubjectNum) {
         if (subSubject.get(subSubjectNum).cNum.equals(subSubject.get(subSubjectNum + 1).cNum)) {
+            Log.d("tag", "minyoung filteredSubject.size("+subSubjectNum +") : " + filteredSubSubject.get(subSubjectNum).cName +" / " + filteredSubSubject.get(subSubjectNum + 1).cName);
             filterCount = 1;
         }
     }
@@ -475,15 +477,18 @@ public class MadeResultActivity extends AppCompatActivity {
                 tmpLunchEndTime = 14.0;
                 break;
         }
-        if (!(subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime)) {
-            filteringNumber = true;
+        if (subSubjectEndTime <= tmpLunchStartTime || subSubjectStartTime >= tmpLunchEndTime) {
+
+        }
+        else{
             Log.d("tag", "minyoung 점심시간이라서 제외 : ");
+            filteringNumber = true;
         }
     }
 
     // 공강요일 설정된 과목 걸러내기
     public void filterBlankDay(int daySpinnerNum, int subSubjectDay) {
-        if (daySpinnerNum != subSubjectDay) {
+        if (daySpinnerNum == subSubjectDay) {
             filteringNumber = true;
             Log.d("tag", "minyoung 공강요일이라서 제외 : ");
         }
