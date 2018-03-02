@@ -612,8 +612,11 @@ public class MadeResultActivity extends AppCompatActivity {
             needSubjectStartTime = needSubject.get(i).cStart - 9;
             needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
+//            SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0
+
             for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) needSubjectStartTime * 2 + j][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                needSubjectCell[(int) (needSubjectStartTime * 2 + j)][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                Log.d("tag", "minyoung Number : " + (int) (needSubjectStartTime*2 +j));
             }
             switch (needSubject.get(i).cDay) {
                 case 0:
@@ -716,7 +719,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -777,7 +782,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -816,7 +823,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k + " / " + j);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -897,7 +906,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -935,7 +946,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k + " / " + j);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -972,7 +985,9 @@ public class MadeResultActivity extends AppCompatActivity {
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
                             if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
-                                Log.d("tag", "minyoung 이미 시간이 차있습니다!" + k + " / " + j);
+                                Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
+                                Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -1248,20 +1263,29 @@ public class MadeResultActivity extends AppCompatActivity {
             }
 
             Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
-            for (int j = 0; j < selectedSubSubject.size(); j++) {
-                int tmpcount = 0;
-                for (int k = j + 1; k < selectedSubSubject.size(); k++) {
-                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
-                        if (selectedSubSubject.get(j).equals(selectedSubSubject.get(k))) {
-                            tmpcount++;
-                        }
-                    }
-                }
-                if(tmpcount==selectedSubSubject.size()){
-                    selectedSubSubject.remove(j);       // 중복된 결과 제외
-                    j--;
-                }
-            }
+//            for (int j = 0; j < selectedSubSubject.size(); j++) {
+//                int tmpcount = 0;
+//                boolean tmpflag = false;
+//                for (int k = j + 1; k < selectedSubSubject.size(); k++) {
+//                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
+//                        for (int l = 0; l < selectedSubSubject.get(j).size() ; l++) {
+//                            for(int m = 0 ; m < selectedSubSubject.get(m).size() ; m++) {
+//                                if(selectedSubSubject.get(j).get(l).equals(selectedSubSubject.get(k).get(m))) {
+//                                    tmpcount++;
+//                                }
+//                            }
+//                        }
+//                        if(tmpcount==selectedSubSubject.size()){
+//                            selectedSubSubject.remove(j);       // 중복된 결과 제외
+//                            j--;
+//                            tmpflag = true;
+//                        }
+//                    }
+//                }
+//                if(tmpflag) {
+//                    break;
+//                }
+//            }
             //조건 테스트하기전에 일단 되는경우 다넣기
             if (selectedSubSubject.size() >= 10) {
                 break;
