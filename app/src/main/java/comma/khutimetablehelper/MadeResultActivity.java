@@ -574,6 +574,20 @@ public class MadeResultActivity extends AppCompatActivity {
         }
     }
 
+    // 배열순서정리
+
+    public void calculateOrder(ArrayList<Subject> TimeTable) {
+        for(int i = 0; i < TimeTable.size() ; i++){
+            for(int j = 0; j < TimeTable.size() ; j++){
+                if(TimeTable.get(i).cRow > TimeTable.get(j).cRow){
+                    Collections.swap(TimeTable,i,j);
+                }
+            }
+        }
+    }
+
+
+
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
         int[][] needSubjectCell = new int[26][5];
@@ -1249,6 +1263,10 @@ public class MadeResultActivity extends AppCompatActivity {
                     if (blankOk) {
                         Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
                         selectedSubSubject.add(new ArrayList<Subject>());
+                        calculateOrder(OKSubSubject);   // 배열안의 순서 정렬
+                        for(int s = 0; s < OKSubSubject.size() ; s++){
+                            Log.d("tag", "minyoung 과목 순서check : " + OKSubSubject.get(s).cRow);
+                        }
                         for (int k = 0; k < OKSubSubject.size(); k++) {
                             selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
                         }
