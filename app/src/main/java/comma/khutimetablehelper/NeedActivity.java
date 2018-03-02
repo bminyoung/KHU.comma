@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,8 @@ public class NeedActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
-    static ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
+    ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
     int i = 0;
-    //확장 리스트뷰에 복사할 리스트 선언
-    List<String> mlistDataHeader;
-    HashMap<String, List<Subject>> mlistDataChild;
 
     //어느 액티비티에서 search를 호출했는지
     static final int NEED = 0;
@@ -115,8 +113,6 @@ public class NeedActivity extends Activity {
         listDataChild = new HashMap<String, List<Subject>>();
 
         // 확장리스트 뷰 어댑터 준비;
-        mlistDataChild = listDataChild;
-        mlistDataHeader = listDataHeader;
         explistAdapter = new NeedExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(explistAdapter);
 
@@ -165,10 +161,6 @@ public class NeedActivity extends Activity {
         });
     }//온크리에이트의 끝
 
-
-
-
-
     //prepareListData 안에서 쓰는 함수
     public void setList(String[] college, int major) {
         ArrayList<Subject> sub = new ArrayList<Subject>();
@@ -177,6 +169,9 @@ public class NeedActivity extends Activity {
             for (int j = 0; j < AppContext.onlySubjectList.size(); j++) {
                 if (AppContext.onlySubjectList.get(j).cDepart == i + major)
                     sub.add(AppContext.onlySubjectList.get(j));
+            }
+            for(int j = 0; j < sub.size();j++) {
+                Log.d("tag", "minyoung/"+ sub.get(j).getName());
             }
             listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
             sub.clear();
@@ -321,8 +316,8 @@ public class NeedActivity extends Activity {
 class NeedExpandableListAdapter extends BaseExpandableListAdapter {
     static int need_inum = 0;
     private Context _context;
-    private static List<String> _listDataHeader;
-    private static HashMap<String, List<Subject>> _listDataChild;
+    private List<String> _listDataHeader;
+    private HashMap<String, List<Subject>> _listDataChild;
 
 
     public NeedExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
