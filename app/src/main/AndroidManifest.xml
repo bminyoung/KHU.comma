@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeScreen" >
-        <activity android:name=".IntroActivity" >
+        <activity android:name=".PermissionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".IntroActivity"></activity>
         <activity android:name=".LoadResultActivity"></activity>
         <activity android:name=".MadeResultActivity" android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".MainActivity"></activity>
