@@ -170,9 +170,6 @@ public class NeedActivity extends Activity {
                 if (AppContext.onlySubjectList.get(j).cDepart == i + major)
                     sub.add(AppContext.onlySubjectList.get(j));
             }
-            for(int j = 0; j < sub.size();j++) {
-                Log.d("tag", "minyoung/"+ sub.get(j).getName());
-            }
             listDataChild.put(listDataHeader.get(i), (List<Subject>) sub.clone());
             sub.clear();
         }
