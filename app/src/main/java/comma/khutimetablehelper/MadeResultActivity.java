@@ -1249,7 +1249,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                 }
                                 if (endcheck) {
 
-                                    if (spinValue.get(10+3) < Maxblank) {
+                                    if (spinValue.get(10) + 3 < Maxblank) {
 
                                         blankOk = false;
                                         break;
@@ -1261,14 +1261,14 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                     }
                     if (blankOk) {
-                        Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
-                        selectedSubSubject.add(new ArrayList<Subject>());
                         calculateOrder(OKSubSubject);   // 배열안의 순서 정렬
-                        for(int s = 0; s < OKSubSubject.size() ; s++){
-                            Log.d("tag", "minyoung 과목 순서check : " + OKSubSubject.get(s).cRow);
-                        }
-                        for (int k = 0; k < OKSubSubject.size(); k++) {
-                            selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                        if(selectedSubSubject.contains(OKSubSubject)){
+                        } else {
+                            Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
+                            selectedSubSubject.add(new ArrayList<Subject>());
+                            for (int k = 0; k < OKSubSubject.size(); k++) {
+                                selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                            }
                         }
                     }
                     if (selectedSubSubject.size() >= 10) {
@@ -1281,29 +1281,7 @@ public class MadeResultActivity extends AppCompatActivity {
             }
 
             Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
-//            for (int j = 0; j < selectedSubSubject.size(); j++) {
-//                int tmpcount = 0;
-//                boolean tmpflag = false;
-//                for (int k = j + 1; k < selectedSubSubject.size(); k++) {
-//                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
-//                        for (int l = 0; l < selectedSubSubject.get(j).size() ; l++) {
-//                            for(int m = 0 ; m < selectedSubSubject.get(m).size() ; m++) {
-//                                if(selectedSubSubject.get(j).get(l).equals(selectedSubSubject.get(k).get(m))) {
-//                                    tmpcount++;
-//                                }
-//                            }
-//                        }
-//                        if(tmpcount==selectedSubSubject.size()){
-//                            selectedSubSubject.remove(j);       // 중복된 결과 제외
-//                            j--;
-//                            tmpflag = true;
-//                        }
-//                    }
-//                }
-//                if(tmpflag) {
-//                    break;
-//                }
-//            }
+
             //조건 테스트하기전에 일단 되는경우 다넣기
             if (selectedSubSubject.size() >= 10) {
                 break;

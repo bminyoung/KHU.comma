@@ -22,6 +22,9 @@ public class PermissionActivity extends AppCompatActivity{
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         1);
             }
+        }else{
+            Intent intent = new Intent(PermissionActivity.this, IntroActivity.class);
+            startActivity(intent);
         }
 
 
