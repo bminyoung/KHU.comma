@@ -516,31 +516,31 @@ public class MadeResultActivity extends AppCompatActivity {
 
         switch (subSubjectDay) {
             case 0:
-                if (subSubjectEndTime > spinValue.get(11) + 3) {
+                if (subSubjectEndTime > spinValue.get(5) + 3) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 1:
-                if (subSubjectEndTime > spinValue.get(12) + 3) {
+                if (subSubjectEndTime > spinValue.get(6) + 3) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 2:
-                if (subSubjectEndTime > spinValue.get(13) + 3) {
+                if (subSubjectEndTime > spinValue.get(7) + 3) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 3:
-                if (subSubjectEndTime > spinValue.get(14) + 3) {
+                if (subSubjectEndTime > spinValue.get(8) + 3) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 4:
-                if (subSubjectEndTime > spinValue.get(15) + 3) {
+                if (subSubjectEndTime > spinValue.get(9) + 3) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
@@ -1226,12 +1226,12 @@ public class MadeResultActivity extends AppCompatActivity {
                 Log.d("tag", "minyoung 현재학점 : " + nowCreditCount + " 최소학점 : " + getSettedMinCreditCount);
                 if (nowCreditCount >= getSettedMinCreditCount) {    // 최소학점을 넘었을때,
                     if (spinStatus.get(4) == 0) { // 공강시간 체크
-                        for (int k = 0; k < 5; k++) {
+                        for (int l = 0; l < 5; l++) {
                             boolean startcheck = true;
                             boolean endcheck;
                             int blankcount = 0;
                             int Maxblank = 0;
-                            for (int l = 0; k < 26; k++) {
+                            for (int k = 0; k < 26; k++) {
                                 if (SubjectCell[k][l] != 0) {
                                     startcheck = false;
                                     endcheck = true;
@@ -1248,9 +1248,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
-
                                     if (spinValue.get(10) + 3 < Maxblank) {
-
                                         blankOk = false;
                                         break;
                                     }
