@@ -516,31 +516,46 @@ public class MadeResultActivity extends AppCompatActivity {
 
         switch (subSubjectDay) {
             case 0:
-                if (subSubjectEndTime > spinValue.get(5) + 3) {
+                if(spinValue.get(5) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(5) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 1:
-                if (subSubjectEndTime > spinValue.get(6) + 3) {
+                if(spinValue.get(6) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(6) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 2:
-                if (subSubjectEndTime > spinValue.get(7) + 3) {
+                if(spinValue.get(7) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(7) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 3:
-                if (subSubjectEndTime > spinValue.get(8) + 3) {
+                if(spinValue.get(8) == 0) {
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(8) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 4:
-                if (subSubjectEndTime > spinValue.get(9) + 3) {
+                if(spinValue.get(9) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(9) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
