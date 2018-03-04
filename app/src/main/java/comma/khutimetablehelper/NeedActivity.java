@@ -9,6 +9,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,7 +51,7 @@ public class NeedActivity extends Activity {
 
     //리스트뷰
     private ListView mlistView = null;
-    private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
+    static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
     protected static CustomListAdapter madapter;
 
     @Override
@@ -61,7 +63,7 @@ public class NeedActivity extends Activity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("사용법");
             dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
-                    "이 화면에서 선택해야합니다. (ex 사이버 강의)\n* 필수과목은 24학점까지 선택가능합니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+                    "이 화면에서 선택해야합니다. (ex 사이버 강의)\n* 필수과목은 24학점까지 선택가능합니다.\n*필수에서 선택한 과목들은 파란색으로 표시됩니다. \n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
             dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -79,6 +81,10 @@ public class NeedActivity extends Activity {
             @Override
             public void onClick(View view) {
                 intentToSub.putExtra("NeedSubject", needSubject);
+                intentToSub.putExtra("NeedList", selectedNeedList);
+                for(int i = 0; i < selectedNeedList.size();i++) {
+                    Log.d("tag", "minyoung/" + selectedNeedList.get(i).getName());
+                }
                 startActivity(intentToSub);
             }
         }); //다음버튼
@@ -91,7 +97,7 @@ public class NeedActivity extends Activity {
                 android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(NeedActivity.this);
                 dialog.setTitle("사용법");
                 dialog.setMessage("* 본인이 꼭! 들어야 하는 과목을 선택하세요.\n * 강의 시간이 따로 명시되어있지 않은 강의를 추가하고 싶으면 " +
-                        "이 화면에서 선택해야합니다. (ex 사이버 강의)");
+                        "이 화면에서 선택해야합니다. (ex 사이버 강의)\n*필수에서 선택한 과목들은 파란색으로 표시됩니다.");
                 dialog.setPositiveButton("확인", null);
                 dialog.show();
             }
@@ -145,7 +151,7 @@ public class NeedActivity extends Activity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.need_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedNeedList, needSubject);
+        madapter = new CustomListAdapter(selectedNeedList, needSubject, NEED);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
@@ -438,10 +444,12 @@ class CustomListAdapter extends BaseAdapter {
     private ArrayList<Subject> oData = new ArrayList<Subject>();
     private ArrayList<Subject> intentSubject = new ArrayList<Subject>(); //다음으로 넘겨줄 과목값
     LayoutInflater inflater = null;
+    int whichActivity;
 
-    CustomListAdapter(ArrayList<Subject> list, ArrayList<Subject> intentSubject) {
+    CustomListAdapter(ArrayList<Subject> list, ArrayList<Subject> intentSubject, int whichActivity) {
         oData = list;
         this.intentSubject = intentSubject;
+        this.whichActivity = whichActivity;
     }
 
     @Override
@@ -473,8 +481,20 @@ class CustomListAdapter extends BaseAdapter {
 
         Button summaryBtn = convertview.findViewById(R.id.need_lstv_summaryBtn);
         ImageButton deleteBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_deleteBtn);
+        LinearLayout layout = convertview.findViewById(R.id.need_lstv_layout);
         final TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
         need_lstv_tv_choosedsubject.setText(selected.getName());
+
+        if(whichActivity == SubActivity.SUB){
+            if(position < NeedActivity.selectedNeedList.size()){
+                Log.d("tag", "minyoung/"+position+""+SubActivity.needSubject.size());
+                deleteBtn.setVisibility(View.INVISIBLE);
+                layout.setBackgroundColor(Color.parseColor("#2096DCFA"));
+            }else{
+                deleteBtn.setVisibility(View.VISIBLE);
+                layout.setBackgroundColor(Color.WHITE);
+            }
+        }
 
         summaryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
