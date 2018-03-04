@@ -90,10 +90,12 @@ public class MadeResultActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 1; //작업량
+
             publishProgress("max", Integer.toString(taskCnt));
 
             for (int i = 0; i < taskCnt; i++) {
                 try {
+
                     Thread.sleep(1000);
 //                    bar.setProgress(20*i);
                 } catch (InterruptedException e) {
@@ -630,6 +632,27 @@ public class MadeResultActivity extends AppCompatActivity {
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
         int[][] needSubjectCell = new int[26][5];
+        int creditIntent;
+        int[] pluralChecker = new int[filteredSubSubject.size()];
+        int[] pluralCount = new int[filteredSubSubject.size()];
+        int[] triplePluralChecker = new int[filteredSubSubject.size()];
+        int intentMonDayClassCount;
+        int intentTuesDayClassCount;
+        int intentWedDayClassCount;
+        int intentThursDayClassCount;
+        int intentFriDayClassCount;
+        boolean blankcheck;
+        int getSettedMinCreditCount = spinValue.get(0) + 9;
+        int getSettedMaxCreditCount = spinValue.get(1) + 9;
+        int nowCreditCount = 0;
+        int monDayClassCount = 0;
+        int tuesDayClassCount = 0;
+        int wednesDayClassCount = 0;
+        int thursDayClassCount = 0;
+        int friDayClassCount = 0;
+        int swapNum = 0;
+        double needSubjectStartTime;
+        double needSubjectEndTime;
 
         ArrayList<Subject> tmpSubSubject = new ArrayList<>();
         ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
@@ -641,22 +664,11 @@ public class MadeResultActivity extends AppCompatActivity {
                 needSubjectCell[i][j] = 0;
             }
         }
-        boolean blankcheck;
-        int getSettedMinCreditCount = spinValue.get(0) + 9;
-        int getSettedMaxCreditCount = spinValue.get(1) + 9;
-        int nowCreditCount = 0;
-        int monDayClassCount = 0;
-        int tuesDayClassCount = 0;
-        int wednesDayClassCount = 0;
-        int thursDayClassCount = 0;
-        int friDayClassCount = 0;
-        int dayCount;
-        int swapNum = 0;
+
 
         //먼저 필수과목 일단 담기
 
-        double needSubjectStartTime;
-        double needSubjectEndTime;
+
 
         for (int i = 0; i < needSubject.size(); i++) {
             if (needSubject.get(i).cDay == -1) {
@@ -694,15 +706,12 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
             }
         }
-        int creditIntent = nowCreditCount;
-        int[] pluralChecker = new int[filteredSubSubject.size()];
-        int[] pluralCount = new int[filteredSubSubject.size()];
-        int[] triplePluralChecker = new int[filteredSubSubject.size()];
-        int intentMonDayClassCount = monDayClassCount;
-        int intentTuesDayClassCount = tuesDayClassCount;
-        int intentWedDayClassCount = wednesDayClassCount;
-        int intentThursDayClassCount = thursDayClassCount;
-        int intentFriDayClassCount = friDayClassCount;
+        creditIntent = nowCreditCount;
+        intentMonDayClassCount = monDayClassCount;
+        intentTuesDayClassCount = tuesDayClassCount;
+        intentWedDayClassCount = wednesDayClassCount;
+        intentThursDayClassCount = thursDayClassCount;
+        intentFriDayClassCount = friDayClassCount;
 
 
         for (int i = 0; i < filteredSubSubject.size(); i++) {
