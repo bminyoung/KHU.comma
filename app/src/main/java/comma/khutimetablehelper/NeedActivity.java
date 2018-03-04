@@ -54,10 +54,15 @@ public class NeedActivity extends Activity {
     static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>(); //위 리스트에 표시되는 과목
     protected static CustomListAdapter madapter;
 
+    private BackPressReturnHandler backPressReturnHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_need);
+
+        // 뒤로가기 핸들러
+        backPressReturnHandler = new BackPressReturnHandler(this);
 
         if (AppContext.first[0]) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -303,6 +308,10 @@ public class NeedActivity extends Activity {
         return ret;
     }
 
+    @Override
+    public void onBackPressed() {
+        backPressReturnHandler.onBackPressed();
+    }
 }
 
 //확장 리스트뷰 어댑터
@@ -479,7 +488,7 @@ class CustomListAdapter extends BaseAdapter {
             convertview = inflater.inflate(R.layout.need_lstv_item, parent, false);
         }
 
-        Button summaryBtn = convertview.findViewById(R.id.need_lstv_summaryBtn);
+        ImageButton summaryBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_summaryimgBtn);
         ImageButton deleteBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_deleteBtn);
         LinearLayout layout = convertview.findViewById(R.id.need_lstv_layout);
         final TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
@@ -543,5 +552,34 @@ class CustomListAdapter extends BaseAdapter {
     public void addNeed(Subject need) {
         intentSubject.add(need);
     }
+}
+
+class BackPressReturnHandler {
+    private long backKeyPressedTime = 0;
+    private Toast toast;
+
+    private Activity activity;
+
+    public BackPressReturnHandler(Activity context) {
+        this.activity = context;
+    }
+
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            showGuide();
+            return;
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            toast.cancel();
+            activity.finish();
+        }
+    }
+
+    public void showGuide() {
+        toast = Toast.makeText(activity, "한번 더 누르시면 이전화면으로 돌아갑니다.", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
 }
 

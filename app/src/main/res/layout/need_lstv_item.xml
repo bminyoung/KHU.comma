@@ -23,13 +23,13 @@
             android:maxLines="2"
             android:gravity="center_vertical"/>
 
-        <Button
-            android:id="@+id/need_lstv_summaryBtn"
-            android:layout_width="50dp"
+        <ImageButton
+            android:id="@+id/need_lstv_summaryimgBtn"
+            android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="-110dp"
             android:layout_marginRight="10dp"
-            android:text="요약"/>
+            android:background="@mipmap/look"/>
 
         <ImageButton
             android:id="@+id/need_lstv_deleteBtn"

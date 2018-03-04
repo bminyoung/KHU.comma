@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("제작자");
-                dialog.setMessage("경희대학교 수학과 동아리 ComMa\n\n"+msg[0]+", "+msg[1]+", "+msg[2]+", "+msg[3]+", "+msg[4]);
+                dialog.setMessage("경희대학교 수학과 동아리 ComMa\n\n"+msg[0]+", "+msg[1]+", "+msg[2]+", "+msg[3]+", "+msg[4]+"\n\n참고로 제작자 이름은 랜덤으로 배열");
                 dialog.setNeutralButton("닫기",null);
                 dialog.show();
             }
