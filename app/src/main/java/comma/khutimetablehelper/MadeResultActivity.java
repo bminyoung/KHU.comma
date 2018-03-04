@@ -54,73 +54,10 @@ public class MadeResultActivity extends AppCompatActivity {
     TextView timeTable[][] = new TextView[140][5]; //시간표 각 칸
     int focusOn; // 저장될 시간표의 위치
 
-    public class CustomProgressDialog extends ProgressDialog {
-        public CustomProgressDialog(Context context) {
-            super(context);
-            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-    }
-
-    // 작업에 사용할 데이터의 자료형 / 작업 진행 표시를 위한 자료형 / 작업의 결과를 표시할 자료형
-    // excute()실행시 넘겨줄 데이터타임 / 진행정보 데이터 타입 publishProgress(), onProgressUpdate()의 인수 / doInBackground()종료시 리턴될 데이터 타입 onPostExecute()의 인수
-    private class CheckTypesTask extends AsyncTask<Integer, String, Void> {
-        private CustomProgressDialog progressDialog = new CustomProgressDialog(MadeResultActivity.this);
-        private ProgressBar bar;
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog.setCanceledOnTouchOutside(false); //다이얼로그 밖 터치해도 안 꺼지도록
-            progressDialog.show();
-            progressDialog.setContentView(R.layout.custom_progress_bar);
-            bar = progressDialog.findViewById(R.id.maderesult_progressbar_bar);
-            bar.setProgress(0);
-            bar.setMax(100);
-            super.onPreExecute();
-        }
-
-        //excute()실행시 실행됨
-        @Override
-        protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
-            final int taskCnt = 1; //작업량
-
-            publishProgress("max", Integer.toString(taskCnt));
-
-            for (int i = 0; i < taskCnt; i++) {
-                try {
-
-                    Thread.sleep(1000);
-//                    bar.setProgress(20*i);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                publishProgress("progress", Integer.toString(i));
-            }
-            return null;
-        }
-
-        // publicshProgress()에서 넘겨준 데이터들 받음
-        protected void onProgressUpdate(String... progress) {
-            if(progress[0].equals("progress")){
-                bar.setProgress(Integer.parseInt(progress[1]));
-            }
-            else if(progress[0].equals("max")){
-                bar.setMax(Integer.parseInt(progress[1]));
-            }
-        }
-
-        //doInBackground()가 종료되면 실행됨
-        @Override
-        protected void onPostExecute(Void result) {
-            progressDialog.dismiss();
-            super.onPostExecute(result);
-        }
-    } //프로그래스바 여기까지
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        CheckTypesTask task = new CheckTypesTask();
         setContentView(R.layout.activity_maderesult);
 
         ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
@@ -266,8 +203,6 @@ public class MadeResultActivity extends AppCompatActivity {
             filteringNumber = false;
             filterCount = 0;
         }
-
-        task.execute(); //인수로 작업량을 넘겨줘도됨
         calculateSubject();
 
         //결과값이 없으면 띄우는 다이얼로그 띄움
@@ -1417,24 +1352,16 @@ class CustomLvAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int i, j;
                 Subject selectedSub = selectedTimeTable.get(0);
-                String msg = selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
+                String msg = selectedSub.cNum + "/" + selectedSub.getName() + " /\n" + selectedSub.cProf + " / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime() + " ";
 
                 for(i = 1; i < selectedTimeTable.size();i ++) {
-                    if(selectedTimeTable.get(i-1).cNum.equals(selectedTimeTable.get(i).cNum)) {
-                        msg += "\n\n";
-                        continue;
-                    }
                     selectedSub = selectedTimeTable.get(i);
-                    msg += selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
-
-                    j = 0;
-                    //같은과목(ex 선대1반 화욜/목욜)시간표시
-                    while (j < AppContext.subjectList.length) {
-                        Subject sub = AppContext.subjectList[j];
-                        if ((sub.cNum.equals(selectedSub.cNum)) && ((sub.cStart != selectedSub.cStart) || sub.cDay != selectedSub.cDay)) {
-                            msg += " / " + AppContext.subjectList[j].day() + " " + AppContext.subjectList[j].getTime();
-                        }
-                        j++;
+                    if(selectedTimeTable.get(i-1).cNum.equals(selectedSub.cNum)) {
+                        msg += " / " + selectedSub.day() + " " + selectedSub.getTime();
+                        continue;
+                    }else {
+                        msg += "\n\n";
+                        msg += selectedSub.cNum + "/" + selectedSub.getName() + " /\n" + selectedSub.cProf + " / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
                     }
                 }
 
