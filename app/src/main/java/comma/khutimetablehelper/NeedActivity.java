@@ -275,10 +275,11 @@ public class NeedActivity extends Activity {
     public static int isValid(Subject sub) { // 담을 수 있다-0 / 시간겹침-1 / 같은수업-2
         int ret = 0;
         int i;
+        int j;
         for (i = 0; i < selectedNeedList.size(); i++) {
             if (selectedNeedList.get(i).cDay == sub.cDay){
                 if (selectedNeedList.get(i).cStart >= sub.cEnd) {
-                    return ret;
+                    break;
                 } else {
                     if (selectedNeedList.get(i).cEnd > sub.cStart) {
                         ret = 1;
@@ -287,8 +288,8 @@ public class NeedActivity extends Activity {
                 }
             }
         }
-        for (i = 0; i < selectedNeedList.size(); i++) {
-            if (selectedNeedList.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))) {
+        for (j = 0; j < selectedNeedList.size(); j++) {
+            if (selectedNeedList.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))) {
                 ret = 2;
                 break;
             }
