@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +39,29 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("주의사항");
                 dialog.setMessage("* 선택한 시간표를 통한 수강신청 결과의 책임은 본인에게 있습니다.\n* 시간표 설정 진행 중 세부적인 설명은 각 화면에서 볼 수 있습니다.");
+                dialog.setNeutralButton("닫기",null);
+                dialog.show();
+            }
+        });
+
+        Button producerBtn = (Button) findViewById(R.id.main_btn_producer);
+        producerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] msg = new String[5];
+                ArrayList<String> producerList = new ArrayList<String>(5);
+                    producerList.add("김기휘");
+                    producerList.add("김정욱");
+                    producerList.add("김준성");
+                    producerList.add("배민영");
+                    producerList.add("유승호");
+                Collections.shuffle(producerList);
+                for (int i = 0 ; i < msg.length ; i++){
+                    msg[i] = producerList.get(i);
+                }
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("제작자");
+                dialog.setMessage("경희대학교 수학과 동아리 ComMa\n\n"+msg[0]+", "+msg[1]+", "+msg[2]+", "+msg[3]+", "+msg[4]);
                 dialog.setNeutralButton("닫기",null);
                 dialog.show();
             }
