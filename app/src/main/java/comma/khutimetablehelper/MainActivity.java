@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                 dialog.setTitle("주의사항");
-                dialog.setMessage("* 선택한 시간표를 통한 수강신청의 성공 여부는 본인에게 있습니다.\n* 시간표 설정 진행 중 세부적인 설명은 각 화면에서 볼 수 있습니다.");
+                dialog.setMessage("* 선택한 시간표를 통한 수강신청 결과의 책임은 본인에게 있습니다.\n* 시간표 설정 진행 중 세부적인 설명은 각 화면에서 볼 수 있습니다.");
                 dialog.setNeutralButton("닫기",null);
                 dialog.show();
             }
