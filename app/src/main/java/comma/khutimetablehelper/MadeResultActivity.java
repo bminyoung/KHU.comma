@@ -90,10 +90,12 @@ public class MadeResultActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 1; //작업량
+
             publishProgress("max", Integer.toString(taskCnt));
 
             for (int i = 0; i < taskCnt; i++) {
                 try {
+
                     Thread.sleep(1000);
 //                    bar.setProgress(20*i);
                 } catch (InterruptedException e) {
@@ -127,7 +129,6 @@ public class MadeResultActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         CheckTypesTask task = new CheckTypesTask();
-        task.execute(); //인수로 작업량을 넘겨줘도됨
         setContentView(R.layout.activity_maderesult);
 
         ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
@@ -145,7 +146,7 @@ public class MadeResultActivity extends AppCompatActivity {
         warningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MadeResultActivity.this);
                 dialog.setTitle("사용법");
                 dialog.setMessage("* 입맛에 맞게 계산된 시간표가 나오는 화면입니다.\n* 상단 오른쪽 버튼을 누르면 띄워진 시간표가 저장됩니다.\n* 여러개 시간표를 저장 할 수 있습니다.\n* 상단 외쪽 버튼을 누르면 홈 화면으로 넘어갑니다.\n* 결과가 뜨지 않는다면 과목의 수를 줄여야 합니다.\n* 계산된 시간표는 최대 10개까지만 표시됩니다.");
                 dialog.setPositiveButton("확인", null);
@@ -274,6 +275,7 @@ public class MadeResultActivity extends AppCompatActivity {
             filterCount = 0;
         }
 
+        task.execute(); //인수로 작업량을 넘겨줘도됨
         calculateSubject();
 
         //결과값이 없으면 띄우는 다이얼로그 띄움
@@ -630,17 +632,15 @@ public class MadeResultActivity extends AppCompatActivity {
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
         int[][] needSubjectCell = new int[26][5];
-
-        ArrayList<Subject> tmpSubSubject = new ArrayList<>();
-        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
-        ArrayList<Subject> OKSubSubject = new ArrayList<>();
-
-        for (int i = 0; i < 26; i++) {
-            for (int j = 0; j < 5; j++) {
-                SubjectCell[i][j] = 0;
-                needSubjectCell[i][j] = 0;
-            }
-        }
+        int creditIntent;
+        int[] pluralChecker = new int[filteredSubSubject.size()];
+        int[] pluralCount = new int[filteredSubSubject.size()];
+        int[] triplePluralChecker = new int[filteredSubSubject.size()];
+        int intentMonDayClassCount;
+        int intentTuesDayClassCount;
+        int intentWedDayClassCount;
+        int intentThursDayClassCount;
+        int intentFriDayClassCount;
         boolean blankcheck;
         int getSettedMinCreditCount = spinValue.get(0) + 9;
         int getSettedMaxCreditCount = spinValue.get(1) + 9;
@@ -650,60 +650,69 @@ public class MadeResultActivity extends AppCompatActivity {
         int wednesDayClassCount = 0;
         int thursDayClassCount = 0;
         int friDayClassCount = 0;
-        int dayCount;
         int swapNum = 0;
-
-        //먼저 필수과목 일단 담기
-
         double needSubjectStartTime;
         double needSubjectEndTime;
 
-        for (int i = 0; i < needSubject.size(); i++) {
-            if (needSubject.get(i).cDay == -1) {
-                continue;
+        ArrayList<Subject> tmpSubSubject = new ArrayList<>();
+        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
+        ArrayList<Subject> OKSubSubject = new ArrayList<>();
+
+            for (int i = 0; i < 26; i++) {
+                for (int j = 0; j < 5; j++) {
+                    SubjectCell[i][j] = 0;
+                    needSubjectCell[i][j] = 0;
+                }
             }
-            needSubjectStartTime = needSubject.get(i).cStart - 9;
-            needSubjectEndTime = needSubject.get(i).cEnd - 9;
+
+
+            //먼저 필수과목 일단 담기
+
+
+            for (int i = 0; i < needSubject.size(); i++) {
+                if (needSubject.get(i).cDay == -1) {
+                    continue;
+                }
+                needSubjectStartTime = needSubject.get(i).cStart - 9;
+                needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
 //            SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0
 
-            for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) (needSubjectStartTime * 2 + j)][needSubject.get(i).cDay] = needSubject.get(i).cRow;
-                Log.d("tag", "minyoung Number : " + (int) (needSubjectStartTime*2 +j));
-            }
-            switch (needSubject.get(i).cDay) {
-                case 0:
-                    monDayClassCount++;
-                    break;
-                case 1:
-                    tuesDayClassCount++;
-                    break;
-                case 2:
-                    wednesDayClassCount++;
-                    break;
-                case 3:
-                    thursDayClassCount++;
-                    break;
-                case 4:
-                    friDayClassCount++;
-                    break;
-            }
-            if (i != 0) {
-                if (needSubject.get(i).cNum.equals(needSubject.get(i - 1).cNum)) {
-                    nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+                for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
+                    needSubjectCell[(int) (needSubjectStartTime * 2 + j)][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                    Log.d("tag", "minyoung Number : " + (int) (needSubjectStartTime * 2 + j));
+                }
+                switch (needSubject.get(i).cDay) {
+                    case 0:
+                        monDayClassCount++;
+                        break;
+                    case 1:
+                        tuesDayClassCount++;
+                        break;
+                    case 2:
+                        wednesDayClassCount++;
+                        break;
+                    case 3:
+                        thursDayClassCount++;
+                        break;
+                    case 4:
+                        friDayClassCount++;
+                        break;
+                }
+                if (i != 0) {
+                    if (needSubject.get(i).cNum.equals(needSubject.get(i - 1).cNum)) {
+                        nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+                    }
+                } else {
+                  nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
                 }
             }
-        }
-        int creditIntent = nowCreditCount;
-        int[] pluralChecker = new int[filteredSubSubject.size()];
-        int[] pluralCount = new int[filteredSubSubject.size()];
-        int[] triplePluralChecker = new int[filteredSubSubject.size()];
-        int intentMonDayClassCount = monDayClassCount;
-        int intentTuesDayClassCount = tuesDayClassCount;
-        int intentWedDayClassCount = wednesDayClassCount;
-        int intentThursDayClassCount = thursDayClassCount;
-        int intentFriDayClassCount = friDayClassCount;
-
+            creditIntent = nowCreditCount;
+            intentMonDayClassCount = monDayClassCount;
+            intentTuesDayClassCount = tuesDayClassCount;
+            intentWedDayClassCount = wednesDayClassCount;
+            intentThursDayClassCount = thursDayClassCount;
+            intentFriDayClassCount = friDayClassCount;
 
         for (int i = 0; i < filteredSubSubject.size(); i++) {
             tmpSubSubject = (ArrayList<Subject>) filteredSubSubject.clone();
