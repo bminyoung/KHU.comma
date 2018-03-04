@@ -1332,6 +1332,7 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         }
         if (selectedSubSubject.size() == 0) {
+            boolean trueTester = false;
             if(!selectedSubSubject.contains(needSubject)) {
                 selectedSubSubject.add(new ArrayList<Subject>());
                 for (int i = 0; i < needSubject.size(); i++) {
@@ -1339,14 +1340,20 @@ public class MadeResultActivity extends AppCompatActivity {
                 }
             }
             int needCreditCount = 0;
+            if(selectedSubSubject.get(0).size() == 0){
+                trueTester = true;
+            }
             for(int i = 0; i < selectedSubSubject.get(0).size(); i++){
                 needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
                 if(getSettedMinCreditCount <= needCreditCount && needCreditCount <= getSettedMaxCreditCount){
 
                 }
                 else{
-                    selectedSubSubject.remove(0);
+                    trueTester = true;
                 }
+            }
+            if(trueTester){
+                selectedSubSubject.remove(0);
             }
         }
 
