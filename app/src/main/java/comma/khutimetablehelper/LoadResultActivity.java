@@ -166,11 +166,27 @@ public class LoadResultActivity extends AppCompatActivity {
     }
 
     public void Summary(View view) {
-        String msg = "";
+        int i, j;
+        Subject selectedSub = subList.get(0);
+        String msg = selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
 
-        for(int i = 0; i < subList.size();i++){
-            Subject sub = subList.get(i);
-            msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
+        for(i = 1; i < subList.size();i ++) {
+            if(subList.get(i-1).cNum.equals(subList.get(i).cNum)) {
+                msg += "\n\n";
+                continue;
+            }
+            selectedSub = subList.get(i);
+            msg += selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
+
+            j = 0;
+            //같은과목(ex 선대1반 화욜/목욜)시간표시
+            while (j < AppContext.subjectList.length) {
+                Subject sub = AppContext.subjectList[j];
+                if ((sub.cNum.equals(selectedSub.cNum)) && ((sub.cStart != selectedSub.cStart) || sub.cDay != selectedSub.cDay)) {
+                    msg += " / " + AppContext.subjectList[j].day() + " " + AppContext.subjectList[j].getTime();
+                }
+                j++;
+            }
         }
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -179,4 +195,19 @@ public class LoadResultActivity extends AppCompatActivity {
         dialog.setNeutralButton("확인",null);
         dialog.show();
     }
+
+//    public void Summary(View view) {
+//        String msg = "";
+//
+//        for(int i = 0; i < subList.size();i++){
+//            Subject sub = subList.get(i);
+//            msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
+//        }
+//
+//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+//        dialog.setTitle("시간표 요약");
+//        dialog.setMessage(msg);
+//        dialog.setNeutralButton("확인",null);
+//        dialog.show();
+//    }
 }

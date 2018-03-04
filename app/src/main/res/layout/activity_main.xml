@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@mipmap/comma"
     android:orientation="vertical"
-    tools:context="comma.khutimetablehelper.MainActivity">
+    tools:context="comma.khutimetablehelper.MainActivity"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,42 +35,32 @@
 
             <ImageButton
                 android:id="@+id/minBtnMade"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@mipmap/designtimetable"
                 android:onClick="GoSetting"
-                 />
+                />
 
             <ImageButton
                 android:id="@+id/mainBtnList"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="110dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:background="@mipmap/loadsavelist"
                 android:onClick="GoList"
-                android:text="시간표\n목록"
-
                 android:textSize="30sp" />
         </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:visibility="invisible"
-            android:clickable="false"/>
 
         <Button
             android:id="@+id/main_btn_producer"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="170dp"
             android:layout_marginBottom="40dp"
             android:background="#00ffffff" />
 
-
     </LinearLayout>
-
 
 </LinearLayout>

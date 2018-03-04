@@ -1420,22 +1420,27 @@ class CustomLvAdapter extends BaseAdapter {
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int i;
-                String msg = "";
+                int i, j;
+                Subject selectedSub = selectedTimeTable.get(0);
+                String msg = selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
 
-                for(i = 0; i < selectedTimeTable.size();i ++) {
-                    Subject selectedSub = selectedTimeTable.get(i);
-                    msg += selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 / " + selectedSub.day() + "요일 / " + selectedSub.getTime() + "\n\n";
-
-                    //같은과목(ex 선대1반 화욜/목욜)시간표시
-                    while (i < AppContext.subjectList.length) {
-                        Subject sub = AppContext.subjectList[i];
-                        if ((sub.cNum.equals(selectedSub.cNum)) && ((sub.cStart != selectedSub.cStart) || sub.cDay != selectedSub.cDay)) {
-                            msg += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
-                        }
-                        i++;
+                for(i = 1; i < selectedTimeTable.size();i ++) {
+                    if(selectedTimeTable.get(i-1).cNum.equals(selectedTimeTable.get(i).cNum)) {
+                        msg += "\n\n";
+                        continue;
                     }
-                    msg += "\n\n";
+                    selectedSub = selectedTimeTable.get(i);
+                    msg += selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
+
+                    j = 0;
+                    //같은과목(ex 선대1반 화욜/목욜)시간표시
+                    while (j < AppContext.subjectList.length) {
+                        Subject sub = AppContext.subjectList[j];
+                        if ((sub.cNum.equals(selectedSub.cNum)) && ((sub.cStart != selectedSub.cStart) || sub.cDay != selectedSub.cDay)) {
+                            msg += " / " + AppContext.subjectList[j].day() + " " + AppContext.subjectList[j].getTime();
+                        }
+                        j++;
+                    }
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
