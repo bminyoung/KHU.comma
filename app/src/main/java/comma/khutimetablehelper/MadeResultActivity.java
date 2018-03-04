@@ -1273,25 +1273,30 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         if (selectedSubSubject.size() == 0) {
             boolean trueTester = false;
-            if (!selectedSubSubject.contains(needSubject)) {
                 selectedSubSubject.add(new ArrayList<Subject>());
                 for (int i = 0; i < needSubject.size(); i++) {
                     selectedSubSubject.get(0).add(needSubject.get(i));
                 }
-            }
             int needCreditCount = 0;
             if (selectedSubSubject.get(0).size() == 0) {
+                Log.d("tag", "minyoung size0이 0");
                 trueTester = true;
             }
             for (int i = 0; i < selectedSubSubject.get(0).size(); i++) {
-                needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
+                if(i > 0) {
+                    if(selectedSubSubject.get(0).get(i).cNum.equals(selectedSubSubject.get(0).get(i-1).cNum)) {
+                        needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
+                    }
+                }
             }
-            if (getSettedMinCreditCount <= needCreditCount && needCreditCount <= getSettedMaxCreditCount) {
-
-            } else {
+            Log.d("tag", "minyoung needCreditCount : " + needCreditCount);
+            if (getSettedMinCreditCount > needCreditCount) {
+                Log.d("tag", "minyoung min이 > need");
+                trueTester = true;
+            } else if(needCreditCount > getSettedMaxCreditCount) {
+                Log.d("tag", "minyoung need > Max");
                 trueTester = true;
             }
-
             if (trueTester) {
                 selectedSubSubject.remove(0);
             }
