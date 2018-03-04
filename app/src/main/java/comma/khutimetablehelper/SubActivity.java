@@ -287,7 +287,7 @@ public class SubActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if((requestCode == SUB) && (resultCode == SearchActivity.SUCCESS)) {
             Subject selected = (Subject) data.getSerializableExtra("subject");
-            madapter.additem(selected);
+            explistAdapter.addItem(selected);
         }
     }
 

@@ -279,7 +279,7 @@ public class NeedActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if ((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
             Subject selected = (Subject) data.getSerializableExtra("subject");
-            madapter.additem(selected);
+            explistAdapter.addItem(selected);
         }
     }
 
@@ -547,6 +547,7 @@ class CustomListAdapter extends BaseAdapter {
 
     public void additem(Subject sub) {
         oData.add(sub);
+        notifyDataSetChanged();
     }
 
     public void addNeed(Subject need) {
