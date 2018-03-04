@@ -52,7 +52,7 @@ public class SettingActivity extends AppCompatActivity {
         if(AppContext.first[1]) {
             android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(this);
             dialog.setTitle("사용법");
-            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
+            dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 여기서 선택한 조건은 후보과목에만 적용됩니다.\n* 다시보고 싶으시면 상단 물음표 버튼을 눌러주세요");
             dialog.setPositiveButton("다시 보지 않기", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -76,7 +76,7 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SettingActivity.this);
                 dialog.setTitle("사용법");
-                dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 결과가 뜨지 않는다면 과목을 줄여야합니다." +
+                dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 여기서 선택한 조건은 후보과목에만 적용됩니다.\n* 결과가 뜨지 않는다면 과목을 줄여야합니다." +
                         "\n* 모든 경우의 수가 나오지 않을 수도 있습니다.");
                 dialog.setPositiveButton("확인", null);
                 dialog.show();

@@ -109,8 +109,8 @@ public class SubActivity extends AppCompatActivity {
             public void onClick(View view) {
                 android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SubActivity.this);
                 dialog.setTitle("사용법");
-                dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요 \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
-                        "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다..");
+                dialog.setMessage("* 꼭! 들어야 하지는 않지만 듣고 싶은 과목을 선택하세요. \n * 후보과목은 최대 12개까지 선택이 가능합니다.\n " +
+                        "* 후보과목을 다량 선택시 계산시간이 다소 소요됩니다.");
                 dialog.setPositiveButton("확인", null);
                 dialog.show();
             }

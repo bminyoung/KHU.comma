@@ -280,7 +280,7 @@ public class MadeResultActivity extends AppCompatActivity {
 
         //결과값이 없으면 띄우는 다이얼로그 띄움
         if(AppContext.tempTimeTableList.size() == 0){
-            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MadeResultActivity.this);
             dialog.setTitle("경고");
             dialog.setMessage("조건에 맞는 시간표가 없습니다.");
             dialog.setPositiveButton("홈으로", new DialogInterface.OnClickListener() {
@@ -297,7 +297,11 @@ public class MadeResultActivity extends AppCompatActivity {
                     finish();
                 }
             });
-            dialog.show();
+            final AlertDialog Dialog;
+            Dialog = dialog.create();
+            Dialog.setCanceledOnTouchOutside(false);
+            Dialog.show();
+
         }
 
         setData();
@@ -1342,26 +1346,26 @@ public class MadeResultActivity extends AppCompatActivity {
         }
         if (selectedSubSubject.size() == 0) {
             boolean trueTester = false;
-            if(!selectedSubSubject.contains(needSubject)) {
+            if (!selectedSubSubject.contains(needSubject)) {
                 selectedSubSubject.add(new ArrayList<Subject>());
                 for (int i = 0; i < needSubject.size(); i++) {
                     selectedSubSubject.get(0).add(needSubject.get(i));
                 }
             }
             int needCreditCount = 0;
-            if(selectedSubSubject.get(0).size() == 0){
+            if (selectedSubSubject.get(0).size() == 0) {
                 trueTester = true;
             }
-            for(int i = 0; i < selectedSubSubject.get(0).size(); i++){
+            for (int i = 0; i < selectedSubSubject.get(0).size(); i++) {
                 needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
-                if(getSettedMinCreditCount <= needCreditCount && needCreditCount <= getSettedMaxCreditCount){
-
-                }
-                else{
-                    trueTester = true;
-                }
             }
-            if(trueTester){
+            if (getSettedMinCreditCount <= needCreditCount && needCreditCount <= getSettedMaxCreditCount) {
+
+            } else {
+                trueTester = true;
+            }
+
+            if (trueTester) {
                 selectedSubSubject.remove(0);
             }
         }
