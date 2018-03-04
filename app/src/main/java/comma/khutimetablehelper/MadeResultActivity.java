@@ -1395,7 +1395,7 @@ class CustomLvAdapter extends BaseAdapter {
 
                 for (int i = 0; i < selected.size(); i++) {
                     Subject sub = selected.get(i);
-                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);

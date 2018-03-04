@@ -170,7 +170,7 @@ public class LoadResultActivity extends AppCompatActivity {
 
         for(int i = 0; i < subList.size();i++){
             Subject sub = subList.get(i);
-            msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+            msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
         }
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
