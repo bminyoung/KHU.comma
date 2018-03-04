@@ -20,6 +20,7 @@
         <item name="android:layout_span">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:background">@drawable/rectangle_openbottom</item>
     </style>
 
@@ -30,6 +31,7 @@
         <item name="android:layout_span">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:background">@drawable/rectangle_opentop</item>
     </style>
 
@@ -38,6 +40,7 @@
         <item name="android:layout_height">35dp</item>
         <item name="android:layout_weight">1.3</item>
         <item name="android:layout_span">1</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@drawable/rectangle_openbottom</item>
         <item name="android:gravity">end</item>
@@ -48,6 +51,7 @@
         <item name="android:layout_height">35dp</item>
         <item name="android:layout_weight">1.3</item>
         <item name="android:layout_span">1</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:paddingRight">3dp</item>
         <item name="android:background">@drawable/rectangle_opentop</item>
     </style>
