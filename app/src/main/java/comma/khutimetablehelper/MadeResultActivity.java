@@ -166,7 +166,6 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         });
 
-
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,6 +275,29 @@ public class MadeResultActivity extends AppCompatActivity {
         }
 
         calculateSubject();
+
+        //결과값이 없으면 띄우는 다이얼로그 띄움
+        if(AppContext.tempTimeTableList.size() == 0){
+            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+            dialog.setTitle("경고");
+            dialog.setMessage("조건에 맞는 시간표가 없습니다.");
+            dialog.setPositiveButton("홈으로", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(MadeResultActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
+            dialog.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
+
         setData();
 
     }
@@ -597,7 +619,7 @@ public class MadeResultActivity extends AppCompatActivity {
         for(int i = 0; i < TimeTable.size() ; i++){
             for(int j = 0; j < TimeTable.size() ; j++){
                 if(TimeTable.get(i).cRow > TimeTable.get(j).cRow){
-                    Collections.swap(TimeTable,i,j);
+                    Collections.swap(TimeTable,j,i);
                 }
             }
         }
@@ -1385,7 +1407,7 @@ class CustomLvAdapter extends BaseAdapter {
 
                 for (int i = 0; i < selected.size(); i++) {
                     Subject sub = selected.get(i);
-                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n";
+                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);

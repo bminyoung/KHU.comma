@@ -76,7 +76,8 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(SettingActivity.this);
                 dialog.setTitle("사용법");
-                dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.");
+                dialog.setMessage("* 시간표 생성시 고려해야할 항목을 선택하세요. \n * 많은 항목을 '꼭! 필요해!' 선택시 조금더 정확한 시간표가 생성됩니다.\n* 결과가 뜨지 않는다면 과목을 줄여야합니다." +
+                        "\n* 모든 경우의 수가 나오지 않을 수도 있습니다.");
                 dialog.setPositiveButton("확인", null);
                 dialog.show();
             }
@@ -294,7 +295,9 @@ public class SettingActivity extends AppCompatActivity {
         dayEndTime_subspin.setSelection(1);
 
         creditMin_spin = (Spinner) findViewById(R.id.setting_spin_creditMin);
+        creditMin_spin.setSelection(6);
         creditMax_spin = (Spinner) findViewById(R.id.setting_spin_creditMax);
+        creditMax_spin.setSelection(6);
         firstTime_spin = (Spinner) findViewById(R.id.setting_spin_firstStartTime);
         timeFlic_spin = (Spinner) findViewById(R.id.setting_spin_timeFlic);
         emptyDay_spin = (Spinner) findViewById(R.id.setting_spin_emptyDay);

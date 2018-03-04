@@ -295,20 +295,7 @@ public class SubActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if((requestCode == SUB) && (resultCode == SearchActivity.SUCCESS)) {
             Subject selected = (Subject) data.getSerializableExtra("subject");
-
-            if(isValid(selected)) { // 리스트에 이미 있으면
-                int i = 0;
-                madapter.additem(selected);
-                while(i < AppContext.subjectList.length){
-                    Subject sub = AppContext.subjectList[i++];
-                    if(sub.cNum.equals(selected.cNum)){
-                        madapter.addNeed(sub);
-                    }
-                }
-                madapter.notifyDataSetChanged();
-            }else{
-                Toast.makeText(SubActivity.this, "이미 담긴 과목입니다", Toast.LENGTH_LONG).show();
-            }
+            madapter.additem(selected);
         }
     }
 
@@ -316,18 +303,18 @@ public class SubActivity extends AppCompatActivity {
         new AlertDialog.Builder(this).setTitle("오류").setMessage("선택된 과목이 없습니다").setNegativeButton("닫기",null).show();
     }
 
-    public static boolean isValid(Subject sub){ // 리스트에 과목이 없다-true 있다-false
-        boolean ret = true;
-        int i, j;
-        for(i = 0; i < selectedSubList.size();i++){
-            if(selectedSubList.get(i).cNum.equals(sub.cNum)){
-                ret = false;
+    public static int isValid(Subject sub){ // 담을 수 있다-0 / need랑겹침-1 / 완전같은수업-2
+        int ret = 0;
+        int i;
+        for(i = 0 ; i < needSubject.size(); i++){
+            if(needSubject.get(i).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
+                ret = 1;
                 break;
             }
         }
-        for(j = 0 ; j < needSubject.size(); j++){
-            if(needSubject.get(j).cNum.substring(0, 8).equals(sub.cNum.substring(0, 8))){
-                ret = false;
+        for(i = 0; i < selectedSubList.size();i++){
+            if(selectedSubList.get(i).cNum.equals(sub.cNum)){
+                ret = 2;
                 break;
             }
         }
@@ -378,27 +365,9 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
             @Override
             //차일드 버튼 클릭 -> 리스트뷰 데이터 입력
             public void onClick(View view) {
-
                 Subject selectedSubject = _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
-                if (SubActivity.madapter.getCount() < 13) {
-                    if (SubActivity.isValid(selectedSubject)) {
-                        int i = 0;
-                        SubActivity.madapter.additem(selectedSubject);
-                        while (i < AppContext.subjectList.length) {
-                            Subject sub = AppContext.subjectList[i++];
-                            if (sub.cNum.equals(selectedSubject.cNum)) {
-                                SubActivity.madapter.addNeed(sub);
-                            }
-                        }
-                        SubActivity.madapter.notifyDataSetChanged();
-                    }
-                } else {
+                addItem(selectedSubject);
 
-                    Toast toast = Toast.makeText(_context, "더이상 등록할 수 없습니다.",Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-                    toast.show();
-                    toast.show();
-                }
             }
         });
 
@@ -413,6 +382,34 @@ class SubExpandableListAdapter extends BaseExpandableListAdapter {
         }
         txtListChild.setText(childText);
         return convertView;
+    }
+
+    public void addItem(Subject selectedSubject){
+        if (SubActivity.madapter.getCount() < 13) { // 담을 수 있다-0 / need랑겹침-1 / 완전같은수업-2
+            switch (SubActivity.isValid(selectedSubject)){
+                case 0:
+                    int i = 0;
+                    SubActivity.madapter.additem(selectedSubject);
+                    while (i < AppContext.subjectList.length) {
+                        Subject sub = AppContext.subjectList[i++];
+                        if (sub.cNum.equals(selectedSubject.cNum)) {
+                            SubActivity.madapter.addNeed(sub);
+                        }
+                    }
+                    SubActivity.madapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    Toast.makeText(_context,"필수에서 이미 선택한 과목입니다.",Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    Toast.makeText(_context,"이미 담긴 수업입니다.",Toast.LENGTH_LONG).show();
+                    break;
+            }
+        } else {
+            Toast toast = Toast.makeText(_context, "최대 갯수를 초과하였습니다.",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
     }
 
     @Override
