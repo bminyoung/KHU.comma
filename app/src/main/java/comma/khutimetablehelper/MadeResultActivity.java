@@ -127,7 +127,6 @@ public class MadeResultActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         CheckTypesTask task = new CheckTypesTask();
-        task.execute(); //인수로 작업량을 넘겨줘도됨
         setContentView(R.layout.activity_maderesult);
 
         ImageButton btnSave = (ImageButton) findViewById(R.id.maderesult_btn_save);
@@ -274,6 +273,7 @@ public class MadeResultActivity extends AppCompatActivity {
             filterCount = 0;
         }
 
+        task.execute(); //인수로 작업량을 넘겨줘도됨
         calculateSubject();
 
         //결과값이 없으면 띄우는 다이얼로그 띄움
