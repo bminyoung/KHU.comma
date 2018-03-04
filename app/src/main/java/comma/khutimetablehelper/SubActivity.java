@@ -1,5 +1,6 @@
 package comma.khutimetablehelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +50,7 @@ public class SubActivity extends AppCompatActivity {
 
     //리스트뷰
     private ListView mlistView = null;
+    private static ArrayList<Subject> selectedNeedList = new ArrayList<Subject>();
     private static ArrayList<Subject> selectedSubList = new ArrayList<Subject>(); // 위 리스트에 표시될 과목
     private ArrayList<Subject> subSubject = new ArrayList<Subject>(); // 다음으로 넘길 과목
     protected static CustomListAdapter madapter;
@@ -76,7 +78,14 @@ public class SubActivity extends AppCompatActivity {
 
         Button nextBtn = (Button) findViewById(R.id.sub_btn_nextbutton);
         needSubject = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedSubject");
+        selectedNeedList = (ArrayList<Subject>) getIntent().getSerializableExtra("NeedList");
         intentToSetting = new Intent(SubActivity.this, SettingActivity.class);
+        if(selectedNeedList.size() != 0) {
+            for (i = 0; i < selectedNeedList.size(); i++) {
+                selectedSubList.add(selectedNeedList.get(i));
+            }
+            i = 0;
+        }
 
         //다음버튼
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +169,7 @@ public class SubActivity extends AppCompatActivity {
 
         //리스트뷰
         mlistView = (ListView) findViewById(R.id.sub_lstv_showSelet);
-        madapter = new CustomListAdapter(selectedSubList, subSubject);
+        madapter = new CustomListAdapter(selectedSubList, subSubject, SUB);
         mlistView.setAdapter(madapter);
 
         //그룹 클릭시 이전 그룹이 닫히게 구현
