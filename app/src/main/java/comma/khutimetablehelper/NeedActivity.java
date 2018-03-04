@@ -276,12 +276,14 @@ public class NeedActivity extends Activity {
         int ret = 0;
         int i;
         for (i = 0; i < selectedNeedList.size(); i++) {
-            if (selectedNeedList.get(i).cStart >= sub.cEnd) {
-                return ret;
-            } else {
-                if (selectedNeedList.get(i).cEnd > sub.cStart) {
-                    ret = 1;
-                    break;
+            if (selectedNeedList.get(i).cDay == sub.cDay){
+                if (selectedNeedList.get(i).cStart >= sub.cEnd) {
+                    return ret;
+                } else {
+                    if (selectedNeedList.get(i).cEnd > sub.cStart) {
+                        ret = 1;
+                        break;
+                    }
                 }
             }
         }
