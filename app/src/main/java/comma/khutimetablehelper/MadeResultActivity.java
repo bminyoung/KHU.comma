@@ -90,10 +90,12 @@ public class MadeResultActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Integer... params) { // 인수로는 작업개수를 넘겨줌.
             final int taskCnt = 1; //작업량
+
             publishProgress("max", Integer.toString(taskCnt));
 
             for (int i = 0; i < taskCnt; i++) {
                 try {
+
                     Thread.sleep(1000);
 //                    bar.setProgress(20*i);
                 } catch (InterruptedException e) {
@@ -630,17 +632,15 @@ public class MadeResultActivity extends AppCompatActivity {
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
         int[][] needSubjectCell = new int[26][5];
-
-        ArrayList<Subject> tmpSubSubject = new ArrayList<>();
-        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
-        ArrayList<Subject> OKSubSubject = new ArrayList<>();
-
-        for (int i = 0; i < 26; i++) {
-            for (int j = 0; j < 5; j++) {
-                SubjectCell[i][j] = 0;
-                needSubjectCell[i][j] = 0;
-            }
-        }
+        int creditIntent;
+        int[] pluralChecker = new int[filteredSubSubject.size()];
+        int[] pluralCount = new int[filteredSubSubject.size()];
+        int[] triplePluralChecker = new int[filteredSubSubject.size()];
+        int intentMonDayClassCount;
+        int intentTuesDayClassCount;
+        int intentWedDayClassCount;
+        int intentThursDayClassCount;
+        int intentFriDayClassCount;
         boolean blankcheck;
         int getSettedMinCreditCount = spinValue.get(0) + 9;
         int getSettedMaxCreditCount = spinValue.get(1) + 9;
@@ -650,60 +650,69 @@ public class MadeResultActivity extends AppCompatActivity {
         int wednesDayClassCount = 0;
         int thursDayClassCount = 0;
         int friDayClassCount = 0;
-        int dayCount;
         int swapNum = 0;
-
-        //먼저 필수과목 일단 담기
-
         double needSubjectStartTime;
         double needSubjectEndTime;
 
-        for (int i = 0; i < needSubject.size(); i++) {
-            if (needSubject.get(i).cDay == -1) {
-                continue;
+        ArrayList<Subject> tmpSubSubject = new ArrayList<>();
+        ArrayList<ArrayList<Subject>> selectedSubSubject = new ArrayList<ArrayList<Subject>>();
+        ArrayList<Subject> OKSubSubject = new ArrayList<>();
+
+            for (int i = 0; i < 26; i++) {
+                for (int j = 0; j < 5; j++) {
+                    SubjectCell[i][j] = 0;
+                    needSubjectCell[i][j] = 0;
+                }
             }
-            needSubjectStartTime = needSubject.get(i).cStart - 9;
-            needSubjectEndTime = needSubject.get(i).cEnd - 9;
+
+
+            //먼저 필수과목 일단 담기
+
+
+            for (int i = 0; i < needSubject.size(); i++) {
+                if (needSubject.get(i).cDay == -1) {
+                    continue;
+                }
+                needSubjectStartTime = needSubject.get(i).cStart - 9;
+                needSubjectEndTime = needSubject.get(i).cEnd - 9;
 
 //            SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0
 
-            for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
-                needSubjectCell[(int) (needSubjectStartTime * 2 + j)][needSubject.get(i).cDay] = needSubject.get(i).cRow;
-                Log.d("tag", "minyoung Number : " + (int) (needSubjectStartTime*2 +j));
-            }
-            switch (needSubject.get(i).cDay) {
-                case 0:
-                    monDayClassCount++;
-                    break;
-                case 1:
-                    tuesDayClassCount++;
-                    break;
-                case 2:
-                    wednesDayClassCount++;
-                    break;
-                case 3:
-                    thursDayClassCount++;
-                    break;
-                case 4:
-                    friDayClassCount++;
-                    break;
-            }
-            if (i != 0) {
-                if (needSubject.get(i).cNum.equals(needSubject.get(i - 1).cNum)) {
-                    nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+                for (int j = 0; j < (int) ((needSubjectEndTime - needSubjectStartTime) * 2); j++) { // (spinValue.get(3)+1)*(1 - spinStatus.get(2))) 공강크기
+                    needSubjectCell[(int) (needSubjectStartTime * 2 + j)][needSubject.get(i).cDay] = needSubject.get(i).cRow;
+                    Log.d("tag", "minyoung Number : " + (int) (needSubjectStartTime * 2 + j));
+                }
+                switch (needSubject.get(i).cDay) {
+                    case 0:
+                        monDayClassCount++;
+                        break;
+                    case 1:
+                        tuesDayClassCount++;
+                        break;
+                    case 2:
+                        wednesDayClassCount++;
+                        break;
+                    case 3:
+                        thursDayClassCount++;
+                        break;
+                    case 4:
+                        friDayClassCount++;
+                        break;
+                }
+                if (i != 0) {
+                    if (needSubject.get(i).cNum.equals(needSubject.get(i - 1).cNum)) {
+                        nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
+                    }
+                } else {
+                  nowCreditCount = nowCreditCount + needSubject.get(i).cCredit;
                 }
             }
-        }
-        int creditIntent = nowCreditCount;
-        int[] pluralChecker = new int[filteredSubSubject.size()];
-        int[] pluralCount = new int[filteredSubSubject.size()];
-        int[] triplePluralChecker = new int[filteredSubSubject.size()];
-        int intentMonDayClassCount = monDayClassCount;
-        int intentTuesDayClassCount = tuesDayClassCount;
-        int intentWedDayClassCount = wednesDayClassCount;
-        int intentThursDayClassCount = thursDayClassCount;
-        int intentFriDayClassCount = friDayClassCount;
-
+            creditIntent = nowCreditCount;
+            intentMonDayClassCount = monDayClassCount;
+            intentTuesDayClassCount = tuesDayClassCount;
+            intentWedDayClassCount = wednesDayClassCount;
+            intentThursDayClassCount = thursDayClassCount;
+            intentFriDayClassCount = friDayClassCount;
 
         for (int i = 0; i < filteredSubSubject.size(); i++) {
             tmpSubSubject = (ArrayList<Subject>) filteredSubSubject.clone();
