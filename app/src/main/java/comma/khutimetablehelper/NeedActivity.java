@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,8 @@ public class NeedActivity extends Activity {
     List<String> listDataHeader;
     HashMap<String, List<Subject>> listDataChild;
     Intent intentToSub;
-    static ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
+    ArrayList<Subject> needSubject = new ArrayList<Subject>(); //다음으로 넘길 과목
     int i = 0;
-    //확장 리스트뷰에 복사할 리스트 선언
-    List<String> mlistDataHeader;
-    HashMap<String, List<Subject>> mlistDataChild;
 
     //어느 액티비티에서 search를 호출했는지
     static final int NEED = 0;
@@ -115,8 +113,6 @@ public class NeedActivity extends Activity {
         listDataChild = new HashMap<String, List<Subject>>();
 
         // 확장리스트 뷰 어댑터 준비;
-        mlistDataChild = listDataChild;
-        mlistDataHeader = listDataHeader;
         explistAdapter = new NeedExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(explistAdapter);
 
@@ -164,10 +160,6 @@ public class NeedActivity extends Activity {
             }
         });
     }//온크리에이트의 끝
-
-
-
-
 
     //prepareListData 안에서 쓰는 함수
     public void setList(String[] college, int major) {
@@ -321,8 +313,8 @@ public class NeedActivity extends Activity {
 class NeedExpandableListAdapter extends BaseExpandableListAdapter {
     static int need_inum = 0;
     private Context _context;
-    private static List<String> _listDataHeader;
-    private static HashMap<String, List<Subject>> _listDataChild;
+    private List<String> _listDataHeader;
+    private HashMap<String, List<Subject>> _listDataChild;
 
 
     public NeedExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Subject>> listChildData) {
@@ -454,8 +446,6 @@ class CustomListAdapter extends BaseAdapter {
         this.intentSubject = intentSubject;
     }
 
-    ;
-
     @Override
     public int getCount() {
         return oData.size();
@@ -473,17 +463,39 @@ class CustomListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertview, ViewGroup parent) {
+        final Context context = parent.getContext();
+        final Subject selected = oData.get(position);
+
         if (convertview == null) {
-            Context context = parent.getContext();
             if (inflater == null) {
                 inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
             convertview = inflater.inflate(R.layout.need_lstv_item, parent, false);
         }
 
-        ImageButton deleteBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_btn);
-        TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
-        need_lstv_tv_choosedsubject.setText(oData.get(position).getName());
+        Button summaryBtn = convertview.findViewById(R.id.need_lstv_summaryBtn);
+        ImageButton deleteBtn = (ImageButton) convertview.findViewById(R.id.need_lstv_deleteBtn);
+        final TextView need_lstv_tv_choosedsubject = (TextView) convertview.findViewById(R.id.need_lstv_tv);
+        need_lstv_tv_choosedsubject.setText(selected.getName());
+
+        summaryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = 0;
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                String msg = selected.getName() + " / " + selected.cProf + "\n" + selected.day() + " " + selected.getTime();
+
+                //같은과목(ex 선대1반 화욜/목욜)시간표시
+                while (i < AppContext.subjectList.length) {
+                    Subject sub = AppContext.subjectList[i];
+                    if ((sub.cNum.equals(selected.cNum)) && ((sub.cStart != selected.cStart) || sub.cDay != selected.cDay)) {
+                        msg += " / " + AppContext.subjectList[i].day() + " " + AppContext.subjectList[i].getTime();
+                    }
+                    i++;
+                }
+                dialogBuilder.setTitle("과목 정보").setMessage(msg).setNegativeButton("확인", null).show();
+            }
+        });
 
         //리스트뷰 제거이벤트
         deleteBtn.setOnClickListener(new View.OnClickListener() {

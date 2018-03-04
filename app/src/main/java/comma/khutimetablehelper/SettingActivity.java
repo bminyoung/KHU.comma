@@ -93,6 +93,8 @@ public class SettingActivity extends AppCompatActivity {
                         Intent intent = new Intent(SettingActivity.this, MadeResultActivity.class);
                         intent.putExtra("NeedSubject", needSubject);
                         intent.putExtra("SubSubject", subSubject);
+                        spinStatus.clear();
+                        spinValue.clear();
                         saveSpinner();
                         intent.putExtra("spinStatus", spinStatus);
                         intent.putExtra("spinValue", spinValue);

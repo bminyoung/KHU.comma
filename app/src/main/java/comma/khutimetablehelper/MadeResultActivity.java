@@ -516,31 +516,46 @@ public class MadeResultActivity extends AppCompatActivity {
 
         switch (subSubjectDay) {
             case 0:
-                if (subSubjectEndTime > spinValue.get(11) + 3) {
+                if(spinValue.get(5) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(5) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 1:
-                if (subSubjectEndTime > spinValue.get(12) + 3) {
+                if(spinValue.get(6) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(6) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 2:
-                if (subSubjectEndTime > spinValue.get(13) + 3) {
+                if(spinValue.get(7) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(7) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 3:
-                if (subSubjectEndTime > spinValue.get(14) + 3) {
+                if(spinValue.get(8) == 0) {
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(8) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
                 break;
             case 4:
-                if (subSubjectEndTime > spinValue.get(15) + 3) {
+                if(spinValue.get(9) == 0){
+                    break;
+                }
+                if (subSubjectEndTime > spinValue.get(9) + 14) {
                     filteringNumber = true;
                     Log.d("tag", "minyoung 늦게끝나서 제외 : ");
                 }
@@ -573,6 +588,20 @@ public class MadeResultActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    // 배열순서정리
+
+    public void calculateOrder(ArrayList<Subject> TimeTable) {
+        for(int i = 0; i < TimeTable.size() ; i++){
+            for(int j = 0; j < TimeTable.size() ; j++){
+                if(TimeTable.get(i).cRow > TimeTable.get(j).cRow){
+                    Collections.swap(TimeTable,i,j);
+                }
+            }
+        }
+    }
+
+
 
     public void calculateSubject() {
         int[][] SubjectCell = new int[26][5];
@@ -1212,12 +1241,12 @@ public class MadeResultActivity extends AppCompatActivity {
                 Log.d("tag", "minyoung 현재학점 : " + nowCreditCount + " 최소학점 : " + getSettedMinCreditCount);
                 if (nowCreditCount >= getSettedMinCreditCount) {    // 최소학점을 넘었을때,
                     if (spinStatus.get(4) == 0) { // 공강시간 체크
-                        for (int k = 0; k < 5; k++) {
+                        for (int l = 0; l < 5; l++) {
                             boolean startcheck = true;
                             boolean endcheck;
                             int blankcount = 0;
                             int Maxblank = 0;
-                            for (int l = 0; k < 26; k++) {
+                            for (int k = 0; k < 26; k++) {
                                 if (SubjectCell[k][l] != 0) {
                                     startcheck = false;
                                     endcheck = true;
@@ -1234,9 +1263,7 @@ public class MadeResultActivity extends AppCompatActivity {
                                     Maxblank = blankcount;
                                 }
                                 if (endcheck) {
-
-                                    if (spinValue.get(10+3) < Maxblank) {
-
+                                    if (spinValue.get(10) + 3 < Maxblank) {
                                         blankOk = false;
                                         break;
                                     }
@@ -1247,10 +1274,14 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                     }
                     if (blankOk) {
-                        Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
-                        selectedSubSubject.add(new ArrayList<Subject>());
-                        for (int k = 0; k < OKSubSubject.size(); k++) {
-                            selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                        calculateOrder(OKSubSubject);   // 배열안의 순서 정렬
+                        if(selectedSubSubject.contains(OKSubSubject)){
+                        } else {
+                            Log.d("tag", "minyoung 과목 목록이 담겼습니다.");
+                            selectedSubSubject.add(new ArrayList<Subject>());
+                            for (int k = 0; k < OKSubSubject.size(); k++) {
+                                selectedSubSubject.get(selectedSubSubject.size() - 1).add(OKSubSubject.get(k)); // 사용될 과목에 넣기      >>>>>>>>>>>>>>> ???
+                            }
                         }
                     }
                     if (selectedSubSubject.size() >= 10) {
@@ -1263,29 +1294,7 @@ public class MadeResultActivity extends AppCompatActivity {
             }
 
             Log.d("tag", "minyoung selectedSub.size : " + selectedSubSubject.size());
-//            for (int j = 0; j < selectedSubSubject.size(); j++) {
-//                int tmpcount = 0;
-//                boolean tmpflag = false;
-//                for (int k = j + 1; k < selectedSubSubject.size(); k++) {
-//                    if (selectedSubSubject.get(j).size() == selectedSubSubject.get(k).size()) {
-//                        for (int l = 0; l < selectedSubSubject.get(j).size() ; l++) {
-//                            for(int m = 0 ; m < selectedSubSubject.get(m).size() ; m++) {
-//                                if(selectedSubSubject.get(j).get(l).equals(selectedSubSubject.get(k).get(m))) {
-//                                    tmpcount++;
-//                                }
-//                            }
-//                        }
-//                        if(tmpcount==selectedSubSubject.size()){
-//                            selectedSubSubject.remove(j);       // 중복된 결과 제외
-//                            j--;
-//                            tmpflag = true;
-//                        }
-//                    }
-//                }
-//                if(tmpflag) {
-//                    break;
-//                }
-//            }
+
             //조건 테스트하기전에 일단 되는경우 다넣기
             if (selectedSubSubject.size() >= 10) {
                 break;

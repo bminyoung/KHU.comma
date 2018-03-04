@@ -13,7 +13,7 @@
     </string-array>
 
     <string-array name="timeFlic">
-        <item>1시간~1시간30분</item>
+        <item>1시간30분 이하</item>
         <item>1시간30분~2시간</item>
     </string-array>
 
