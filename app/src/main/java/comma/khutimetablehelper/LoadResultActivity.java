@@ -184,7 +184,7 @@ public class LoadResultActivity extends AppCompatActivity {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("시간표 요약");
         dialog.setMessage(msg);
-        dialog.setNeutralButton("확인",null);
+        dialog.setPositiveButton("확인",null);
         dialog.show();
     }
 }
