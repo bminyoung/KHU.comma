@@ -294,7 +294,9 @@ public class SettingActivity extends AppCompatActivity {
         dayEndTime_subspin.setSelection(1);
 
         creditMin_spin = (Spinner) findViewById(R.id.setting_spin_creditMin);
+        creditMin_spin.setSelection(6);
         creditMax_spin = (Spinner) findViewById(R.id.setting_spin_creditMax);
+        creditMax_spin.setSelection(6);
         firstTime_spin = (Spinner) findViewById(R.id.setting_spin_firstStartTime);
         timeFlic_spin = (Spinner) findViewById(R.id.setting_spin_timeFlic);
         emptyDay_spin = (Spinner) findViewById(R.id.setting_spin_emptyDay);
