@@ -1,17 +1,12 @@
 package comma.khutimetablehelper;
 
-
-import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -35,7 +28,6 @@ import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -1418,16 +1410,32 @@ class CustomLvAdapter extends BaseAdapter {
         TextView tv = (TextView) convertview.findViewById(R.id.maderesult_lstv_name);
         ImageButton imgBtn = (ImageButton) convertview.findViewById(R.id.maderesult_btn_look);
         tv.setText("시간표 " + (position + 1));
-        final ArrayList<Subject> selected = list.get(position);
+        final ArrayList<Subject> selectedTimeTable = list.get(position);
 
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = "";
+                int i, j;
+                Subject selectedSub = selectedTimeTable.get(0);
+                String msg = selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
 
-                for (int i = 0; i < selected.size(); i++) {
-                    Subject sub = selected.get(i);
-                    msg += sub.cNum + "/" + sub.getName() + " / " + sub.cProf + "교수 / " + sub.cCredit + "학점 / " + sub.day() + "요일 / " + sub.getTime() + "\n\n";
+                for(i = 1; i < selectedTimeTable.size();i ++) {
+                    if(selectedTimeTable.get(i-1).cNum.equals(selectedTimeTable.get(i).cNum)) {
+                        msg += "\n\n";
+                        continue;
+                    }
+                    selectedSub = selectedTimeTable.get(i);
+                    msg += selectedSub.cNum + "/" + selectedSub.getName() + " / " + selectedSub.cProf + "교수 / " + selectedSub.cCredit + "학점 /\n" + selectedSub.day() + " " + selectedSub.getTime();
+
+                    j = 0;
+                    //같은과목(ex 선대1반 화욜/목욜)시간표시
+                    while (j < AppContext.subjectList.length) {
+                        Subject sub = AppContext.subjectList[j];
+                        if ((sub.cNum.equals(selectedSub.cNum)) && ((sub.cStart != selectedSub.cStart) || sub.cDay != selectedSub.cDay)) {
+                            msg += " / " + AppContext.subjectList[j].day() + " " + AppContext.subjectList[j].getTime();
+                        }
+                        j++;
+                    }
                 }
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);

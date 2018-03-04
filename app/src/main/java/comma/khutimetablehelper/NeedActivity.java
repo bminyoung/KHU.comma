@@ -87,9 +87,6 @@ public class NeedActivity extends Activity {
             public void onClick(View view) {
                 intentToSub.putExtra("NeedSubject", needSubject);
                 intentToSub.putExtra("NeedList", selectedNeedList);
-                for(int i = 0; i < selectedNeedList.size();i++) {
-                    Log.d("tag", "minyoung/" + selectedNeedList.get(i).getName());
-                }
                 startActivity(intentToSub);
             }
         }); //다음버튼
@@ -279,7 +276,7 @@ public class NeedActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if ((requestCode == NEED) && (resultCode == SearchActivity.SUCCESS)) {
             Subject selected = (Subject) data.getSerializableExtra("subject");
-            madapter.additem(selected);
+            explistAdapter.addItem(selected);
         }
     }
 
@@ -496,7 +493,6 @@ class CustomListAdapter extends BaseAdapter {
 
         if(whichActivity == SubActivity.SUB){
             if(position < NeedActivity.selectedNeedList.size()){
-                Log.d("tag", "minyoung/"+position+""+SubActivity.needSubject.size());
                 deleteBtn.setVisibility(View.INVISIBLE);
                 layout.setBackgroundColor(Color.parseColor("#2096DCFA"));
             }else{
@@ -510,7 +506,7 @@ class CustomListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 int i = 0;
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-                String msg = selected.getName() + " / " + selected.cProf + "\n" + selected.day() + " " + selected.getTime();
+                String msg = selected.getName() + " / " + selected.cProf + " / " + selected.cCredit + "학점\n" + selected.day() + " " + selected.getTime();
 
                 //같은과목(ex 선대1반 화욜/목욜)시간표시
                 while (i < AppContext.subjectList.length) {
@@ -547,6 +543,7 @@ class CustomListAdapter extends BaseAdapter {
 
     public void additem(Subject sub) {
         oData.add(sub);
+        notifyDataSetChanged();
     }
 
     public void addNeed(Subject need) {
