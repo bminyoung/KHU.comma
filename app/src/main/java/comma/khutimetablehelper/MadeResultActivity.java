@@ -144,7 +144,7 @@ public class MadeResultActivity extends AppCompatActivity {
         warningBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MadeResultActivity.this);
                 dialog.setTitle("사용법");
                 dialog.setMessage("* 입맛에 맞게 계산된 시간표가 나오는 화면입니다.\n* 상단 오른쪽 버튼을 누르면 띄워진 시간표가 저장됩니다.\n* 여러개 시간표를 저장 할 수 있습니다.\n* 상단 외쪽 버튼을 누르면 홈 화면으로 넘어갑니다.\n* 결과가 뜨지 않는다면 과목의 수를 줄여야 합니다.\n* 계산된 시간표는 최대 10개까지만 표시됩니다.");
                 dialog.setPositiveButton("확인", null);

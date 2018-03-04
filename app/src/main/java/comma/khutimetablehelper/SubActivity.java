@@ -276,23 +276,6 @@ public class SubActivity extends AppCompatActivity {
         }
     }
 
-    // DialogInterface.OnClickListener 인터페이스를 구현
-    private DialogInterface.OnClickListener yesButtonClickListener = new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            ChangeFirst() ;
-        }
-    };
-
-
-
-    //처음뜨는 다이얼로그 확인버튼 클릭시 false로 바꿈
-    protected boolean ChangeFirst() {
-        first = false ;
-        return  first;
-    }
-
     //액티비티가 종료될때 static변수 비워주기
     protected void onDestroy() {
         selectedSubList.clear();
