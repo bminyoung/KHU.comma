@@ -210,6 +210,7 @@ public class MadeResultActivity extends AppCompatActivity {
             AlertDialog.Builder dialog = new AlertDialog.Builder(MadeResultActivity.this);
             dialog.setTitle("경고");
             dialog.setMessage("조건에 맞는 시간표가 없습니다.");
+            dialog.setCancelable(false);
             dialog.setPositiveButton("홈으로", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -1287,6 +1288,8 @@ public class MadeResultActivity extends AppCompatActivity {
                     if(selectedSubSubject.get(0).get(i).cNum.equals(selectedSubSubject.get(0).get(i-1).cNum)) {
                         needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
                     }
+                } else {
+                    needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
                 }
             }
             Log.d("tag", "minyoung needCreditCount : " + needCreditCount);
