@@ -166,7 +166,6 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         });
 
-
         btnMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,6 +220,8 @@ public class MadeResultActivity extends AppCompatActivity {
 
         filteredSubSubject = (ArrayList<Subject>) subSubject.clone();
 
+        calculateOrder(needSubject);
+
         // 필수과목, 시작시간, 점심시간, 공강요일, 강의최대시간, 끝나는시간에 맞지않는과목 걸러내기
         for (int i = 0; i < filteredSubSubject.size(); i++) {
             if (i < filteredSubSubject.size() - 1) {
@@ -274,6 +275,29 @@ public class MadeResultActivity extends AppCompatActivity {
         }
 
         calculateSubject();
+
+        //결과값이 없으면 띄우는 다이얼로그 띄움
+        if(AppContext.tempTimeTableList.size() == 0){
+            android.support.v7.app.AlertDialog.Builder dialog = new android.support.v7.app.AlertDialog.Builder(MadeResultActivity.this);
+            dialog.setTitle("경고");
+            dialog.setMessage("조건에 맞는 시간표가 없습니다.");
+            dialog.setPositiveButton("홈으로", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(MadeResultActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            });
+            dialog.setNegativeButton("뒤로가기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
+
         setData();
 
     }
@@ -595,7 +619,7 @@ public class MadeResultActivity extends AppCompatActivity {
         for(int i = 0; i < TimeTable.size() ; i++){
             for(int j = 0; j < TimeTable.size() ; j++){
                 if(TimeTable.get(i).cRow > TimeTable.get(j).cRow){
-                    Collections.swap(TimeTable,i,j);
+                    Collections.swap(TimeTable,j,i);
                 }
             }
         }
@@ -618,8 +642,8 @@ public class MadeResultActivity extends AppCompatActivity {
             }
         }
         boolean blankcheck;
-        int getSettedMinCreditCount = spinValue.get(0) + 15;
-        int getSettedMaxCreditCount = spinValue.get(1) + 15;
+        int getSettedMinCreditCount = spinValue.get(0) + 9;
+        int getSettedMaxCreditCount = spinValue.get(1) + 9;
         int nowCreditCount = 0;
         int monDayClassCount = 0;
         int tuesDayClassCount = 0;
@@ -746,11 +770,11 @@ public class MadeResultActivity extends AppCompatActivity {
                             blankcheck = false;
                         }
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -809,11 +833,11 @@ public class MadeResultActivity extends AppCompatActivity {
                             blankcheck = false;
                         }
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -850,11 +874,11 @@ public class MadeResultActivity extends AppCompatActivity {
                         tmpJ = j;
                         j = pluralChecker[tmpJ];
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -933,11 +957,11 @@ public class MadeResultActivity extends AppCompatActivity {
                             blankcheck = false;
                         }
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -973,11 +997,11 @@ public class MadeResultActivity extends AppCompatActivity {
                         tmpJ = j;
                         j = pluralChecker[tmpJ];
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -1012,11 +1036,11 @@ public class MadeResultActivity extends AppCompatActivity {
                         }
                         j = triplePluralChecker[tmpJ];
                         for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                            if (SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] != 0) {
+                            if (SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] != 0) {
                                 blankcheck = false;
                                 Log.d("tag", "minyoung 이미 시간이 차있습니다 : " + tmpSubSubject.get(j).cName +" / " + tmpSubSubject.get(j).cStart);
                                 Log.d("tag", "minyoung 셀넘버 : " + (int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k));
-                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay]);
+                                Log.d("tag", "minyoung 무슨과목 : " + SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay]);
                                 break;
                             }
                         }
@@ -1119,7 +1143,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cStart + "~" + tmpSubSubject.get(j).cEnd);
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 없으면 셀에 한번만담아도됨
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
 //                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
                             tmpSubSubject.remove(j);
@@ -1135,7 +1159,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cDay);
                             nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된과목이 1개면 셀에2번담아야됨 셀에담기는거 이상없음
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             tmpJ = j;
                             j = pluralChecker[tmpJ];
@@ -1143,7 +1167,7 @@ public class MadeResultActivity extends AppCompatActivity {
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cDay);
                             OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             j = tmpJ;
 //                            Log.d("tag", "minyoung 제거하는 과목" + tmpSubSubject.get(j).cName);
@@ -1168,20 +1192,20 @@ public class MadeResultActivity extends AppCompatActivity {
                             nowCreditCount = nowCreditCount + tmpSubSubject.get(j).cCredit;
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cStart + "~" + tmpSubSubject.get(j).cEnd);
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {       // 중복된 과목이 3개면 셀에 3번담아야됨
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             tmpJ = j;
                             j = pluralChecker[tmpJ];
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cStart + "~" + tmpSubSubject.get(j).cEnd);
                             OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             j = triplePluralChecker[tmpJ];
                             Log.d("tag", "minyoung " + tmpSubSubject.get(j).cStart + "~" + tmpSubSubject.get(j).cEnd);
                             OKSubSubject.add(tmpSubSubject.get(j));
                             for (int k = 0; k < (int) ((tmpSubSubject.get(j).cEnd - tmpSubSubject.get(j).cStart) * 2); k++) {
-                                SubjectCell[(int) (tmpSubSubject.get(j).cStart - 9) * 2 + k][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
+                                SubjectCell[(int) ((tmpSubSubject.get(j).cStart - 9) * 2 + k)][tmpSubSubject.get(j).cDay] = tmpSubSubject.get(j).cRow;
                             }
                             j = tmpJ;
                             if (j > pluralChecker[tmpJ] && j > triplePluralChecker[tmpJ]) {
@@ -1307,12 +1331,29 @@ public class MadeResultActivity extends AppCompatActivity {
                 selectedSubSubject.get(i).add(needSubject.get(j));
             }
         }
-        if (selectedSubSubject.size() < 10) {
+        if (selectedSubSubject.size() == 0) {
+            boolean trueTester = false;
             if(!selectedSubSubject.contains(needSubject)) {
                 selectedSubSubject.add(new ArrayList<Subject>());
                 for (int i = 0; i < needSubject.size(); i++) {
-                    selectedSubSubject.get(selectedSubSubject.size() - 1).add(needSubject.get(i));
+                    selectedSubSubject.get(0).add(needSubject.get(i));
                 }
+            }
+            int needCreditCount = 0;
+            if(selectedSubSubject.get(0).size() == 0){
+                trueTester = true;
+            }
+            for(int i = 0; i < selectedSubSubject.get(0).size(); i++){
+                needCreditCount = needCreditCount + selectedSubSubject.get(0).get(i).cCredit;
+                if(getSettedMinCreditCount <= needCreditCount && needCreditCount <= getSettedMaxCreditCount){
+
+                }
+                else{
+                    trueTester = true;
+                }
+            }
+            if(trueTester){
+                selectedSubSubject.remove(0);
             }
         }
 
