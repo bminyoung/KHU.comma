@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="몇학점?"
+                        android:text="몇 학점?"
                         android:textSize="20sp"/>
 
                     <Spinner
@@ -177,7 +177,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="몇시부터?"
+                        android:text="몇 시부터?"
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 
@@ -216,7 +216,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="몇시까지?"
+                        android:text="몇 시까지?"
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 
@@ -427,7 +427,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="한 수업을 몇시간 들을까?"
+                        android:text="한 수업을 몇 시간?"
                         android:textSize="20sp"
                         android:layout_weight="1"/>
 

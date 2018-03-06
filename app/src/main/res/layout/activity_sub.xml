@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="40dp"
-                    android:text="후보과목을 골라봐"
+                    android:text="후보 과목을 골라봐"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HomeScreen"
         android:largeHeap="true">
-        <activity android:name=".PermissionActivity" >
+        <activity android:name=".PermissionActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,15 +21,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".IntroActivity"></activity>
-        <activity android:name=".LoadResultActivity"></activity>
-        <activity android:name=".MadeResultActivity" android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SaveListActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".NeedActivity" android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".SubActivity" android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".IntroActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".LoadResultActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".MadeResultActivity" android:windowSoftInputMode="adjustNothing" android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SaveListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".NeedActivity" android:windowSoftInputMode="adjustNothing" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SubActivity" android:windowSoftInputMode="adjustNothing" android:screenOrientation="portrait"></activity>
+        <activity android:name=".SearchActivity" android:screenOrientation="portrait"></activity>
 
     </application>
 
